@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Elegance C#</title>
-  <subtitle>Mr-Brain</subtitle>
+  <subtitle>Elegance C#</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-05T01:40:27.481Z</updated>
+  <updated>2016-03-05T11:59:51.267Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,16 +16,153 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>React Reflux</title>
+    <link href="http://yoursite.com/2016/03/05/my-reflux/"/>
+    <id>http://yoursite.com/2016/03/05/my-reflux/</id>
+    <published>2016-03-05T08:58:20.711Z</published>
+    <updated>2016-03-05T11:59:51.267Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;React-Flow&quot;&gt;&lt;a href=&quot;#React-Flow&quot; class=&quot;headerlink&quot; title=&quot;React Flow&quot;&gt;&lt;/a&gt;React Flow&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;images/Flux.png&quot; alt=&quot;React Flow&quot;&gt;&lt;/p&gt;
+&lt;h4 id=&quot;Create-Actions&quot;&gt;&lt;a href=&quot;#Create-Actions&quot; class=&quot;headerlink&quot; title=&quot;Create Actions&quot;&gt;&lt;/a&gt;Create Actions&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;import $ = require(&amp;apos;jquery&amp;apos;);
+import t1 = require(&amp;apos;t1&amp;apos;);
+import FReflux = t1.FReflux;
+import FRefluxActions = t1.FRefluxActions;
+
+enum Demo1ActionType {
+    Request
+}
+
+export class Demo1Actions extends FRefluxActions&amp;lt;Demo1ActionType&amp;gt; {
+    constructor() {
+        super(Demo1ActionType);
+    }
+
+    Request(name: string) {
+        this.dispatchEvent(Demo1ActionType.Request, name);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;Create-Store&quot;&gt;&lt;a href=&quot;#Create-Store&quot; class=&quot;headerlink&quot; title=&quot;Create Store&quot;&gt;&lt;/a&gt;Create Store&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;import t1 = require(&amp;apos;t1&amp;apos;);
+import FReflux = t1.FReflux;
+import FRefluxStore = t1.FRefluxStore;
+
+export class Demo1State {
+    name: string;
+}
+
+
+export class Demo1Store extends FRefluxStore&amp;lt;Demo1State&amp;gt; {
+    _state: Demo1State = new Demo1State();
+
+    constructor(actions: FRefluxActions&amp;lt;any&amp;gt;[]) {
+        super(actions);
+    }
+
+    getState(): Demo1State {
+        return this._state;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;Create-Main-View&quot;&gt;&lt;a href=&quot;#Create-Main-View&quot; class=&quot;headerlink&quot; title=&quot;Create Main View&quot;&gt;&lt;/a&gt;Create Main View&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;export interface MobileDemo1Props extends React.Props&amp;lt;MobileDemo1&amp;gt; {
+    history: any;
+}
+
+interface IRouter {
+    replaceWith(path: string);
+}
+
+interface IRouterContext {
+    router: IRouter;
+}
+
+export class MobileDemo1 extends FRefluxStoreComponent&amp;lt;MobileDemo1Props, Demo1State&amp;gt; {
+    context: IRouterContext;
+
+    static contextTypes: React.ValidationMap&amp;lt;any&amp;gt; =  {
+        router: React.PropTypes.func.isRequired
+    };
+
+    constructor() {
+        this.name = &amp;quot;MobileDemo1&amp;quot;;
+        super(_app1Store);
+    }
+
+    componentWillMount() {
+    }
+
+    componentWillUnmount() {
+    }
+
+    componentDidMount() {
+        super.componentDidMount();
+    }
+
+    navigate() {
+        console.log(this.props);
+        this.props.history.pushState(null, &amp;quot;/&amp;quot;);
+        //this.props.history.replaceState(null, &amp;quot;/&amp;quot;);
+    }
+
+    render() {
+        return (
+            &amp;lt;div&amp;gt;React-Router Demo1
+                &amp;lt;Link to=&amp;apos;Panel1&amp;apos;&amp;gt;Panel1&amp;lt;/Link&amp;gt;
+                &amp;lt;Link to=&amp;apos;Panel2&amp;apos;&amp;gt;&amp;lt;button className=&amp;quot;btn btn-success&amp;quot;&amp;gt;Panel2&amp;lt;/button&amp;gt;&amp;lt;/Link&amp;gt;
+                &amp;lt;button onClick={this.navigate.bind(this)}&amp;gt;TEST&amp;lt;/button&amp;gt;
+                {this.props.children}
+            &amp;lt;/div&amp;gt;
+        );
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;Create-Panel1-View&quot;&gt;&lt;a href=&quot;#Create-Panel1-View&quot; class=&quot;headerlink&quot; title=&quot;Create Panel1 View&quot;&gt;&lt;/a&gt;Create Panel1 View&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;interface Panel1Props extends React.Props&amp;lt;Panel1&amp;gt; {
+}
+
+
+class Panel1 extends FRefluxReducerComponent&amp;lt;Panel1Props, Demo1State&amp;gt; {
+    constructor() {
+        super();
+    }
+
+    getStateFromStore(state: Demo1State): Demo1State {
+        return state;
+    }
+
+    render() {
+        return (
+            &amp;lt;div&amp;gt;
+                Hello Panel-1
+            &amp;lt;/div&amp;gt;
+        );
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;Render&quot;&gt;&lt;a href=&quot;#Render&quot; class=&quot;headerlink&quot; title=&quot;Render&quot;&gt;&lt;/a&gt;Render&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;ReactDOM.render(
+    &amp;lt;Router.Router history={Router.browserHistory}&amp;gt;
+        {routeMap}
+    &amp;lt;/Router.Router&amp;gt;, 
+    document.getElementById(&amp;apos;app1&amp;apos;)
+);
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;React-Flow&quot;&gt;&lt;a href=&quot;#React-Flow&quot; class=&quot;headerlink&quot; title=&quot;React Flow&quot;&gt;&lt;/a&gt;React Flow&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;images/Flux.png&quot; alt=&quot;React 
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Install Hexo</title>
     <link href="http://yoursite.com/2016/03/05/install-hexo/"/>
     <id>http://yoursite.com/2016/03/05/install-hexo/</id>
     <published>2016-03-05T01:30:43.895Z</published>
-    <updated>2016-03-05T01:40:27.481Z</updated>
+    <updated>2016-03-05T08:45:06.276Z</updated>
     
     <content type="html">&lt;h3 id=&quot;Create-a-GitHub-Account&quot;&gt;&lt;a href=&quot;#Create-a-GitHub-Account&quot; class=&quot;headerlink&quot; title=&quot;Create a GitHub Account&quot;&gt;&lt;/a&gt;Create a GitHub Account&lt;/h3&gt;&lt;p&gt;Create a new Repository name: “username.github.io” &lt;/p&gt;
 &lt;p&gt;username must same as account name&lt;/p&gt;
-&lt;h3 id=&quot;Install-Node-js&quot;&gt;&lt;a href=&quot;#Install-Node-js&quot; class=&quot;headerlink&quot; title=&quot;Install Node.js&quot;&gt;&lt;/a&gt;Install Node.js&lt;/h3&gt;&lt;p&gt;npm install hexo -g&lt;br&gt;npm init Blog&lt;br&gt;cd Blog&lt;/p&gt;
-&lt;p&gt;npm install&lt;/p&gt;
+&lt;h3 id=&quot;Install-Node-js&quot;&gt;&lt;a href=&quot;#Install-Node-js&quot; class=&quot;headerlink&quot; title=&quot;Install Node.js&quot;&gt;&lt;/a&gt;Install Node.js&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;npm install hexo -g
+npm init Blog
+cd Blog
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;npm install&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;npm install hexo-generator-index --save
 npm install hexo-generator-archive --save
 npm install hexo-generator-category --save
@@ -41,39 +178,28 @@ npm install hexo-generator-feed@1 --save
 npm install hexo-generator-sitemap@1 --save
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Process the following command, and visit localhost:4000 to see the result&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;hexo server
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;hexo n #生成文章，或者source_posts手動編輯&lt;br&gt;hexo s #本地發佈預覽效果&lt;br&gt;hexo g #生成public靜態文件&lt;br&gt;最後我選擇手動同步更新至GitHub&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The Following command that generate public folder, you can deploy it to your target site folder.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;hexo g
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Modify _config.yml file in Blog Folder&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;deploy:
+  type: git
+    repo: https://github.com/username/username.github.io.git
+    branch: master
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Deploy to GitHub command&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;hexo d -g
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Other&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;hexo n #生成文章，或者 source\_posts 手動編輯
+hexo s #發佈預覽效果
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Update Hexo&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm update -g
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Install Other Theme&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/MOxFIVE/hexo-theme-yelee.git themes/yelee        
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Modify themes/yelee/_config.yml&lt;/p&gt;
 </content>
     
     <summary type="html">
     
       &lt;h3 id=&quot;Create-a-GitHub-Account&quot;&gt;&lt;a href=&quot;#Create-a-GitHub-Account&quot; class=&quot;headerlink&quot; title=&quot;Create a GitHub Account&quot;&gt;&lt;/a&gt;Create a GitHub A
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2016/03/05/hello-world/"/>
-    <id>http://yoursite.com/2016/03/05/hello-world/</id>
-    <published>2016-03-05T01:12:44.296Z</published>
-    <updated>2016-03-05T01:12:44.296Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
     
     </summary>
     
