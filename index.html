@@ -302,21 +302,7 @@ export class Demo1Store extends FRefluxStore&lt;Demo1State&gt; {
     history: any;
 }
 
-interface IRouter {
-    replaceWith(path: string);
-}
-
-interface IRouterContext {
-    router: IRouter;
-}
-
 export class MobileDemo1 extends FRefluxStoreComponent&lt;MobileDemo1Props, Demo1State&gt; {
-    context: IRouterContext;
-
-    static contextTypes: React.ValidationMap&lt;any&gt; =  {
-        router: React.PropTypes.func.isRequired
-    };
-
     constructor() {
         this.name = &quot;MobileDemo1&quot;;
         super(_app1Store);

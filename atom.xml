@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-05T11:59:51.267Z</updated>
+  <updated>2016-03-05T14:03:01.095Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/03/05/my-reflux/"/>
     <id>http://yoursite.com/2016/03/05/my-reflux/</id>
     <published>2016-03-05T08:58:20.711Z</published>
-    <updated>2016-03-05T11:59:51.267Z</updated>
+    <updated>2016-03-05T14:03:01.095Z</updated>
     
     <content type="html">&lt;h3 id=&quot;React-Flow&quot;&gt;&lt;a href=&quot;#React-Flow&quot; class=&quot;headerlink&quot; title=&quot;React Flow&quot;&gt;&lt;/a&gt;React Flow&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;images/Flux.png&quot; alt=&quot;React Flow&quot;&gt;&lt;/p&gt;
 &lt;h4 id=&quot;Create-Actions&quot;&gt;&lt;a href=&quot;#Create-Actions&quot; class=&quot;headerlink&quot; title=&quot;Create Actions&quot;&gt;&lt;/a&gt;Create Actions&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;import $ = require(&amp;apos;jquery&amp;apos;);
@@ -65,21 +65,7 @@ export class Demo1Store extends FRefluxStore&amp;lt;Demo1State&amp;gt; {
     history: any;
 }
 
-interface IRouter {
-    replaceWith(path: string);
-}
-
-interface IRouterContext {
-    router: IRouter;
-}
-
 export class MobileDemo1 extends FRefluxStoreComponent&amp;lt;MobileDemo1Props, Demo1State&amp;gt; {
-    context: IRouterContext;
-
-    static contextTypes: React.ValidationMap&amp;lt;any&amp;gt; =  {
-        router: React.PropTypes.func.isRequired
-    };
-
     constructor() {
         this.name = &amp;quot;MobileDemo1&amp;quot;;
         super(_app1Store);
