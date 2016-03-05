@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Mr-Brain</title>
-  <subtitle>Elegance C#</subtitle>
+  <title>Elegance C#</title>
+  <subtitle>Mr-Brain</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-05T01:12:44.296Z</updated>
+  <updated>2016-03-05T01:40:27.481Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Install Hexo</title>
+    <link href="http://yoursite.com/2016/03/05/install-hexo/"/>
+    <id>http://yoursite.com/2016/03/05/install-hexo/</id>
+    <published>2016-03-05T01:30:43.895Z</published>
+    <updated>2016-03-05T01:40:27.481Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;Create-a-GitHub-Account&quot;&gt;&lt;a href=&quot;#Create-a-GitHub-Account&quot; class=&quot;headerlink&quot; title=&quot;Create a GitHub Account&quot;&gt;&lt;/a&gt;Create a GitHub Account&lt;/h3&gt;&lt;p&gt;Create a new Repository name: “username.github.io” &lt;/p&gt;
+&lt;p&gt;username must same as account name&lt;/p&gt;
+&lt;h3 id=&quot;Install-Node-js&quot;&gt;&lt;a href=&quot;#Install-Node-js&quot; class=&quot;headerlink&quot; title=&quot;Install Node.js&quot;&gt;&lt;/a&gt;Install Node.js&lt;/h3&gt;&lt;p&gt;npm install hexo -g&lt;br&gt;npm init Blog&lt;br&gt;cd Blog&lt;/p&gt;
+&lt;p&gt;npm install&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm install hexo-generator-index --save
+npm install hexo-generator-archive --save
+npm install hexo-generator-category --save
+npm install hexo-generator-tag --save
+npm install hexo-server --save
+npm install hexo-deployer-git --save
+npm install hexo-deployer-heroku --save
+npm install hexo-deployer-rsync --save
+npm install hexo-deployer-openshift --save
+npm install hexo-renderer-marked@0.2 --save
+npm install hexo-renderer-stylus@0.2 --save
+npm install hexo-generator-feed@1 --save
+npm install hexo-generator-sitemap@1 --save
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Process the following command, and visit localhost:4000 to see the result&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;hexo server
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;hexo n #生成文章，或者source_posts手動編輯&lt;br&gt;hexo s #本地發佈預覽效果&lt;br&gt;hexo g #生成public靜態文件&lt;br&gt;最後我選擇手動同步更新至GitHub&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Create-a-GitHub-Account&quot;&gt;&lt;a href=&quot;#Create-a-GitHub-Account&quot; class=&quot;headerlink&quot; title=&quot;Create a GitHub Account&quot;&gt;&lt;/a&gt;Create a GitHub A
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
