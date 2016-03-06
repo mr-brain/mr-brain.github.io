@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/03/05/install-hexo/</loc>
+    
+    <lastmod>2016-03-06T06:28:12.669Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/07/27/asp-net-mvc-throw-exception/</loc>
     
     <lastmod>2016-03-06T06:23:49.761Z</lastmod>
@@ -488,13 +495,6 @@
     <loc>http://yoursite.com/2016/03/05/my-reflux/</loc>
     
     <lastmod>2016-03-06T01:33:42.236Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/03/05/install-hexo/</loc>
-    
-    <lastmod>2016-03-05T15:20:03.927Z</lastmod>
     
   </url>
   

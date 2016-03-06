@@ -141,7 +141,7 @@ class Panel1 extends FRefluxReducerComponent&amp;lt;Panel1Props, Demo1State&amp;
     <link href="http://yoursite.com/2016/03/05/install-hexo/"/>
     <id>http://yoursite.com/2016/03/05/install-hexo/</id>
     <published>2016-03-05T01:30:43.895Z</published>
-    <updated>2016-03-05T15:20:03.927Z</updated>
+    <updated>2016-03-06T06:28:12.669Z</updated>
     
     <content type="html">&lt;h3 id=&quot;Create-a-GitHub-Account&quot;&gt;&lt;a href=&quot;#Create-a-GitHub-Account&quot; class=&quot;headerlink&quot; title=&quot;Create a GitHub Account&quot;&gt;&lt;/a&gt;Create a GitHub Account&lt;/h3&gt;&lt;p&gt;Create a new Repository name: “username.github.io” &lt;/p&gt;
 &lt;p&gt;username must same as account name&lt;/p&gt;
@@ -176,8 +176,8 @@ npm install hexo-generator-search --save
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Deploy to GitHub command&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;hexo d -g
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Other&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hexo n #生成文章，或者 source\_posts 手動編輯
-hexo s #發佈預覽效果
+&lt;pre&gt;&lt;code&gt;hexo n #Generate articles，or source\_posts manually edit/create md file
+hexo s #deploy preview result
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Update Hexo&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;npm update -g
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Install Other Theme&lt;/p&gt;
