@@ -1,0 +1,1513 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Elegance C#" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Elegance C#">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="Elegance C#">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Elegance C#">
+<meta name="twitter:description">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Elegance C# </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="C#">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Elegance C#</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+
+    
+
+    
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/02/15/jsonnet-serializedeserialize-methods/" itemprop="url">
+                  Json.NET Serialize/Deserialize methods
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-02-15T09:33:32+08:00" content="2015-02-15">
+              2015-02-15
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>The following example demonstrates the use Strong type, JObject, Dynamic different approaches to deal with JSON serialization / deserialization.</p>
+<pre><code>public class Food
+{
+    public DateTime d { get; set; }
+    public int n { get; set; }
+    public string s { get; set; }
+    public int[] a { get; set; }
+}
+</code></pre><p>Lab1:Using Strong Type to deserialize</p>
+<pre><code>Food f = JsonConvert.DeserializeObject&lt;Food&gt;(jsonString);
+</code></pre><p>Lab2:Using JObject to deserialize</p>
+<pre><code>JObject jo = JObject.Parse(jsonString);
+DateTime d = jo.Property(&quot;d&quot;).Value.Value&lt;DateTime&gt;();
+int n = jo[&quot;n&quot;].Value&lt;int&gt;();
+string s = jo[&quot;s&quot;].Value&lt;string&gt;();
+int[] ary = jo[&quot;a&quot;].Value&lt;JArray&gt;()
+  .Select(o =&gt; o.Value&lt;int&gt;()).ToArray();
+</code></pre><p>Lab3:Using Dynamic to deserialize</p>
+<pre><code>JObject jo = JObject.Parse(jsonString);
+dynamic dyna = jo as dynamic;
+
+DateTime d = dyna.d;
+int n = dyna.n;
+string s = dyna.s;
+var ary = ((JArray)jo[&quot;a&quot;]).Cast&lt;dynamic&gt;().ToArray();
+</code></pre><p>Deserialize Performance: Lab2 &gt; Lab1 ~= Lab2</p>
+<p>Lab4:Using Strong Type to serialize</p>
+<pre><code>Food f = new Food()
+{
+    d = new DateTime(2015, 1, 1),
+    n = 12345,
+    s = &quot;MR-Brain&quot;,
+    a = new int[] { 1, 2, 3, 4, 5 }
+};
+string json = JsonConvert.SerializeObject(f);
+</code></pre><p>Lab5:Using JObject to serialize</p>
+<pre><code>JObject jo = new JObject();
+jo.Add(new JProperty(&quot;d&quot;, new DateTime(2015, 1, 1)));
+jo.Add(new JProperty(&quot;n&quot;, 12345));
+jo.Add(new JProperty(&quot;s&quot;, &quot;MR-Brain&quot;));
+jo.Add(new JProperty(&quot;a&quot;, new JArray(1, 2, 3, 4, 5)));
+string json = jo.ToString(Formatting.None);
+</code></pre><p>Lab6:Using Dynamic to serialize</p>
+<pre><code>dynamic dyna = new JObject();
+dyna.d = new DateTime(2015, 1, 1);
+dyna.n = 12345;
+dyna.s = &quot;MR-Brain&quot;;
+dyna.a = new JArray(1, 2, 3, 4, 5);
+string json = dyna.ToString(Formatting.None);
+</code></pre><p>Serialize Performance: Lab5 &gt; Lab4 &gt; Lab6 </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/02/14/why-cant-i-get-the-jenkins-powershell-plugin-to-work/" itemprop="url">
+                  Why can't I get the Jenkins Powershell plugin to work?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-02-14T23:20:04+08:00" content="2015-02-14">
+              2015-02-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>PowerShell says “execution of scripts is disabled on this system.”</p>
+<p>Jenkins powershell plugin is running 32 bit Powershell</p>
+<pre><code>64-bit:  C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe
+32-bit:  C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+</code></pre><p>you can run following</p>
+<pre><code>&gt; C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe
+PS C:\hoge &gt; Set-ExecutionPolicy RemoteSigned
+PS C:\hoge &gt; exit
+
+&gt; C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+PS C:\hoge &gt; Set-ExecutionPolicy RemoteSigned
+PS C:\hoge &gt; exit
+</code></pre><p>Or you can</p>
+<pre><code>set-executionpolicy -executionpolicy unrestricted
+set-executionpolicy -executionpolicy -Scope LocalMachine unrestricted
+get-executionpolicy -list
+</code></pre><p>Other Information</p>
+<pre><code>powershell.exe -executionpolicy unrestricted -command .\test.ps1
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/02/09/how-can-i-run-powershell-with-the-net-4-runtime/" itemprop="url">
+                  How can I run PowerShell with the .NET 4 runtime?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-02-09T22:37:00+08:00" content="2015-02-09">
+              2015-02-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Enabling Execution of PowerShell PS1 Scripts</p>
+<pre><code>Set-ExecutionPolicy Unrestricted
+</code></pre><p>You can see exactly what versions Powershell is using by examining the value of <em>$PSVersionTable</em></p>
+<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/PSVersionTable2.png" alt="PSVersionTable2"></p>
+<p>Notice the value or CLRVersion begins with a “2”.</p>
+<p>Being lazy, of course, we hate manual steps, so here is a small PowerShell script that will automatically create and place the necessary files. Be aware that the script as shown below will overwrite existing .config files.</p>
+<pre><code>$config_text = @&quot;
+&lt;?xml version=&quot;1.0&quot;?&gt; 
+&lt;configuration&gt; 
+    &lt;startup useLegacyV2RuntimeActivationPolicy=&quot;true&quot;&gt; 
+        &lt;supportedRuntime version=&quot;v4.0.30319&quot;/&gt; 
+        &lt;supportedRuntime version=&quot;v2.0.50727&quot;/&gt; 
+    &lt;/startup&gt; 
+&lt;/configuration&gt;
+&quot;@
+
+$config_text| Out-File $pshome\powershell.exe.config
+$config_text| Out-File $pshome\powershell_ise.exe.config
+</code></pre><p>Start PowerShell as an Administrator an then run the script.</p>
+<p>Now restart PowerShell and examine the value of $PSVersionTable.</p>
+<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/PSVersionTable4.png" alt="PSVersionTable4"></p>
+<p>And now your .NET 4.0 module will load correctly.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/01/15/autofac-global-interface-interceptor-with-autofacextrasdynamicproxy2/" itemprop="url">
+                  Autofac global interface interceptor with Autofac.Extras.DynamicProxy2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-01-15T19:30:46+08:00" content="2015-01-15">
+              2015-01-15
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>You can’t really do EnableInterfaceInterceptors <em>globally</em>.</p>
+<p>But you can add the interceptors dynamically and it requires a little work. The way to go is to create a custom Autofac.Module that attaches to all component registrations. I’ll show it to you in an example.</p>
+<pre><code>public class InterceptorModule : Autofac.Module
+{
+  // This is a private constant from the Autofac.Extras.DynamicProxy2 assembly
+  // that is needed to &quot;poke&quot; interceptors into registrations.
+  const string InterceptorsPropertyName = &quot;Autofac.Extras.DynamicProxy2.RegistrationExtensions.InterceptorsPropertyName&quot;;
+
+  protected override void Load(ContainerBuilder builder)
+  {
+    // Register global interceptors here.
+    builder.Register(c =&gt; new CallLogger(Console.Out));
+  }
+
+  protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
+  {
+    // Here is where you define your &quot;global interceptor list&quot;
+    var interceptorServices = new Service[] { 
+        new TypedService(typeof(CallLogger)) 
+    };
+
+    // Append the global interceptors to any existing list, or create a new interceptor
+    // list if none are specified. Note this info will only be used by registrations
+    // that are set to have interceptors enabled. It&apos;ll be ignored by others.
+    object existing;
+    if (registration.Metadata.TryGetValue(InterceptorsPropertyName, out existing))
+    {
+      registration.Metadata[InterceptorsPropertyName] =
+        ((IEnumerable&lt;Service&gt;)existing).Concat(interceptorServices).Distinct();
+    }
+    else
+    {
+      registration.Metadata.Add(InterceptorsPropertyName, interceptorServices);
+    }
+  }
+}
+</code></pre><p>To make it work, you register the module along with the rest of your dependencies. </p>
+<pre><code>builder.RegisterType&lt;YourType&gt;()
+   .As&lt;YourIInterface&gt;()
+   .EnableInterfaceInterceptors();
+// Here&apos;s the magic module:
+builder.RegisterModule&lt;InterceptorModule&gt;();
+var container = builder.Build();
+</code></pre><p>If you run these registrations and resolve, You can see the interceptor works as you’ll see the CallLogger output.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/01/13/how-to-catch-httprequestvalidationexception/" itemprop="url">
+                  How To Catch HttpRequestValidationException
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-01-13T22:12:59+08:00" content="2015-01-13">
+              2015-01-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>If you’ve worked with ASP.NET for any length of time, you have worried about how to handle the Yellow Screen of Death. You know, the one that says:</p>
+<pre><code>HttpRequestValidationException: A potentially dangerous Request.Form value was detected from the client...
+</code></pre><p>or something similar.</p>
+<p>The common refrain is turn off request validation, but there are times when you want to use the built-in validation functions. You just want a friendlier error for your user.</p>
+<p>This code could be better thought out, but here it is anyway:</p>
+<pre><code>void Application_Error(object sender, EventArgs e) 
+{ 
+  // Code that runs when an unhandled error occurs
+  Exception ex = Server.GetLastError();
+  if (ex is HttpRequestValidationException)
+  {
+    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(
+      &quot;http://&quot; + Request.Url.Authority + Request.ApplicationPath + &quot;/HttpRequestValidationException.aspx&quot;);
+    HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+
+    Response.Clear();
+    Response.ClearHeaders();
+    for (int i = 0; i &lt; response.Headers.Count; i++)
+      Response.AddHeader(response.Headers.GetKey(i), response.Headers.Get(i));
+    Response.StatusCode = (int)response.StatusCode;
+
+    System.IO.Stream src = response.GetResponseStream();
+    while (true) {
+      int b = src.ReadByte();
+      if (b == -1) break;
+      Response.OutputStream.WriteByte((byte)b);
+    }
+
+    response.Close();
+    Response.End(); 
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/12/29/vs2013-browserlink/" itemprop="url">
+                  Using Browser Link in Visual Studio 2013
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-12-29T15:18:50+08:00" content="2014-12-29">
+              2014-12-29
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://dl.dropboxusercontent.com/u/13003046/images/InspectMode.png" alt="InspectMode"></p>
+<p>Web Essentials adds a number of other great Browser Link extensions that are available through the Web Essentials toolbar. Download <a href="http://vswebessentials.com/download" target="_blank" rel="external">Web Essentials</a> to try out these great new features.</p>
+<p><em>Inspect Mode</em> – Allows you to highlight an element in the browser and the corresponding code will be highlighted in Visual Studio.</p>
+<p><em>Design Mode</em> – Allows you to edit the content of an element in the browser and the corresponding code will be updated in Visual Studio. This even works if the HTML was generated by Razor code!</p>
+<p><em>Track Unused CSS</em> – Enters a CSS tracking mode that helps you find unused CSS.</p>
+<p><strong>Enabling Browser Link for Static HTML Files</strong><br>To enable Browser Link for static HTML files, add the following to your Web.config file.</p>
+<pre><code>&lt;configuration&gt;
+  &lt;system.webServer&gt;    
+    &lt;handlers&gt;
+      &lt;add name=&quot;Browser Link for HTML&quot; path=&quot;*.html&quot; verb=&quot;*&quot; 
+           type=&quot;System.Web.StaticFileHandler, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; 
+           resourceType=&quot;File&quot; preCondition=&quot;integratedMode&quot; /&gt;
+    &lt;/handlers&gt;
+  &lt;/system.webServer&gt;    
+&lt;/configuration&gt;
+</code></pre><p>Document reference url from <a href="http://www.asp.net/visual-studio/overview/2013/using-browser-link" target="_blank" rel="external">microsoft</a> </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/12/26/javascript-json-date-conversion/" itemprop="url">
+                  JavaScript JSON date conversion
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-12-26T09:53:12+08:00" content="2014-12-26">
+              2014-12-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>In JavaScript’s Date type, after JSON.stringify() will return ISO-8601 format (yyyy-MM-ddTHH: mm: ss.fffZ); interestingly, the JSON.parse() return a string, and not restored to the original Date type.</p>
+<p>ISO-8601 format will revert back to the Date of demand, to achieve through JSON.parse() function of Reviver. Examples are as follows:</p>
+<pre><code>var dateReviver = function (key, value) {
+    var a;
+    if (typeof value === &apos;string&apos;) {
+        a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);
+        if (a) {
+            return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4], +a[5], +a[6]));
+        }
+        a = /^\/Date\((.*?)\)\/$/.exec(value);
+        if (a) {
+          return new Date(parseInt(a[1]));
+        }
+    }
+    return value;
+};
+</code></pre><p>We can invoke it as following:</p>
+<pre><code>var strJson = &quot;\&quot;2014-12-25T07:27:13.851Z\&quot;&quot;;
+var result = JSON.parse(strJson, dateReviver);
+
+strJson = &quot;\&quot;&quot;/Date(1330444800000)/\&quot;&quot;;
+result = JSON.parse(strJson, dateReviver);
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/12/24/automatic-package-restore-in-visual-studio/" itemprop="url">
+                  Automatic Package Restore in Visual Studio
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-12-24T17:16:25+08:00" content="2014-12-24">
+              2014-12-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>We can add the pre-build event for each of the project that require the packages.config</p>
+<pre><code>cd $(ProjectDir)
+nuget restore -source http://www.nuget.org/api/v2/ -packagesdirectory ../packages
+</code></pre><p>What if you have custom package sources?<br>All you need to do is create a NuGet.Config file next to your .sln file, containing:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;configuration&gt;
+  &lt;packageSources&gt;
+    &lt;add key=&quot;nuget.org&quot; value=&quot;https://www.nuget.org/api/v2/&quot; /&gt;
+    &lt;add key=&quot;aspnetwebstacknightlyrelease&quot; value=&quot;https://www.myget.org/f/aspnetwebstacknightlyrelease/&quot; /&gt;
+  &lt;/packageSources&gt;
+&lt;/configuration&gt;
+</code></pre><p>Note that if you have private package sources that you want to keep out of your repo, you can add them to</p>
+<pre><code>%APPDATA%\NuGet\Nuget.config (see this page) for details.
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/12/22/invoke-or-begininvoke-cannot-be-called-on-a-control-until-the-window-handle-has-been-created/" itemprop="url">
+                  How to avoid BeginInvoke before a handle has been created?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-12-22T22:12:59+08:00" content="2014-12-22">
+              2014-12-22
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Invoke or BeginInvoke cannot be called on a control until the window handle has been created.</p>
+<pre><code>public static class ControlExtension
+{
+    public static void SafeInvoke(this Control uiElement, Action updater, bool forceSynchronous)
+    {
+        if (uiElement == null) {
+            throw new ArgumentNullException(&quot;uiElement&quot;);
+        }
+
+        if (uiElement.InvokeRequired) {
+            if (forceSynchronous) {
+                uiElement.Invoke((Action)delegate
+                {
+                    SafeInvoke(uiElement, updater, forceSynchronous);
+                });
+            }
+            else {
+                uiElement.BeginInvoke((Action)delegate
+                {
+                    SafeInvoke(uiElement, updater, forceSynchronous);
+                });
+            }
+        }
+        else {
+            if (uiElement.IsDisposed) {
+                throw new ObjectDisposedException(&quot;Control is already disposed.&quot;);
+            }
+            updater();
+        }
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/12/04/outlook-2007-requiring-a-password-when-resuming-from-hibernation/" itemprop="url">
+                  Outlook 2007 requiring a Password When Resuming from Hibernation
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-12-04T09:31:12+08:00" content="2014-12-04">
+              2014-12-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>I recently noticed that a Need password prompt after resuming from hibernation mode.</p>
+<p>You can download MicrosoftFixit50636.msi from Microsoft website (<a href="http://support.microsoft.com/kb/949918/en" target="_blank" rel="external">http://support.microsoft.com/kb/949918/en</a>).</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="Mr-Brain" />
+          <p class="site-author-name" itemprop="name">Mr-Brain</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+          
+          
+
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr-Brain</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+  
+
+
+</body>
+</html>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-05T14:03:01.095Z</updated>
+  <updated>2016-03-06T01:33:42.236Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://yoursite.com/2016/03/05/my-reflux/"/>
     <id>http://yoursite.com/2016/03/05/my-reflux/</id>
     <published>2016-03-05T08:58:20.711Z</published>
-    <updated>2016-03-05T14:03:01.095Z</updated>
+    <updated>2016-03-06T01:33:42.236Z</updated>
     
-    <content type="html">&lt;h3 id=&quot;React-Flow&quot;&gt;&lt;a href=&quot;#React-Flow&quot; class=&quot;headerlink&quot; title=&quot;React Flow&quot;&gt;&lt;/a&gt;React Flow&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;images/Flux.png&quot; alt=&quot;React Flow&quot;&gt;&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;React-Flow&quot;&gt;&lt;a href=&quot;#React-Flow&quot; class=&quot;headerlink&quot; title=&quot;React Flow&quot;&gt;&lt;/a&gt;React Flow&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/images/Flux.png&quot; alt=&quot;React Flow&quot;&gt;&lt;/p&gt;
 &lt;h4 id=&quot;Create-Actions&quot;&gt;&lt;a href=&quot;#Create-Actions&quot; class=&quot;headerlink&quot; title=&quot;Create Actions&quot;&gt;&lt;/a&gt;Create Actions&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;import $ = require(&amp;apos;jquery&amp;apos;);
 import t1 = require(&amp;apos;t1&amp;apos;);
 import FReflux = t1.FReflux;
@@ -129,7 +129,7 @@ class Panel1 extends FRefluxReducerComponent&amp;lt;Panel1Props, Demo1State&amp;
     
     <summary type="html">
     
-      &lt;h3 id=&quot;React-Flow&quot;&gt;&lt;a href=&quot;#React-Flow&quot; class=&quot;headerlink&quot; title=&quot;React Flow&quot;&gt;&lt;/a&gt;React Flow&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;images/Flux.png&quot; alt=&quot;React 
+      &lt;h3 id=&quot;React-Flow&quot;&gt;&lt;a href=&quot;#React-Flow&quot; class=&quot;headerlink&quot; title=&quot;React Flow&quot;&gt;&lt;/a&gt;React Flow&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/images/Flux.png&quot; alt=&quot;React
     
     </summary>
     
@@ -141,7 +141,7 @@ class Panel1 extends FRefluxReducerComponent&amp;lt;Panel1Props, Demo1State&amp;
     <link href="http://yoursite.com/2016/03/05/install-hexo/"/>
     <id>http://yoursite.com/2016/03/05/install-hexo/</id>
     <published>2016-03-05T01:30:43.895Z</published>
-    <updated>2016-03-05T08:45:06.276Z</updated>
+    <updated>2016-03-05T15:20:03.927Z</updated>
     
     <content type="html">&lt;h3 id=&quot;Create-a-GitHub-Account&quot;&gt;&lt;a href=&quot;#Create-a-GitHub-Account&quot; class=&quot;headerlink&quot; title=&quot;Create a GitHub Account&quot;&gt;&lt;/a&gt;Create a GitHub Account&lt;/h3&gt;&lt;p&gt;Create a new Repository name: “username.github.io” &lt;/p&gt;
 &lt;p&gt;username must same as account name&lt;/p&gt;
@@ -162,6 +162,8 @@ npm install hexo-renderer-marked@0.2 --save
 npm install hexo-renderer-stylus@0.2 --save
 npm install hexo-generator-feed@1 --save
 npm install hexo-generator-sitemap@1 --save
+npm install hexo-tag-bootstrap --save
+npm install hexo-generator-search --save
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Process the following command, and visit localhost:4000 to see the result&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;hexo server
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The Following command that generate public folder, you can deploy it to your target site folder.&lt;/p&gt;
@@ -186,6 +188,641 @@ hexo s #發佈預覽效果
     <summary type="html">
     
       &lt;h3 id=&quot;Create-a-GitHub-Account&quot;&gt;&lt;a href=&quot;#Create-a-GitHub-Account&quot; class=&quot;headerlink&quot; title=&quot;Create a GitHub Account&quot;&gt;&lt;/a&gt;Create a GitHub A
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>nuget &#39;packages&#39; element is not declared warning</title>
+    <link href="http://yoursite.com/2015/08/02/nuget-package-element-is-not-declared-warning/"/>
+    <id>http://yoursite.com/2015/08/02/nuget-package-element-is-not-declared-warning/</id>
+    <published>2015-08-02T01:01:55.263Z</published>
+    <updated>2016-03-06T06:21:59.656Z</updated>
+    
+    <content type="html">&lt;p&gt;not a showstopper but when using nuget in a project, it creates a packages.config file with this shape&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;packages&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   ... your packages&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/packages&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;this gives a warning in VS&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The ‘packages’ element is not declared.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;You can always make simple xsd schema for ‘packages.config’ to get rid of this warning. To do this, create file named “packages.xsd”:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot; ?&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;xs:schema xmlns:xs=&amp;quot;http://www.w3.org/2001/XMLSchema&amp;quot; elementFormDefault=&amp;quot;qualified&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      targetNamespace=&amp;quot;urn:packages&amp;quot; xmlns=&amp;quot;urn:packages&amp;quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;xs:element name=&amp;quot;packages&amp;quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;xs:complexType&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;xs:sequence&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;xs:element name=&amp;quot;package&amp;quot; maxOccurs=&amp;quot;unbounded&amp;quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;lt;xs:complexType&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;xs:attribute name=&amp;quot;id&amp;quot; type=&amp;quot;xs:string&amp;quot; use=&amp;quot;required&amp;quot; /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;xs:attribute name=&amp;quot;version&amp;quot; type=&amp;quot;xs:string&amp;quot; use=&amp;quot;required&amp;quot; /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;xs:attribute name=&amp;quot;targetFramework&amp;quot; type=&amp;quot;xs:string&amp;quot; use=&amp;quot;optional&amp;quot; /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;xs:attribute name=&amp;quot;allowedVersions&amp;quot; type=&amp;quot;xs:string&amp;quot; use=&amp;quot;optional&amp;quot; /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;lt;/xs:complexType&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;/xs:element&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;/xs:sequence&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;/xs:complexType&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;/xs:element&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/xs:schema&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Location of this file (two options)&lt;/p&gt;
+&lt;p&gt;In the same folder as ‘packages.config’ file,&lt;br&gt;If you want to share packages.xsd across multiple projects, move it to the Visual Studio Schemas folder (the path may slightly differ, it’s  D:\Program Files (x86)\Microsoft Visual Studio 10.0\Xml\Schemas for me).&lt;br&gt;Then, edit &lt;packages&gt; tag in packages.config file (add xmlns attribute):&lt;/packages&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;packages xmlns=&amp;quot;urn:packages&amp;quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Now the warning should disappear (even if packages.config file is open in Visual Studio).&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;not a showstopper but when using nuget in a project, it creates a packages.config file with this shape&lt;/p&gt;
+&lt;figure class=&quot;highlight plain
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ASP.NET MVC throw Exception</title>
+    <link href="http://yoursite.com/2015/07/27/asp-net-mvc-throw-exception/"/>
+    <id>http://yoursite.com/2015/07/27/asp-net-mvc-throw-exception/</id>
+    <published>2015-07-27T08:04:37.034Z</published>
+    <updated>2016-03-06T06:23:49.761Z</updated>
+    
+    <content type="html">&lt;p&gt;My application was working fine and after I did some upgrades I am getting this error.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Attempt by &amp;apos;System.Web.Mvc.PreApplicationStartCode.Start()&amp;apos; to critical method &amp;apos;System.Web.WebPages.Razor.PreApplicationStartCode.Start()&amp;apos; failed
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Please use this package from nuget&lt;/p&gt;
+&lt;p&gt;Install-Package Microsoft.AspNet.Mvc -Version 5.2.2&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;My application was working fine and after I did some upgrades I am getting this error.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Attempt by &amp;apos;System.Web.Mvc.Pre
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>VS.NET 2013 Error</title>
+    <link href="http://yoursite.com/2015/05/21/vsnet2013-error/"/>
+    <id>http://yoursite.com/2015/05/21/vsnet2013-error/</id>
+    <published>2015-05-21T06:09:56.803Z</published>
+    <updated>2016-03-06T01:39:32.521Z</updated>
+    
+    <content type="html">&lt;p&gt;Getting Error “‘Microsoft.VisualStudio.Editor.Implementation.EditorPackage’ package did not load correctly”?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Please try to remove %LOCALAPPDATA%\Microsoft\VisualStudio\11.0\ComponentModelCache and restarting VS2012. Hope this will fix your issue.&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Getting Error “‘Microsoft.VisualStudio.Editor.Implementation.EditorPackage’ package did not load correctly”?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Please t
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>NuGet Manager Console</title>
+    <link href="http://yoursite.com/2015/05/07/NuGet-Manager-Console/"/>
+    <id>http://yoursite.com/2015/05/07/NuGet-Manager-Console/</id>
+    <published>2015-05-07T13:47:26.171Z</published>
+    <updated>2016-03-06T06:21:45.681Z</updated>
+    
+    <content type="html">&lt;p&gt;List all available versions of a specific package?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;get-package -ListAvailable -AllVersions -filter nunit -source &lt;a href=&quot;https://nuget.org/api/v2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://nuget.org/api/v2/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;How to install special version of package?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;install-package nunit -version x.xx&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;List all available versions of a specific package?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;get-package -ListAvailable -AllVersions -filter nunit -source &lt;a h
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Resharper shortcut keys</title>
+    <link href="http://yoursite.com/2015/04/06/resharper-shortcut-keys/"/>
+    <id>http://yoursite.com/2015/04/06/resharper-shortcut-keys/</id>
+    <published>2015-04-05T23:31:40.790Z</published>
+    <updated>2016-03-06T06:03:01.820Z</updated>
+    
+    <content type="html">&lt;p&gt;How to restore parameter info (argument list) shortcut with Resharper?&lt;/p&gt;
+&lt;p&gt;If you go to the &lt;strong&gt;Visual Studio Tools -&amp;gt; Options -&amp;gt; Keyboard&lt;/strong&gt; section, you can type the shortcut in the shortcut keys edit box and VS will show what commands are bound to that shortcut combination. So, hitting &lt;strong&gt;ctrl+shift+space&lt;/strong&gt; will show you that is mapped to &lt;strong&gt;“Edit.ParameterInfo”&lt;/strong&gt; for the Workfow Designer, and &lt;strong&gt;“ReSharper.ReSharper_CompleteCodeSmart”&lt;/strong&gt; for the Text Editor and the XAML UI Designer. You can do a similar thing with &lt;strong&gt;ctrl+p&lt;/strong&gt;.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;How to restore parameter info (argument list) shortcut with Resharper?&lt;/p&gt;
+&lt;p&gt;If you go to the &lt;strong&gt;Visual Studio Tools -&amp;gt; Options 
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Automapper 3.0 - This type is not supported on this platform when I use MSTest.exe ?</title>
+    <link href="http://yoursite.com/2015/04/01/automapper-this-type-is-not-supported-on-this-platform/"/>
+    <id>http://yoursite.com/2015/04/01/automapper-this-type-is-not-supported-on-this-platform/</id>
+    <published>2015-04-01T02:12:20.034Z</published>
+    <updated>2016-03-06T06:20:03.134Z</updated>
+    
+    <content type="html">&lt;p&gt;MSTest show following error:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Source value:&lt;br&gt;System.Data.DataTableReader —&amp;gt; System.PlatformNotSupportedException: Proxy generation not supported on this platform.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To fix it, add an explicit call to something in AutoMapper.Net4.dll. For instance, with the class ListSourceMapper :&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var useless = new ListSourceMapper();
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Or you can&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[TestClass]
+[DeploymentItem(&amp;quot;AutoMapper.Net4.dll&amp;quot;)]
+public class YourTest
+{
+    [TestMethod]
+    public void Test1()
+    {
+        ...
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;MSTest show following error:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Source value:&lt;br&gt;System.Data.DataTableReader —&amp;gt; System.PlatformNotSupportedException:
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>How to compile many typescript files in VS.NET 2013?</title>
+    <link href="http://yoursite.com/2015/03/30/how-to-combine-typescript-files/"/>
+    <id>http://yoursite.com/2015/03/30/how-to-combine-typescript-files/</id>
+    <published>2015-03-30T14:26:45.527Z</published>
+    <updated>2016-03-06T06:20:32.897Z</updated>
+    
+    <content type="html">&lt;p&gt;We can add following MSBuild script in your csproj file.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;Import Project=&amp;quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&amp;quot;
+    Condition=&amp;quot;Exists(&amp;apos;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\$(TypeScriptToolsVersion)\Microsoft.TypeScript.targets&amp;apos;)&amp;quot; /&amp;gt;
+&amp;lt;Target Name=&amp;quot;CombineT1&amp;quot; BeforeTargets=&amp;quot;PrepareForBuild&amp;quot;&amp;gt;
+  &amp;lt;ItemGroup&amp;gt;
+    &amp;lt;T1TypeScriptFiles Include=&amp;quot;$(projectDir)Scripts\t1\*.ts;&amp;quot; Exclude=&amp;quot;$(projectDir)\Scripts\**\*.d.ts;&amp;quot; /&amp;gt;
+  &amp;lt;/ItemGroup&amp;gt;
+  &amp;lt;WriteLinesToFile File=&amp;quot;$(projectDir)Scripts\t1\typescriptcompiler.input&amp;quot; Lines=&amp;quot;@(T1TypeScriptFiles)&amp;quot; Overwrite=&amp;quot;true&amp;quot; Encoding=&amp;quot;UTF-8&amp;quot; /&amp;gt;
+  &amp;lt;Exec Command=&amp;quot;&amp;amp;quot;$(MSBuildProgramFiles32)\Microsoft SDKs\TypeScript\$(TypeScriptToolsVersion)\tsc&amp;amp;quot; --out $(projectDir)Scripts\t1\t1.js --target ES5 @$(projectDir)Scripts\t1\typescriptcompiler.input&amp;quot; CustomErrorRegularExpression=&amp;quot;\.ts\([0-9]+,[0-9]+\):(.*)&amp;quot;&amp;gt;
+  &amp;lt;/Exec&amp;gt;
+&amp;lt;/Target&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;We can add following MSBuild script in your csproj file.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;Import Project=&amp;quot;$(MSBuildExtensionsPath32)\Microsoft\Vis
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Jasmine Errors in VS.NET 2013</title>
+    <link href="http://yoursite.com/2015/03/28/jasmine-errors/"/>
+    <id>http://yoursite.com/2015/03/28/jasmine-errors/</id>
+    <published>2015-03-28T01:56:34.190Z</published>
+    <updated>2016-03-06T06:21:29.386Z</updated>
+    
+    <content type="html">&lt;p&gt;I get the following error:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Script:&lt;br&gt;C:\Users\xxx\AppData\Local\Microsoft\VisualStudio\12.0\Extensions\2q5cdx5o.qzv\TestFiles\Jasmine\v2\jasmine.js&lt;/p&gt;
+&lt;p&gt;Error: ‘null’ is not an object (evaluating ‘currentSpec.expect’) #665&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I find the root cause:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;describe(&amp;quot;[TS]Test&amp;quot;, function () {
+  expect(&amp;quot;&amp;quot;).toBe(&amp;quot;&amp;quot;);
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I forgot to add the ‘it’ statement around my expect.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;describe(&amp;quot;[TS]Test&amp;quot;, function () {
+  it(&amp;quot;test&amp;quot;,() =&amp;gt; {
+    expect(&amp;quot;&amp;quot;).toBe(&amp;quot;&amp;quot;);
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I get the following error:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Script:&lt;br&gt;C:\Users\xxx\AppData\Local\Microsoft\VisualStudio\12.0\Extensions\2q5cdx5o.qzv\
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>What is the GOOGLE_INPUT_CHEXT_FLAG in web pages?</title>
+    <link href="http://yoursite.com/2015/03/24/google-input-chext-flag/"/>
+    <id>http://yoursite.com/2015/03/24/google-input-chext-flag/</id>
+    <published>2015-03-24T15:15:55.246Z</published>
+    <updated>2016-03-06T06:20:18.561Z</updated>
+    
+    <content type="html">&lt;p&gt;Now a days I can see that just before the ending of the  tag something like below appears:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&amp;quot;GOOGLE_INPUT_CHEXT_FLAG&amp;quot; style=&amp;quot;display: none;&amp;quot; input=&amp;quot;&amp;quot; input_stat=&amp;quot;{}&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I can see this in every webpages whenever I try to Inspect Element in Google Chrome.&lt;/p&gt;
+&lt;p&gt;I have got the point. Its because of the extension: &lt;strong&gt;Google Input Tools (by Google)&lt;/strong&gt;.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Now a days I can see that just before the ending of the  tag something like below appears:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&amp;quot;GOOGLE_INPUT_C
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>angular tutor</title>
+    <link href="http://yoursite.com/2015/03/24/angular-tutor/"/>
+    <id>http://yoursite.com/2015/03/24/angular-tutor/</id>
+    <published>2015-03-24T14:44:12.071Z</published>
+    <updated>2016-03-06T06:19:41.203Z</updated>
+    
+    <content type="html">&lt;p&gt;How to load Template in Angular?&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public class HomeController : Controller
+{
+    public ActionResult Template(string id)
+    {
+        return PartialView(string.Format(&amp;quot;~/Views/Home/Partials/{0}.cshtml&amp;quot;, id));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, we can use following code &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div ng-include=&amp;quot;&amp;apos;/Home/Template/Index&amp;apos;&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;How to load Template in Angular?&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public class HomeController : Controller
+{
+    public ActionResult Template(string id)
+  
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>angular with many errors in typescript typing files</title>
+    <link href="http://yoursite.com/2015/03/16/angular-d-ts-errors-in-typescript-2015-03-16/"/>
+    <id>http://yoursite.com/2015/03/16/angular-d-ts-errors-in-typescript-2015-03-16/</id>
+    <published>2015-03-16T14:42:13.031Z</published>
+    <updated>2016-03-06T06:19:25.115Z</updated>
+    
+    <content type="html">&lt;p&gt;I have a problem with Visual Studio 2013 generating too many errors when using&lt;br&gt;angular.d.ts typescript type file.&lt;/p&gt;
+&lt;p&gt;all in jquery.d.ts, like the following errors:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;‘,’ expected.&lt;br&gt;&lt;br&gt;‘=’ expected.&lt;br&gt;&lt;br&gt;Identifier expected.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The most likely reason for this is that you are using an older version of TypeScript.&lt;br&gt;The language is moving swiftly and some of the features in version 1.4 are particularly useful in definition files, so it is likely that you will need to upgrade to 1.4.&lt;/p&gt;
+&lt;p&gt;Download version 1.4 &lt;a href=&quot;https://visualstudiogallery.msdn.microsoft.com/2d42d8dc-e085-45eb-a30b-3f7d50d55304&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;here&lt;/a&gt; (Updated 2015.01.16)&lt;/p&gt;
+&lt;p&gt;However, Where can I find the TypeScript version installed in Visual Studio?&lt;br&gt;you can simply do in Visual Studio Command Prompt:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tsc -v
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It will display typescript version&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Version 1.0.3.0
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I have a problem with Visual Studio 2013 generating too many errors when using&lt;br&gt;angular.d.ts typescript type file.&lt;/p&gt;
+&lt;p&gt;all in jquery
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Handling Session and Authentication Timeouts in ASP.NET MVC</title>
+    <link href="http://yoursite.com/2015/03/15/handling-session-and-authentication-timeouts-in-aspnet-mvc/"/>
+    <id>http://yoursite.com/2015/03/15/handling-session-and-authentication-timeouts-in-aspnet-mvc/</id>
+    <published>2015-03-15T03:48:48.461Z</published>
+    <updated>2016-03-06T06:17:53.082Z</updated>
+    
+    <content type="html">&lt;p&gt;The SessionExpireFilterAttribute action filter is then automatically called before each action to check if Session”UserName” is null. If it determines a timeout has not occurred, it allows the actual called action to execute. Otherwise, it forces a redirect to a timeout notification page, which in turn redirects to the logon page to allow the user to re-logon.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+public class SessionExpireFilterAttribute : ActionFilterAttribute
+{
+    public override void OnActionExecuting(ActionExecutingContext filterContext)
+    {
+        HttpContext ctx = HttpContext.Current;
+
+        // If the browser session or authentication session has expired...
+        if (ctx.Session[&amp;quot;UserName&amp;quot;] == null || !filterContext.HttpContext.Request.IsAuthenticated)
+        {
+            if (filterContext.HttpContext.Request.IsAjaxRequest())
+            {
+                // For AJAX requests, we&amp;apos;re overriding the returned JSON result with a simple string,
+                // indicating to the calling JavaScript code that a redirect should be performed.
+                filterContext.Result = new JsonResult { Data = &amp;quot;_LogonTimeoutRedirect_&amp;quot; };
+            }
+            else
+            {
+                // For round-trip posts, we&amp;apos;re forcing a redirect to Home/TimeoutRedirect/, which
+                // simply displays a temporary 5 second notification that they have timed out, and
+                // will, in turn, redirect to the logon page.
+                filterContext.Result = new RedirectToRouteResult(
+                        new RouteValueDictionary {
+                    { &amp;quot;Controller&amp;quot;, &amp;quot;Home&amp;quot; },
+                    { &amp;quot;Action&amp;quot;, &amp;quot;TimeoutRedirect&amp;quot; }
+            });
+            }
+        }
+        base.OnActionExecuting(filterContext);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We’ll create a couple of action filters to provide cross-cutting checks for timeout scenarios. The first will normally be hit when the browser session has timed out, but will also handle if the authentication has timed out first:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+public class SessionAuthorizeAttribute : AuthorizeAttribute
+{
+    protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+    {
+        HttpContext ctx = HttpContext.Current;
+
+        // If the browser session has expired...
+        if (ctx.Session[&amp;quot;UserName&amp;quot;] == null)
+        {
+            if (filterContext.HttpContext.Request.IsAjaxRequest())
+            {
+                // For AJAX requests, we&amp;apos;re overriding the returned JSON result with a simple string,
+                // indicating to the calling JavaScript code that a redirect should be performed.
+                filterContext.Result = new JsonResult { Data = &amp;quot;_LogonTimeoutRedirect_&amp;quot; };
+            }
+            else
+            {
+                // For round-trip posts, we&amp;apos;re forcing a redirect to Home/TimeoutRedirect/, which
+                // simply displays a temporary 5 second notification that they have timed out, and
+                // will, in turn, redirect to the logon page.
+                filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary {
+                        { &amp;quot;Controller&amp;quot;, &amp;quot;Home&amp;quot; },
+                        { &amp;quot;Action&amp;quot;, &amp;quot;TimeoutRedirect&amp;quot; }
+                });
+            }
+        }
+        else if (filterContext.HttpContext.Request.IsAuthenticated)
+        {
+            // Otherwise the reason we got here was because the user didn&amp;apos;t have access rights to the
+            // operation, and a 403 should be returned.
+            filterContext.Result = new HttpStatusCodeResult(403);
+        }
+        else
+        {
+            base.HandleUnauthorizedRequest(filterContext);
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The Timeout Warning Message Page&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;meta http-equiv=&amp;quot;refresh&amp;quot; content=&amp;quot;5;url=/Account/Logon/&amp;quot; /&amp;gt;
+&amp;lt;h2&amp;gt;
+  Sorry, but your session has timed out. You&amp;apos;ll be redirected to the Log On page in 5 seconds...
+&amp;lt;/h2&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We can register global filter&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+{
+    filters.Add(new HandleErrorAttribute());
+    filters.Add(new SessionExpireFilterAttribute());
+    filters.Add(new SessionAuthorizationAttribute());
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Client-Side Calling Code Sample&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$.ajax({
+    url: &amp;quot;/MyController/MyAction&amp;quot;,
+    type: &amp;apos;POST&amp;apos;,
+    dataType: &amp;apos;json&amp;apos;,
+    data: jsonData,
+    contentType: &amp;apos;application/json; charset=utf-8&amp;apos;,
+    success: function (result) {
+        if (checkTimeout(result)) {
+            // There was no timeout, so continue processing...
+        }
+    },
+    error: function (result) {
+        if (checkTimeout(result)) {
+            // There was no timeout, so continue processing...
+        }
+    }
+});
+
+
+function checkTimeout(data) {
+    var thereIsStillTime = true;
+    if (data) {
+        if (data.responseText) {
+            if ((data.responseText.indexOf(&amp;quot;&amp;lt;title&amp;gt;Log On&amp;lt;/title&amp;gt;&amp;quot;) &amp;gt; -1) || (data.responseText.indexOf(&amp;quot;&amp;lt;title&amp;gt;Object moved&amp;lt;/title&amp;gt;&amp;quot;) &amp;gt; -1) || (data.responseText === &amp;apos;&amp;quot;_LogonTimeoutRedirect_&amp;quot;&amp;apos;)) thereIsStillTime = false;
+        } else {
+            if (data == &amp;quot;_Logon_&amp;quot;) thereIsStillTime = false;
+        }
+        if (!thereIsStillTime) {
+            window.location.href = &amp;quot;/Home/TimeoutRedirect&amp;quot;;
+        }
+    } else {
+        $.ajax({
+            url: &amp;quot;/Home/CheckTimeout/&amp;quot;,
+            type: &amp;apos;POST&amp;apos;,
+            dataType: &amp;apos;json&amp;apos;,
+            contentType: &amp;apos;application/json; charset=utf-8&amp;apos;,
+            async: false,
+            complete: function (result) {
+                thereIsStillTime = checkTimeout(result);
+            }
+        });
+    }
+    return thereIsStillTime;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In Web.config, we can control the session timeout&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;system.web&amp;gt;
+  &amp;lt;sessionState mode=&amp;quot;InProc&amp;quot; timeout=&amp;quot;1&amp;quot; cookieless=&amp;quot;UseCookies&amp;quot; /&amp;gt;
+&amp;lt;/system.web&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;The SessionExpireFilterAttribute action filter is then automatically called before each action to check if Session”UserName” is null. If 
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Found conflicts between different versions of the same dependent assemblies</title>
+    <link href="http://yoursite.com/2015/03/11/found-conflicts-between-different-versions-of-the-same-dependent-assemblies/"/>
+    <id>http://yoursite.com/2015/03/11/found-conflicts-between-different-versions-of-the-same-dependent-assemblies/</id>
+    <published>2015-03-11T13:58:35.530Z</published>
+    <updated>2016-03-06T06:19:10.826Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;Found conflicts between different versions of the same dependent assembly. Please set the “AutoGenerateBindingRedirects” property to true in the project file. For more information, see &lt;a href=&quot;http://go.microsoft.com/fwlink/?LinkId=294190&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://go.microsoft.com/fwlink/?LinkId=294190&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Considering there are about 50 references across the projects I have in this solution, that isn’t particularly helpful. &lt;/p&gt;
+&lt;p&gt;There is an easy way to get the compiler to spit out more information.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;In Visual Studio 2013 go to Tools &amp;gt; Options.&lt;/li&gt;
+&lt;li&gt;Select Project and Solutions &amp;gt; Build and Run.&lt;/li&gt;
+&lt;li&gt;Find the drop down MSBuild project build output verbosity. Here you can configure MSBuild to give you more information. By default it will be set to “Minimal”. Change this to “Detailed’.&lt;/li&gt;
+&lt;li&gt;Rebuild and view the Output window. Copy everything into notepad and search for the &lt;strong&gt;warning&lt;/strong&gt; which should tell you which assemblies you need to look at.&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Found conflicts between different versions of the same dependent assembly. Please set the “AutoGenerateBindingRedirects” pro
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Razor View throwing &quot;The name &#39;model&#39; does not exist in the current context&quot;</title>
+    <link href="http://yoursite.com/2015/03/04/razor-view-throwing-the-name-model-does-not-exist-in-the-current-context/"/>
+    <id>http://yoursite.com/2015/03/04/razor-view-throwing-the-name-model-does-not-exist-in-the-current-context/</id>
+    <published>2015-03-04T05:48:50.133Z</published>
+    <updated>2016-03-06T06:17:33.915Z</updated>
+    
+    <content type="html">&lt;p&gt;Razor is giving me this nonsensical error:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The name ‘model’ does not exist in the current context.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The part that makes literally zero sense is that this is causing the error:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@model ICollection&amp;lt;DataSourceByActive&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I know for a fact that @model is proper Razor syntax.&lt;/p&gt;
+&lt;p&gt;So why is this happening? How can I fix it?&lt;/p&gt;
+&lt;p&gt;I think you have messed up the web.config file which lives in the Views folder.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Create a new project targeting same .NET framework and copy its Views/web.config file over top the one in your current project&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This will fix your problem.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Razor is giving me this nonsensical error:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The name ‘model’ does not exist in the current context.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>PsExec gets stuck on licence prompt when running non-interactively</title>
+    <link href="http://yoursite.com/2015/03/04/psexec-gets-stuck-on-licence-prompt-when-running-noninteractively/"/>
+    <id>http://yoursite.com/2015/03/04/psexec-gets-stuck-on-licence-prompt-when-running-noninteractively/</id>
+    <published>2015-03-04T05:42:15.541Z</published>
+    <updated>2016-03-06T06:17:15.595Z</updated>
+    
+    <content type="html">&lt;p&gt;Use the &lt;strong&gt;/accepteula&lt;/strong&gt; command-line switch to accept the licence agreement.&lt;/p&gt;
+&lt;p&gt;Or set&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;pre&gt;&lt;code&gt;HKCU\Software\Sysinternals\PsExec\EulaAccepted 
+&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;p&gt;to 1&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Caution:&lt;/strong&gt; if the reg key above is set to 0 (EULA was declined once) then the /accepteula will not work, you have to set the key to 1 manually (or delete it altogether).&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Use the &lt;strong&gt;/accepteula&lt;/strong&gt; command-line switch to accept the licence agreement.&lt;/p&gt;
+&lt;p&gt;Or set&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;pre&gt;&lt;code&gt;HKCU\
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</title>
+    <link href="http://yoursite.com/2015/02/25/jquery-1101-does-not-work-well-with-ie11-upgrade-to-1102/"/>
+    <id>http://yoursite.com/2015/02/25/jquery-1101-does-not-work-well-with-ie11-upgrade-to-1102/</id>
+    <published>2015-02-25T04:29:33.183Z</published>
+    <updated>2016-03-06T06:16:49.195Z</updated>
+    
+    <content type="html">&lt;p&gt;JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2&lt;/p&gt;
+&lt;p&gt;reference: &lt;a href=&quot;https://issues.apache.org/jira/browse/WICKET-5404&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://issues.apache.org/jira/browse/WICKET-5404&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2&lt;/p&gt;
+&lt;p&gt;reference: &lt;a href=&quot;https://issues.apache.org/jira/browse/WICKET-540
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>VS.NET found the WebAPI reference error</title>
+    <link href="http://yoursite.com/2015/02/17/vsnet-found-the-webapi-reference-error/"/>
+    <id>http://yoursite.com/2015/02/17/vsnet-found-the-webapi-reference-error/</id>
+    <published>2015-02-17T15:41:15.261Z</published>
+    <updated>2016-03-06T06:16:29.223Z</updated>
+    
+    <content type="html">&lt;p&gt;I’ve created a MVC 4 Web API Application inside my solution, but I changed nuget package default location. So I’m getting 2 errors right now. &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;‘System.Web.Http.HttpConfiguration’ does not contain a definition for ‘MapHttpAttributeRoutes’ and no extension method ‘MapHttpAttributeRoutes’ accepting a first argument of type ‘System.Web.Http.HttpConfiguration’ could be found (are you missing a using directive or an assembly reference?)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A forced reinstall of WebAPI could do the job:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;update-package microsoft.aspnet.webapi -reinstall -project yourProject
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I’ve created a MVC 4 Web API Application inside my solution, but I changed nuget package default location. So I’m getting 2 errors right 
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Is it possible to share the location of Nuget packages for multiple projects ?</title>
+    <link href="http://yoursite.com/2015/02/17/is-it-possible-to-share-the-location-of-nuget-packages-for-multiple-projects/"/>
+    <id>http://yoursite.com/2015/02/17/is-it-possible-to-share-the-location-of-nuget-packages-for-multiple-projects/</id>
+    <published>2015-02-17T14:50:48.956Z</published>
+    <updated>2016-03-06T06:21:04.081Z</updated>
+    
+    <content type="html">&lt;p&gt;Nuget version 2.1&lt;/p&gt;
+&lt;p&gt;There is now official documentation on how to control the package locations. The release notes for 2.1 specifies the following configuration in a nuget.config file.&lt;/p&gt;
+&lt;p&gt;Please modify NuGet.config file in&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;C:\Users\MrBrain\AppData\Roaming\NuGet\NuGet.Config
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and add following &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;configuration&amp;gt;
+  &amp;lt;config&amp;gt;
+    &amp;lt;add key=&amp;quot;repositoryPath&amp;quot; value=&amp;quot;C:\thePathToMyPackagesFolder&amp;quot; &amp;gt;&amp;lt;/add&amp;gt;
+  &amp;lt;/config&amp;gt;
+  ... 
+&amp;lt;/configuration&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Restart VS.NET 2013, NuGet will place packages in the new location.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Nuget version 2.1&lt;/p&gt;
+&lt;p&gt;There is now official documentation on how to control the package locations. The release notes for 2.1 specifies
     
     </summary>
     

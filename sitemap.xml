@@ -2,16 +2,506 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2015/07/27/asp-net-mvc-throw-exception/</loc>
+    
+    <lastmod>2016-03-06T06:23:49.761Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/08/02/nuget-package-element-is-not-declared-warning/</loc>
+    
+    <lastmod>2016-03-06T06:21:59.656Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/05/07/NuGet-Manager-Console/</loc>
+    
+    <lastmod>2016-03-06T06:21:45.681Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/03/28/jasmine-errors/</loc>
+    
+    <lastmod>2016-03-06T06:21:29.386Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/02/17/is-it-possible-to-share-the-location-of-nuget-packages-for-multiple-projects/</loc>
+    
+    <lastmod>2016-03-06T06:21:04.081Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/10/16/how-to-compile-razor-views-at-compile-time/</loc>
+    
+    <lastmod>2016-03-06T06:20:48.114Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/03/30/how-to-combine-typescript-files/</loc>
+    
+    <lastmod>2016-03-06T06:20:32.897Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/03/24/google-input-chext-flag/</loc>
+    
+    <lastmod>2016-03-06T06:20:18.561Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/04/01/automapper-this-type-is-not-supported-on-this-platform/</loc>
+    
+    <lastmod>2016-03-06T06:20:03.134Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/03/24/angular-tutor/</loc>
+    
+    <lastmod>2016-03-06T06:19:41.203Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/03/16/angular-d-ts-errors-in-typescript-2015-03-16/</loc>
+    
+    <lastmod>2016-03-06T06:19:25.115Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/03/11/found-conflicts-between-different-versions-of-the-same-dependent-assemblies/</loc>
+    
+    <lastmod>2016-03-06T06:19:10.826Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/12/29/vs2013-browserlink/</loc>
+    
+    <lastmod>2016-03-06T06:18:49.099Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/11/30/aspnet-mvc-table-grid-post-form-and-read-lines/</loc>
+    
+    <lastmod>2016-03-06T06:18:31.194Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/03/15/handling-session-and-authentication-timeouts-in-aspnet-mvc/</loc>
+    
+    <lastmod>2016-03-06T06:17:53.082Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/03/04/razor-view-throwing-the-name-model-does-not-exist-in-the-current-context/</loc>
+    
+    <lastmod>2016-03-06T06:17:33.915Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/03/04/psexec-gets-stuck-on-licence-prompt-when-running-noninteractively/</loc>
+    
+    <lastmod>2016-03-06T06:17:15.595Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/02/25/jquery-1101-does-not-work-well-with-ie11-upgrade-to-1102/</loc>
+    
+    <lastmod>2016-03-06T06:16:49.195Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/02/17/vsnet-found-the-webapi-reference-error/</loc>
+    
+    <lastmod>2016-03-06T06:16:29.223Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/01/15/autofac-global-interface-interceptor-with-autofacextrasdynamicproxy2/</loc>
+    
+    <lastmod>2016-03-06T06:16:07.201Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/02/14/why-cant-i-get-the-jenkins-powershell-plugin-to-work/</loc>
+    
+    <lastmod>2016-03-06T06:15:45.676Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/01/13/how-to-catch-httprequestvalidationexception/</loc>
+    
+    <lastmod>2016-03-06T06:15:24.202Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/12/22/invoke-or-begininvoke-cannot-be-called-on-a-control-until-the-window-handle-has-been-created/</loc>
+    
+    <lastmod>2016-03-06T06:15:06.587Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/11/21/overriding--operator-how-to-compare-to-null/</loc>
+    
+    <lastmod>2016-03-06T06:14:47.491Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/08/08/how-to-get-vsnet-2013-offline-update-3-/</loc>
+    
+    <lastmod>2016-03-06T06:14:26.183Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/07/04/c-convert-xml-string-to-object/</loc>
+    
+    <lastmod>2016-03-06T06:14:07.884Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/06/29/nullreferenceexception-unexplained-error-in-aspnet-mvc/</loc>
+    
+    <lastmod>2016-03-06T06:13:10.292Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/06/25/using-forms-authentication-in-aspnet-mvc/</loc>
+    
+    <lastmod>2016-03-06T06:12:46.884Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/06/11/how-do-i-use-the-qdir-internal-file-association-rules-eg-7zip/</loc>
+    
+    <lastmod>2016-03-06T06:12:20.668Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/06/05/select-distinct-using-linq/</loc>
+    
+    <lastmod>2016-03-06T06:11:58.397Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/06/05/how-to-redirect-to-a-specific-version-of-net-assembly-at-runtime/</loc>
+    
+    <lastmod>2016-03-06T06:11:37.138Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/06/05/get-class-list-for-element-with-jquery/</loc>
+    
+    <lastmod>2016-03-06T06:11:14.814Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/06/04/jquery-multiple-attribute-selector/</loc>
+    
+    <lastmod>2016-03-06T06:10:52.428Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/06/03/unit-testing-aspnet-web-site-project-code-stored-in-app_code/</loc>
+    
+    <lastmod>2016-03-06T06:10:31.060Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/06/03/how-to-move-windows-that-open-up-offscreen/</loc>
+    
+    <lastmod>2016-03-06T06:10:07.261Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/05/03/remove-the-last-character-in-a-string-in-tsql/</loc>
+    
+    <lastmod>2016-03-06T06:09:42.566Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/06/03/how-to-deploy-files-for-unit-test-project/</loc>
+    
+    <lastmod>2016-03-06T06:09:20.605Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/06/02/log-all-methods-using-autofac-interceptor/</loc>
+    
+    <lastmod>2016-03-06T06:08:57.495Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/10/13/render-dynamic-model-in-razor-view-engine-and-aspnet-mvc/</loc>
+    
+    <lastmod>2016-03-06T06:08:35.334Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/08/19/dir-file-whose-file-size-is-greater-than-1024kb/</loc>
+    
+    <lastmod>2016-03-06T06:08:12.247Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/09/06/install-typescript091/</loc>
+    
+    <lastmod>2016-03-06T06:07:15.384Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/09/04/typescript-syntax/</loc>
+    
+    <lastmod>2016-03-06T06:06:48.871Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/07/28/resolving-dependent-net-assembly-version-conflicts/</loc>
+    
+    <lastmod>2016-03-06T06:06:20.560Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/08/19/microsoftvisualstudioshellinteropdll-error/</loc>
+    
+    <lastmod>2016-03-06T06:05:51.680Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/09/05/no-exports-were-found-that-match-the-constraint-contract-name-error/</loc>
+    
+    <lastmod>2016-03-06T06:05:30.130Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/09/08/adding-the-globalasaxcs-file-in-aspnet-website/</loc>
+    
+    <lastmod>2016-03-06T06:05:10.760Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/08/18/c-50-callermembername/</loc>
+    
+    <lastmod>2016-03-06T06:04:44.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2008/09/01/valuehelper-class/</loc>
+    
+    <lastmod>2016-03-06T06:03:57.657Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2008/09/05/dynamicproperty-class/</loc>
+    
+    <lastmod>2016-03-06T06:03:35.027Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/04/06/resharper-shortcut-keys/</loc>
+    
+    <lastmod>2016-03-06T06:03:01.820Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2013/08/26/whats-the-thing-in-net-version/</loc>
+    
+    <lastmod>2016-03-06T06:02:08.264Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2008/09/15/dataconfig-class/</loc>
+    
+    <lastmod>2016-03-06T02:27:02.853Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2008/12/08/dynamic-linq-to-object/</loc>
+    
+    <lastmod>2016-03-06T02:25:39.845Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2009/01/15/copy-vdi-file-of-virtualbox/</loc>
+    
+    <lastmod>2016-03-06T02:23:20.053Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2010/01/24/how-to-make-tsql-to-filter-criteria-is-casesensitive/</loc>
+    
+    <lastmod>2016-03-06T02:20:18.239Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2010/06/19/multiline-plsql-command-with-net-oraclecommand/</loc>
+    
+    <lastmod>2016-03-06T02:18:02.784Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/05/31/database-diagram-support-objects-cannot-be-installed/</loc>
+    
+    <lastmod>2016-03-06T02:09:27.660Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/05/31/microsoft-fastcgi-error-0x80070585/</loc>
+    
+    <lastmod>2016-03-06T02:08:37.643Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/05/31/cant-save-your-table-changes-in-sql2008-management-studio/</loc>
+    
+    <lastmod>2016-03-06T02:06:52.277Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/05/31/cannot-see-cs-files-after-last-rename-vsnet-2013-projects/</loc>
+    
+    <lastmod>2016-03-06T02:04:29.782Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/05/31/a-mixedmode-assembly-exception-message-been-showed/</loc>
+    
+    <lastmod>2016-03-06T02:02:16.943Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/05/31/why-isnt-there-an-assembly-unload-method/</loc>
+    
+    <lastmod>2016-03-06T02:00:39.448Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/02/15/jsonnet-serializedeserialize-methods/</loc>
+    
+    <lastmod>2016-03-06T01:58:26.809Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/02/09/how-can-i-run-powershell-with-the-net-4-runtime/</loc>
+    
+    <lastmod>2016-03-06T01:56:14.760Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/12/26/javascript-json-date-conversion/</loc>
+    
+    <lastmod>2016-03-06T01:55:05.065Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/12/24/automatic-package-restore-in-visual-studio/</loc>
+    
+    <lastmod>2016-03-06T01:53:14.450Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/12/04/outlook-2007-requiring-a-password-when-resuming-from-hibernation/</loc>
+    
+    <lastmod>2016-03-06T01:51:53.386Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2014/07/01/display-gmt-datetime-format-string/</loc>
+    
+    <lastmod>2016-03-06T01:49:41.676Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/05/21/vsnet2013-error/</loc>
+    
+    <lastmod>2016-03-06T01:39:32.521Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/03/05/my-reflux/</loc>
     
-    <lastmod>2016-03-05T14:03:01.095Z</lastmod>
+    <lastmod>2016-03-06T01:33:42.236Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2016/03/05/install-hexo/</loc>
     
-    <lastmod>2016-03-05T08:45:06.276Z</lastmod>
+    <lastmod>2016-03-05T15:20:03.927Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2010/07/10/vmware-bridged-network-stops-working-after-sleephibernate-on-windows-host/</loc>
+    
+    <lastmod>2010-07-10T02:12:59.000Z</lastmod>
     
   </url>
   
