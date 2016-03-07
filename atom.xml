@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-06T01:33:42.236Z</updated>
+  <updated>2016-03-07T23:40:15.121Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>React Reflux</title>
-    <link href="http://yoursite.com/2016/03/05/my-reflux/"/>
-    <id>http://yoursite.com/2016/03/05/my-reflux/</id>
+    <link href="http://yoursite.com/2016/03/05/reflux/"/>
+    <id>http://yoursite.com/2016/03/05/reflux/</id>
     <published>2016-03-05T08:58:20.711Z</published>
-    <updated>2016-03-06T01:33:42.236Z</updated>
+    <updated>2016-03-07T23:40:15.121Z</updated>
     
     <content type="html">&lt;h3 id=&quot;React-Flow&quot;&gt;&lt;a href=&quot;#React-Flow&quot; class=&quot;headerlink&quot; title=&quot;React Flow&quot;&gt;&lt;/a&gt;React Flow&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/images/Flux.png&quot; alt=&quot;React Flow&quot;&gt;&lt;/p&gt;
 &lt;h4 id=&quot;Create-Actions&quot;&gt;&lt;a href=&quot;#Create-Actions&quot; class=&quot;headerlink&quot; title=&quot;Create Actions&quot;&gt;&lt;/a&gt;Create Actions&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;import $ = require(&amp;apos;jquery&amp;apos;);
@@ -119,12 +119,48 @@ class Panel1 extends FRefluxReducerComponent&amp;lt;Panel1Props, Demo1State&amp;
         );
     }
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;Render&quot;&gt;&lt;a href=&quot;#Render&quot; class=&quot;headerlink&quot; title=&quot;Render&quot;&gt;&lt;/a&gt;Render&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;ReactDOM.render(
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;Render&quot;&gt;&lt;a href=&quot;#Render&quot; class=&quot;headerlink&quot; title=&quot;Render&quot;&gt;&lt;/a&gt;Render&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;import * as Router from &amp;apos;react-router&amp;apos;;
+import { Route, IndexRoute, Link } from &amp;apos;react-router&amp;apos;;
+
+var routeMap = (
+        &amp;lt;Route path=&amp;quot;/&amp;quot; component={MobileDemo1}&amp;gt;
+                &amp;lt;IndexRoute component={Panel1}/&amp;gt;
+                &amp;lt;Route path=&amp;quot;Panel1&amp;quot; component={Panel1}/&amp;gt;
+        &amp;lt;Route path=&amp;quot;Panel2&amp;quot; component={Panel2}/&amp;gt;
+        &amp;lt;Route path=&amp;quot;*&amp;quot; component={NotFoundPage} /&amp;gt;
+    &amp;lt;/Route&amp;gt;
+);
+
+ReactDOM.render(
     &amp;lt;Router.Router history={Router.browserHistory}&amp;gt;
         {routeMap}
     &amp;lt;/Router.Router&amp;gt;, 
     document.getElementById(&amp;apos;app1&amp;apos;)
 );
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;Main-js&quot;&gt;&lt;a href=&quot;#Main-js&quot; class=&quot;headerlink&quot; title=&quot;Main.js&quot;&gt;&lt;/a&gt;Main.js&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;(function(){
+    var baseUrl = &amp;quot;/js/Samples/ReactRouterDemo1/&amp;quot;;
+
+    require.config({
+        paths: {
+            &amp;quot;App&amp;quot;: baseUrl + &amp;quot;App&amp;quot;,
+        }
+    });
+})();
+
+define([&amp;quot;require&amp;quot;, &amp;quot;exports&amp;quot;, &amp;apos;App&amp;apos;], function (require, exports, app) {
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;HTML&quot;&gt;&lt;a href=&quot;#HTML&quot; class=&quot;headerlink&quot; title=&quot;HTML&quot;&gt;&lt;/a&gt;HTML&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;
+    &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width&amp;quot; /&amp;gt;
+    &amp;lt;title&amp;gt;React Router Demo1&amp;lt;/title&amp;gt;
+    &amp;lt;script src=&amp;quot;~/js/requirejs-config.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script src=&amp;quot;~/Scripts/require.js&amp;quot; data-main=&amp;quot;/js/Samples/ReactRouterDemo1/Main.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+    &amp;lt;div id=&amp;quot;app1&amp;quot;&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;</content>
     
     <summary type="html">

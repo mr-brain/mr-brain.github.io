@@ -430,6 +430,102 @@
             
               
                 
+                <a class="post-title-link" href="/2014/06/03/how-to-deploy-files-for-unit-test-project/" itemprop="url">
+                  How to deploy files for VS.NET Unit Test Project
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2014-06-03T22:12:59+08:00" content="2014-06-03">
+              2014-06-03
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Here’s the easiest way to accomplish deploying folders to the TestResults folder:</p>
+<ol>
+<li>Right click on the .testrunconfig file in your solution explorer.  For me, its LocalTestRun.testrunconfig.</li>
+<li>Select Open With and select XML editor</li>
+<li>Add a deployment item, specifying the relative path as the file name and an outputdirectory value of the directory name.  In my example, I want to deploy everything in the configuration directory to a folder called configuration in the testrun folder, so I’ve added the following entry:</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Deployment</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">DeploymentItem</span> <span class="attr">filename</span>=<span class="string">"Services\Identity\Claim\ClaimService.Test\configuration\"</span> <span class="attr">outputDirectory</span>=<span class="string">"configuration\"</span> &gt;</span><span class="tag">&lt;/<span class="name">DeploymentItem</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Deployment</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Now when my tests execution, Visual Studio copies over all my configuration file entries and is able to load the app.config file successfully.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/06/03/unit-testing-aspnet-web-site-project-code-stored-in-app_code/" itemprop="url">
                   Unit Testing ASP.NET Web Site Project code stored in APP_Code
                 </a>
@@ -498,102 +594,6 @@
   &lt;/Target&gt;  
 &lt;/Project&gt;
 </code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/06/03/how-to-deploy-files-for-unit-test-project/" itemprop="url">
-                  How to deploy files for VS.NET Unit Test Project
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2014-06-03T22:12:59+08:00" content="2014-06-03">
-              2014-06-03
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Here’s the easiest way to accomplish deploying folders to the TestResults folder:</p>
-<ol>
-<li>Right click on the .testrunconfig file in your solution explorer.  For me, its LocalTestRun.testrunconfig.</li>
-<li>Select Open With and select XML editor</li>
-<li>Add a deployment item, specifying the relative path as the file name and an outputdirectory value of the directory name.  In my example, I want to deploy everything in the configuration directory to a folder called configuration in the testrun folder, so I’ve added the following entry:</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Deployment</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">DeploymentItem</span> <span class="attr">filename</span>=<span class="string">"Services\Identity\Claim\ClaimService.Test\configuration\"</span> <span class="attr">outputDirectory</span>=<span class="string">"configuration\"</span> &gt;</span><span class="tag">&lt;/<span class="name">DeploymentItem</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Deployment</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>Now when my tests execution, Visual Studio copies over all my configuration file entries and is able to load the app.config file successfully.</p>
-
           
         
       

@@ -216,7 +216,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/05/my-reflux/" itemprop="url">
+                <a class="post-title-link" href="/2016/03/05/reflux/" itemprop="url">
                   React Reflux
                 </a>
               
@@ -356,12 +356,48 @@ class Panel1 extends FRefluxReducerComponent&lt;Panel1Props, Demo1State&gt; {
         );
     }
 }
-</code></pre><h3 id="Render"><a href="#Render" class="headerlink" title="Render"></a>Render</h3><pre><code>ReactDOM.render(
+</code></pre><h3 id="Render"><a href="#Render" class="headerlink" title="Render"></a>Render</h3><pre><code>import * as Router from &apos;react-router&apos;;
+import { Route, IndexRoute, Link } from &apos;react-router&apos;;
+
+var routeMap = (
+        &lt;Route path=&quot;/&quot; component={MobileDemo1}&gt;
+                &lt;IndexRoute component={Panel1}/&gt;
+                &lt;Route path=&quot;Panel1&quot; component={Panel1}/&gt;
+        &lt;Route path=&quot;Panel2&quot; component={Panel2}/&gt;
+        &lt;Route path=&quot;*&quot; component={NotFoundPage} /&gt;
+    &lt;/Route&gt;
+);
+
+ReactDOM.render(
     &lt;Router.Router history={Router.browserHistory}&gt;
         {routeMap}
     &lt;/Router.Router&gt;, 
     document.getElementById(&apos;app1&apos;)
 );
+</code></pre><h3 id="Main-js"><a href="#Main-js" class="headerlink" title="Main.js"></a>Main.js</h3><pre><code>(function(){
+    var baseUrl = &quot;/js/Samples/ReactRouterDemo1/&quot;;
+
+    require.config({
+        paths: {
+            &quot;App&quot;: baseUrl + &quot;App&quot;,
+        }
+    });
+})();
+
+define([&quot;require&quot;, &quot;exports&quot;, &apos;App&apos;], function (require, exports, app) {
+});
+</code></pre><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><pre><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot; /&gt;
+    &lt;title&gt;React Router Demo1&lt;/title&gt;
+    &lt;script src=&quot;~/js/requirejs-config.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;~/Scripts/require.js&quot; data-main=&quot;/js/Samples/ReactRouterDemo1/Main.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;app1&quot;&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
           
         
