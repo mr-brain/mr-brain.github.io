@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-07T23:40:15.121Z</updated>
+  <updated>2016-03-08T00:00:20.826Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>React Reflux</title>
+    <title>React + FReflux</title>
     <link href="http://yoursite.com/2016/03/05/reflux/"/>
     <id>http://yoursite.com/2016/03/05/reflux/</id>
     <published>2016-03-05T08:58:20.711Z</published>
-    <updated>2016-03-07T23:40:15.121Z</updated>
+    <updated>2016-03-08T00:00:20.826Z</updated>
     
     <content type="html">&lt;h3 id=&quot;React-Flow&quot;&gt;&lt;a href=&quot;#React-Flow&quot; class=&quot;headerlink&quot; title=&quot;React Flow&quot;&gt;&lt;/a&gt;React Flow&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/images/Flux.png&quot; alt=&quot;React Flow&quot;&gt;&lt;/p&gt;
 &lt;h4 id=&quot;Create-Actions&quot;&gt;&lt;a href=&quot;#Create-Actions&quot; class=&quot;headerlink&quot; title=&quot;Create Actions&quot;&gt;&lt;/a&gt;Create Actions&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;import $ = require(&amp;apos;jquery&amp;apos;);
