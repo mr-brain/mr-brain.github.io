@@ -72,7 +72,7 @@
 <li>To sign the assembly, In the Signing tab check &quot;Sign the assembly&quot; check box.</li>
 </ul>
 <p>In the combo box, select the option &lt;New…&gt; to create a new key. In the &quot;Create Strong Name Key&quot; dialog, type DemoKey.snk as the name for the key and uncheck the Protect my key file with a password check box. Click OK.</p>
-<p><img src="../Source/2016%5C03/images/iis-url-rewrite-4.png" alt="sign the assembly" /></p>
+<p><img src="/Source/2016%5C03/images/iis-url-rewrite-4.png" alt="sign the assembly" /></p>
 <ul>
 <li>Select the &quot;Build Events&quot; tab and add the following &quot;Post-build event&quot; command line:</li>
 </ul>
@@ -88,9 +88,9 @@ gacutil.exe /if &quot;$(TargetPath)&quot;</p>
 <ul>
 <li>Open IIS Manager and select the URL Rewrite feature</li>
 </ul>
-<p><img src="../Source/2016%5C03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-1.png" alt="Step1" /></p>
-<p><img src="../Source/2016%5C03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-2.png" alt="Step2" /></p>
-<p><img src="../Source/2016%5C03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-3.png" alt="Step3" /></p>
+<p><img src="/Source/2016%5C03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-1.png" alt="Step1" /></p>
+<p><img src="/Source/2016%5C03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-2.png" alt="Step2" /></p>
+<p><img src="/Source/2016%5C03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-3.png" alt="Step3" /></p>
 <p>This completes the registration and configuration of a rewrite provider. As a result the web.config file for the default web site will contain the following XML code inside of the <rewrite> section:</p>
 <pre><code>&lt;system.webServer&gt;
 	&lt;rewrite&gt;
