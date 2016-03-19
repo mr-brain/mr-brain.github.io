@@ -1,497 +1,286 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
-
-
-
-
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Elegance C#" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
-
-
-
-
-
-
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Elegance C#">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Elegance C#">
-<meta property="og:description">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Elegance C#">
-<meta name="twitter:description">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: 'Author'
-    }
-  };
-</script>
-
-  <title> Elegance C# </title>
+	<title></title>
+	<link href="/Content/bootstrap.css" rel="stylesheet" />
+	<link href="/css/blog-home.css" rel="stylesheet" />
 </head>
+<body>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="C#">
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Elegance C#</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
 
-  
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Blog Entries Column -->
+			<div class="col-md-8">
+				<h1 class="page-header">
+					Elegance C#
+					<small>Mr-Brain</small>
+				</h1>
 
+				
 
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Elegance C#</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle"></p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu ">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-
-      
+<h2>
+	<a href="#">TEST</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/15 22:36:16</p>
+<p>{% codeblock lang:objc %}
+[rectangle setX: 10 y: 10 width: 20 height: 20];
+{% endcodeblock %}</p>
+<p><a href="/default/test.html">Wiki</a></p>
+<p>{% iframe /default/OddsCalculator.html 600 480 %}</p>
+<p><button onClick="test()">TEST</button></p>
 
 
-      
-      
-    </ul>
-  
-
-  
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/05/reflux/" itemprop="url">
-                  React + FReflux
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-03-05T16:58:20+08:00" content="2016-03-05">
-              2016-03-05
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
+<hr>
+<h2>
+	<a href="#">Create Custom IIS URL Rewrite Provider</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/13 11:03:35</p>
+<p>Developing a Custom Rewrite Provider for URL Rewrite Module</p>
+<h3>Creating a Visual Studio C# Class Library Project</h3>
+<ul>
+<li>add references to Microsoft.Web.Iis.Rewrite.dll located in &quot;%ProgramFiles%\Reference Assemblies\Microsoft\IIS&quot;.</li>
+</ul>
+<p>Rewrite providers must be placed in the .NET Global Assembly Cache (GAC)</p>
+<ul>
+<li>To sign the assembly, In the Signing tab check &quot;Sign the assembly&quot; check box.</li>
+</ul>
+<p>In the combo box, select the option &lt;New…&gt; to create a new key. In the &quot;Create Strong Name Key&quot; dialog, type DemoKey.snk as the name for the key and uncheck the Protect my key file with a password check box. Click OK.</p>
+<p><img src="../Source/2016%5C03/images/iis-url-rewrite-4.png" alt="sign the assembly" /></p>
+<ul>
+<li>Select the &quot;Build Events&quot; tab and add the following &quot;Post-build event&quot; command line:</li>
+</ul>
+<p>CALL &quot;%VS90COMNTOOLS%\vsvars32.bat&quot; &gt; NULL
+gacutil.exe /if &quot;$(TargetPath)&quot;</p>
+<p>Note: if you use Visual Studio 2010 then replace %VS90COMNTOOLS% with %VS100COMNTOOLS%.</p>
+<h3>Implementing the provider interfaces</h3>
+<pre><code>public class CdnRewriteProvider : IRewriteProvider, IProviderDescriptor
+{
+}
+</code></pre>
+<h3>Registering and configuring the provider</h3>
+<ul>
+<li>Open IIS Manager and select the URL Rewrite feature</li>
+</ul>
+<p><img src="../Source/2016%5C03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-1.png" alt="Step1" /></p>
+<p><img src="../Source/2016%5C03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-2.png" alt="Step2" /></p>
+<p><img src="../Source/2016%5C03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-3.png" alt="Step3" /></p>
+<p>This completes the registration and configuration of a rewrite provider. As a result the web.config file for the default web site will contain the following XML code inside of the <rewrite> section:</p>
+<pre><code>&lt;system.webServer&gt;
+	&lt;rewrite&gt;
+		&lt;providers&gt;
+			&lt;provider name=&quot;T1.IisUrlRewriteModule&quot; type=&quot;T1.IisUrlRewriteModule.CdnRewriteProvider, T1.IisUrlRewriteModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd92a3df2f0d20b9&quot;&gt;
+				&lt;settings&gt;
+					&lt;add key=&quot;config&quot; value=&quot;aaa&quot; /&gt;
+				&lt;/settings&gt;
+			&lt;/provider&gt;
+		&lt;/providers&gt;
+	&lt;/rewrite&gt;
+&lt;/system.webServer&gt;
+</code></pre>
 
 
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="React-Flow"><a href="#React-Flow" class="headerlink" title="React Flow"></a>React Flow</h3><p><img src="/images/Flux.png" alt="React Flow"></p>
-<h4 id="Create-Actions"><a href="#Create-Actions" class="headerlink" title="Create Actions"></a>Create Actions</h4><pre><code>import $ = require(&apos;jquery&apos;);
-import t1 = require(&apos;t1&apos;);
+<hr>
+<h2>
+	<a href="#">React + FReflux</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/05 16:58:20</p>
+<h3>React Flow</h3>
+<p><img src="/images/Flux.png" alt="React Flow" /></p>
+<h4>Create Actions</h4>
+<pre><code>import $ = require('jquery');
+import t1 = require('t1');
 import FReflux = t1.FReflux;
 import FRefluxActions = t1.FRefluxActions;
 
 enum Demo1ActionType {
-    Request
+	Request
 }
 
 export class Demo1Actions extends FRefluxActions&lt;Demo1ActionType&gt; {
-    constructor() {
-        super(Demo1ActionType);
-    }
+	constructor() {
+		super(Demo1ActionType);
+	}
 
-    Request(name: string) {
-        this.dispatchEvent(Demo1ActionType.Request, name);
-    }
+	Request(name: string) {
+		this.dispatchEvent(Demo1ActionType.Request, name);
+	}
 }
-</code></pre><h4 id="Create-Store"><a href="#Create-Store" class="headerlink" title="Create Store"></a>Create Store</h4><pre><code>import t1 = require(&apos;t1&apos;);
+</code></pre>
+<h4>Create Store</h4>
+<pre><code>import t1 = require('t1');
 import FReflux = t1.FReflux;
 import FRefluxStore = t1.FRefluxStore;
 
 export class Demo1State {
-    name: string;
+	name: string;
 }
 
 
 export class Demo1Store extends FRefluxStore&lt;Demo1State&gt; {
-    _state: Demo1State = new Demo1State();
+	_state: Demo1State = new Demo1State();
 
-    constructor(actions: FRefluxActions&lt;any&gt;[]) {
-        super(actions);
-    }
+	constructor(actions: FRefluxActions&lt;any&gt;[]) {
+		super(actions);
+	}
 
-    getState(): Demo1State {
-        return this._state;
-    }
+	getState(): Demo1State {
+		return this._state;
+	}
 }
-</code></pre><h4 id="Create-Main-View"><a href="#Create-Main-View" class="headerlink" title="Create Main View"></a>Create Main View</h4><pre><code>export interface MobileDemo1Props extends React.Props&lt;MobileDemo1&gt; {
-    history: any;
+</code></pre>
+<h4>Create Main View</h4>
+<pre><code>export interface MobileDemo1Props extends React.Props&lt;MobileDemo1&gt; {
+	history: any;
 }
 
 export class MobileDemo1 extends FRefluxStoreComponent&lt;MobileDemo1Props, Demo1State&gt; {
-    constructor() {
-        this.name = &quot;MobileDemo1&quot;;
-        super(_app1Store);
-    }
+	constructor() {
+		this.name = &quot;MobileDemo1&quot;;
+		super(_app1Store);
+	}
 
-    componentWillMount() {
-    }
+	componentWillMount() {
+	}
 
-    componentWillUnmount() {
-    }
+	componentWillUnmount() {
+	}
 
-    componentDidMount() {
-        super.componentDidMount();
-    }
+	componentDidMount() {
+		super.componentDidMount();
+	}
 
-    navigate() {
-        console.log(this.props);
-        this.props.history.pushState(null, &quot;/&quot;);
-        //this.props.history.replaceState(null, &quot;/&quot;);
-    }
+	navigate() {
+		console.log(this.props);
+		this.props.history.pushState(null, &quot;/&quot;);
+		//this.props.history.replaceState(null, &quot;/&quot;);
+	}
 
-    render() {
-        return (
-            &lt;div&gt;React-Router Demo1
-                &lt;Link to=&apos;Panel1&apos;&gt;Panel1&lt;/Link&gt;
-                &lt;Link to=&apos;Panel2&apos;&gt;&lt;button className=&quot;btn btn-success&quot;&gt;Panel2&lt;/button&gt;&lt;/Link&gt;
-                &lt;button onClick={this.navigate.bind(this)}&gt;TEST&lt;/button&gt;
-                {this.props.children}
-            &lt;/div&gt;
-        );
-    }
+	render() {
+		return (
+			&lt;div&gt;React-Router Demo1
+				&lt;Link to='Panel1'&gt;Panel1&lt;/Link&gt;
+				&lt;Link to='Panel2'&gt;&lt;button className=&quot;btn btn-success&quot;&gt;Panel2&lt;/button&gt;&lt;/Link&gt;
+				&lt;button onClick={this.navigate.bind(this)}&gt;TEST&lt;/button&gt;
+				{this.props.children}
+			&lt;/div&gt;
+		);
+	}
 }
-</code></pre><h4 id="Create-Panel1-View"><a href="#Create-Panel1-View" class="headerlink" title="Create Panel1 View"></a>Create Panel1 View</h4><pre><code>interface Panel1Props extends React.Props&lt;Panel1&gt; {
+</code></pre>
+<h4>Create Panel1 View</h4>
+<pre><code>interface Panel1Props extends React.Props&lt;Panel1&gt; {
 }
 
 
 class Panel1 extends FRefluxReducerComponent&lt;Panel1Props, Demo1State&gt; {
-    constructor() {
-        super();
-    }
+	constructor() {
+		super();
+	}
 
-    getStateFromStore(state: Demo1State): Demo1State {
-        return state;
-    }
+	getStateFromStore(state: Demo1State): Demo1State {
+		return state;
+	}
 
-    render() {
-        return (
-            &lt;div&gt;
-                Hello Panel-1
-            &lt;/div&gt;
-        );
-    }
+	render() {
+		return (
+			&lt;div&gt;
+				Hello Panel-1
+			&lt;/div&gt;
+		);
+	}
 }
-</code></pre><h3 id="Render"><a href="#Render" class="headerlink" title="Render"></a>Render</h3><pre><code>import * as Router from &apos;react-router&apos;;
-import { Route, IndexRoute, Link } from &apos;react-router&apos;;
+</code></pre>
+<h3>Render</h3>
+<pre><code>import * as Router from 'react-router';
+import { Route, IndexRoute, Link } from 'react-router';
 
 var routeMap = (
-        &lt;Route path=&quot;/&quot; component={MobileDemo1}&gt;
-                &lt;IndexRoute component={Panel1}/&gt;
-                &lt;Route path=&quot;Panel1&quot; component={Panel1}/&gt;
+		&lt;Route path=&quot;/&quot; component={MobileDemo1}&gt;
+				&lt;IndexRoute component={Panel1}/&gt;
+				&lt;Route path=&quot;Panel1&quot; component={Panel1}/&gt;
         &lt;Route path=&quot;Panel2&quot; component={Panel2}/&gt;
         &lt;Route path=&quot;*&quot; component={NotFoundPage} /&gt;
     &lt;/Route&gt;
 );
 
 ReactDOM.render(
-    &lt;Router.Router history={Router.browserHistory}&gt;
-        {routeMap}
-    &lt;/Router.Router&gt;, 
-    document.getElementById(&apos;app1&apos;)
+	&lt;Router.Router history={Router.browserHistory}&gt;
+		{routeMap}
+	&lt;/Router.Router&gt;, 
+	document.getElementById('app1')
 );
-</code></pre><h3 id="Main-js"><a href="#Main-js" class="headerlink" title="Main.js"></a>Main.js</h3><pre><code>(function(){
-    var baseUrl = &quot;/js/Samples/ReactRouterDemo1/&quot;;
+</code></pre>
+<h3>Main.js</h3>
+<pre><code>(function(){
+	var baseUrl = &quot;/js/Samples/ReactRouterDemo1/&quot;;
 
-    require.config({
-        paths: {
-            &quot;App&quot;: baseUrl + &quot;App&quot;,
-        }
-    });
+	require.config({
+		paths: {
+			&quot;App&quot;: baseUrl + &quot;App&quot;,
+		}
+	});
 })();
 
-define([&quot;require&quot;, &quot;exports&quot;, &apos;App&apos;], function (require, exports, app) {
+define([&quot;require&quot;, &quot;exports&quot;, 'App'], function (require, exports, app) {
 });
-</code></pre><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><pre><code>&lt;html&gt;
+</code></pre>
+<h3>HTML</h3>
+<pre><code>&lt;html&gt;
 &lt;head&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot; /&gt;
-    &lt;title&gt;React Router Demo1&lt;/title&gt;
-    &lt;script src=&quot;~/js/requirejs-config.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;~/Scripts/require.js&quot; data-main=&quot;/js/Samples/ReactRouterDemo1/Main.js&quot;&gt;&lt;/script&gt;
+	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot; /&gt;
+	&lt;title&gt;React Router Demo1&lt;/title&gt;
+	&lt;script src=&quot;~/js/requirejs-config.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;~/Scripts/require.js&quot; data-main=&quot;/js/Samples/ReactRouterDemo1/Main.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;div id=&quot;app1&quot;&gt;
-    &lt;/div&gt;
+	&lt;div id=&quot;app1&quot;&gt;
+	&lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
 
 
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/05/install-hexo/" itemprop="url">
-                  Install Hexo
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-03-05T09:30:43+08:00" content="2016-03-05">
-              2016-03-05
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Create-a-GitHub-Account"><a href="#Create-a-GitHub-Account" class="headerlink" title="Create a GitHub Account"></a>Create a GitHub Account</h3><p>Create a new Repository name: “username.github.io” </p>
+<hr>
+<h2>
+	<a href="#">Install Hexo</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/05 09:30:43</p>
+<h3>Create a GitHub Account</h3>
+<p>Create a new Repository name: &quot;username.github.io&quot;</p>
 <p>username must same as account name</p>
-<h3 id="Install-Node-js"><a href="#Install-Node-js" class="headerlink" title="Install Node.js"></a>Install Node.js</h3><pre><code>npm install hexo -g
+<h3>Install Node.js</h3>
+<pre><code>npm install hexo -g
 npm init Blog
 cd Blog
-</code></pre><p>npm install</p>
+</code></pre>
+<p>npm install</p>
 <pre><code>npm install hexo-generator-index --save
 npm install hexo-generator-archive --save
 npm install hexo-generator-category --save
@@ -507,1010 +296,204 @@ npm install hexo-generator-feed@1 --save
 npm install hexo-generator-sitemap@1 --save
 npm install hexo-tag-bootstrap --save
 npm install hexo-generator-search --save
-</code></pre><p>Process the following command, and visit localhost:4000 to see the result</p>
+</code></pre>
+<p>Process the following command, and visit localhost:4000 to see the result</p>
 <pre><code>hexo server
-</code></pre><p>The Following command that generate public folder, you can deploy it to your target site folder.</p>
+</code></pre>
+<p>The Following command that generate public folder, you can deploy it to your target site folder.</p>
 <pre><code>hexo g
-</code></pre><p>Modify _config.yml file in Blog Folder</p>
+</code></pre>
+<p>Modify _config.yml file in Blog Folder</p>
 <pre><code>deploy:
   type: git
-    repo: https://github.com/username/username.github.io.git
-    branch: master
-</code></pre><p>Deploy to GitHub command</p>
+  repo: https://github.com/username/username.github.io.git
+  branch: master
+</code></pre>
+<p>Deploy to GitHub command</p>
 <pre><code>hexo d -g
-</code></pre><p>Other</p>
+</code></pre>
+<p>Other</p>
 <pre><code>hexo n #Generate articles，or source\_posts manually edit/create md file
 hexo s #deploy preview result
-</code></pre><p>Update Hexo</p>
+</code></pre>
+<p>Update Hexo</p>
 <pre><code>npm update -g
-</code></pre><p>Install Other Theme</p>
-<pre><code>git clone https://github.com/MOxFIVE/hexo-theme-yelee.git themes/yelee        
-</code></pre><p>Modify themes/yelee/_config.yml</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
+</code></pre>
+<p>Install Other Theme</p>
+<pre><code>git clone https://github.com/MOxFIVE/hexo-theme-yelee.git themes/yelee		
+</code></pre>
+<p>Modify themes/yelee/_config.yml</p>
 
 
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/02/nuget-package-element-is-not-declared-warning/" itemprop="url">
-                  nuget 'packages' element is not declared warning
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2015-08-02T09:01:55+08:00" content="2015-08-02">
-              2015-08-02
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>not a showstopper but when using nuget in a project, it creates a packages.config file with this shape</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;packages&gt;</span><br><span class="line">   ... your packages</span><br><span class="line">&lt;/packages&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2>
+	<a href="#">nuget &#39;packages&#39; element is not declared warning</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/08/02 09:01:55</p>
+<p>not a showstopper but when using nuget in a project, it creates a packages.config file with this shape</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;packages&gt;
+   ... your packages
+&lt;/packages&gt;
+</code></pre>
 <p>this gives a warning in VS</p>
 <blockquote>
-<p>The ‘packages’ element is not declared.</p>
+<p>The 'packages' element is not declared.</p>
 </blockquote>
-<p>You can always make simple xsd schema for ‘packages.config’ to get rid of this warning. To do this, create file named “packages.xsd”:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span><br><span class="line">&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; elementFormDefault=&quot;qualified&quot;</span><br><span class="line">      targetNamespace=&quot;urn:packages&quot; xmlns=&quot;urn:packages&quot;&gt;</span><br><span class="line">  &lt;xs:element name=&quot;packages&quot;&gt;</span><br><span class="line">    &lt;xs:complexType&gt;</span><br><span class="line">      &lt;xs:sequence&gt;</span><br><span class="line">        &lt;xs:element name=&quot;package&quot; maxOccurs=&quot;unbounded&quot;&gt;</span><br><span class="line">          &lt;xs:complexType&gt;</span><br><span class="line">            &lt;xs:attribute name=&quot;id&quot; type=&quot;xs:string&quot; use=&quot;required&quot; /&gt;</span><br><span class="line">            &lt;xs:attribute name=&quot;version&quot; type=&quot;xs:string&quot; use=&quot;required&quot; /&gt;</span><br><span class="line">            &lt;xs:attribute name=&quot;targetFramework&quot; type=&quot;xs:string&quot; use=&quot;optional&quot; /&gt;</span><br><span class="line">            &lt;xs:attribute name=&quot;allowedVersions&quot; type=&quot;xs:string&quot; use=&quot;optional&quot; /&gt;</span><br><span class="line">          &lt;/xs:complexType&gt;</span><br><span class="line">        &lt;/xs:element&gt;</span><br><span class="line">      &lt;/xs:sequence&gt;</span><br><span class="line">    &lt;/xs:complexType&gt;</span><br><span class="line">  &lt;/xs:element&gt;</span><br><span class="line">&lt;/xs:schema&gt;</span><br></pre></td></tr></table></figure>
+<p>You can always make simple xsd schema for 'packages.config' to get rid of this warning. To do this, create file named &quot;packages.xsd&quot;:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; elementFormDefault=&quot;qualified&quot;
+      targetNamespace=&quot;urn:packages&quot; xmlns=&quot;urn:packages&quot;&gt;
+  &lt;xs:element name=&quot;packages&quot;&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element name=&quot;package&quot; maxOccurs=&quot;unbounded&quot;&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:attribute name=&quot;id&quot; type=&quot;xs:string&quot; use=&quot;required&quot; /&gt;
+            &lt;xs:attribute name=&quot;version&quot; type=&quot;xs:string&quot; use=&quot;required&quot; /&gt;
+            &lt;xs:attribute name=&quot;targetFramework&quot; type=&quot;xs:string&quot; use=&quot;optional&quot; /&gt;
+            &lt;xs:attribute name=&quot;allowedVersions&quot; type=&quot;xs:string&quot; use=&quot;optional&quot; /&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+      &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;
+</code></pre>
 <p>Location of this file (two options)</p>
-<p>In the same folder as ‘packages.config’ file,<br>If you want to share packages.xsd across multiple projects, move it to the Visual Studio Schemas folder (the path may slightly differ, it’s  D:\Program Files (x86)\Microsoft Visual Studio 10.0\Xml\Schemas for me).<br>Then, edit <packages> tag in packages.config file (add xmlns attribute):</packages></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;packages xmlns=&quot;urn:packages&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>In the same folder as 'packages.config' file,
+If you want to share packages.xsd across multiple projects, move it to the Visual Studio Schemas folder (the path may slightly differ, it's  D:\Program Files (x86)\Microsoft Visual Studio 10.0\Xml\Schemas for me).
+Then, edit <packages> tag in packages.config file (add xmlns attribute):</p>
+<pre><code>&lt;packages xmlns=&quot;urn:packages&quot;&gt;
+</code></pre>
 <p>Now the warning should disappear (even if packages.config file is open in Visual Studio).</p>
 
-          
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/27/asp-net-mvc-throw-exception/" itemprop="url">
-                  ASP.NET MVC throw Exception
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2015-07-27T16:04:37+08:00" content="2015-07-27">
-              2015-07-27
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>My application was working fine and after I did some upgrades I am getting this error.</p>
-<pre><code>Attempt by &apos;System.Web.Mvc.PreApplicationStartCode.Start()&apos; to critical method &apos;System.Web.WebPages.Razor.PreApplicationStartCode.Start()&apos; failed
-</code></pre><p>Please use this package from nuget</p>
+<hr>
+<h2>
+	<a href="#">ASP.NET MVC throw Exception</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/07/27 16:04:37</p>
+<p>My application was working fine and after I did some upgrades I am getting this error.</p>
+<pre><code>	Attempt by 'System.Web.Mvc.PreApplicationStartCode.Start()' to critical method 'System.Web.WebPages.Razor.PreApplicationStartCode.Start()' failed
+</code></pre>
+<p>Please use this package from nuget</p>
 <p>Install-Package Microsoft.AspNet.Mvc -Version 5.2.2</p>
 
-          
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/21/vsnet2013-error/" itemprop="url">
-                  VS.NET 2013 Error
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2015-05-21T14:09:56+08:00" content="2015-05-21">
-              2015-05-21
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Getting Error “‘Microsoft.VisualStudio.Editor.Implementation.EditorPackage’ package did not load correctly”?</p>
+<hr>
+<h2>
+	<a href="#">VS.NET 2013 Error</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/05/21 14:09:56</p>
+<p>Getting Error &quot;'Microsoft.VisualStudio.Editor.Implementation.EditorPackage' package did not load correctly&quot;?</p>
 <blockquote>
 <p>Please try to remove %LOCALAPPDATA%\Microsoft\VisualStudio\11.0\ComponentModelCache and restarting VS2012. Hope this will fix your issue.</p>
 </blockquote>
 
-          
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/07/NuGet-Manager-Console/" itemprop="url">
-                  NuGet Manager Console
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2015-05-07T21:47:26+08:00" content="2015-05-07">
-              2015-05-07
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>List all available versions of a specific package?</p>
+<hr>
+<h2>
+	<a href="#">NuGet Manager Console</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/05/07 21:47:26</p>
+<p>List all available versions of a specific package?</p>
 <blockquote>
-<p>get-package -ListAvailable -AllVersions -filter nunit -source <a href="https://nuget.org/api/v2/" target="_blank" rel="external">https://nuget.org/api/v2/</a></p>
+<p>get-package -ListAvailable -AllVersions -filter nunit -source https://nuget.org/api/v2/</p>
 </blockquote>
 <p>How to install special version of package?</p>
 <blockquote>
 <p>install-package nunit -version x.xx</p>
 </blockquote>
 
-          
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
+<hr>
+<h2>
+	<a href="#">Resharper shortcut keys</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/06 07:31:40</p>
+<p>How to restore parameter info (argument list) shortcut with Resharper?</p>
+<p>If you go to the <strong>Visual Studio Tools -&gt; Options -&gt; Keyboard</strong> section, you can type the shortcut in the shortcut keys edit box and VS will show what commands are bound to that shortcut combination. So, hitting <strong>ctrl+shift+space</strong> will show you that is mapped to <strong>&quot;Edit.ParameterInfo&quot;</strong> for the Workfow Designer, and <strong>&quot;ReSharper.ReSharper_CompleteCodeSmart&quot;</strong> for the Text Editor and the XAML UI Designer. You can do a similar thing with <strong>ctrl+p</strong>.</p>
 
 
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/04/06/resharper-shortcut-keys/" itemprop="url">
-                  Resharper shortcut keys
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2015-04-06T07:31:40+08:00" content="2015-04-06">
-              2015-04-06
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>How to restore parameter info (argument list) shortcut with Resharper?</p>
-<p>If you go to the <strong>Visual Studio Tools -&gt; Options -&gt; Keyboard</strong> section, you can type the shortcut in the shortcut keys edit box and VS will show what commands are bound to that shortcut combination. So, hitting <strong>ctrl+shift+space</strong> will show you that is mapped to <strong>“Edit.ParameterInfo”</strong> for the Workfow Designer, and <strong>“ReSharper.ReSharper_CompleteCodeSmart”</strong> for the Text Editor and the XAML UI Designer. You can do a similar thing with <strong>ctrl+p</strong>.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/04/01/automapper-this-type-is-not-supported-on-this-platform/" itemprop="url">
-                  Automapper 3.0 - This type is not supported on this platform when I use MSTest.exe ?
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2015-04-01T10:12:20+08:00" content="2015-04-01">
-              2015-04-01
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>MSTest show following error:</p>
+<hr>
+<h2>
+	<a href="#">Automapper 3.0 - This type is not supported on this platform when I use MSTest.exe ?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/01 10:12:20</p>
+<p>MSTest show following error:</p>
 <blockquote>
-<p>Source value:<br>System.Data.DataTableReader —&gt; System.PlatformNotSupportedException: Proxy generation not supported on this platform.</p>
+<p>Source value:
+System.Data.DataTableReader ---&gt; System.PlatformNotSupportedException: Proxy generation not supported on this platform.</p>
 </blockquote>
 <p>To fix it, add an explicit call to something in AutoMapper.Net4.dll. For instance, with the class ListSourceMapper :</p>
 <pre><code>var useless = new ListSourceMapper();
-</code></pre><p>Or you can</p>
+</code></pre>
+<p>Or you can</p>
 <pre><code>[TestClass]
 [DeploymentItem(&quot;AutoMapper.Net4.dll&quot;)]
 public class YourTest
 {
-    [TestMethod]
-    public void Test1()
-    {
-        ...
-    }
+	[TestMethod]
+	public void Test1()
+	{
+		...
+	}
 }
 </code></pre>
-          
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
 
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/03/30/how-to-combine-typescript-files/" itemprop="url">
-                  How to compile many typescript files in VS.NET 2013?
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2015-03-30T22:26:45+08:00" content="2015-03-30">
-              2015-03-30
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>We can add following MSBuild script in your csproj file.</p>
-<pre><code>&lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot;
-    Condition=&quot;Exists(&apos;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\$(TypeScriptToolsVersion)\Microsoft.TypeScript.targets&apos;)&quot; /&gt;
-&lt;Target Name=&quot;CombineT1&quot; BeforeTargets=&quot;PrepareForBuild&quot;&gt;
-  &lt;ItemGroup&gt;
-    &lt;T1TypeScriptFiles Include=&quot;$(projectDir)Scripts\t1\*.ts;&quot; Exclude=&quot;$(projectDir)\Scripts\**\*.d.ts;&quot; /&gt;
-  &lt;/ItemGroup&gt;
-  &lt;WriteLinesToFile File=&quot;$(projectDir)Scripts\t1\typescriptcompiler.input&quot; Lines=&quot;@(T1TypeScriptFiles)&quot; Overwrite=&quot;true&quot; Encoding=&quot;UTF-8&quot; /&gt;
-  &lt;Exec Command=&quot;&amp;quot;$(MSBuildProgramFiles32)\Microsoft SDKs\TypeScript\$(TypeScriptToolsVersion)\tsc&amp;quot; --out $(projectDir)Scripts\t1\t1.js --target ES5 @$(projectDir)Scripts\t1\typescriptcompiler.input&quot; CustomErrorRegularExpression=&quot;\.ts\([0-9]+,[0-9]+\):(.*)&quot;&gt;
-  &lt;/Exec&gt;
-&lt;/Target&gt;
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/03/28/jasmine-errors/" itemprop="url">
-                  Jasmine Errors in VS.NET 2013
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2015-03-28T09:56:34+08:00" content="2015-03-28">
-              2015-03-28
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>I get the following error:</p>
-<blockquote>
-<p>Script:<br>C:\Users\xxx\AppData\Local\Microsoft\VisualStudio\12.0\Extensions\2q5cdx5o.qzv\TestFiles\Jasmine\v2\jasmine.js</p>
-<p>Error: ‘null’ is not an object (evaluating ‘currentSpec.expect’) #665</p>
-</blockquote>
-<p>I find the root cause:</p>
-<pre><code>describe(&quot;[TS]Test&quot;, function () {
-  expect(&quot;&quot;).toBe(&quot;&quot;);
-});
-</code></pre><p>I forgot to add the ‘it’ statement around my expect.</p>
-<pre><code>describe(&quot;[TS]Test&quot;, function () {
-  it(&quot;test&quot;,() =&gt; {
-    expect(&quot;&quot;).toBe(&quot;&quot;);
-  });
-});
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/default_avatar.jpg"
-               alt="Mr-Brain" />
-          <p class="site-author-name" itemprop="name">Mr-Brain</p>
-          <p class="site-description motion-element" itemprop="description"></p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">72</span>
-              <span class="site-state-item-name">Artikel</span>
-            </a>
-          </div>
-          
-          
-
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-      </section>
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Mr-Brain</span>
-</div>
-
-<div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top"></div>
-  </div>
-
-  
-
-
-  
-
-
-
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-  
-  
-  
-
-  
-  
-
-
+<hr>
+
+<!-- Pager -->
+<ul class="pager">
+		<li class="previous">
+			<a href="Index1.html">&larr; Older</a>
+		</li>
+	</ul>
+
+			</div>
+
+
+			<!-- Blog Sidebar Widgets Column -->
+			<div class="col-md-4">
+				<!-- Blog Search Well -->
+				<!--<div class="well">
+					<h4>Blog Search</h4>
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</div>
+				</div>-->
+				<!-- Blog Categories Well -->
+				
+
+				<!-- Side Widget Well -->
+				<div class="well">
+					<h4>About Me</h4>
+					<p>"Write Less Do More", Elegant code written more representative that people can leave work early.</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Mr-Brain Website 2016</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+	</div>
+	<!-- /.container -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

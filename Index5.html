@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<link href="/Content/bootstrap.css" rel="stylesheet" />
+	<link href="/css/blog-home.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Elegance C#</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Blog Entries Column -->
+			<div class="col-md-8">
+				<h1 class="page-header">
+					Elegance C#
+					<small>Mr-Brain</small>
+				</h1>
+
+				
+
+<h2>
+	<a href="#">Can’t save your table changes in SQL2008 Management Studio</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/31 09:46:25</p>
+<p>Can’t save your table changes in SQL2008 Management Studio ?</p>
+<p>In SQL Server 2008, when you do some changes on a table and save it you’ll get a warning message like below</p>
+<pre><code>Saving changes is not permitted. The changes you have made require the following tables to be dropped and re-created. You have either made changes to a table that can’t be re-created or enabled the option Prevent saving changes that require the table to be re-created.
+</code></pre>
+<p>What the… that didn’t happen to me in SQL Server 2005 nor previous versions of SQL Server. So there is definitely a behaviour change in the new management studio. Luckily this behaviour can be disabled. You just need to go to Tools -&gt; Options then go to the Designer Page and uncheck &quot;Prevent saving changes that require table re-creation&quot;.</p>
+
+
+<hr>
+<h2>
+	<a href="#">A “mixed-mode assembly exception” Message been showed.</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/31 08:13:57</p>
+<p>To run .NET 2.0 assembly in .NET 4.0 environment, a “mixed-mode assembly exception” Message been showed.</p>
+<p>Add a configuration in the app.config: startup</p>
+<pre><code>&lt;startup useLegacyV2RuntimeActivationPolicy=”true”&gt; 
+  &lt;supportedRuntime version=”v4.0”/&gt; 
+&lt;/startup&gt;
+</code></pre>
+<p>reference from MSDN, specifically address: http://msdn.microsoft.com/zh-cn/library/bbx34a2h.aspx</p>
+
+
+<hr>
+<h2>
+	<a href="#">Why isn&#39;t there an Assembly. Unload method?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/31 08:13:57</p>
+<p>Please refer to this article (http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx).</p>
+<p>Memory consumption been eating more and more?</p>
+<pre><code>do
+{
+  Assembly.LoadFrom(&quot;Library1.dll&quot;);
+}while( true );
+</code></pre>
+<p>The result is NO. It will only keep a copy of Library1 Assembly in Memory, And never been release.
+But I need the plugin Mechanism for Load/Unload Assembly.</p>
+<p>How to load and unload Library1 Assembly?
+Step1: Create the Library1 Project.</p>
+<pre><code>[Serializable]
+public class MyClass1
+{
+  public string Test()
+  {
+    return &quot;abc&quot;;
+  }
+}
+</code></pre>
+<p>Step 2: Create the Test Project.</p>
+<pre><code>AppDomainSetup ads = new AppDomainSetup();
+ShadowCopyFiles = &quot;true&quot;;
+var myAppDomain = AppDomain.CreateDomain(&quot;MyAppDomainName&quot;, null, ads);
+</code></pre>
+<p>The follow code will load Library1.dll file.</p>
+<pre><code>object proxy = myAppDomain.CreateInstanceFromAndUnwrap(&quot;Library1.dll&quot;, &quot;Library1.MyClass1&quot;);
+</code></pre>
+<p>Invoke the Test Method.</p>
+<pre><code>MethodInfo mi = proxy.GetType().GetMethod(&quot;Test&quot;, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+string s = (string)mi.Invoke(proxy, new object[]{});
+</code></pre>
+<p>Unload the Library1.dll file.</p>
+<pre><code>AppDomain.Unload(myAppDomain);
+</code></pre>
+<p>If you use T1 Common Library. You can write the following simple code.</p>
+<pre><code>UnloadAssembly asm = UnloadAssembly.Load(&quot;Library1.dll&quot;);
+UnloadClass cls = asm.GetUnloadClass(&quot;Library1.MyClass1&quot;);
+string s = (string)cls.Invoke(&quot;Test&quot;);
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Remove the last character in a string in T-SQL?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/03 22:12:59</p>
+<p>How do I remove the last character in a string in T-SQL?</p>
+<p>I.E.</p>
+<blockquote>
+<p>'TEST STRING'</p>
+</blockquote>
+<p>to return:</p>
+<blockquote>
+<p>'TEST STRIN'</p>
+</blockquote>
+<p>Sample code:</p>
+<pre><code>DECLARE @String VARCHAR(100)
+SET @String = 'TEST STRING'
+
+-- Chop off the end character
+SET @String = LEFT(@String, LEN(@String) - 1)
+
+SELECT @String
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Render dynamic model in Razor view engine and ASP.NET MVC</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/10/13 22:12:59</p>
+<p>When I try to render a view whose model type is specified as: @model dynamic</p>
+<p>by using the following code:</p>
+<pre><code>@{ Html.RenderPartial(&quot;PartialView&quot;, Model.UserProfile); }
+</code></pre>
+<p>I get the following exception:</p>
+<blockquote>
+<p>'System.Web.Mvc.HtmlHelper<dynamic>' has no applicable method named 'RenderPartial'
+but appears to have an extension method by that name.
+Extension methods cannot be dynamically dispatched.
+Consider casting the dynamic arguments or calling the extension method without the extension method syntax.</p>
+</blockquote>
+<p>Answer: It appears that the view where I was placing the RenderPartial code had a dynamic model, and thus, MVC couldn't choose the correct method to use. Casting the model in the RenderPartial call to the correct type fixed the issue.</p>
+<pre><code>@Html.Partial(&quot;_PartialView&quot;, (ModelClass)View.UserProfile)
+@{ Html.RenderPartial(&quot;PartialView&quot;, (ModelClass)Model.UserProfile); }
+</code></pre>
+<p>When you send the anonymous type model to the view:</p>
+<pre><code>return View(new {x=4, y=6});
+</code></pre>
+<p>It show that using anonymous types is not supported, however, there is a workaround, you can use an ExpandoObject, convert it to Expando</p>
+<pre><code>using T1.Web.Mvc4;
+return View(new {x=4, y=6}.ToExpando());
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Adding the Global.asax.cs file in Asp.net WebSite</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/09/08 22:12:59</p>
+<p>If we use Asp.net Web Application (File -&gt; New-&gt; Project-&gt; Asp.net Web Application), we can add Global.asax as well as Global.asax.cs file.</p>
+<p>However, if we use Asp.net Web site (File-&gt;New-&gt;Website-&gt;Asp.net Website), it is not the case. By default we will have Global.asax file only and not the Global.asax.cs file.</p>
+<p>The structure of the Global.asax file is as under</p>
+<pre><code>&lt;%@ Application Language=&quot;C#&quot; %&gt;
+&lt;script runat=&quot;server&quot;&gt;
+void Application_Start(object sender, EventArgs e)
+{
+  // Code that runs on application startup
+}
+void Application_End(object sender, EventArgs e)
+{
+  //  Code that runs on application shutdown
+}
+void Application_Error(object sender, EventArgs e)
+{
+  // Code that runs when an unhandled error occurs
+}
+void Session_Start(object sender, EventArgs e)
+{
+  // Code that runs when a new session is started
+}
+void Session_End(object sender, EventArgs e)
+{
+}      
+&lt;/script&gt;
+</code></pre>
+<p>So how can we add a Global.asax.cs file for a Asp.net Web site project? Let us observer the same in the below steps</p>
+<p>Step 1: Right click App_Code -&gt; Add New Item -&gt; Class -&gt; Rename it as Global.cs . Then click on the Add button.</p>
+<p>Step 2: In the Global.cs file that got created, decorate it by inheriting the class from System.Web.HttpApplication</p>
+<p>So the Global.asax.cs file will now look like</p>
+<pre><code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+public class Global : System.Web.HttpApplication
+{
+  public Global()
+  {
+    // TODO: Add constructor logic here
+  }
+
+  protected void Application_Start(object sender, EventArgs e)
+  {
+  }
+        
+  protected void Session_Start(object sender, EventArgs e)
+  {
+  }
+
+  protected void Session_End(object sender, EventArgs e)
+  {
+  }
+  
+  protected void Application_End(object sender, EventArgs e)
+  {
+  }
+}
+</code></pre>
+<p>Step 3: Now, from the Global.asax file, remove the entire script code and change the</p>
+<pre><code>&lt;%@ Application Language=&quot;C#&quot; %&gt;
+</code></pre>
+<p>to</p>
+<pre><code>&lt;%@ Application Language=&quot;C#&quot; CodeBehind=&quot;~/App_Code/Global.asax.cs&quot; Inherits=&quot;Global&quot; %&gt;
+</code></pre>
+<p>That's it. Now run the application and it will work
+Hope this helps atleast for the newbies. Happy coding.</p>
+
+
+<hr>
+<h2>
+	<a href="#">Install TypeScript-0.9.1</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/09/06 22:12:59</p>
+<p>Compile-on-Save With TypeScript 0.8.2, we've enabled the ability to compile a project when source files in the project are saved, circumventing the usual manual compile step.</p>
+<p>Download TypeScript for Visual Studio 2012 and 2013 http://www.microsoft.com/en-us/download/details.aspx?id=34790</p>
+<p>For this to work, you need to enable the global setting in Tools-&gt;Options-&gt;Text Editor-&gt;TypeScript-&gt;Project. Specifically, enable &quot;Automatically compile TypeScript files which are part of a project&quot;.</p>
+<p>Next, you need to make sure your Visual Studio project uses the new TypeScript targets file. You can do this in one of two ways. New projects created with the TypeScript 0.8.2 release will automatically include a link to this targets file (as will the new version of the Windows 8 sample in the samples directory). For projects made with previous versions, you will need to edit the project file by right-clicking the project, selecting &quot;Unload Project&quot;, right-clicking the project, selecting &quot;Edit&quot;, and updating the project XML with the following:</p>
+<p>For each TypeScript file in your project, change the build action to 'TypeScriptCompile':</p>
+<pre><code>&lt;TypeScriptCompile Include=&quot;app.ts&quot; /&gt;
+</code></pre>
+<p>Then additionally add (or replace if you had an older PreBuild action for TypeScript) the following at the end of your project file to include TypeScript compilation in your project.</p>
+<p>For JavaScript projects (.jsproj):</p>
+<pre><code>&lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.VisualStudio.$(WMSJSProject).targets&quot; /&gt;
+  &lt;PropertyGroup Condition=&quot;'$(Configuration)' == 'Debug'&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;true&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;true&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;PropertyGroup Condition=&quot;'$(Configuration)' == 'Release'&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;false&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;false&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot; /&gt;
+</code></pre>
+<p>For C#-style projects (.csproj):</p>
+<pre><code> &lt;PropertyGroup Condition=&quot;'$(Configuration)' == 'Debug'&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;true&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;true&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;PropertyGroup Condition=&quot;'$(Configuration)' == 'Release'&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;false&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;false&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot; /&gt;
+</code></pre>
+<p>PS:Web Essentials 2012 is a feature of Visual Studio 2012 expansion plug For v3.0: Remove all support for the TypeScript (http://madskristensen.net/post/Web-Essentials-2013-Where-is-the-TypeScript-support.aspx) This was because many of those features were built directly in to Visual Studio 2013 and therefore no longer needed support by Web Essentials.</p>
+<p>The repository for high quality TypeScript type definitions. https://github.com/borisyankov/DefinitelyTyped#readme</p>
+<p>Usage: Include a line like this:</p>
+<pre><code>/// &lt;reference path=&quot;jquery.d.ts&quot; /&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">No exports were found that match the constraint contract name error</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/09/05 22:12:59</p>
+<p>This morning I faced a problem while creating my Visual Studio 2012 Library Project. It said &quot;no exports were found that match the constraint contract name&quot;</p>
+<p>I solved this problem by clearing Visual Studio Component Model Cache. Just delete or rename this folder:</p>
+<blockquote>
+<p>%AppData%..\Local\Microsoft\VisualStudio\11.0\ComponentModelCache</p>
+</blockquote>
+<p>Visual Studio Express 2012 has different paths. Visual Studio Express</p>
+<blockquote>
+<p>...\Users{user}\AppData\Local\Microsoft\WDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>With Visual Studio Express 2012 for Web</p>
+<blockquote>
+<p>...\Users{user}\AppData\Local\Microsoft\VWDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>When I running MyWebSite in .NET 4.0 and I can't get it working.</p>
+<blockquote>
+<p>HTTP error 500.22-Internal Server Error
+Detect ASP.NET setting does not apply to integrated Managed pipeline mode.</p>
+</blockquote>
+<p>If you still need to use the HTTP Module you need to configure it (.NET 4.0 framework) as follows:</p>
+<pre><code>&lt;system.webServer&gt;
+  &lt;modules runAllManagedModulesForAllRequests=&quot;true&quot;&gt;
+    &lt;add name=&quot;MyModule&quot; type=&quot;&lt;&lt;Namespace&gt;&gt;.&lt;&lt;Class&gt;&gt;, &lt;&lt;assembly&gt;&gt;&quot;/&gt;
+  &lt;/modules&gt;
+  &lt;validation validateIntegratedModeConfiguration=&quot;false&quot;/&gt;
+&lt;/system.webServer&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">TypeScript Syntax</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/09/04 22:12:59</p>
+<p>Declare variables</p>
+<pre><code>var i:number = 1;
+var s:string = &quot;text&quot;;
+</code></pre>
+<p>interface and class</p>
+<pre><code>interface IPersion{
+  firtname: string;
+  lastname: string;
+}
+
+class Student implements IPersion{
+  firtname: string;
+  lastname: string;
+  
+  constructor(public name: string){
+    this.firstname = name;
+    this.lastname = &quot;Student&quot;;
+  }
+  sayName()
+  {
+    return &quot;Student&quot;;
+  }
+}
+
+class Teacher extends Student{
+  constructor()
+  {
+    super(&quot;Flash&quot;);
+    this.lastname = &quot;Teacher&quot;;
+  }
+
+  sayName()
+  {
+    return &quot;Teacher&quot;;
+  }
+}
+</code></pre>
+<p>static method</p>
+<pre><code>class utils{
+  public static CopyProperties(source: any, target: any): void {
+    for (var prop in source) {
+      if (target[prop] !== undefined) {
+        target[prop] = source[prop];
+      }
+      else {
+        console.error(&quot;Cannot set undefined property: &quot; + prop);
+      }
+    }
+  }
+}
+
+utils.CopyProperties(source, dest);
+</code></pre>
+<p>create module in math.ts</p>
+<pre><code>module math{
+        export function MathAdd(a:number, b:number)
+        {
+                return a+b;
+        }
+}
+</code></pre>
+<p>use math module in test.ts</p>
+<pre><code>/// &lt;reference path=&quot;math.ts&quot; /&gt;
+var c:number = math.MathAdd(1, 2);
+</code></pre>
+<p>create module in file1.ts</p>
+<pre><code>export function MathAdd(a:number, b:number)
+{
+  return a+b;
+}
+</code></pre>
+<p>use file1 file module in test.ts</p>
+<pre><code>import f1 = module('file1')
+var c:number = f1.MathAdd(1, 2);
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">What&#39;s the thing in .net version?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/08/26 12:39:01</p>
+<p>|Visual Studio|.NET								|MVC        |EF  |Released     |
+|--		      |:--								|--         |--  |--           |
+|VS2002       |1.0								|N/A        |N/A |January 2002 |
+|VS2003	      |1.1								|N/A        |N/A |April 2003   |
+|VS2005       |2.0								|N/A        |N/A |November 2005|
+|VS2008       |2.0,3.0,3.5						|N/A        |N/A |November 2007|
+|VS2008SP1    |2.0,3.0,3.5SP1					|Add-in 1.0 |Yes |August 2008  |
+|VS2010SP1    |2.0,3.0,3.5,4.0					|2.0,3.0    |Yes |April 2010   |
+|VS2010SP1    |2.0,3.0,3.5SP1,4.0				|2.0,3.0    |Yes |March 2011   |
+|VS2012       |2.0,3.0,3.5,4.0,4.5				|3.0,4.0    |Yes |August 2012  |
+|VS2012SP2    |2.0,3.0,3.5,4.0,4.5				|3.0,4.0    |Yes |April 2013   |
+|VS2012SP3    |2.0,3.0,3.5,4.0,4.5				|3.0,4.0    |Yes |June 2013    |
+|VS2013	      |2.0,3.0,3.5,4.0,4.5.1			|4.0        |Yes |October 2013 |
+|VS2015	      |2.0,3.0,3.5,4.0,4.5.1,4.5.2,4.6	|			|Yes | |</p>
+<p>VS2010SP1: When you have SP1 installed you'll see instead: Microsoft Visual Studio 2010 Version 10.0.40219.1 SP1Rel Microsoft .NET Framework Version 4.0.30319 SP1Rel</p>
+<p>VS2012SP2: Add Fakes Framework that is the next generation of Moles &amp; Stubs. (http://research.microsoft.com/en-us/projects/moles/) Fakes is different from Moles, however, so moving from Moles to Fakes will require some modifications to your code. The Moles framework will not be supported in Visual Studio 2012.</p>
+<p>|C# 	|.NET	|CLR	|MVC    |Razor	|Not support OS
+|--     |--		|--		|--     |--		|--
+|C# 1.0 |1.0	|1.0	|N/A    |N/A	|
+|C# 1.2 |1.1	|1.1	|N/A    |N/A	|
+|C# 2.0 |2.0	|2.0	|MVC1   |N/A	|
+|C# 3.0 |3.5	|2.0	|MVC2   |N/A	|
+|C# 4.0 |4.0	|4.0	|MVC3,4	|Razor	|
+|C# 5.0 |4.5	|4.0	|MVC4   | 		|XP,2003
+|		|4.5.1	|4.0	|		| 		|
+|		|4.5.2	|4.0	|		| 		|</p>
+<p>C# 1.2 Features: First version to call Dispose on IEnumerators which implemented IDisposable</p>
+<p>C# 2.0 Features: Generics, anonymous methods, nullable types</p>
+<p>C# 3.0 Features: Lambda expressions, extension methods, expression trees, implicit type(var), query expressions</p>
+<p>C# 4.0 Features: Late binding(dynamic), named arguments and optional</p>
+<p>C# 5.0 Features: Async programming, caller info attributes</p>
+<p>|VS.NET |Path
+|--     |--
+|VS2008 |&quot;C:\Program Files\Microsoft Visual Studio 9.0&quot;
+|VS2010 |&quot;C:\Program Files\Microsoft Visual Studio 10.0&quot;
+|VS2012 |&quot;C:\Program Files\Microsoft Visual Studio 11.0&quot;
+|VS2013 |&quot;C:\Program Files\Microsoft Visual Studio 12.0&quot;</p>
+<p>There are some known issues using EF 4.x in a .NET 4.5 project.
+We recommend installing a pre-release version of EF 5, which is designed to work with .NET 4.5</p>
+<p>Update: 2015.03.15</p>
+
+
+<hr>
+
+<!-- Pager -->
+<ul class="pager">
+		<li class="previous">
+			<a href="Index6.html">&larr; Older</a>
+		</li>
+			<li class="next">
+			<a href="Index4.html">Newer &rarr;</a>
+		</li>
+</ul>
+
+			</div>
+
+
+			<!-- Blog Sidebar Widgets Column -->
+			<div class="col-md-4">
+				<!-- Blog Search Well -->
+				<!--<div class="well">
+					<h4>Blog Search</h4>
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</div>
+				</div>-->
+				<!-- Blog Categories Well -->
+				
+
+				<!-- Side Widget Well -->
+				<div class="well">
+					<h4>About Me</h4>
+					<p>"Write Less Do More", Elegant code written more representative that people can leave work early.</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Mr-Brain Website 2016</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+	</div>
+	<!-- /.container -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
