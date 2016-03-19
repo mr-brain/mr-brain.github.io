@@ -1,0 +1,48 @@
+<h2>C# Convert XML String to Object</h2>
+<p>You need to use the xsd.exe tool which gets installed with the Windows SDK into a directory something similar to:</p>
+<pre><code>C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin
+</code></pre>
+<p>And on 64bit computers:</p>
+<pre><code>C:\Program Files (x86)\Microsoft SDKs\Windows\v6.0A\bin
+</code></pre>
+<p>On the first run, you use xsd.exe and you convert your sample XML into a XSD file (XML schema file):</p>
+<pre><code>xsd yourfile.xml
+</code></pre>
+<p>This gives you yourfile.xsd, which in a second step, you can convert again using xsd.exe into a C# class:</p>
+<pre><code>xsd yourfile.xsd /c
+</code></pre>
+<p>You can deserialize xml string to C# object:</p>
+<pre><code>StringReader sr = new StringReader(xmlStr);
+XmlSerializer mySerializer = new XmlSerializer(typeof(YourObject));
+YourObject obj = (YourObject)mySerializer.Deserialize(sr);
+</code></pre>
+<p>You can serialize object to <strong>simple</strong> xml string.
+First, you must declare namespace in YourObject:</p>
+<pre><code>public class YourObject
+{
+   public YourObject()
+   {
+    this._namespaces = new XmlSerializerNamespaces(new XmlQualifiedName[] {
+      new XmlQualifiedName(string.Empty, &quot;urn:Abracadabra&quot;) // Default Namespace
+    });
+  }
+
+  [XmlNamespaceDeclarations]
+  public XmlSerializerNamespaces Namespaces
+  {
+    get { return this._namespaces; }
+  }
+  private XmlSerializerNamespaces _namespaces;
+
+  ...
+}
+</code></pre>
+<p>Then you can start serialize obj to xml string:</p>
+<pre><code>MemoryStream ms = new MemoryStream();
+XmlSerializer mySerializer = new XmlSerializer(typeof(YourObject));
+mySerializer.Serialize(ms, obj, obj.Namespaces);
+ms.Position = 0;
+StreamReader sr = new StreamReader(ms);
+string strXml = sr.ReadToEnd();
+</code></pre>
+

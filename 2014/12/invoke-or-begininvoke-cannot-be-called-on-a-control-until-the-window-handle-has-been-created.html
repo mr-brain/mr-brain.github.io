@@ -1,0 +1,34 @@
+<h2>How to avoid BeginInvoke before a handle has been created?</h2>
+<p>Invoke or BeginInvoke cannot be called on a control until the window handle has been created.</p>
+<pre><code>public static class ControlExtension
+{
+    public static void SafeInvoke(this Control uiElement, Action updater, bool forceSynchronous)
+    {
+        if (uiElement == null) {
+            throw new ArgumentNullException(&quot;uiElement&quot;);
+        }
+
+        if (uiElement.InvokeRequired) {
+            if (forceSynchronous) {
+                uiElement.Invoke((Action)delegate
+                {
+                    SafeInvoke(uiElement, updater, forceSynchronous);
+                });
+            }
+            else {
+                uiElement.BeginInvoke((Action)delegate
+                {
+                    SafeInvoke(uiElement, updater, forceSynchronous);
+                });
+            }
+        }
+        else {
+            if (uiElement.IsDisposed) {
+                throw new ObjectDisposedException(&quot;Control is already disposed.&quot;);
+            }
+            updater();
+        }
+    }
+}
+</code></pre>
+

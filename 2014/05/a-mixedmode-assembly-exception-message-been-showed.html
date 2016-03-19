@@ -1,0 +1,9 @@
+<h2>A “mixed-mode assembly exception” Message been showed.</h2>
+<p>To run .NET 2.0 assembly in .NET 4.0 environment, a “mixed-mode assembly exception” Message been showed.</p>
+<p>Add a configuration in the app.config: startup</p>
+<pre><code>&lt;startup useLegacyV2RuntimeActivationPolicy=”true”&gt; 
+  &lt;supportedRuntime version=”v4.0”/&gt; 
+&lt;/startup&gt;
+</code></pre>
+<p>reference from MSDN, specifically address: http://msdn.microsoft.com/zh-cn/library/bbx34a2h.aspx</p>
+

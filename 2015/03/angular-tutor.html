@@ -1,0 +1,14 @@
+<h2>angular tutor</h2>
+<p>How to load Template in Angular?</p>
+<pre><code>public class HomeController : Controller
+{
+	public ActionResult Template(string id)
+	{
+		return PartialView(string.Format(&quot;~/Views/Home/Partials/{0}.cshtml&quot;, id));
+	}
+}
+</code></pre>
+<p>Then, we can use following code</p>
+<pre><code>&lt;div ng-include=&quot;'/Home/Template/Index'&quot;&gt;&lt;/div&gt;
+</code></pre>
+

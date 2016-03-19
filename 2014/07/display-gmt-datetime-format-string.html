@@ -1,0 +1,13 @@
+<h2>Display GMT date-time format string for C#</h2>
+<p>The perform code is:</p>
+<pre><code>public static string GetGmtTimeString(this DateTime now)
+{
+  double gmt = TimeZoneInfo.Local.GetUtcOffset(now).TotalHours;
+  string gmtTime = string.Format(&quot;{0} GMT{1}{2}&quot;,
+    now.ToString(&quot;yyyy/MM/dd HH:mm:ss&quot;),
+      (gmt &gt;= 0) ? &quot;+&quot; : &quot;&quot;,
+      gmt);
+  return gmtTime;
+}
+</code></pre>
+

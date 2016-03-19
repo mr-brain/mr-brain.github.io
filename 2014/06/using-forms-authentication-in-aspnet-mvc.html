@@ -1,0 +1,96 @@
+<h2>Using Forms Authentication in ASP.NET MVC</h2>
+<p>In Web.config</p>
+<pre><code>&lt;configuration&gt;
+  &lt;system.web&gt;
+    &lt;authentication mode=&quot;Forms&quot;&gt;
+      &lt;forms defaultUrl=&quot;~/Home/Index/&quot; loginUrl=&quot;~/Home/Login/&quot; timeout=&quot;30&quot; &gt;&lt;/forms&gt;
+    &lt;/authentication&gt;
+    &lt;authorization&gt;
+      &lt;deny users=&quot;?&quot;&gt;&lt;/deny&gt;
+    &lt;/authorization&gt;
+  &lt;/system.web&gt;
+  &lt;location path=&quot;Scripts&quot;&gt;
+    &lt;system.web&gt;
+	  &lt;authorization&gt;
+	    &lt;allow users=&quot;*&quot;&gt;&lt;/allow&gt;
+	  &lt;/authorization&gt;
+	&lt;/system.web&gt;
+  &lt;/location&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>Create LoginViewModel.cs</p>
+<pre><code>public class LoginViewModel : IValidatableObject
+{
+	[DisplayFormat(ConvertEmptyStringToNull = false)]
+	public string ReturnUrl { get; set; }
+
+	[DisplayFormat(ConvertEmptyStringToNull = false)]
+	[Required]
+	public string UserName { get; set; }
+
+	[DisplayFormat(ConvertEmptyStringToNull = false)]
+	[Required]
+	[DataType(DataType.Password)]
+	[Display(Name = &quot;Password&quot;)]
+	public string Password { get; set; }
+
+	[Display(Name = &quot;Remember me?&quot;)]
+	public bool RememberMe { get; set; }
+
+	public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)
+	{
+		return null;
+	}
+}
+</code></pre>
+<p>Create HomeController.cs</p>
+<pre><code>public class HomeController : Controller
+{
+	[AllowAnonymous]
+	public ActionResult Login(string ReturnUrl)
+	{
+		//ReturnUrl: url that is before user login
+		var vm = new LoginViewModel() { ReturnUrl = ReturnUrl };
+		return View(vm);
+	}
+
+	[AllowAnonymous]
+	[HttpPost]
+	public ActionResult Login(LoginViewModel model)
+	{
+		//
+		if( !ModelState.IsValid )
+		{
+			return View(model);
+		}
+
+		//todo check login account and password
+		if (false)
+		{
+          ...
+		}
+
+		FormsAuthentication.RedirectFromLoginPage(model.UserName, false);
+		return Redirect(FormsAuthentication.GetRedirectUrl(model.UserName, false));
+	}
+	[AllowAnonymous]
+    public ActionResult Logout()
+    {
+        Session.Abandon();
+        FormsAuthentication.SignOut();
+        return RedirectToAction(&quot;Login&quot;, &quot;Home&quot;);
+    }
+</code></pre>
+<p>In Home/Login.cshtml</p>
+<pre><code>@using (Html.BeginForm(&quot;Login&quot;, &quot;Home&quot;, new { ReturnUrl=Model.ReturnUrl }, FormMethod.Post, new { autocomplete=&quot;off&quot; }))
+{
+  @Html.TextBoxFor(m =&gt; m.UserName) 
+  @Html.ValidationMessageFor(m =&gt; m.UserName)
+  &lt;br /&gt;
+  @Html.PasswordFor(m =&gt; m.Password) 
+  @Html.ValidationMessageFor(m =&gt; m.Password)
+  &lt;br /&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Login&quot; /&gt;
+}
+</code></pre>
+

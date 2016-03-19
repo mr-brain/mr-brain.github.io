@@ -1,0 +1,48 @@
+<h2>ASP.NET MVC Table Grid Post Form And Read Lines</h2>
+<p>How can read the posted grid data line by line?</p>
+<p>You can create a Model for Stock and it can be bind to your view. Then you can pass list of stock objects to controller as below.</p>
+<p><strong>Stock Model</strong></p>
+<pre><code>public class Stock
+{
+    public int StockId { get; set; }
+    public int Amount { get; set; }
+    public decimal Price { get; set; }
+}
+</code></pre>
+<p><strong>View</strong></p>
+<pre><code>@model IEnumerable&lt;Stock&gt;
+&lt;form action=&quot;/Controler/ActionStockNew&quot; method=&quot;post&quot; id=&quot;form&quot;&gt;
+&lt;table&gt;
+    @for (int i = 0; i &lt; Model.Count(); i++)
+    {&lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type=&quot;text&quot; name=&quot;[@i].StockId&quot; /&gt;
+        &lt;/td&gt;
+        &lt;td&gt;
+            &lt;input type=&quot;text&quot; name=&quot;[@i].Amount&quot; /&gt;
+        &lt;/td&gt;
+        &lt;td&gt;
+            &lt;input type=&quot;text&quot; name=&quot;[@i].Price&quot; /&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    }
+&lt;/table&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Save&quot; /&gt;
+&lt;/form&gt;
+</code></pre>
+<p><strong>Controllers</strong></p>
+<pre><code>public ActionResult ActionStockNew()
+{
+    List&lt;Stock&gt; stockList = new List&lt;Stock&gt;();
+    // fill stock
+
+    return View(stockList);
+}
+
+[HttpPost]
+public ActionResult ActionStockNew(ICollection&lt;Stock&gt; stockList)
+{
+    // process
+}
+</code></pre>
+

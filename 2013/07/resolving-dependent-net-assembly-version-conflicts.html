@@ -1,0 +1,38 @@
+<h2>Resolving Dependent .NET Assembly Version Conflicts</h2>
+<p>I ran into an interesting error message this morning while run application.</p>
+<blockquote>
+<p>------ Build started: Project: UnitTests, Configuration: Debug Any CPU ------
+Consider app.config remapping of assembly &quot;yourAssembly, Culture=neutral, PublicKeyToken=xxx&quot;
+from Version &quot;2.2.0.0&quot; [] to Version &quot;2.2.8.0&quot;
+[C:\Demo\yourAssembly.dll] to solve conflict and get rid of warning.
+C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\Microsoft.Common.targets :
+warning MSB3247: Found conflicts between different versions of the same dependent assembly.</p>
+</blockquote>
+<p>This occurs because YourApp depends on a different version of the your Assembly.</p>
+<p>Fortunately, the error message gives you all you need to know to fix the problem. I added an App.config file to the project with the following XML.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;configuration&gt;
+  &lt;runtime&gt;
+    &lt;assemblyBinding xmlns=&quot;urn:schemas-microsoft-com:asm.v1&quot;&gt;
+      &lt;dependentAssembly&gt;
+        &lt;assemblyIdentity name=&quot;myAssembly&quot; publicKeyToken=&quot;96D09A1EB7F44A77&quot; culture=&quot;neutral&quot;/&gt;
+        &lt;bindingRedirect oldVersion=&quot;0.0.0.0-2.2.8.0&quot; newVersion=&quot;2.2.8.0&quot;/&gt;
+      &lt;/dependentAssembly&gt;
+    &lt;/assemblyBinding&gt;
+  &lt;/runtime&gt;
+&lt;/configuration&gt; 
+</code></pre>
+<p>How to find public key token for a .NET DLL or assembly?</p>
+<p>Use the following command,</p>
+<blockquote>
+<p>sn -T myDLL.dll</p>
+</blockquote>
+<p>This will give you the public key token. Remember one thing this only works if the assembly has to be strongly signed.</p>
+<p>Example</p>
+<pre><code>C:\WINNT\Microsoft.NET\Framework\v3.5&gt;sn -T myDll.dll
+Microsoft (R) .NET Framework Strong Name Utility  Version 3.5.21022.8
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Public key token is x77x5x561934x089
+</code></pre>
+

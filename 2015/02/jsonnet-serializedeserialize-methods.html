@@ -1,0 +1,59 @@
+<h2>Json.NET Serialize/Deserialize methods</h2>
+<p>The following example demonstrates the use Strong type, JObject, Dynamic different approaches to deal with JSON serialization / deserialization.</p>
+<pre><code>public class Food
+{
+	public DateTime d { get; set; }
+	public int n { get; set; }
+	public string s { get; set; }
+	public int[] a { get; set; }
+}
+</code></pre>
+<p>Lab1:Using Strong Type to deserialize</p>
+<pre><code>Food f = JsonConvert.DeserializeObject&lt;Food&gt;(jsonString);
+</code></pre>
+<p>Lab2:Using JObject to deserialize</p>
+<pre><code>JObject jo = JObject.Parse(jsonString);
+DateTime d = jo.Property(&quot;d&quot;).Value.Value&lt;DateTime&gt;();
+int n = jo[&quot;n&quot;].Value&lt;int&gt;();
+string s = jo[&quot;s&quot;].Value&lt;string&gt;();
+int[] ary = jo[&quot;a&quot;].Value&lt;JArray&gt;()
+  .Select(o =&gt; o.Value&lt;int&gt;()).ToArray();
+</code></pre>
+<p>Lab3:Using Dynamic to deserialize</p>
+<pre><code>JObject jo = JObject.Parse(jsonString);
+dynamic dyna = jo as dynamic;
+
+DateTime d = dyna.d;
+int n = dyna.n;
+string s = dyna.s;
+var ary = ((JArray)jo[&quot;a&quot;]).Cast&lt;dynamic&gt;().ToArray();
+</code></pre>
+<p>Deserialize Performance: Lab2 &gt; Lab1 ~= Lab2</p>
+<p>Lab4:Using Strong Type to serialize</p>
+<pre><code>Food f = new Food()
+{
+	d = new DateTime(2015, 1, 1),
+	n = 12345,
+	s = &quot;MR-Brain&quot;,
+	a = new int[] { 1, 2, 3, 4, 5 }
+};
+string json = JsonConvert.SerializeObject(f);
+</code></pre>
+<p>Lab5:Using JObject to serialize</p>
+<pre><code>JObject jo = new JObject();
+jo.Add(new JProperty(&quot;d&quot;, new DateTime(2015, 1, 1)));
+jo.Add(new JProperty(&quot;n&quot;, 12345));
+jo.Add(new JProperty(&quot;s&quot;, &quot;MR-Brain&quot;));
+jo.Add(new JProperty(&quot;a&quot;, new JArray(1, 2, 3, 4, 5)));
+string json = jo.ToString(Formatting.None);
+</code></pre>
+<p>Lab6:Using Dynamic to serialize</p>
+<pre><code>dynamic dyna = new JObject();
+dyna.d = new DateTime(2015, 1, 1);
+dyna.n = 12345;
+dyna.s = &quot;MR-Brain&quot;;
+dyna.a = new JArray(1, 2, 3, 4, 5);
+string json = dyna.ToString(Formatting.None);
+</code></pre>
+<p>Serialize Performance: Lab5 &gt; Lab4 &gt; Lab6</p>
+

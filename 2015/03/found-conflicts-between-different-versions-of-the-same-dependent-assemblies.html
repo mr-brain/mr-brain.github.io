@@ -1,0 +1,13 @@
+<h2>Found conflicts between different versions of the same dependent assemblies</h2>
+<blockquote>
+<p>Found conflicts between different versions of the same dependent assembly. Please set the &quot;AutoGenerateBindingRedirects&quot; property to true in the project file. For more information, see http://go.microsoft.com/fwlink/?LinkId=294190.</p>
+</blockquote>
+<p>Considering there are about 50 references across the projects I have in this solution, that isn't particularly helpful.</p>
+<p>There is an easy way to get the compiler to spit out more information.</p>
+<ol>
+<li>In Visual Studio 2013 go to Tools &gt; Options.</li>
+<li>Select Project and Solutions &gt; Build and Run.</li>
+<li>Find the drop down MSBuild project build output verbosity. Here you can configure MSBuild to give you more information. By default it will be set to &quot;Minimal&quot;. Change this to &quot;Detailed'.</li>
+<li>Rebuild and view the Output window. Copy everything into notepad and search for the <strong>warning</strong> which should tell you which assemblies you need to look at.</li>
+</ol>
+

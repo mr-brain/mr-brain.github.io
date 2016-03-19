@@ -1,0 +1,1 @@
+﻿robocopy D:\VPC\VDisk\GitRepository\GitHub-Blog\Blog\source\_posts D:\VPC\VDisk\GitRepository\CS\MyProjects\MarkdownBlog\MarkdownBlog\Source /dcopy:t

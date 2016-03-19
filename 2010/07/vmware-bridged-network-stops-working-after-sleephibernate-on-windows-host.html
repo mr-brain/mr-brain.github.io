@@ -1,0 +1,8 @@
+<h2>VMware Bridged Network stops working after sleep/hibernate on Windows Host.</h2>
+<p>Running VMware Workstation 6.5 (or above 6.5). My Bridged networking stops working after Windows sleeps or hibernates. A restart is required to restore its operation. NAT networking works fine.
+Anyone have any ideas how to restore it without a reboot?</p>
+<p>Please run the following two commands in a cmd as administrator:</p>
+<pre><code>net stop vmnetbridge
+net start vmnetbridge
+</code></pre>
+

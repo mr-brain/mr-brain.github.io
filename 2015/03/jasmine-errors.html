@@ -1,0 +1,20 @@
+<h2>Jasmine Errors in VS.NET 2013</h2>
+<p>I get the following error:</p>
+<blockquote>
+<p>Script:
+C:\Users\xxx\AppData\Local\Microsoft\VisualStudio\12.0\Extensions\2q5cdx5o.qzv\TestFiles\Jasmine\v2\jasmine.js</p>
+</blockquote>
+<p>Error: 'null' is not an object (evaluating 'currentSpec.expect') #665</p>
+<p>I find the root cause:</p>
+<pre><code>describe(&quot;[TS]Test&quot;, function () {
+  expect(&quot;&quot;).toBe(&quot;&quot;);
+});
+</code></pre>
+<p>I forgot to add the 'it' statement around my expect.</p>
+<pre><code>describe(&quot;[TS]Test&quot;, function () {
+  it(&quot;test&quot;,() =&gt; {
+	expect(&quot;&quot;).toBe(&quot;&quot;);
+  });
+});
+</code></pre>
+

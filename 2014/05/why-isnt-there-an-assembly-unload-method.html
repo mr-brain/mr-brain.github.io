@@ -1,0 +1,42 @@
+<h2>Why isn't there an Assembly. Unload method?</h2>
+<p>Please refer to this article (http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx).</p>
+<p>Memory consumption been eating more and more?</p>
+<pre><code>do
+{
+  Assembly.LoadFrom(&quot;Library1.dll&quot;);
+}while( true );
+</code></pre>
+<p>The result is NO. It will only keep a copy of Library1 Assembly in Memory, And never been release.
+But I need the plugin Mechanism for Load/Unload Assembly.</p>
+<p>How to load and unload Library1 Assembly?
+Step1: Create the Library1 Project.</p>
+<pre><code>[Serializable]
+public class MyClass1
+{
+  public string Test()
+  {
+    return &quot;abc&quot;;
+  }
+}
+</code></pre>
+<p>Step 2: Create the Test Project.</p>
+<pre><code>AppDomainSetup ads = new AppDomainSetup();
+ShadowCopyFiles = &quot;true&quot;;
+var myAppDomain = AppDomain.CreateDomain(&quot;MyAppDomainName&quot;, null, ads);
+</code></pre>
+<p>The follow code will load Library1.dll file.</p>
+<pre><code>object proxy = myAppDomain.CreateInstanceFromAndUnwrap(&quot;Library1.dll&quot;, &quot;Library1.MyClass1&quot;);
+</code></pre>
+<p>Invoke the Test Method.</p>
+<pre><code>MethodInfo mi = proxy.GetType().GetMethod(&quot;Test&quot;, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+string s = (string)mi.Invoke(proxy, new object[]{});
+</code></pre>
+<p>Unload the Library1.dll file.</p>
+<pre><code>AppDomain.Unload(myAppDomain);
+</code></pre>
+<p>If you use T1 Common Library. You can write the following simple code.</p>
+<pre><code>UnloadAssembly asm = UnloadAssembly.Load(&quot;Library1.dll&quot;);
+UnloadClass cls = asm.GetUnloadClass(&quot;Library1.MyClass1&quot;);
+string s = (string)cls.Invoke(&quot;Test&quot;);
+</code></pre>
+

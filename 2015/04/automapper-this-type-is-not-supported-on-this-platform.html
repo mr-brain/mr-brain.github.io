@@ -1,0 +1,22 @@
+<h2>Automapper 3.0 - This type is not supported on this platform when I use MSTest.exe ?</h2>
+<p>MSTest show following error:</p>
+<blockquote>
+<p>Source value:
+System.Data.DataTableReader ---&gt; System.PlatformNotSupportedException: Proxy generation not supported on this platform.</p>
+</blockquote>
+<p>To fix it, add an explicit call to something in AutoMapper.Net4.dll. For instance, with the class ListSourceMapper :</p>
+<pre><code>var useless = new ListSourceMapper();
+</code></pre>
+<p>Or you can</p>
+<pre><code>[TestClass]
+[DeploymentItem(&quot;AutoMapper.Net4.dll&quot;)]
+public class YourTest
+{
+	[TestMethod]
+	public void Test1()
+	{
+		...
+	}
+}
+</code></pre>
+

@@ -1,0 +1,16 @@
+<h2>Dynamic Linq To Object</h2>
+<p>Q: I need to filter a generic list with a dynamic query:</p>
+<pre><code>List&lt;string&gt; l; 
+var x = l.Where(*dynamic query*)
+</code></pre>
+<p>How would i do this using LINQ?
+but it appears to not work with objects that use IEnumerable(generic lists included).
+Can anyone offer any ideas?</p>
+<p>Answers</p>
+<blockquote>
+<p>Assuming you mean a string-based query: the dynamic LINQ library will work fine; just call .AsQueryable() first:</p>
+</blockquote>
+<pre><code>string s = *dynamic query*
+var qry = l.AsQueryable().
+</code></pre>
+

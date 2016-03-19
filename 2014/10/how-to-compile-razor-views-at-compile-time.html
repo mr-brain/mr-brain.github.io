@@ -1,0 +1,13 @@
+<h2>How to compile razor views at compile time ?</h2>
+<p>Razor views are dynamically compiled by the ASP.NET runtime. If you want your views to be built at compile-time you could add the following option to your .csproj file:</p>
+<pre><code>&lt;PropertyGroup Condition=&quot; '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' &quot;&gt;
+	...
+    &lt;MvcBuildViews&gt;true&lt;/MvcBuildViews&gt;
+&lt;/PropertyGroup&gt;
+
+...
+&lt;Target Name=&quot;MvcBuildViews&quot; AfterTargets=&quot;AfterBuild&quot; Condition=&quot;'$(MvcBuildViews)'=='true'&quot;&gt;
+	&lt;AspNetCompiler VirtualPath=&quot;temp&quot; PhysicalPath=&quot;$(WebProjectOutputDir)&quot; /&gt;
+&lt;/Target&gt;
+</code></pre>
+

@@ -1,0 +1,28 @@
+<h2>Unit Testing ASP.NET Web Site Project code stored in APP_Code</h2>
+<p>Here's a Website.targets file you can include in unit testing solution. It (re)compiles website only when App_Code changes. Just add something in <strong>Test Project</strong> like</p>
+<pre><code>&lt;PropertyGroup&gt;
+    &lt;WebsiteName&gt;*MyWebsite*&lt;/WebsiteName&gt;
+    &lt;WebsitePath&gt;..&lt;/WebsitePath&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;Import Project=&quot;$(ProjectDir)\Website.targets&quot; &gt;&lt;/Import&gt;
+  &lt;Target Name=&quot;BeforeBuild&quot; DependsOnTargets=&quot;CompileWebsite&quot;&gt;
+  &lt;/Target&gt;
+</code></pre>
+<p>to your .csproj, customizing WebsiteName and WebsitePath and you should be ready to create <strong>Website.targets</strong> file in Test Project Folder:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;!--
+    Target that compiles Website's App_Code to be used for testing
+  --&gt;
+&lt;Project DefaultTargets=&quot;CompileWebsite&quot; ToolsVersion=&quot;4.0&quot; xmlns=&quot;http://schemas.microsoft.com/developer/msbuild/2003&quot;&gt;
+  &lt;ItemGroup&gt;
+    &lt;AppCodeFiles Include=&quot;$(WebsitePath)\$(WebsiteName)\App_Code\**\*.*&quot; &gt;&lt;/AppCodeFiles&gt;
+  &lt;/ItemGroup&gt;
+  &lt;Target Name=&quot;CompileWebsite&quot; Inputs=&quot;@(AppCodeFiles)&quot; Outputs=&quot;$(ProjectDir)\PrecompiledWeb\bin\App_Code.dll&quot;&gt;
+    &lt;AspNetCompiler VirtualPath=&quot;$(WebsiteName)&quot; PhysicalPath=&quot;$(WebsitePath)\$(WebsiteName)&quot; TargetPath=&quot;$(ProjectDir)\PrecompiledWeb&quot; Force=&quot;true&quot; Debug=&quot;true&quot; &gt;&lt;/AspNetCompiler&gt;
+  &lt;/Target&gt;
+  &lt;Target Name=&quot;CleanWebsite&quot;&gt;
+    &lt;RemoveDir Directories=&quot;$(WebsitePath)\$(WebsiteName)\PrecompiledWeb&quot; &gt;&lt;/RemoveDir&gt;
+  &lt;/Target&gt;  
+&lt;/Project&gt;
+</code></pre>
+

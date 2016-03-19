@@ -1,0 +1,67 @@
+<h2>C# 5.0 CallerMemberName</h2>
+<p>My new favorite C# language feature: CallerMemberName</p>
+<p>This is how a property with INotifyPropertyChanged support looks like pre C# 4.5:</p>
+<pre><code>public string OldStylePropertyChanged
+{
+  get { return _oldStyle; }
+  set
+  {
+    if (value != _oldStyle)
+    {
+      _oldStyle = value;
+      OnPropertyChangedOldStyle(&quot;OldStylePropertyChanged&quot;);
+    }
+  }
+}
+private void OnPropertyChangedOldStyle(string propertyName)
+{
+  var handler = PropertyChanged;
+  if (handler != null)
+  {
+    handler(this, new PropertyChangedEventArgs(propertyName));
+  }
+}
+</code></pre>
+<p>And this is how it will look like when we apply the use of CallerMemberName in our PropertyChanged method:</p>
+<pre><code>public string DynamicTitle
+{
+  get { return _dynamicTitle; }
+  set
+  {
+    if (value != _dynamicTitle)
+    {
+      _dynamicTitle = value;
+      OnPropertyChanged();
+    }
+  }
+}
+private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+{
+  var handler = PropertyChanged;
+  if (handler != null)
+  {
+    handler(this, new PropertyChangedEventArgs(propertyName));
+  }
+}
+</code></pre>
+<p>Some more really cool additions to CallerMemberName is the following Parameter attributes:</p>
+<p>*	[CallerMemberName]
+*	[CallerFilePath]
+*	[CallerLineNumber]</p>
+<p>The name of the attributes is straight forward and easy to understand, so I doubt that I would have to describe them in detail, instead, let's look at an example straight from MSDN on how to use them.</p>
+<pre><code>public sealed class Logger
+{
+  public void TraceMessage(string message,
+       [CallerMemberName] string memberName = &quot;&quot;,
+       [CallerFilePath] string sourceFilePath = &quot;&quot;,
+       [CallerLineNumber] int sourceLineNumber = 0)
+  {
+    Debug.WriteLine(&quot;message: &quot; + message);
+    Debug.WriteLine(&quot;member name: &quot; + memberName);
+    Debug.WriteLine(&quot;source file path: &quot; + sourceFilePath);
+    Debug.WriteLine(&quot;source line number: &quot; + sourceLineNumber);
+  }
+}
+</code></pre>
+<p>Happy hacking!</p>
+

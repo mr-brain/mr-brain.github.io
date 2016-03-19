@@ -1,0 +1,10 @@
+<h2>Get Class list for element with jQuery</h2>
+<p>You can iterate and find the one you want:</p>
+<pre><code>var classList = $('#divId').attr('class').split(/\s+/);
+$.each( classList, function(index, item){
+    if (item === 'someClass') {
+       //do something
+    }
+});
+</code></pre>
+

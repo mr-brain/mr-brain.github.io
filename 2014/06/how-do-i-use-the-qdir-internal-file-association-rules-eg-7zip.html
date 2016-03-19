@@ -1,0 +1,23 @@
+<h2>How do i use the Q-Dir internal file association rules eg 7-Zip?</h2>
+<p><em>Example 1:</em>
+Eg: For 7-zip, with 7-zip in the default Program Files folder.</p>
+<blockquote>
+<p><em>.zip;</em>.rar=C:\Program Files\7-Zip\7zFM.exe</p>
+</blockquote>
+<p><em>Example 2:</em>
+Q-Dir is on the USB Stik and Notepad++ also.
+The file extension &quot;txt&quot;, &quot;cpp&quot;, &quot;pl&quot;, &quot;ini&quot;, &quot;php&quot;, &quot;cgi&quot; to be with Notepad++ open.</p>
+<blockquote>
+<p><em>.txt;</em>.cpp;<em>.pl;</em>.ini;<em>.php;</em>.cgi=%drive%/npp/unicode/notepad++.exe</p>
+</blockquote>
+<p>Or even for portable 7-Zip :</p>
+<blockquote>
+<p><em>.zip;</em>.rar;<em>.7z;</em>.tar;<em>.iso;</em>.lzh=%drive%/7-Zip/7zFM.exe</p>
+</blockquote>
+<p>%drive% is a placeholder for the drive from which to Q-Dir is started.
+In the case of: the Q-Dir path is &quot;M:/Q-Dir/Q-Dir.exe&quot; then would be %drive% a placeholder for &quot;M:&quot;.</p>
+<p>This allows you to define yourself,
+through the menu :
+Extras &gt;&gt; ... more options, then tab bar Association.</p>
+<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/Assoziation_in_Q_Dir.png" alt="img" /></p>
+

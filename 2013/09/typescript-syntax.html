@@ -1,0 +1,77 @@
+<h2>TypeScript Syntax</h2>
+<p>Declare variables</p>
+<pre><code>var i:number = 1;
+var s:string = &quot;text&quot;;
+</code></pre>
+<p>interface and class</p>
+<pre><code>interface IPersion{
+  firtname: string;
+  lastname: string;
+}
+
+class Student implements IPersion{
+  firtname: string;
+  lastname: string;
+  
+  constructor(public name: string){
+    this.firstname = name;
+    this.lastname = &quot;Student&quot;;
+  }
+  sayName()
+  {
+    return &quot;Student&quot;;
+  }
+}
+
+class Teacher extends Student{
+  constructor()
+  {
+    super(&quot;Flash&quot;);
+    this.lastname = &quot;Teacher&quot;;
+  }
+
+  sayName()
+  {
+    return &quot;Teacher&quot;;
+  }
+}
+</code></pre>
+<p>static method</p>
+<pre><code>class utils{
+  public static CopyProperties(source: any, target: any): void {
+    for (var prop in source) {
+      if (target[prop] !== undefined) {
+        target[prop] = source[prop];
+      }
+      else {
+        console.error(&quot;Cannot set undefined property: &quot; + prop);
+      }
+    }
+  }
+}
+
+utils.CopyProperties(source, dest);
+</code></pre>
+<p>create module in math.ts</p>
+<pre><code>module math{
+        export function MathAdd(a:number, b:number)
+        {
+                return a+b;
+        }
+}
+</code></pre>
+<p>use math module in test.ts</p>
+<pre><code>/// &lt;reference path=&quot;math.ts&quot; /&gt;
+var c:number = math.MathAdd(1, 2);
+</code></pre>
+<p>create module in file1.ts</p>
+<pre><code>export function MathAdd(a:number, b:number)
+{
+  return a+b;
+}
+</code></pre>
+<p>use file1 file module in test.ts</p>
+<pre><code>import f1 = module('file1')
+var c:number = f1.MathAdd(1, 2);
+</code></pre>
+

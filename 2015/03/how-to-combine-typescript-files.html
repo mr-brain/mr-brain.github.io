@@ -1,0 +1,14 @@
+<h2>How to compile many typescript files in VS.NET 2013?</h2>
+<p>We can add following MSBuild script in your csproj file.</p>
+<pre><code>&lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot;
+    Condition=&quot;Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\$(TypeScriptToolsVersion)\Microsoft.TypeScript.targets')&quot; /&gt;
+&lt;Target Name=&quot;CombineT1&quot; BeforeTargets=&quot;PrepareForBuild&quot;&gt;
+  &lt;ItemGroup&gt;
+    &lt;T1TypeScriptFiles Include=&quot;$(projectDir)Scripts\t1\*.ts;&quot; Exclude=&quot;$(projectDir)\Scripts\**\*.d.ts;&quot; /&gt;
+  &lt;/ItemGroup&gt;
+  &lt;WriteLinesToFile File=&quot;$(projectDir)Scripts\t1\typescriptcompiler.input&quot; Lines=&quot;@(T1TypeScriptFiles)&quot; Overwrite=&quot;true&quot; Encoding=&quot;UTF-8&quot; /&gt;
+  &lt;Exec Command=&quot;&amp;quot;$(MSBuildProgramFiles32)\Microsoft SDKs\TypeScript\$(TypeScriptToolsVersion)\tsc&amp;quot; --out $(projectDir)Scripts\t1\t1.js --target ES5 @$(projectDir)Scripts\t1\typescriptcompiler.input&quot; CustomErrorRegularExpression=&quot;\.ts\([0-9]+,[0-9]+\):(.*)&quot;&gt;
+  &lt;/Exec&gt;
+&lt;/Target&gt;
+</code></pre>
+

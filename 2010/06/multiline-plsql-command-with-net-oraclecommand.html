@@ -1,0 +1,38 @@
+<h2>Multi-line PL/SQL command with .NET OracleCommand</h2>
+<p>I'm using System.Data.OracleClient.OracleCommand to create a table and fill it out with some data. The query I am using runs OK in PS/SQL Developer, however when I'm trying to execute it from within .NET application I'm getting this error:</p>
+<blockquote>
+<p>ORA-06550: line 1, column 20:
+PLS-00103: Encountered the symbol &quot;&quot; when expecting one of the following:</p>
+<p>begin function package pragma procedure subtype type use form current cursor</p>
+</blockquote>
+<p>Here is some code:</p>
+<pre><code>var text = @&quot;declare cnt number;
+begin
+
+select count(*) into cnt from all_tables
+where table_name = 'TABLE_A';
+
+
+if cnt = 1 then
+begin 
+execute immediate 'truncate table TABLE_A';
+execute immediate 'drop table TABLE_A';
+end;
+end if;
+
+execute immediate 'create table TABLE_A as 
+(SELECT DISTINCT v.ID, g.ext_id FROM VIEW_A v
+JOIN TABLE_B B ON v.id = B.Id
+WHERE YEAR1 = ''2008'')';
+
+end;&quot;);
+cmd.CommandText = text;
+cmd.ExecuteNonQuery();
+</code></pre>
+<p>Search Google, finally found:
+I think you need to lose just the '\r' characters.</p>
+<pre><code>text = text.Replace(&quot;\r\n&quot;, &quot;\n&quot;);
+cmd.CommandText = text;
+cmd.ExecuteNonQuery();
+</code></pre>
+

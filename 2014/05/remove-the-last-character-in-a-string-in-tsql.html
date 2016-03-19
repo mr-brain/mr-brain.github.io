@@ -1,0 +1,20 @@
+<h2>Remove the last character in a string in T-SQL?</h2>
+<p>How do I remove the last character in a string in T-SQL?</p>
+<p>I.E.</p>
+<blockquote>
+<p>'TEST STRING'</p>
+</blockquote>
+<p>to return:</p>
+<blockquote>
+<p>'TEST STRIN'</p>
+</blockquote>
+<p>Sample code:</p>
+<pre><code>DECLARE @String VARCHAR(100)
+SET @String = 'TEST STRING'
+
+-- Chop off the end character
+SET @String = LEFT(@String, LEN(@String) - 1)
+
+SELECT @String
+</code></pre>
+

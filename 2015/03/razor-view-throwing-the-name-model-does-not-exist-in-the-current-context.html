@@ -1,0 +1,16 @@
+<h2>Razor View throwing &quot;The name 'model' does not exist in the current context&quot;</h2>
+<p>Razor is giving me this nonsensical error:</p>
+<blockquote>
+<p>The name 'model' does not exist in the current context.</p>
+</blockquote>
+<p>The part that makes literally zero sense is that this is causing the error:</p>
+<pre><code>		@model ICollection&lt;DataSourceByActive&gt;
+</code></pre>
+<p>I know for a fact that @model is proper Razor syntax.</p>
+<p>So why is this happening? How can I fix it?</p>
+<p>I think you have messed up the web.config file which lives in the Views folder.</p>
+<blockquote>
+<p>Create a new project targeting same .NET framework and copy its Views/web.config file over top the one in your current project</p>
+</blockquote>
+<p>This will fix your problem.</p>
+

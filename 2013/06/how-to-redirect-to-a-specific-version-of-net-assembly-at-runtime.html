@@ -1,0 +1,18 @@
+<h2>How to redirect to a specific version of .net assembly at runtime?</h2>
+<p>We can redirect to a specific version of a .net assembly by using configuration file as below:</p>
+<pre><code class="language-xml">&lt;configuration&gt;
+  &lt;runtime&gt;
+    &lt;assemblyBinding xmlns=&quot;urn:schemas-microsoft-com:asm.v1&quot;&gt;
+      &lt;dependentAssembly&gt;
+        &lt;assemblyIdentity name=&quot;myAssembly&quot;
+          publicKeyToken=&quot;32ab4ba45e0a69a1&quot;
+          culture=&quot;en-us&quot; /&gt;
+        &lt;!-- Assembly versions can be redirected in application, 
+          publisher policy, or machine configuration files. --&gt;
+        &lt;bindingRedirect oldVersion=&quot;1.0.0.0&quot; newVersion=&quot;2.0.0.0&quot; /&gt;
+      &lt;/dependentAssembly&gt;
+    &lt;/assemblyBinding&gt;
+  &lt;/runtime&gt;
+&lt;/configuration&gt;
+</code></pre>
+

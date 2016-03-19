@@ -1,0 +1,24 @@
+<h2>Render dynamic model in Razor view engine and ASP.NET MVC</h2>
+<p>When I try to render a view whose model type is specified as: @model dynamic</p>
+<p>by using the following code:</p>
+<pre><code>@{ Html.RenderPartial(&quot;PartialView&quot;, Model.UserProfile); }
+</code></pre>
+<p>I get the following exception:</p>
+<blockquote>
+<p>'System.Web.Mvc.HtmlHelper<dynamic>' has no applicable method named 'RenderPartial'
+but appears to have an extension method by that name.
+Extension methods cannot be dynamically dispatched.
+Consider casting the dynamic arguments or calling the extension method without the extension method syntax.</p>
+</blockquote>
+<p>Answer: It appears that the view where I was placing the RenderPartial code had a dynamic model, and thus, MVC couldn't choose the correct method to use. Casting the model in the RenderPartial call to the correct type fixed the issue.</p>
+<pre><code>@Html.Partial(&quot;_PartialView&quot;, (ModelClass)View.UserProfile)
+@{ Html.RenderPartial(&quot;PartialView&quot;, (ModelClass)Model.UserProfile); }
+</code></pre>
+<p>When you send the anonymous type model to the view:</p>
+<pre><code>return View(new {x=4, y=6});
+</code></pre>
+<p>It show that using anonymous types is not supported, however, there is a workaround, you can use an ExpandoObject, convert it to Expando</p>
+<pre><code>using T1.Web.Mvc4;
+return View(new {x=4, y=6}.ToExpando());
+</code></pre>
+

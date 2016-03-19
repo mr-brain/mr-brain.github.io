@@ -1,0 +1,39 @@
+<h2>Overriding == operator. How to compare to null?</h2>
+<p>Here is a simplified example:</p>
+<pre><code>public static bool operator ==(ThreeDPoint a, ThreeDPoint b)
+{
+    if (a == null)
+    {
+         //any code here never gets executed!  We first die a slow painful death.
+    }
+    return a.Equals(b);
+}
+</code></pre>
+<p>However, what happens when a ThreeDPoint  object is null?</p>
+<p>You can't write:</p>
+<pre><code>ThreeDPoint  a;
+if (a == null)
+{
+    //fail!
+}
+</code></pre>
+<p>Use object.ReferenceEquals(person1, null) instead of the == operator:</p>
+<pre><code>public static bool operator ==(ThreeDPoint a, ThreeDPoint b)
+{
+    // If both are null, or both are same instance, return true.
+    if (System.Object.ReferenceEquals(a, b))
+    {
+        return true;
+    }
+
+    // If one is null, but not both, return false.
+    if (((object)a == null) || ((object)b == null))
+    {
+        return false;
+    }
+
+    // Return true if the fields match:
+    return a.x == b.x &amp;&amp; a.y == b.y &amp;&amp; a.z == b.z;
+}
+</code></pre>
+

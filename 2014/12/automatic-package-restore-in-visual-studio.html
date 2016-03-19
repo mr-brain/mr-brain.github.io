@@ -1,0 +1,19 @@
+<h2>Automatic Package Restore in Visual Studio</h2>
+<p>We can add the pre-build event for each of the project that require the packages.config</p>
+<pre><code>cd $(ProjectDir)
+nuget restore -source http://www.nuget.org/api/v2/ -packagesdirectory ../packages
+</code></pre>
+<p>What if you have custom package sources?
+All you need to do is create a NuGet.Config file next to your .sln file, containing:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;configuration&gt;
+  &lt;packageSources&gt;
+    &lt;add key=&quot;nuget.org&quot; value=&quot;https://www.nuget.org/api/v2/&quot; /&gt;
+    &lt;add key=&quot;aspnetwebstacknightlyrelease&quot; value=&quot;https://www.myget.org/f/aspnetwebstacknightlyrelease/&quot; /&gt;
+  &lt;/packageSources&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>Note that if you have private package sources that you want to keep out of your repo, you can add them to</p>
+<pre><code>%APPDATA%\NuGet\Nuget.config (see this page) for details.
+</code></pre>
+

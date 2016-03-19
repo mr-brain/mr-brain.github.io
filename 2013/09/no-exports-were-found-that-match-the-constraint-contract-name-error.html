@@ -1,0 +1,28 @@
+<h2>No exports were found that match the constraint contract name error</h2>
+<p>This morning I faced a problem while creating my Visual Studio 2012 Library Project. It said &quot;no exports were found that match the constraint contract name&quot;</p>
+<p>I solved this problem by clearing Visual Studio Component Model Cache. Just delete or rename this folder:</p>
+<blockquote>
+<p>%AppData%..\Local\Microsoft\VisualStudio\11.0\ComponentModelCache</p>
+</blockquote>
+<p>Visual Studio Express 2012 has different paths. Visual Studio Express</p>
+<blockquote>
+<p>...\Users{user}\AppData\Local\Microsoft\WDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>With Visual Studio Express 2012 for Web</p>
+<blockquote>
+<p>...\Users{user}\AppData\Local\Microsoft\VWDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>When I running MyWebSite in .NET 4.0 and I can't get it working.</p>
+<blockquote>
+<p>HTTP error 500.22-Internal Server Error
+Detect ASP.NET setting does not apply to integrated Managed pipeline mode.</p>
+</blockquote>
+<p>If you still need to use the HTTP Module you need to configure it (.NET 4.0 framework) as follows:</p>
+<pre><code>&lt;system.webServer&gt;
+  &lt;modules runAllManagedModulesForAllRequests=&quot;true&quot;&gt;
+    &lt;add name=&quot;MyModule&quot; type=&quot;&lt;&lt;Namespace&gt;&gt;.&lt;&lt;Class&gt;&gt;, &lt;&lt;assembly&gt;&gt;&quot;/&gt;
+  &lt;/modules&gt;
+  &lt;validation validateIntegratedModeConfiguration=&quot;false&quot;/&gt;
+&lt;/system.webServer&gt;
+</code></pre>
+

@@ -1,0 +1,69 @@
+<h2>Adding the Global.asax.cs file in Asp.net WebSite</h2>
+<p>If we use Asp.net Web Application (File -&gt; New-&gt; Project-&gt; Asp.net Web Application), we can add Global.asax as well as Global.asax.cs file.</p>
+<p>However, if we use Asp.net Web site (File-&gt;New-&gt;Website-&gt;Asp.net Website), it is not the case. By default we will have Global.asax file only and not the Global.asax.cs file.</p>
+<p>The structure of the Global.asax file is as under</p>
+<pre><code>&lt;%@ Application Language=&quot;C#&quot; %&gt;
+&lt;script runat=&quot;server&quot;&gt;
+void Application_Start(object sender, EventArgs e)
+{
+  // Code that runs on application startup
+}
+void Application_End(object sender, EventArgs e)
+{
+  //  Code that runs on application shutdown
+}
+void Application_Error(object sender, EventArgs e)
+{
+  // Code that runs when an unhandled error occurs
+}
+void Session_Start(object sender, EventArgs e)
+{
+  // Code that runs when a new session is started
+}
+void Session_End(object sender, EventArgs e)
+{
+}      
+&lt;/script&gt;
+</code></pre>
+<p>So how can we add a Global.asax.cs file for a Asp.net Web site project? Let us observer the same in the below steps</p>
+<p>Step 1: Right click App_Code -&gt; Add New Item -&gt; Class -&gt; Rename it as Global.cs . Then click on the Add button.</p>
+<p>Step 2: In the Global.cs file that got created, decorate it by inheriting the class from System.Web.HttpApplication</p>
+<p>So the Global.asax.cs file will now look like</p>
+<pre><code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+public class Global : System.Web.HttpApplication
+{
+  public Global()
+  {
+    // TODO: Add constructor logic here
+  }
+
+  protected void Application_Start(object sender, EventArgs e)
+  {
+  }
+        
+  protected void Session_Start(object sender, EventArgs e)
+  {
+  }
+
+  protected void Session_End(object sender, EventArgs e)
+  {
+  }
+  
+  protected void Application_End(object sender, EventArgs e)
+  {
+  }
+}
+</code></pre>
+<p>Step 3: Now, from the Global.asax file, remove the entire script code and change the</p>
+<pre><code>&lt;%@ Application Language=&quot;C#&quot; %&gt;
+</code></pre>
+<p>to</p>
+<pre><code>&lt;%@ Application Language=&quot;C#&quot; CodeBehind=&quot;~/App_Code/Global.asax.cs&quot; Inherits=&quot;Global&quot; %&gt;
+</code></pre>
+<p>That's it. Now run the application and it will work
+Hope this helps atleast for the newbies. Happy coding.</p>
+

@@ -1,0 +1,27 @@
+<h2>DynamicProperty Class</h2>
+<p>Introduction
+Some programming tasks require dynamic nature of properties exposed by an object. E.g. it might be needed to access object property by a given key, it might be needed to get all object properties and iterate over them. Dynamic properties are useful when you need to manage them at runtime, when your object is already instantiated.</p>
+<p>In this article we are going to create simple implementation of dynamic properties using C# programming language. We'll use generics for our dynamic properties to make the implementation more flexible and to avoid boxing operations when value types are used for underlying property values.</p>
+<p>*	Assembly:T1.dll
+*	Namespace:T1.Common</p>
+<p>Using the code</p>
+<pre><code>MyClass c1 = new MyClass();
+c1.Name = &quot;123&quot;;
+int i = c1.ID;
+</code></pre>
+<p>Using .NET Invoke Method</p>
+<pre><code>MyClass c1 = new MyClass();
+PropertyInfo pi = c1.GetProperty(&quot;Name&quot;);
+pi.SetValue(c1, &quot;123&quot;);
+pi = c1.GetProperty(&quot;ID&quot;);
+int i = (int)pi.GetValue(c1, null);
+</code></pre>
+<p>Using DynamicProperty Method</p>
+<pre><code>MyClass c1 = new MyClass();
+var setName = DynamicProperty.SetProperty(&quot;Name&quot;);
+setName(c1, &quot;123&quot;);
+var getID = DynamicProperty.GetProperty(&quot;ID&quot;);
+int i = getID(c1);
+</code></pre>
+<p>DynamicProperty Method is fast than Invoke Method.</p>
+

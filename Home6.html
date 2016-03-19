@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<link href="/Content/bootstrap.css" rel="stylesheet" />
+	<link href="/css/blog-home.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Elegance C#</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Blog Entries Column -->
+			<div class="col-md-8">
+				<h1 class="page-header">
+					Elegance C#
+					<small>Mr-Brain</small>
+				</h1>
+
+				
+
+<h2>
+	<a href="#">Microsoft.VisualStudio.Shell.Interop.dll ERROR</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/08/19 22:12:59</p>
+<p>VS 2008, COM interop, and Microsoft.VisualStudio.Shell.Interop.dll</p>
+<p>When I try to compile our VsPackages with VS 2008 the compilation fails. The compilation fails with the message:</p>
+<blockquote>
+<p>The assembly 'Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
+is not registered for COM Interop. Please register it with regasm.exe /tlb.</p>
+</blockquote>
+<p>This is a known bug that was discovered right as VS2008 was going out the door. Microsoft have a fix in place (to be delivered with VS 2008 SP1)</p>
+<blockquote>
+<p>https://connect.microsoft.com/VisualStudio/Downloads/DownloadDetails.aspx?DownloadID=10671</p>
+</blockquote>
+
+
+<hr>
+<h2>
+	<a href="#">dir file whose File size is greater than 1024KB</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/08/19 22:12:59</p>
+<p>Powershell: dir file whose File size is greater than 1024KB</p>
+<p>The following example perform is will list the files with .pdf extensions. where-object will filter the result set to files with length greater than 1MB. format-table will format the final output to display only the name of the file</p>
+<p>ls *.pdf -Recurse | where-object {$_.length -gt 1048576} | format-table -property Name</p>
+
+
+<hr>
+<h2>
+	<a href="#">C# 5.0 CallerMemberName </a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/08/18 22:12:59</p>
+<p>My new favorite C# language feature: CallerMemberName</p>
+<p>This is how a property with INotifyPropertyChanged support looks like pre C# 4.5:</p>
+<pre><code>public string OldStylePropertyChanged
+{
+  get { return _oldStyle; }
+  set
+  {
+    if (value != _oldStyle)
+    {
+      _oldStyle = value;
+      OnPropertyChangedOldStyle(&quot;OldStylePropertyChanged&quot;);
+    }
+  }
+}
+private void OnPropertyChangedOldStyle(string propertyName)
+{
+  var handler = PropertyChanged;
+  if (handler != null)
+  {
+    handler(this, new PropertyChangedEventArgs(propertyName));
+  }
+}
+</code></pre>
+<p>And this is how it will look like when we apply the use of CallerMemberName in our PropertyChanged method:</p>
+<pre><code>public string DynamicTitle
+{
+  get { return _dynamicTitle; }
+  set
+  {
+    if (value != _dynamicTitle)
+    {
+      _dynamicTitle = value;
+      OnPropertyChanged();
+    }
+  }
+}
+private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+{
+  var handler = PropertyChanged;
+  if (handler != null)
+  {
+    handler(this, new PropertyChangedEventArgs(propertyName));
+  }
+}
+</code></pre>
+<p>Some more really cool additions to CallerMemberName is the following Parameter attributes:</p>
+<p>*	[CallerMemberName]
+*	[CallerFilePath]
+*	[CallerLineNumber]</p>
+<p>The name of the attributes is straight forward and easy to understand, so I doubt that I would have to describe them in detail, instead, let's look at an example straight from MSDN on how to use them.</p>
+<pre><code>public sealed class Logger
+{
+  public void TraceMessage(string message,
+       [CallerMemberName] string memberName = &quot;&quot;,
+       [CallerFilePath] string sourceFilePath = &quot;&quot;,
+       [CallerLineNumber] int sourceLineNumber = 0)
+  {
+    Debug.WriteLine(&quot;message: &quot; + message);
+    Debug.WriteLine(&quot;member name: &quot; + memberName);
+    Debug.WriteLine(&quot;source file path: &quot; + sourceFilePath);
+    Debug.WriteLine(&quot;source line number: &quot; + sourceLineNumber);
+  }
+}
+</code></pre>
+<p>Happy hacking!</p>
+
+
+<hr>
+<h2>
+	<a href="#">Resolving Dependent .NET Assembly Version Conflicts</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/07/28 22:12:59</p>
+<p>I ran into an interesting error message this morning while run application.</p>
+<blockquote>
+<p>------ Build started: Project: UnitTests, Configuration: Debug Any CPU ------
+Consider app.config remapping of assembly &quot;yourAssembly, Culture=neutral, PublicKeyToken=xxx&quot;
+from Version &quot;2.2.0.0&quot; [] to Version &quot;2.2.8.0&quot;
+[C:\Demo\yourAssembly.dll] to solve conflict and get rid of warning.
+C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\Microsoft.Common.targets :
+warning MSB3247: Found conflicts between different versions of the same dependent assembly.</p>
+</blockquote>
+<p>This occurs because YourApp depends on a different version of the your Assembly.</p>
+<p>Fortunately, the error message gives you all you need to know to fix the problem. I added an App.config file to the project with the following XML.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;configuration&gt;
+  &lt;runtime&gt;
+    &lt;assemblyBinding xmlns=&quot;urn:schemas-microsoft-com:asm.v1&quot;&gt;
+      &lt;dependentAssembly&gt;
+        &lt;assemblyIdentity name=&quot;myAssembly&quot; publicKeyToken=&quot;96D09A1EB7F44A77&quot; culture=&quot;neutral&quot;/&gt;
+        &lt;bindingRedirect oldVersion=&quot;0.0.0.0-2.2.8.0&quot; newVersion=&quot;2.2.8.0&quot;/&gt;
+      &lt;/dependentAssembly&gt;
+    &lt;/assemblyBinding&gt;
+  &lt;/runtime&gt;
+&lt;/configuration&gt; 
+</code></pre>
+<p>How to find public key token for a .NET DLL or assembly?</p>
+<p>Use the following command,</p>
+<blockquote>
+<p>sn -T myDLL.dll</p>
+</blockquote>
+<p>This will give you the public key token. Remember one thing this only works if the assembly has to be strongly signed.</p>
+<p>Example</p>
+<pre><code>C:\WINNT\Microsoft.NET\Framework\v3.5&gt;sn -T myDll.dll
+Microsoft (R) .NET Framework Strong Name Utility  Version 3.5.21022.8
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Public key token is x77x5x561934x089
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to redirect to a specific version of .net assembly at runtime?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/06/05 22:12:59</p>
+<p>We can redirect to a specific version of a .net assembly by using configuration file as below:</p>
+<pre><code class="language-xml">&lt;configuration&gt;
+  &lt;runtime&gt;
+    &lt;assemblyBinding xmlns=&quot;urn:schemas-microsoft-com:asm.v1&quot;&gt;
+      &lt;dependentAssembly&gt;
+        &lt;assemblyIdentity name=&quot;myAssembly&quot;
+          publicKeyToken=&quot;32ab4ba45e0a69a1&quot;
+          culture=&quot;en-us&quot; /&gt;
+        &lt;!-- Assembly versions can be redirected in application, 
+          publisher policy, or machine configuration files. --&gt;
+        &lt;bindingRedirect oldVersion=&quot;1.0.0.0&quot; newVersion=&quot;2.0.0.0&quot; /&gt;
+      &lt;/dependentAssembly&gt;
+    &lt;/assemblyBinding&gt;
+  &lt;/runtime&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to move windows that open up offscreen?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/06/03 22:12:59</p>
+<p>1.	Press <em>ALT</em> + <em>SPACE</em> to bring up the system menu (you won't see it because it is off screen)
+2.	Press <em>M</em> to select the &quot;Move&quot; menu choice.
+3.	Press one of the arrow keys to initiate the movement.</p>
+<p>Now just use the mouse to place the window where you want.</p>
+<p>In fact, as long as we remember a few shortcuts, you can easily solve this small problem:</p>
+<p>「Shift」＋「Win」＋ Left/Right Arrow: You can work around the screen to quickly switch windows.</p>
+<p>「Alt」＋ Space ＋「M」:  Can move the cursor quickly &quot;stick&quot; to the currently displayed warning window,  when you move the mouse,  you can drag the window to the front of the visible screen.</p>
+
+
+<hr>
+<h2>
+	<a href="#">VMware Bridged Network stops working after sleep/hibernate on Windows Host.</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2010/07/10 10:12:59</p>
+<p>Running VMware Workstation 6.5 (or above 6.5). My Bridged networking stops working after Windows sleeps or hibernates. A restart is required to restore its operation. NAT networking works fine.
+Anyone have any ideas how to restore it without a reboot?</p>
+<p>Please run the following two commands in a cmd as administrator:</p>
+<pre><code>net stop vmnetbridge
+net start vmnetbridge
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Multi-line PL/SQL command with .NET OracleCommand</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2010/06/19 10:12:59</p>
+<p>I'm using System.Data.OracleClient.OracleCommand to create a table and fill it out with some data. The query I am using runs OK in PS/SQL Developer, however when I'm trying to execute it from within .NET application I'm getting this error:</p>
+<blockquote>
+<p>ORA-06550: line 1, column 20:
+PLS-00103: Encountered the symbol &quot;&quot; when expecting one of the following:</p>
+<p>begin function package pragma procedure subtype type use form current cursor</p>
+</blockquote>
+<p>Here is some code:</p>
+<pre><code>var text = @&quot;declare cnt number;
+begin
+
+select count(*) into cnt from all_tables
+where table_name = 'TABLE_A';
+
+
+if cnt = 1 then
+begin 
+execute immediate 'truncate table TABLE_A';
+execute immediate 'drop table TABLE_A';
+end;
+end if;
+
+execute immediate 'create table TABLE_A as 
+(SELECT DISTINCT v.ID, g.ext_id FROM VIEW_A v
+JOIN TABLE_B B ON v.id = B.Id
+WHERE YEAR1 = ''2008'')';
+
+end;&quot;);
+cmd.CommandText = text;
+cmd.ExecuteNonQuery();
+</code></pre>
+<p>Search Google, finally found:
+I think you need to lose just the '\r' characters.</p>
+<pre><code>text = text.Replace(&quot;\r\n&quot;, &quot;\n&quot;);
+cmd.CommandText = text;
+cmd.ExecuteNonQuery();
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to make T-SQL to filter criteria is case-sensitive?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2010/01/24 10:12:59</p>
+<p>Basically, add more &quot;Collate SQL_Latin1_General_CP1_CI_AS&quot; in after the conditions, it should be followed would be a case-sensitive.</p>
+<pre><code>SELECT *
+FROM dbo.CaseSensitiveTest
+WHERE Value1 LIKE '%Test%' Collate SQL_Latin1_General_CP1_CI_AS
+GO
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Copy vdi file of Virtualbox</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2009/01/15 10:12:59</p>
+<p>VirtualBox often used to test the system, but the most troublesome is that VirtualBox to use uuid to control vdi file, so there is no way to use copy commands to copy vdi file.</p>
+<p>Therefore, if you want to copy a vdi file, you must use the following command to re-generate a new uuid.</p>
+<pre><code>VBoxManage clonevdi Orig.vdi New.vdi
+</code></pre>
+<p>If you copy the exhausted only to find, there are still commands can be remedied.</p>
+<pre><code>VBoxManage internalcommands setvdiuuid New.vdi
+</code></pre>
+
+
+<hr>
+
+<!-- Pager -->
+<ul class="pager">
+		<li class="previous">
+			<a href="Home7.html">&larr; Older</a>
+		</li>
+			<li class="next">
+			<a href="Home5.html">Newer &rarr;</a>
+		</li>
+</ul>
+
+			</div>
+
+
+			<!-- Blog Sidebar Widgets Column -->
+			<div class="col-md-4">
+				<!-- Blog Search Well -->
+				<!--<div class="well">
+					<h4>Blog Search</h4>
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</div>
+				</div>-->
+				<!-- Blog Categories Well -->
+				
+
+				<!-- Side Widget Well -->
+				<div class="well">
+					<h4>About Me</h4>
+					<p>"Write Less Do More", Elegant code written more representative that people can leave work early.</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Mr-Brain Website 2016</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+	</div>
+	<!-- /.container -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<h2>How To Catch HttpRequestValidationException</h2>
+<p>If you've worked with ASP.NET for any length of time, you have worried about how to handle the Yellow Screen of Death. You know, the one that says:</p>
+<pre><code>HttpRequestValidationException: A potentially dangerous Request.Form value was detected from the client...
+</code></pre>
+<p>or something similar.</p>
+<p>The common refrain is turn off request validation, but there are times when you want to use the built-in validation functions. You just want a friendlier error for your user.</p>
+<p>This code could be better thought out, but here it is anyway:</p>
+<pre><code>void Application_Error(object sender, EventArgs e) 
+{ 
+  // Code that runs when an unhandled error occurs
+  Exception ex = Server.GetLastError();
+  if (ex is HttpRequestValidationException)
+  {
+    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(
+      &quot;http://&quot; + Request.Url.Authority + Request.ApplicationPath + &quot;/HttpRequestValidationException.aspx&quot;);
+    HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+
+    Response.Clear();
+    Response.ClearHeaders();
+    for (int i = 0; i &lt; response.Headers.Count; i++)
+      Response.AddHeader(response.Headers.GetKey(i), response.Headers.Get(i));
+    Response.StatusCode = (int)response.StatusCode;
+
+    System.IO.Stream src = response.GetResponseStream();
+    while (true) {
+      int b = src.ReadByte();
+      if (b == -1) break;
+      Response.OutputStream.WriteByte((byte)b);
+    }
+
+    response.Close();
+    Response.End(); 
+}
+</code></pre>
+

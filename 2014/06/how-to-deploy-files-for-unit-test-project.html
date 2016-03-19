@@ -1,0 +1,11 @@
+<h2>How to deploy files for VS.NET Unit Test Project</h2>
+<p>Here’s the easiest way to accomplish deploying folders to the TestResults folder:</p>
+<p>1.	Right click on the .testrunconfig file in your solution explorer.  For me, its LocalTestRun.testrunconfig.
+2.	Select Open With and select XML editor
+3.	Add a deployment item, specifying the relative path as the file name and an outputdirectory value of the directory name.  In my example, I want to deploy everything in the configuration directory to a folder called configuration in the testrun folder, so I’ve added the following entry:</p>
+<pre><code class="language-xml">&lt;Deployment&gt;
+  &lt;DeploymentItem filename=&quot;Services\Identity\Claim\ClaimService.Test\configuration\&quot; outputDirectory=&quot;configuration\&quot; &gt;&lt;/DeploymentItem&gt;
+&lt;/Deployment&gt;
+</code></pre>
+<p>Now when my tests execution, Visual Studio copies over all my configuration file entries and is able to load the app.config file successfully.</p>
+

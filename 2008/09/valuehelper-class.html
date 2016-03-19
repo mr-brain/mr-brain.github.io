@@ -1,0 +1,45 @@
+<h2>ValueHelper Class</h2>
+<p>Introduction
+If you want to clone the same object of class, you must inherit &quot;ICloneable&quot; interface and implement Clone() method for clone function. Now only through ValueHelper Class can be simple to complete this goal.</p>
+<p>*	Assembly:T1.dll
+*	Namespace:T1.Common</p>
+<p>Using the code:</p>
+<pre><code>MyClass a = new MyClass();
+a.Id = 123;
+a.Name = &quot;abc&quot;;
+MyClass b = new MyClass();
+b.Id = a.Id;
+b.Name = a.Name;
+Console.WriteLine(&quot;b Id={0} Name={1}&quot;, b.Id, b.Name);
+</code></pre>
+<p>And the following code in the same</p>
+<pre><code>MyClass a = new MyClass();
+a.Id = 123;
+a.Name = &quot;abc&quot;;
+MyClass b = new MyClass();
+ValueHelper.CopyData(a, b);
+Console.WriteLine(&quot;b Id={0} Name={1}&quot;, b.Id, b.Name);
+</code></pre>
+<p>You can also use Property.GetValue/SetValue to achieve the same purpose, but ValueHelper.CopyData performance on faster than the Property.GetValue/SetValue.</p>
+<p>ValueHelper Class copy only int/float/string... basic types of variables, do not copy the object type variable.</p>
+<p>Therefore, the following code to try to copy the a.Item object will be skipped.</p>
+<pre><code>class MyClass1
+{
+	public string ID{get; set;}
+}
+
+class MyClass2
+{
+	public string Name{get; set;}
+	public MyClass1 Item{get; set;}
+}
+
+MyClass2 a = new MyClass2();
+a.Name = &quot;abc&quot;;
+a.Item = new MyClass1();
+a.ID = &quot;123&quot;;
+MyClass2 b = new MyClass2();
+ValueHelper.CopyData(a, b); 
+//b.Item will be null.
+</code></pre>
+

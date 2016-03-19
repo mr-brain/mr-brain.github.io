@@ -1,0 +1,39 @@
+<h2>DataConfig Class</h2>
+<p>Introduction
+Each database connection parameters set different. DataConfig so you can easily set these parameters.</p>
+<p>Assembly:T1.Data.dll
+Namespace:T1.Data</p>
+<p>DataConfig Properties:</p>
+<p>*	ProviderType ProviderType
+*	string Server
+*	string Database
+*	string LoginId
+*	string Password</p>
+<p>Through the above property setting, you can easily export a variety of different database connection string.
+Using the code:</p>
+<pre><code>DataConfig cfg = new DataConfig();
+cfg.ProviderType = ProviderType.SqlServer;
+cfg.Server = &quot;172.0.0.1&quot;;
+cfg.Database = &quot;Northwind&quot;;
+cfg.LoginId = &quot;sa&quot;;
+cfg.Password = &quot;123&quot;;
+console.WriteLine(cfg.ConnectString);
+</code></pre>
+<p>If you wish change to Oracle...</p>
+<pre><code>cfg.ProviderType = ProviderType.Oracle;
+console.WriteLine(cfg.ConnectString);
+</code></pre>
+<p>Even if you wish change to SqlExpress...</p>
+<pre><code>cfg.ProviderType = ProviderType.SqlExpress;
+console.WriteLine(cfg.ConnectString);
+</code></pre>
+<p>In addition you can also simplify the traditional connection string in app.Config file.</p>
+<p><add name="db1" connectionString="Data Source=172.0.0.1;Network Library=DBMSSOCN;Initial Catalog=Northwind;User ID=sa;Password=123"></add></p>
+<p>Change to...</p>
+<pre><code class="language-xml">&lt;add name=&quot;db1&quot; connectionString=&quot;ProviderType=SqlServer;Server=172.0.0.1;Database=Northwind;User ID=sa;Password=123&quot;&gt;&lt;/add&gt;
+</code></pre>
+<p>If you wish change to Oracle connection string...</p>
+<pre><code class="language-xml">&lt;add name=&quot;db1&quot; connectionString=&quot;ProviderType=Oracle;Server=172.0.0.1;Database=Northwind;User ID=sa;Password=123&quot;&gt;&lt;/add&gt;
+</code></pre>
+<p>With DataConfig, you do not have to remember some special database connection parameters.</p>
+

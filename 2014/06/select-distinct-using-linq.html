@@ -1,0 +1,34 @@
+<h2>Select distinct using linq</h2>
+<p>Using <a href="https://code.google.com/p/morelinq/">morelinq</a> you can use DistinctBy:</p>
+<pre><code>myList.DistinctBy(x =&gt; x.id);
+</code></pre>
+<p>Otherwise, you can use a group:</p>
+<pre><code>myList.GroupBy(x =&gt; x.id)
+	.Select(g =&gt; g.First());
+</code></pre>
+<p>Or you can use linq syntax</p>
+<pre><code>distinctData = from tb1 in myList
+	group tb1 by tb1.id into g
+	select g.First();
+</code></pre>
+<p>You can create custom extension method:</p>
+<pre><code>public static class EnumerableExtender
+{
+	public static IEnumerable&lt;TSource&gt; DistinctBy&lt;TSource, TKey&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector)
+	{
+		HashSet&lt;TKey&gt; seenKeys = new HashSet&lt;TKey&gt;();
+		foreach (TSource element in source)
+		{
+			var elementValue = keySelector(element);
+			if (seenKeys.Add(elementValue))
+			{
+				yield return element;
+			}
+		}
+	}
+}
+</code></pre>
+<p>Would be better to write a lot of use.</p>
+<pre><code>distinctDatas = myList.DistinctBy(person =&gt; person.Name);
+</code></pre>
+

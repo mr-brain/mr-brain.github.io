@@ -1,0 +1,12 @@
+<h2>NullReferenceException unexplained error in ASP.NET MVC</h2>
+<pre><code>[NullReferenceException: Object reference not set to an instance of an object.]
+   System.Web.Mvc.&lt;ConvertResults&gt;d__2.MoveNext() +105
+   System.Web.Mvc.&lt;Validate&gt;d__1.MoveNext() +1050  System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext) +404
+</code></pre>
+<p>Please check your <em>Validate</em> function code in <strong><em>xxx</em>Model</strong> (inherited <em>IValidatableObject</em>). <font color='red'>You should not return null value.</font></p>
+<pre><code>public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)
+{
+  return null;   // this is error code
+}
+</code></pre>
+

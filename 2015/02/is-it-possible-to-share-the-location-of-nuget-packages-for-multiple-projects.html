@@ -1,0 +1,16 @@
+<h2>Is it possible to share the location of Nuget packages for multiple projects ?</h2>
+<p>Nuget version 2.1</p>
+<p>There is now official documentation on how to control the package locations. The release notes for 2.1 specifies the following configuration in a nuget.config file.</p>
+<p>Please modify NuGet.config file in</p>
+<pre><code>C:\Users\MrBrain\AppData\Roaming\NuGet\NuGet.Config
+</code></pre>
+<p>and add following</p>
+<pre><code>&lt;configuration&gt;
+  &lt;config&gt;
+    &lt;add key=&quot;repositoryPath&quot; value=&quot;C:\thePathToMyPackagesFolder&quot; &gt;&lt;/add&gt;
+  &lt;/config&gt;
+  ... 
+&lt;/configuration&gt;
+</code></pre>
+<p>Restart VS.NET 2013, NuGet will place packages in the new location.</p>
+

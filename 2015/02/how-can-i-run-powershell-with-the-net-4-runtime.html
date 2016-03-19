@@ -1,0 +1,26 @@
+<h2>How can I run PowerShell with the .NET 4 runtime?</h2>
+<p>Enabling Execution of PowerShell PS1 Scripts</p>
+<pre><code>Set-ExecutionPolicy Unrestricted
+</code></pre>
+<p>You can see exactly what versions Powershell is using by examining the value of <em>$PSVersionTable</em></p>
+<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/PSVersionTable2.png" alt="PSVersionTable2" /></p>
+<p>Notice the value or CLRVersion begins with a &quot;2&quot;.</p>
+<p>Being lazy, of course, we hate manual steps, so here is a small PowerShell script that will automatically create and place the necessary files. Be aware that the script as shown below will overwrite existing .config files.</p>
+<pre><code>$config_text = @&quot;
+&lt;?xml version=&quot;1.0&quot;?&gt; 
+&lt;configuration&gt; 
+    &lt;startup useLegacyV2RuntimeActivationPolicy=&quot;true&quot;&gt; 
+        &lt;supportedRuntime version=&quot;v4.0.30319&quot;/&gt; 
+        &lt;supportedRuntime version=&quot;v2.0.50727&quot;/&gt; 
+    &lt;/startup&gt; 
+&lt;/configuration&gt;
+&quot;@
+
+$config_text| Out-File $pshome\powershell.exe.config
+$config_text| Out-File $pshome\powershell_ise.exe.config
+</code></pre>
+<p>Start PowerShell as an Administrator an then run the script.</p>
+<p>Now restart PowerShell and examine the value of $PSVersionTable.</p>
+<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/PSVersionTable4.png" alt="PSVersionTable4" /></p>
+<p>And now your .NET 4.0 module will load correctly.</p>
+

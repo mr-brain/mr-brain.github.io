@@ -1,0 +1,24 @@
+<h2>Why can't I get the Jenkins Powershell plugin to work?</h2>
+<p>PowerShell says “execution of scripts is disabled on this system.”</p>
+<p>Jenkins powershell plugin is running 32 bit Powershell</p>
+<pre><code>64-bit:  C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe
+32-bit:  C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+</code></pre>
+<p>you can run following</p>
+<pre><code>&gt; C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe
+PS C:\hoge &gt; Set-ExecutionPolicy RemoteSigned
+PS C:\hoge &gt; exit
+
+&gt; C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+PS C:\hoge &gt; Set-ExecutionPolicy RemoteSigned
+PS C:\hoge &gt; exit
+</code></pre>
+<p>Or you can</p>
+<pre><code>set-executionpolicy -executionpolicy unrestricted
+set-executionpolicy -executionpolicy -Scope LocalMachine unrestricted
+get-executionpolicy -list
+</code></pre>
+<p>Other Information</p>
+<pre><code>powershell.exe -executionpolicy unrestricted -command .\test.ps1
+</code></pre>
+

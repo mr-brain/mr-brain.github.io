@@ -1,0 +1,10 @@
+<h2>PsExec gets stuck on licence prompt when running non-interactively</h2>
+<p>Use the <strong>/accepteula</strong> command-line switch to accept the licence agreement.</p>
+<p>Or set</p>
+<blockquote>
+<pre><code>HKCU\Software\Sysinternals\PsExec\EulaAccepted 
+</code></pre>
+</blockquote>
+<p>to 1</p>
+<p><strong>Caution:</strong> if the reg key above is set to 0 (EULA was declined once) then the /accepteula will not work, you have to set the key to 1 manually (or delete it altogether).</p>
+
