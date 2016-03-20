@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<link href="/Content/bootstrap.css" rel="stylesheet" />
+	<link href="/css/blog-home.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/Blog">Elegance C#</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/Blog/BlogList0.html">Articles</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Blog Entries Column -->
+			<div class="col-md-8">
+				<h1 class="page-header">
+					Elegance C#
+					<small>Mr-Brain</small>
+				</h1>
+
+				
+
+<ul class="list-group">
+	<h2>
+		<a href="#">PsExec gets stuck on licence prompt when running non-interactively</a>
+	</h2>
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/04 13:42:15</p>
+	<p>Use the <strong>/accepteula</strong> command-line switch to accept the licence agreement.</p>
+<p>Or set</p>
+<blockquote>
+<pre><code>HKCU\Software\Sysinternals\PsExec\EulaAccepted 
+</code></pre>
+</blockquote>
+<p>to 1</p>
+<p><strong>Caution:</strong> if the reg key above is set to 0 (EULA was declined once) then the /accepteula will not work, you have to set the key to 1 manually (or delete it altogether).</p>
+
+
+</ul>
+
+<!-- Pager -->
+<ul class="pager">
+		<li class="previous">
+			<a href="/Blog/2015/02/jquery-1101-does-not-work-well-with-ie11-upgrade-to-1102.html">&larr; Older</a>
+		</li>
+			<li class="next">
+			<a href="/Blog/2015/03/razor-view-throwing-the-name-model-does-not-exist-in-the-current-context.html">Newer &rarr;</a>
+		</li>
+</ul>
+
+			</div>
+
+
+			<!-- Blog Sidebar Widgets Column -->
+			<div class="col-md-4">
+				<!-- Blog Search Well -->
+				<!--<div class="well">
+					<h4>Blog Search</h4>
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</div>
+				</div>-->
+				<!-- Blog Categories Well -->
+				
+
+				<!-- Side Widget Well -->
+				<div class="well">
+					<h4>About Me</h4>
+					<p>"Write Less Do More", Elegant code written more representative that people can leave work early.</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Mr-Brain Website 2016</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+	</div>
+	<!-- /.container -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

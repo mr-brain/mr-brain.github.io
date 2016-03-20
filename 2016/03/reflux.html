@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<link href="/Content/bootstrap.css" rel="stylesheet" />
+	<link href="/css/blog-home.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/Blog">Elegance C#</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/Blog/BlogList0.html">Articles</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Blog Entries Column -->
+			<div class="col-md-8">
+				<h1 class="page-header">
+					Elegance C#
+					<small>Mr-Brain</small>
+				</h1>
+
+				
+
+<ul class="list-group">
+	<h2>
+		<a href="#">React + FReflux</a>
+	</h2>
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/05 16:58:20</p>
+	<h3>React Flow</h3>
+<p><img src="/Source/2016/03/reflux/Flux.png" alt="React Flow" /></p>
+<h4>Create Actions</h4>
+<pre><code>import $ = require('jquery');
+import t1 = require('t1');
+import FReflux = t1.FReflux;
+import FRefluxActions = t1.FRefluxActions;
+
+enum Demo1ActionType {
+	Request
+}
+
+export class Demo1Actions extends FRefluxActions&lt;Demo1ActionType&gt; {
+	constructor() {
+		super(Demo1ActionType);
+	}
+
+	Request(name: string) {
+		this.dispatchEvent(Demo1ActionType.Request, name);
+	}
+}
+</code></pre>
+<h4>Create Store</h4>
+<pre><code>import t1 = require('t1');
+import FReflux = t1.FReflux;
+import FRefluxStore = t1.FRefluxStore;
+
+export class Demo1State {
+	name: string;
+}
+
+
+export class Demo1Store extends FRefluxStore&lt;Demo1State&gt; {
+	_state: Demo1State = new Demo1State();
+
+	constructor(actions: FRefluxActions&lt;any&gt;[]) {
+		super(actions);
+	}
+
+	getState(): Demo1State {
+		return this._state;
+	}
+}
+</code></pre>
+<h4>Create Main View</h4>
+<pre><code>export interface MobileDemo1Props extends React.Props&lt;MobileDemo1&gt; {
+	history: any;
+}
+
+export class MobileDemo1 extends FRefluxStoreComponent&lt;MobileDemo1Props, Demo1State&gt; {
+	constructor() {
+		this.name = &quot;MobileDemo1&quot;;
+		super(_app1Store);
+	}
+
+	componentWillMount() {
+	}
+
+	componentWillUnmount() {
+	}
+
+	componentDidMount() {
+		super.componentDidMount();
+	}
+
+	navigate() {
+		console.log(this.props);
+		this.props.history.pushState(null, &quot;/&quot;);
+		//this.props.history.replaceState(null, &quot;/&quot;);
+	}
+
+	render() {
+		return (
+			&lt;div&gt;React-Router Demo1
+				&lt;Link to='Panel1'&gt;Panel1&lt;/Link&gt;
+				&lt;Link to='Panel2'&gt;&lt;button className=&quot;btn btn-success&quot;&gt;Panel2&lt;/button&gt;&lt;/Link&gt;
+				&lt;button onClick={this.navigate.bind(this)}&gt;TEST&lt;/button&gt;
+				{this.props.children}
+			&lt;/div&gt;
+		);
+	}
+}
+</code></pre>
+<h4>Create Panel1 View</h4>
+<pre><code>interface Panel1Props extends React.Props&lt;Panel1&gt; {
+}
+
+
+class Panel1 extends FRefluxReducerComponent&lt;Panel1Props, Demo1State&gt; {
+	constructor() {
+		super();
+	}
+
+	getStateFromStore(state: Demo1State): Demo1State {
+		return state;
+	}
+
+	render() {
+		return (
+			&lt;div&gt;
+				Hello Panel-1
+			&lt;/div&gt;
+		);
+	}
+}
+</code></pre>
+<h3>Render</h3>
+<pre><code>import * as Router from 'react-router';
+import { Route, IndexRoute, Link } from 'react-router';
+
+var routeMap = (
+		&lt;Route path=&quot;/&quot; component={MobileDemo1}&gt;
+				&lt;IndexRoute component={Panel1}/&gt;
+				&lt;Route path=&quot;Panel1&quot; component={Panel1}/&gt;
+        &lt;Route path=&quot;Panel2&quot; component={Panel2}/&gt;
+        &lt;Route path=&quot;*&quot; component={NotFoundPage} /&gt;
+    &lt;/Route&gt;
+);
+
+ReactDOM.render(
+	&lt;Router.Router history={Router.browserHistory}&gt;
+		{routeMap}
+	&lt;/Router.Router&gt;, 
+	document.getElementById('app1')
+);
+</code></pre>
+<h3>Main.js</h3>
+<pre><code>(function(){
+	var baseUrl = &quot;/js/Samples/ReactRouterDemo1/&quot;;
+
+	require.config({
+		paths: {
+			&quot;App&quot;: baseUrl + &quot;App&quot;,
+		}
+	});
+})();
+
+define([&quot;require&quot;, &quot;exports&quot;, 'App'], function (require, exports, app) {
+});
+</code></pre>
+<h3>HTML</h3>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot; /&gt;
+	&lt;title&gt;React Router Demo1&lt;/title&gt;
+	&lt;script src=&quot;~/js/requirejs-config.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;~/Scripts/require.js&quot; data-main=&quot;/js/Samples/ReactRouterDemo1/Main.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id=&quot;app1&quot;&gt;
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+
+</ul>
+
+<!-- Pager -->
+<ul class="pager">
+		<li class="previous">
+			<a href="/Blog/2016/03/install-hexo.html">&larr; Older</a>
+		</li>
+			<li class="next">
+			<a href="/Blog/2016/03/create-custom-iis-url-rewrite-provider.html">Newer &rarr;</a>
+		</li>
+</ul>
+
+			</div>
+
+
+			<!-- Blog Sidebar Widgets Column -->
+			<div class="col-md-4">
+				<!-- Blog Search Well -->
+				<!--<div class="well">
+					<h4>Blog Search</h4>
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</div>
+				</div>-->
+				<!-- Blog Categories Well -->
+				
+
+				<!-- Side Widget Well -->
+				<div class="well">
+					<h4>About Me</h4>
+					<p>"Write Less Do More", Elegant code written more representative that people can leave work early.</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Mr-Brain Website 2016</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+	</div>
+	<!-- /.container -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

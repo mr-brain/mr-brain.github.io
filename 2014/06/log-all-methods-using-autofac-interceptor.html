@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<link href="/Content/bootstrap.css" rel="stylesheet" />
+	<link href="/css/blog-home.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/Blog">Elegance C#</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/Blog/BlogList0.html">Articles</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Blog Entries Column -->
+			<div class="col-md-8">
+				<h1 class="page-header">
+					Elegance C#
+					<small>Mr-Brain</small>
+				</h1>
+
+				
+
+<ul class="list-group">
+	<h2>
+		<a href="#">log all methods using AutoFac interceptor</a>
+	</h2>
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/02 22:12:59</p>
+	<p>Add references to:</p>
+<p>*	Autofac.dll (v3.1.1)
+*	Autofac.Extras.DynamicProxy2.dll (v3.0.2)
+*	Castle.Core.dll (Castle.Core 3.2.0 for .NETFramework v4.0 Client Profile)</p>
+<p>#Create Interceptors#
+Interceptors implement the Castle.DynamicProxy.IInterceptor interface. Here's a simple interceptor example that logs method calls including inputs and outputs:</p>
+<pre><code>public class LoggerClass : IInterceptor
+{
+	public void Intercept(IInvocation invocation)
+	{
+		Console.WriteLine(&quot;Calling method {0} with parameters {1}... &quot;,
+			invocation.Method.Name,
+			string.Join(&quot;, &quot;, invocation.Arguments.Select(a =&gt; (a ?? &quot;&quot;).ToString()).ToArray()));
+
+		invocation.Proceed();
+
+		Console.WriteLine(&quot;Done: result was {0}.&quot;, invocation.ReturnValue);
+	}
+}
+</code></pre>
+<p>#Register Interceptors with Autofac#
+Interceptors must be registered with the container. You can register them either as typed services or as named services. If you register them as named services, they must be named IInterceptor registrations.</p>
+<p>Which of these you choose depends on how you decide to associate interceptors with the types being intercepted.</p>
+<pre><code>// Named registration
+builder.Register(c =&gt; new LoggerClass())
+       .Named&lt;IInterceptor&gt;(&quot;log-calls&quot;);
+
+// Typed registration
+builder.Register(c =&gt; new LoggerClass());
+</code></pre>
+<p>#Enable Interception on Types#
+When you register a type being intercepted, you have to mark the type at registration time so Autofac knows to wire up that interception. You do this using the EnableInterfaceInterceptors() and EnableClassInterceptors() registration extensions.</p>
+<pre><code>ContainerBuilder cb = new ContainerBuilder();
+cb.RegisterType&lt;SomeType&gt;()
+	 .As&lt;ISomeInterface&gt;()
+	 .EnableInterfaceInterceptors()
+	 .InterceptedBy(typeof(LoggerClass));
+cb.Register(c =&gt; new LoggerClass());
+</code></pre>
+<p>Under the covers, EnableInterfaceInterceptors() creates an interface proxy that performs the interception, while EnableClassInterceptors() dynamically subclasses the target component to perform interception of virtual methods.</p>
+<p>Both techniques can be used in conjunction with the assembly scanning support, so you can configure batches of components using the same methods.</p>
+
+
+</ul>
+
+<!-- Pager -->
+<ul class="pager">
+		<li class="previous">
+			<a href="/Blog/2014/05/cannot-see-cs-files-after-last-rename-vsnet-2013-projects.html">&larr; Older</a>
+		</li>
+			<li class="next">
+			<a href="/Blog/2014/06/how-to-deploy-files-for-unit-test-project.html">Newer &rarr;</a>
+		</li>
+</ul>
+
+			</div>
+
+
+			<!-- Blog Sidebar Widgets Column -->
+			<div class="col-md-4">
+				<!-- Blog Search Well -->
+				<!--<div class="well">
+					<h4>Blog Search</h4>
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</div>
+				</div>-->
+				<!-- Blog Categories Well -->
+				
+
+				<!-- Side Widget Well -->
+				<div class="well">
+					<h4>About Me</h4>
+					<p>"Write Less Do More", Elegant code written more representative that people can leave work early.</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Mr-Brain Website 2016</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+	</div>
+	<!-- /.container -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

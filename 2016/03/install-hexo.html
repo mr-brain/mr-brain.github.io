@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<link href="/Content/bootstrap.css" rel="stylesheet" />
+	<link href="/css/blog-home.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/Blog">Elegance C#</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/Blog/BlogList0.html">Articles</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Blog Entries Column -->
+			<div class="col-md-8">
+				<h1 class="page-header">
+					Elegance C#
+					<small>Mr-Brain</small>
+				</h1>
+
+				
+
+<ul class="list-group">
+	<h2>
+		<a href="#">Install Hexo</a>
+	</h2>
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/05 09:30:43</p>
+	<h3>Create a GitHub Account</h3>
+<p>Create a new Repository name: &quot;username.github.io&quot;</p>
+<p>username must same as account name</p>
+<h3>Install Node.js</h3>
+<pre><code>npm install hexo -g
+npm init Blog
+cd Blog
+</code></pre>
+<p>npm install</p>
+<pre><code>npm install hexo-generator-index --save
+npm install hexo-generator-archive --save
+npm install hexo-generator-category --save
+npm install hexo-generator-tag --save
+npm install hexo-server --save
+npm install hexo-deployer-git --save
+npm install hexo-deployer-heroku --save
+npm install hexo-deployer-rsync --save
+npm install hexo-deployer-openshift --save
+npm install hexo-renderer-marked@0.2 --save
+npm install hexo-renderer-stylus@0.2 --save
+npm install hexo-generator-feed@1 --save
+npm install hexo-generator-sitemap@1 --save
+npm install hexo-tag-bootstrap --save
+npm install hexo-generator-search --save
+</code></pre>
+<p>Process the following command, and visit localhost:4000 to see the result</p>
+<pre><code>hexo server
+</code></pre>
+<p>The Following command that generate public folder, you can deploy it to your target site folder.</p>
+<pre><code>hexo g
+</code></pre>
+<p>Modify _config.yml file in Blog Folder</p>
+<pre><code>deploy:
+  type: git
+  repo: https://github.com/username/username.github.io.git
+  branch: master
+</code></pre>
+<p>Deploy to GitHub command</p>
+<pre><code>hexo d -g
+</code></pre>
+<p>Other</p>
+<pre><code>hexo n #Generate articles，or source\_posts manually edit/create md file
+hexo s #deploy preview result
+</code></pre>
+<p>Update Hexo</p>
+<pre><code>npm update -g
+</code></pre>
+<p>Install Other Theme</p>
+<pre><code>git clone https://github.com/MOxFIVE/hexo-theme-yelee.git themes/yelee		
+</code></pre>
+<p>Modify themes/yelee/_config.yml</p>
+
+
+</ul>
+
+<!-- Pager -->
+<ul class="pager">
+		<li class="previous">
+			<a href="/Blog/2015/08/nuget-package-element-is-not-declared-warning.html">&larr; Older</a>
+		</li>
+			<li class="next">
+			<a href="/Blog/2016/03/reflux.html">Newer &rarr;</a>
+		</li>
+</ul>
+
+			</div>
+
+
+			<!-- Blog Sidebar Widgets Column -->
+			<div class="col-md-4">
+				<!-- Blog Search Well -->
+				<!--<div class="well">
+					<h4>Blog Search</h4>
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</div>
+				</div>-->
+				<!-- Blog Categories Well -->
+				
+
+				<!-- Side Widget Well -->
+				<div class="well">
+					<h4>About Me</h4>
+					<p>"Write Less Do More", Elegant code written more representative that people can leave work early.</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Mr-Brain Website 2016</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+	</div>
+	<!-- /.container -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
