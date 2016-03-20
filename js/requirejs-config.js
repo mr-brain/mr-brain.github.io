@@ -20,7 +20,7 @@
 		"typescript": "/Scripts/typescript/typescript",
 		"TypescriptCompilerApi": "/js/common/TypescriptCompilerApi",
 		"Exporter": "t1/deps/Exporter",
-		"t1": "/Scripts/t1/dist/t1-bundle-0.1",
+		"t1": "/Scripts/t1/dist/T1-bundle-0.1",
 		"velocity": "velocity-1.2.3",
 		//"Velocity-React": "/Scripts/velocity-react-1.1.1/velocity-component",
 		"VelocityComponent": "/js/Samples/VelocityComponent",
