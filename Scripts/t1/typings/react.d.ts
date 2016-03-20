@@ -19,4 +19,8 @@
 //declare module RefluxCore {
 //}
 
-//import Reflux = RefluxCore;
+declare module 'react-with-addons' {
+	export namespace addons {
+		function createFragment(data: any);
+	}
+}

@@ -3,8 +3,7 @@ React + FReflux
 
 ### React Flow
 
-![React Flow](/images/Flux.png)
-
+![React Flow](reflux/Flux.png)
 
 #### Create Actions
 

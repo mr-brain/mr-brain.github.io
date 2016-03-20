@@ -1,16 +1,9 @@
-TEST
+Odds convert table
 ---
 
-{% codeblock lang:objc %}
-[rectangle setX: 10 y: 10 width: 20 height: 20];
-{% endcodeblock %}
-
-[Wiki](/default/test.html)
+<iframe src="/Source/odds-convert-table.html" width=480 height=740 frameborder=0>
+</iframe>
 
 
-{% iframe /default/OddsCalculator.html 600 480 %}
-
-
-<button onClick="test()">TEST</button>
 
 

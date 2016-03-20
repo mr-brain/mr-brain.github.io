@@ -13,7 +13,7 @@ Rewrite providers must be placed in the .NET Global Assembly Cache (GAC)
 
 In the combo box, select the option <New…> to create a new key. In the "Create Strong Name Key" dialog, type DemoKey.snk as the name for the key and uncheck the Protect my key file with a password check box. Click OK.
 
-![sign the assembly](images/iis-url-rewrite-4.png)
+![iis-url-rewrite](create-custom-iis-url-rewrite-provider/iis-url-rewrite-4.png)
 
 
 * Select the "Build Events" tab and add the following "Post-build event" command line:
