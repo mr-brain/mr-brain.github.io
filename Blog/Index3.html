@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<link href="/Content/bootstrap.css" rel="stylesheet" />
+	<link href="/css/blog-home.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/Blog/Index.html">Elegance C#</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/Blog/BlogList0.html">Articles</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Blog Entries Column -->
+			<div class="col-md-8">
+				<h1 class="page-header">
+					Elegance C#
+					<small>Mr-Brain</small>
+				</h1>
+
+				
+
+<h2>
+	<a href="#">How to avoid BeginInvoke before a handle has been created? </a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/22 22:12:59</p>
+<p>Invoke or BeginInvoke cannot be called on a control until the window handle has been created.</p>
+<pre><code>public static class ControlExtension
+{
+    public static void SafeInvoke(this Control uiElement, Action updater, bool forceSynchronous)
+    {
+        if (uiElement == null) {
+            throw new ArgumentNullException(&quot;uiElement&quot;);
+        }
+
+        if (uiElement.InvokeRequired) {
+            if (forceSynchronous) {
+                uiElement.Invoke((Action)delegate
+                {
+                    SafeInvoke(uiElement, updater, forceSynchronous);
+                });
+            }
+            else {
+                uiElement.BeginInvoke((Action)delegate
+                {
+                    SafeInvoke(uiElement, updater, forceSynchronous);
+                });
+            }
+        }
+        else {
+            if (uiElement.IsDisposed) {
+                throw new ObjectDisposedException(&quot;Control is already disposed.&quot;);
+            }
+            updater();
+        }
+    }
+}
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Outlook 2007 requiring a Password When Resuming from Hibernation </a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/04 09:31:12</p>
+<p>I recently noticed that a Need password prompt after resuming from hibernation mode.</p>
+<p>You can download MicrosoftFixit50636.msi from Microsoft website (http://support.microsoft.com/kb/949918/en).</p>
+
+
+<hr>
+<h2>
+	<a href="#">ASP.NET MVC Table Grid Post Form And Read Lines</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/11/30 18:47:47</p>
+<p>How can read the posted grid data line by line?</p>
+<p>You can create a Model for Stock and it can be bind to your view. Then you can pass list of stock objects to controller as below.</p>
+<p><strong>Stock Model</strong></p>
+<pre><code>public class Stock
+{
+    public int StockId { get; set; }
+    public int Amount { get; set; }
+    public decimal Price { get; set; }
+}
+</code></pre>
+<p><strong>View</strong></p>
+<pre><code>@model IEnumerable&lt;Stock&gt;
+&lt;form action=&quot;/Controler/ActionStockNew&quot; method=&quot;post&quot; id=&quot;form&quot;&gt;
+&lt;table&gt;
+    @for (int i = 0; i &lt; Model.Count(); i++)
+    {&lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type=&quot;text&quot; name=&quot;[@i].StockId&quot; /&gt;
+        &lt;/td&gt;
+        &lt;td&gt;
+            &lt;input type=&quot;text&quot; name=&quot;[@i].Amount&quot; /&gt;
+        &lt;/td&gt;
+        &lt;td&gt;
+            &lt;input type=&quot;text&quot; name=&quot;[@i].Price&quot; /&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    }
+&lt;/table&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Save&quot; /&gt;
+&lt;/form&gt;
+</code></pre>
+<p><strong>Controllers</strong></p>
+<pre><code>public ActionResult ActionStockNew()
+{
+    List&lt;Stock&gt; stockList = new List&lt;Stock&gt;();
+    // fill stock
+
+    return View(stockList);
+}
+
+[HttpPost]
+public ActionResult ActionStockNew(ICollection&lt;Stock&gt; stockList)
+{
+    // process
+}
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Overriding == operator. How to compare to null?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/11/21 22:12:59</p>
+<p>Here is a simplified example:</p>
+<pre><code>public static bool operator ==(ThreeDPoint a, ThreeDPoint b)
+{
+    if (a == null)
+    {
+         //any code here never gets executed!  We first die a slow painful death.
+    }
+    return a.Equals(b);
+}
+</code></pre>
+<p>However, what happens when a ThreeDPoint  object is null?</p>
+<p>You can't write:</p>
+<pre><code>ThreeDPoint  a;
+if (a == null)
+{
+    //fail!
+}
+</code></pre>
+<p>Use object.ReferenceEquals(person1, null) instead of the == operator:</p>
+<pre><code>public static bool operator ==(ThreeDPoint a, ThreeDPoint b)
+{
+    // If both are null, or both are same instance, return true.
+    if (System.Object.ReferenceEquals(a, b))
+    {
+        return true;
+    }
+
+    // If one is null, but not both, return false.
+    if (((object)a == null) || ((object)b == null))
+    {
+        return false;
+    }
+
+    // Return true if the fields match:
+    return a.x == b.x &amp;&amp; a.y == b.y &amp;&amp; a.z == b.z;
+}
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to compile razor views at compile time ?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/10/16 10:05:31</p>
+<p>Razor views are dynamically compiled by the ASP.NET runtime. If you want your views to be built at compile-time you could add the following option to your .csproj file:</p>
+<pre><code>&lt;PropertyGroup Condition=&quot; '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' &quot;&gt;
+	...
+    &lt;MvcBuildViews&gt;true&lt;/MvcBuildViews&gt;
+&lt;/PropertyGroup&gt;
+
+...
+&lt;Target Name=&quot;MvcBuildViews&quot; AfterTargets=&quot;AfterBuild&quot; Condition=&quot;'$(MvcBuildViews)'=='true'&quot;&gt;
+	&lt;AspNetCompiler VirtualPath=&quot;temp&quot; PhysicalPath=&quot;$(WebProjectOutputDir)&quot; /&gt;
+&lt;/Target&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to get VS.NET 2013 off-line Update 3 ?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/08/08 22:12:59</p>
+<p>Download VS.NET 2013 Update 3 online setup file from http://www.microsoft.com/en-US/download/details.aspx?id=43721</p>
+<p>Input following command</p>
+<blockquote>
+<p>VS2013.3.exe /layout</p>
+</blockquote>
+<p><img src="/Source/2014/08/https://dl.dropboxusercontent.com/u/13003046/images/VS2013-Update3.PNG" alt="img" /></p>
+<p>You will get the about 1.8G files in download folder.
+Click VS2013.exe will install VS.NET 2013 Update 3.</p>
+
+
+<hr>
+<h2>
+	<a href="#">C# Convert XML String to Object</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/07/04 22:12:59</p>
+<p>You need to use the xsd.exe tool which gets installed with the Windows SDK into a directory something similar to:</p>
+<pre><code>C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin
+</code></pre>
+<p>And on 64bit computers:</p>
+<pre><code>C:\Program Files (x86)\Microsoft SDKs\Windows\v6.0A\bin
+</code></pre>
+<p>On the first run, you use xsd.exe and you convert your sample XML into a XSD file (XML schema file):</p>
+<pre><code>xsd yourfile.xml
+</code></pre>
+<p>This gives you yourfile.xsd, which in a second step, you can convert again using xsd.exe into a C# class:</p>
+<pre><code>xsd yourfile.xsd /c
+</code></pre>
+<p>You can deserialize xml string to C# object:</p>
+<pre><code>StringReader sr = new StringReader(xmlStr);
+XmlSerializer mySerializer = new XmlSerializer(typeof(YourObject));
+YourObject obj = (YourObject)mySerializer.Deserialize(sr);
+</code></pre>
+<p>You can serialize object to <strong>simple</strong> xml string.
+First, you must declare namespace in YourObject:</p>
+<pre><code>public class YourObject
+{
+   public YourObject()
+   {
+    this._namespaces = new XmlSerializerNamespaces(new XmlQualifiedName[] {
+      new XmlQualifiedName(string.Empty, &quot;urn:Abracadabra&quot;) // Default Namespace
+    });
+  }
+
+  [XmlNamespaceDeclarations]
+  public XmlSerializerNamespaces Namespaces
+  {
+    get { return this._namespaces; }
+  }
+  private XmlSerializerNamespaces _namespaces;
+
+  ...
+}
+</code></pre>
+<p>Then you can start serialize obj to xml string:</p>
+<pre><code>MemoryStream ms = new MemoryStream();
+XmlSerializer mySerializer = new XmlSerializer(typeof(YourObject));
+mySerializer.Serialize(ms, obj, obj.Namespaces);
+ms.Position = 0;
+StreamReader sr = new StreamReader(ms);
+string strXml = sr.ReadToEnd();
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Display GMT date-time format string for C#</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/07/01 11:31:39</p>
+<p>The perform code is:</p>
+<pre><code>public static string GetGmtTimeString(this DateTime now)
+{
+  double gmt = TimeZoneInfo.Local.GetUtcOffset(now).TotalHours;
+  string gmtTime = string.Format(&quot;{0} GMT{1}{2}&quot;,
+    now.ToString(&quot;yyyy/MM/dd HH:mm:ss&quot;),
+      (gmt &gt;= 0) ? &quot;+&quot; : &quot;&quot;,
+      gmt);
+  return gmtTime;
+}
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">NullReferenceException unexplained error in ASP.NET MVC</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/29 22:12:59</p>
+<pre><code>[NullReferenceException: Object reference not set to an instance of an object.]
+   System.Web.Mvc.&lt;ConvertResults&gt;d__2.MoveNext() +105
+   System.Web.Mvc.&lt;Validate&gt;d__1.MoveNext() +1050  System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext) +404
+</code></pre>
+<p>Please check your <em>Validate</em> function code in <strong><em>xxx</em>Model</strong> (inherited <em>IValidatableObject</em>). <font color='red'>You should not return null value.</font></p>
+<pre><code>public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)
+{
+  return null;   // this is error code
+}
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Using Forms Authentication in ASP.NET MVC</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/25 22:12:59</p>
+<p>In Web.config</p>
+<pre><code>&lt;configuration&gt;
+  &lt;system.web&gt;
+    &lt;authentication mode=&quot;Forms&quot;&gt;
+      &lt;forms defaultUrl=&quot;~/Home/Index/&quot; loginUrl=&quot;~/Home/Login/&quot; timeout=&quot;30&quot; &gt;&lt;/forms&gt;
+    &lt;/authentication&gt;
+    &lt;authorization&gt;
+      &lt;deny users=&quot;?&quot;&gt;&lt;/deny&gt;
+    &lt;/authorization&gt;
+  &lt;/system.web&gt;
+  &lt;location path=&quot;Scripts&quot;&gt;
+    &lt;system.web&gt;
+	  &lt;authorization&gt;
+	    &lt;allow users=&quot;*&quot;&gt;&lt;/allow&gt;
+	  &lt;/authorization&gt;
+	&lt;/system.web&gt;
+  &lt;/location&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>Create LoginViewModel.cs</p>
+<pre><code>public class LoginViewModel : IValidatableObject
+{
+	[DisplayFormat(ConvertEmptyStringToNull = false)]
+	public string ReturnUrl { get; set; }
+
+	[DisplayFormat(ConvertEmptyStringToNull = false)]
+	[Required]
+	public string UserName { get; set; }
+
+	[DisplayFormat(ConvertEmptyStringToNull = false)]
+	[Required]
+	[DataType(DataType.Password)]
+	[Display(Name = &quot;Password&quot;)]
+	public string Password { get; set; }
+
+	[Display(Name = &quot;Remember me?&quot;)]
+	public bool RememberMe { get; set; }
+
+	public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)
+	{
+		return null;
+	}
+}
+</code></pre>
+<p>Create HomeController.cs</p>
+<pre><code>public class HomeController : Controller
+{
+	[AllowAnonymous]
+	public ActionResult Login(string ReturnUrl)
+	{
+		//ReturnUrl: url that is before user login
+		var vm = new LoginViewModel() { ReturnUrl = ReturnUrl };
+		return View(vm);
+	}
+
+	[AllowAnonymous]
+	[HttpPost]
+	public ActionResult Login(LoginViewModel model)
+	{
+		//
+		if( !ModelState.IsValid )
+		{
+			return View(model);
+		}
+
+		//todo check login account and password
+		if (false)
+		{
+          ...
+		}
+
+		FormsAuthentication.RedirectFromLoginPage(model.UserName, false);
+		return Redirect(FormsAuthentication.GetRedirectUrl(model.UserName, false));
+	}
+	[AllowAnonymous]
+    public ActionResult Logout()
+    {
+        Session.Abandon();
+        FormsAuthentication.SignOut();
+        return RedirectToAction(&quot;Login&quot;, &quot;Home&quot;);
+    }
+</code></pre>
+<p>In Home/Login.cshtml</p>
+<pre><code>@using (Html.BeginForm(&quot;Login&quot;, &quot;Home&quot;, new { ReturnUrl=Model.ReturnUrl }, FormMethod.Post, new { autocomplete=&quot;off&quot; }))
+{
+  @Html.TextBoxFor(m =&gt; m.UserName) 
+  @Html.ValidationMessageFor(m =&gt; m.UserName)
+  &lt;br /&gt;
+  @Html.PasswordFor(m =&gt; m.Password) 
+  @Html.ValidationMessageFor(m =&gt; m.Password)
+  &lt;br /&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Login&quot; /&gt;
+}
+</code></pre>
+
+
+<hr>
+
+<!-- Pager -->
+<ul class="pager">
+		<li class="previous">
+			<a href="Index4.html">&larr; Older</a>
+		</li>
+			<li class="next">
+			<a href="Index2.html">Newer &rarr;</a>
+		</li>
+</ul>
+
+			</div>
+
+
+			<!-- Blog Sidebar Widgets Column -->
+			<div class="col-md-4">
+				<!-- Blog Search Well -->
+				<div class="well" id="SearchBox">
+					
+				</div>
+
+				<!-- Blog Categories Well -->
+				
+
+				<!-- Side Widget Well -->
+				<div class="well">
+					<h4>About Me</h4>
+					<p>"Write Less Do More", Elegant code written more representative that people can leave work early.</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Mr-Brain Website 2016</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+	</div>
+	<!-- /.container -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="/Scripts/bootstrap.min.js"></script>
+	<script src="/js/requirejs-config.js"></script>
+	<script src="/Scripts/require.js" data-main="/js/search/App.js"></script>
+	
+</body>
+</html>

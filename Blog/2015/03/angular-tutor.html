@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<link href="/Content/bootstrap.css" rel="stylesheet" />
+	<link href="/css/blog-home.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/Blog/Index.html">Elegance C#</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/Blog/BlogList0.html">Articles</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Blog Entries Column -->
+			<div class="col-md-8">
+				<h1 class="page-header">
+					Elegance C#
+					<small>Mr-Brain</small>
+				</h1>
+
+				
+
+<ul class="list-group">
+	<h2>
+		<a href="#">angular tutor</a>
+	</h2>
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/24 22:44:12</p>
+	<p>How to load Template in Angular?</p>
+<pre><code>public class HomeController : Controller
+{
+	public ActionResult Template(string id)
+	{
+		return PartialView(string.Format(&quot;~/Views/Home/Partials/{0}.cshtml&quot;, id));
+	}
+}
+</code></pre>
+<p>Then, we can use following code</p>
+<pre><code>&lt;div ng-include=&quot;'/Home/Template/Index'&quot;&gt;&lt;/div&gt;
+</code></pre>
+
+
+</ul>
+
+<!-- Pager -->
+<ul class="pager">
+		<li class="previous">
+			<a href="/Blog/2015/03/angular-d-ts-errors-in-typescript-2015-03-16.html">&larr; Older</a>
+		</li>
+			<li class="next">
+			<a href="/Blog/2015/03/google-input-chext-flag.html">Newer &rarr;</a>
+		</li>
+</ul>
+
+			</div>
+
+
+			<!-- Blog Sidebar Widgets Column -->
+			<div class="col-md-4">
+				<!-- Blog Search Well -->
+				<div class="well" id="SearchBox">
+					
+				</div>
+
+				<!-- Blog Categories Well -->
+				
+
+				<!-- Side Widget Well -->
+				<div class="well">
+					<h4>About Me</h4>
+					<p>"Write Less Do More", Elegant code written more representative that people can leave work early.</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Mr-Brain Website 2016</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+	</div>
+	<!-- /.container -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="/Scripts/bootstrap.min.js"></script>
+	<script src="/js/requirejs-config.js"></script>
+	<script src="/Scripts/require.js" data-main="/js/search/App.js"></script>
+	
+</body>
+</html>

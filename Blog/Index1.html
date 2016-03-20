@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<link href="/Content/bootstrap.css" rel="stylesheet" />
+	<link href="/css/blog-home.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/Blog/Index.html">Elegance C#</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/Blog/BlogList0.html">Articles</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Blog Entries Column -->
+			<div class="col-md-8">
+				<h1 class="page-header">
+					Elegance C#
+					<small>Mr-Brain</small>
+				</h1>
+
+				
+
+<h2>
+	<a href="#">How to compile many typescript files in VS.NET 2013?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/30 22:26:45</p>
+<p>We can add following MSBuild script in your csproj file.</p>
+<pre><code>&lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot;
+    Condition=&quot;Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\$(TypeScriptToolsVersion)\Microsoft.TypeScript.targets')&quot; /&gt;
+&lt;Target Name=&quot;CombineT1&quot; BeforeTargets=&quot;PrepareForBuild&quot;&gt;
+  &lt;ItemGroup&gt;
+    &lt;T1TypeScriptFiles Include=&quot;$(projectDir)Scripts\t1\*.ts;&quot; Exclude=&quot;$(projectDir)\Scripts\**\*.d.ts;&quot; /&gt;
+  &lt;/ItemGroup&gt;
+  &lt;WriteLinesToFile File=&quot;$(projectDir)Scripts\t1\typescriptcompiler.input&quot; Lines=&quot;@(T1TypeScriptFiles)&quot; Overwrite=&quot;true&quot; Encoding=&quot;UTF-8&quot; /&gt;
+  &lt;Exec Command=&quot;&amp;quot;$(MSBuildProgramFiles32)\Microsoft SDKs\TypeScript\$(TypeScriptToolsVersion)\tsc&amp;quot; --out $(projectDir)Scripts\t1\t1.js --target ES5 @$(projectDir)Scripts\t1\typescriptcompiler.input&quot; CustomErrorRegularExpression=&quot;\.ts\([0-9]+,[0-9]+\):(.*)&quot;&gt;
+  &lt;/Exec&gt;
+&lt;/Target&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Jasmine Errors in VS.NET 2013 </a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/28 09:56:34</p>
+<p>I get the following error:</p>
+<blockquote>
+<p>Script:
+C:\Users\xxx\AppData\Local\Microsoft\VisualStudio\12.0\Extensions\2q5cdx5o.qzv\TestFiles\Jasmine\v2\jasmine.js</p>
+</blockquote>
+<p>Error: 'null' is not an object (evaluating 'currentSpec.expect') #665</p>
+<p>I find the root cause:</p>
+<pre><code>describe(&quot;[TS]Test&quot;, function () {
+  expect(&quot;&quot;).toBe(&quot;&quot;);
+});
+</code></pre>
+<p>I forgot to add the 'it' statement around my expect.</p>
+<pre><code>describe(&quot;[TS]Test&quot;, function () {
+  it(&quot;test&quot;,() =&gt; {
+	expect(&quot;&quot;).toBe(&quot;&quot;);
+  });
+});
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">What is the GOOGLE_INPUT_CHEXT_FLAG in web pages?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/24 23:15:55</p>
+<p>Now a days I can see that just before the ending of the </body> tag something like below appears:</p>
+<pre><code>&lt;div id=&quot;GOOGLE_INPUT_CHEXT_FLAG&quot; style=&quot;display: none;&quot; input=&quot;&quot; input_stat=&quot;{}&quot;&gt;&lt;/div&gt;
+</code></pre>
+<p>I can see this in every webpages whenever I try to Inspect Element in Google Chrome.</p>
+<p>I have got the point. Its because of the extension: <strong>Google Input Tools (by Google)</strong>.</p>
+
+
+<hr>
+<h2>
+	<a href="#">angular tutor</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/24 22:44:12</p>
+<p>How to load Template in Angular?</p>
+<pre><code>public class HomeController : Controller
+{
+	public ActionResult Template(string id)
+	{
+		return PartialView(string.Format(&quot;~/Views/Home/Partials/{0}.cshtml&quot;, id));
+	}
+}
+</code></pre>
+<p>Then, we can use following code</p>
+<pre><code>&lt;div ng-include=&quot;'/Home/Template/Index'&quot;&gt;&lt;/div&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">angular with many errors in typescript typing files</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/16 22:42:13</p>
+<p>I have a problem with Visual Studio 2013 generating too many errors when using
+angular.d.ts typescript type file.</p>
+<p>all in jquery.d.ts, like the following errors:</p>
+<blockquote>
+<p>',' expected.</br>
+'=' expected.</br>
+Identifier expected.</p>
+</blockquote>
+<p>The most likely reason for this is that you are using an older version of TypeScript.
+The language is moving swiftly and some of the features in version 1.4 are particularly useful in definition files, so it is likely that you will need to upgrade to 1.4.</p>
+<p>Download version 1.4 <a href="https://visualstudiogallery.msdn.microsoft.com/2d42d8dc-e085-45eb-a30b-3f7d50d55304">here</a> (Updated 2015.01.16)</p>
+<p>However, Where can I find the TypeScript version installed in Visual Studio?
+you can simply do in Visual Studio Command Prompt:</p>
+<pre><code>tsc -v
+</code></pre>
+<p>It will display typescript version</p>
+<pre><code>Version 1.0.3.0
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Handling Session and Authentication Timeouts in ASP.NET MVC</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/15 11:48:48</p>
+<p>The SessionExpireFilterAttribute action filter is then automatically called before each action to check if Session&quot;UserName&quot; is null. If it determines a timeout has not occurred, it allows the actual called action to execute. Otherwise, it forces a redirect to a timeout notification page, which in turn redirects to the logon page to allow the user to re-logon.</p>
+<pre><code>[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+public class SessionExpireFilterAttribute : ActionFilterAttribute
+{
+	public override void OnActionExecuting(ActionExecutingContext filterContext)
+	{
+		HttpContext ctx = HttpContext.Current;
+
+		// If the browser session or authentication session has expired...
+		if (ctx.Session[&quot;UserName&quot;] == null || !filterContext.HttpContext.Request.IsAuthenticated)
+		{
+			if (filterContext.HttpContext.Request.IsAjaxRequest())
+			{
+				// For AJAX requests, we're overriding the returned JSON result with a simple string,
+				// indicating to the calling JavaScript code that a redirect should be performed.
+				filterContext.Result = new JsonResult { Data = &quot;_LogonTimeoutRedirect_&quot; };
+			}
+			else
+			{
+				// For round-trip posts, we're forcing a redirect to Home/TimeoutRedirect/, which
+				// simply displays a temporary 5 second notification that they have timed out, and
+				// will, in turn, redirect to the logon page.
+				filterContext.Result = new RedirectToRouteResult(
+						new RouteValueDictionary {
+                    { &quot;Controller&quot;, &quot;Home&quot; },
+                    { &quot;Action&quot;, &quot;TimeoutRedirect&quot; }
+            });
+			}
+		}
+		base.OnActionExecuting(filterContext);
+	}
+}
+</code></pre>
+<p>We'll create a couple of action filters to provide cross-cutting checks for timeout scenarios. The first will normally be hit when the browser session has timed out, but will also handle if the authentication has timed out first:</p>
+<pre><code>[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+public class SessionAuthorizeAttribute : AuthorizeAttribute
+{
+    protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+    {
+        HttpContext ctx = HttpContext.Current;
+ 
+        // If the browser session has expired...
+        if (ctx.Session[&quot;UserName&quot;] == null)
+        {
+            if (filterContext.HttpContext.Request.IsAjaxRequest())
+            {
+                // For AJAX requests, we're overriding the returned JSON result with a simple string,
+                // indicating to the calling JavaScript code that a redirect should be performed.
+                filterContext.Result = new JsonResult { Data = &quot;_LogonTimeoutRedirect_&quot; };
+            }
+            else
+            {
+                // For round-trip posts, we're forcing a redirect to Home/TimeoutRedirect/, which
+                // simply displays a temporary 5 second notification that they have timed out, and
+                // will, in turn, redirect to the logon page.
+                filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary {
+                        { &quot;Controller&quot;, &quot;Home&quot; },
+                        { &quot;Action&quot;, &quot;TimeoutRedirect&quot; }
+                });
+            }
+        }
+        else if (filterContext.HttpContext.Request.IsAuthenticated)
+        {
+            // Otherwise the reason we got here was because the user didn't have access rights to the
+            // operation, and a 403 should be returned.
+            filterContext.Result = new HttpStatusCodeResult(403);
+        }
+        else
+        {
+            base.HandleUnauthorizedRequest(filterContext);
+        }
+    }
+}
+</code></pre>
+<p>The Timeout Warning Message Page</p>
+<pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;5;url=/Account/Logon/&quot; /&gt;
+&lt;h2&gt;
+  Sorry, but your session has timed out. You'll be redirected to the Log On page in 5 seconds...
+&lt;/h2&gt;
+</code></pre>
+<p>We can register global filter</p>
+<pre><code>public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+{
+	filters.Add(new HandleErrorAttribute());
+	filters.Add(new SessionExpireFilterAttribute());
+	filters.Add(new SessionAuthorizationAttribute());
+}
+</code></pre>
+<p>Client-Side Calling Code Sample</p>
+<pre><code>$.ajax({
+    url: &quot;/MyController/MyAction&quot;,
+    type: 'POST',
+    dataType: 'json',
+    data: jsonData,
+    contentType: 'application/json; charset=utf-8',
+    success: function (result) {
+        if (checkTimeout(result)) {
+            // There was no timeout, so continue processing...
+        }
+    },
+    error: function (result) {
+        if (checkTimeout(result)) {
+            // There was no timeout, so continue processing...
+        }
+    }
+});
+
+
+function checkTimeout(data) {
+    var thereIsStillTime = true;
+    if (data) {
+        if (data.responseText) {
+            if ((data.responseText.indexOf(&quot;&lt;title&gt;Log On&lt;/title&gt;&quot;) &gt; -1) || (data.responseText.indexOf(&quot;&lt;title&gt;Object moved&lt;/title&gt;&quot;) &gt; -1) || (data.responseText === '&quot;_LogonTimeoutRedirect_&quot;')) thereIsStillTime = false;
+        } else {
+            if (data == &quot;_Logon_&quot;) thereIsStillTime = false;
+        }
+        if (!thereIsStillTime) {
+            window.location.href = &quot;/Home/TimeoutRedirect&quot;;
+        }
+    } else {
+        $.ajax({
+            url: &quot;/Home/CheckTimeout/&quot;,
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: false,
+            complete: function (result) {
+                thereIsStillTime = checkTimeout(result);
+            }
+        });
+    }
+    return thereIsStillTime;
+}
+</code></pre>
+<p>In Web.config, we can control the session timeout</p>
+<pre><code>&lt;system.web&gt;
+  &lt;sessionState mode=&quot;InProc&quot; timeout=&quot;1&quot; cookieless=&quot;UseCookies&quot; /&gt;
+&lt;/system.web&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Found conflicts between different versions of the same dependent assemblies</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/11 21:58:35</p>
+<blockquote>
+<p>Found conflicts between different versions of the same dependent assembly. Please set the &quot;AutoGenerateBindingRedirects&quot; property to true in the project file. For more information, see http://go.microsoft.com/fwlink/?LinkId=294190.</p>
+</blockquote>
+<p>Considering there are about 50 references across the projects I have in this solution, that isn't particularly helpful.</p>
+<p>There is an easy way to get the compiler to spit out more information.</p>
+<ol>
+<li>In Visual Studio 2013 go to Tools &gt; Options.</li>
+<li>Select Project and Solutions &gt; Build and Run.</li>
+<li>Find the drop down MSBuild project build output verbosity. Here you can configure MSBuild to give you more information. By default it will be set to &quot;Minimal&quot;. Change this to &quot;Detailed'.</li>
+<li>Rebuild and view the Output window. Copy everything into notepad and search for the <strong>warning</strong> which should tell you which assemblies you need to look at.</li>
+</ol>
+
+
+<hr>
+<h2>
+	<a href="#">Razor View throwing &quot;The name &#39;model&#39; does not exist in the current context&quot;</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/04 13:48:50</p>
+<p>Razor is giving me this nonsensical error:</p>
+<blockquote>
+<p>The name 'model' does not exist in the current context.</p>
+</blockquote>
+<p>The part that makes literally zero sense is that this is causing the error:</p>
+<pre><code>		@model ICollection&lt;DataSourceByActive&gt;
+</code></pre>
+<p>I know for a fact that @model is proper Razor syntax.</p>
+<p>So why is this happening? How can I fix it?</p>
+<p>I think you have messed up the web.config file which lives in the Views folder.</p>
+<blockquote>
+<p>Create a new project targeting same .NET framework and copy its Views/web.config file over top the one in your current project</p>
+</blockquote>
+<p>This will fix your problem.</p>
+
+
+<hr>
+<h2>
+	<a href="#">PsExec gets stuck on licence prompt when running non-interactively</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/04 13:42:15</p>
+<p>Use the <strong>/accepteula</strong> command-line switch to accept the licence agreement.</p>
+<p>Or set</p>
+<blockquote>
+<pre><code>HKCU\Software\Sysinternals\PsExec\EulaAccepted 
+</code></pre>
+</blockquote>
+<p>to 1</p>
+<p><strong>Caution:</strong> if the reg key above is set to 0 (EULA was declined once) then the /accepteula will not work, you have to set the key to 1 manually (or delete it altogether).</p>
+
+
+<hr>
+<h2>
+	<a href="#">JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/25 12:29:33</p>
+<p>JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</p>
+<p>reference: https://issues.apache.org/jira/browse/WICKET-5404</p>
+
+
+<hr>
+
+<!-- Pager -->
+<ul class="pager">
+		<li class="previous">
+			<a href="Index2.html">&larr; Older</a>
+		</li>
+			<li class="next">
+			<a href="Index.html">Newer &rarr;</a>
+		</li>
+</ul>
+
+			</div>
+
+
+			<!-- Blog Sidebar Widgets Column -->
+			<div class="col-md-4">
+				<!-- Blog Search Well -->
+				<div class="well" id="SearchBox">
+					
+				</div>
+
+				<!-- Blog Categories Well -->
+				
+
+				<!-- Side Widget Well -->
+				<div class="well">
+					<h4>About Me</h4>
+					<p>"Write Less Do More", Elegant code written more representative that people can leave work early.</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Mr-Brain Website 2016</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+	</div>
+	<!-- /.container -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="/Scripts/bootstrap.min.js"></script>
+	<script src="/js/requirejs-config.js"></script>
+	<script src="/Scripts/require.js" data-main="/js/search/App.js"></script>
+	
+</body>
+</html>

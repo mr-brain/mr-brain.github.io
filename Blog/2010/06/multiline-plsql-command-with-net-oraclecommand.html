@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<link href="/Content/bootstrap.css" rel="stylesheet" />
+	<link href="/css/blog-home.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/Blog/Index.html">Elegance C#</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/Blog/BlogList0.html">Articles</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Blog Entries Column -->
+			<div class="col-md-8">
+				<h1 class="page-header">
+					Elegance C#
+					<small>Mr-Brain</small>
+				</h1>
+
+				
+
+<ul class="list-group">
+	<h2>
+		<a href="#">Multi-line PL/SQL command with .NET OracleCommand</a>
+	</h2>
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2010/06/19 10:12:59</p>
+	<p>I'm using System.Data.OracleClient.OracleCommand to create a table and fill it out with some data. The query I am using runs OK in PS/SQL Developer, however when I'm trying to execute it from within .NET application I'm getting this error:</p>
+<blockquote>
+<p>ORA-06550: line 1, column 20:
+PLS-00103: Encountered the symbol &quot;&quot; when expecting one of the following:</p>
+<p>begin function package pragma procedure subtype type use form current cursor</p>
+</blockquote>
+<p>Here is some code:</p>
+<pre><code>var text = @&quot;declare cnt number;
+begin
+
+select count(*) into cnt from all_tables
+where table_name = 'TABLE_A';
+
+
+if cnt = 1 then
+begin 
+execute immediate 'truncate table TABLE_A';
+execute immediate 'drop table TABLE_A';
+end;
+end if;
+
+execute immediate 'create table TABLE_A as 
+(SELECT DISTINCT v.ID, g.ext_id FROM VIEW_A v
+JOIN TABLE_B B ON v.id = B.Id
+WHERE YEAR1 = ''2008'')';
+
+end;&quot;);
+cmd.CommandText = text;
+cmd.ExecuteNonQuery();
+</code></pre>
+<p>Search Google, finally found:
+I think you need to lose just the '\r' characters.</p>
+<pre><code>text = text.Replace(&quot;\r\n&quot;, &quot;\n&quot;);
+cmd.CommandText = text;
+cmd.ExecuteNonQuery();
+</code></pre>
+
+
+</ul>
+
+<!-- Pager -->
+<ul class="pager">
+		<li class="previous">
+			<a href="/Blog/2010/01/how-to-make-tsql-to-filter-criteria-is-casesensitive.html">&larr; Older</a>
+		</li>
+			<li class="next">
+			<a href="/Blog/2010/07/vmware-bridged-network-stops-working-after-sleephibernate-on-windows-host.html">Newer &rarr;</a>
+		</li>
+</ul>
+
+			</div>
+
+
+			<!-- Blog Sidebar Widgets Column -->
+			<div class="col-md-4">
+				<!-- Blog Search Well -->
+				<div class="well" id="SearchBox">
+					
+				</div>
+
+				<!-- Blog Categories Well -->
+				
+
+				<!-- Side Widget Well -->
+				<div class="well">
+					<h4>About Me</h4>
+					<p>"Write Less Do More", Elegant code written more representative that people can leave work early.</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Mr-Brain Website 2016</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+	</div>
+	<!-- /.container -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="/Scripts/bootstrap.min.js"></script>
+	<script src="/js/requirejs-config.js"></script>
+	<script src="/Scripts/require.js" data-main="/js/search/App.js"></script>
+	
+</body>
+</html>
