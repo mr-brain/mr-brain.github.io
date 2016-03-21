@@ -59,6 +59,20 @@
 				
 
 <h2>
+	<a href="#">Copy vdi file of Virtualbox</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2009/01/15 10:12:59</p>
+<p>VirtualBox often used to test the system, but the most troublesome is that VirtualBox to use uuid to control vdi file, so there is no way to use copy commands to copy vdi file.</p>
+<p>Therefore, if you want to copy a vdi file, you must use the following command to re-generate a new uuid.</p>
+<pre><code>VBoxManage clonevdi Orig.vdi New.vdi
+</code></pre>
+<p>If you copy the exhausted only to find, there are still commands can be remedied.</p>
+<pre><code>VBoxManage internalcommands setvdiuuid New.vdi
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">Dynamic Linq To Object</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2008/12/08 10:12:59</p>

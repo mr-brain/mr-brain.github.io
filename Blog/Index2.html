@@ -59,6 +59,15 @@
 				
 
 <h2>
+	<a href="#">JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/25 12:29:33</p>
+<p>JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</p>
+<p>reference: https://issues.apache.org/jira/browse/WICKET-5404</p>
+
+
+<hr>
+<h2>
 	<a href="#">VS.NET found the WebAPI reference error</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/17 23:41:15</p>
@@ -362,30 +371,6 @@ var result = JSON.parse(strJson, dateReviver);
 
 strJson = &quot;\&quot;&quot;/Date(1330444800000)/\&quot;&quot;;
 result = JSON.parse(strJson, dateReviver);
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Automatic Package Restore in Visual Studio</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/24 17:16:25</p>
-<p>We can add the pre-build event for each of the project that require the packages.config</p>
-<pre><code>cd $(ProjectDir)
-nuget restore -source http://www.nuget.org/api/v2/ -packagesdirectory ../packages
-</code></pre>
-<p>What if you have custom package sources?
-All you need to do is create a NuGet.Config file next to your .sln file, containing:</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;configuration&gt;
-  &lt;packageSources&gt;
-    &lt;add key=&quot;nuget.org&quot; value=&quot;https://www.nuget.org/api/v2/&quot; /&gt;
-    &lt;add key=&quot;aspnetwebstacknightlyrelease&quot; value=&quot;https://www.myget.org/f/aspnetwebstacknightlyrelease/&quot; /&gt;
-  &lt;/packageSources&gt;
-&lt;/configuration&gt;
-</code></pre>
-<p>Note that if you have private package sources that you want to keep out of your repo, you can add them to</p>
-<pre><code>%APPDATA%\NuGet\Nuget.config (see this page) for details.
 </code></pre>
 
 

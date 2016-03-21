@@ -60,46 +60,18 @@
 
 <ul class="list-group">
 	<h2>
-		<a href="#">nuget &#39;packages&#39; element is not declared warning</a>
+		<a href="#">When debug a Typescript application in Google Chrome, the *.ts files are appear totally empty ?</a>
 	</h2>
-	<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/08/02 09:01:55</p>
-	<p>not a showstopper but when using nuget in a project, it creates a packages.config file with this shape</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;packages&gt;
-   ... your packages
-&lt;/packages&gt;
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/11/25 07:58:43</p>
+	<p>You try to add following to your web.config</p>
+<pre><code>&lt;system.webServer&gt;
+  ...
+  &lt;staticContent&gt;
+    &lt;remove fileExtension=&quot;.tsx&quot; /&gt;
+    &lt;mimeMap fileExtension=&quot;.tsx&quot; mimeType=&quot;application/javascript&quot; /&gt;
+  &lt;/staticContent&gt;
+&lt;/system.webServer&gt;
 </code></pre>
-<p>this gives a warning in VS</p>
-<blockquote>
-<p>The 'packages' element is not declared.</p>
-</blockquote>
-<p>You can always make simple xsd schema for 'packages.config' to get rid of this warning. To do this, create file named &quot;packages.xsd&quot;:</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
-&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; elementFormDefault=&quot;qualified&quot;
-      targetNamespace=&quot;urn:packages&quot; xmlns=&quot;urn:packages&quot;&gt;
-  &lt;xs:element name=&quot;packages&quot;&gt;
-    &lt;xs:complexType&gt;
-      &lt;xs:sequence&gt;
-        &lt;xs:element name=&quot;package&quot; maxOccurs=&quot;unbounded&quot;&gt;
-          &lt;xs:complexType&gt;
-            &lt;xs:attribute name=&quot;id&quot; type=&quot;xs:string&quot; use=&quot;required&quot; /&gt;
-            &lt;xs:attribute name=&quot;version&quot; type=&quot;xs:string&quot; use=&quot;required&quot; /&gt;
-            &lt;xs:attribute name=&quot;targetFramework&quot; type=&quot;xs:string&quot; use=&quot;optional&quot; /&gt;
-            &lt;xs:attribute name=&quot;allowedVersions&quot; type=&quot;xs:string&quot; use=&quot;optional&quot; /&gt;
-          &lt;/xs:complexType&gt;
-        &lt;/xs:element&gt;
-      &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-  &lt;/xs:element&gt;
-&lt;/xs:schema&gt;
-</code></pre>
-<p>Location of this file (two options)</p>
-<p>In the same folder as 'packages.config' file,
-If you want to share packages.xsd across multiple projects, move it to the Visual Studio Schemas folder (the path may slightly differ, it's  D:\Program Files (x86)\Microsoft Visual Studio 10.0\Xml\Schemas for me).
-Then, edit <packages> tag in packages.config file (add xmlns attribute):</p>
-<pre><code>&lt;packages xmlns=&quot;urn:packages&quot;&gt;
-</code></pre>
-<p>Now the warning should disappear (even if packages.config file is open in Visual Studio).</p>
 
 
 </ul>
@@ -107,10 +79,10 @@ Then, edit <packages> tag in packages.config file (add xmlns attribute):</p>
 <!-- Pager -->
 <ul class="pager">
 		<li class="previous">
-			<a href="/Blog/2015/07/asp-net-mvc-throw-exception.html">&larr; Older</a>
+			<a href="/Blog/2015/08/nuget-package-element-is-not-declared-warning.html">&larr; Older</a>
 		</li>
 			<li class="next">
-			<a href="/Blog/2015/11/when-debug-typescript-ts-files-in-chrome.html">Newer &rarr;</a>
+			<a href="/Blog/2016/03/install-hexo.html">Newer &rarr;</a>
 		</li>
 </ul>
 

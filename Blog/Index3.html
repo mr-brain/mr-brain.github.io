@@ -59,6 +59,30 @@
 				
 
 <h2>
+	<a href="#">Automatic Package Restore in Visual Studio</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/24 17:16:25</p>
+<p>We can add the pre-build event for each of the project that require the packages.config</p>
+<pre><code>cd $(ProjectDir)
+nuget restore -source http://www.nuget.org/api/v2/ -packagesdirectory ../packages
+</code></pre>
+<p>What if you have custom package sources?
+All you need to do is create a NuGet.Config file next to your .sln file, containing:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;configuration&gt;
+  &lt;packageSources&gt;
+    &lt;add key=&quot;nuget.org&quot; value=&quot;https://www.nuget.org/api/v2/&quot; /&gt;
+    &lt;add key=&quot;aspnetwebstacknightlyrelease&quot; value=&quot;https://www.myget.org/f/aspnetwebstacknightlyrelease/&quot; /&gt;
+  &lt;/packageSources&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>Note that if you have private package sources that you want to keep out of your repo, you can add them to</p>
+<pre><code>%APPDATA%\NuGet\Nuget.config (see this page) for details.
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">How to avoid BeginInvoke before a handle has been created? </a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/22 22:12:59</p>
@@ -319,107 +343,6 @@ string strXml = sr.ReadToEnd();
 <pre><code>public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)
 {
   return null;   // this is error code
-}
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Using Forms Authentication in ASP.NET MVC</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/25 22:12:59</p>
-<p>In Web.config</p>
-<pre><code>&lt;configuration&gt;
-  &lt;system.web&gt;
-    &lt;authentication mode=&quot;Forms&quot;&gt;
-      &lt;forms defaultUrl=&quot;~/Home/Index/&quot; loginUrl=&quot;~/Home/Login/&quot; timeout=&quot;30&quot; &gt;&lt;/forms&gt;
-    &lt;/authentication&gt;
-    &lt;authorization&gt;
-      &lt;deny users=&quot;?&quot;&gt;&lt;/deny&gt;
-    &lt;/authorization&gt;
-  &lt;/system.web&gt;
-  &lt;location path=&quot;Scripts&quot;&gt;
-    &lt;system.web&gt;
-	  &lt;authorization&gt;
-	    &lt;allow users=&quot;*&quot;&gt;&lt;/allow&gt;
-	  &lt;/authorization&gt;
-	&lt;/system.web&gt;
-  &lt;/location&gt;
-&lt;/configuration&gt;
-</code></pre>
-<p>Create LoginViewModel.cs</p>
-<pre><code>public class LoginViewModel : IValidatableObject
-{
-	[DisplayFormat(ConvertEmptyStringToNull = false)]
-	public string ReturnUrl { get; set; }
-
-	[DisplayFormat(ConvertEmptyStringToNull = false)]
-	[Required]
-	public string UserName { get; set; }
-
-	[DisplayFormat(ConvertEmptyStringToNull = false)]
-	[Required]
-	[DataType(DataType.Password)]
-	[Display(Name = &quot;Password&quot;)]
-	public string Password { get; set; }
-
-	[Display(Name = &quot;Remember me?&quot;)]
-	public bool RememberMe { get; set; }
-
-	public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)
-	{
-		return null;
-	}
-}
-</code></pre>
-<p>Create HomeController.cs</p>
-<pre><code>public class HomeController : Controller
-{
-	[AllowAnonymous]
-	public ActionResult Login(string ReturnUrl)
-	{
-		//ReturnUrl: url that is before user login
-		var vm = new LoginViewModel() { ReturnUrl = ReturnUrl };
-		return View(vm);
-	}
-
-	[AllowAnonymous]
-	[HttpPost]
-	public ActionResult Login(LoginViewModel model)
-	{
-		//
-		if( !ModelState.IsValid )
-		{
-			return View(model);
-		}
-
-		//todo check login account and password
-		if (false)
-		{
-          ...
-		}
-
-		FormsAuthentication.RedirectFromLoginPage(model.UserName, false);
-		return Redirect(FormsAuthentication.GetRedirectUrl(model.UserName, false));
-	}
-	[AllowAnonymous]
-    public ActionResult Logout()
-    {
-        Session.Abandon();
-        FormsAuthentication.SignOut();
-        return RedirectToAction(&quot;Login&quot;, &quot;Home&quot;);
-    }
-</code></pre>
-<p>In Home/Login.cshtml</p>
-<pre><code>@using (Html.BeginForm(&quot;Login&quot;, &quot;Home&quot;, new { ReturnUrl=Model.ReturnUrl }, FormMethod.Post, new { autocomplete=&quot;off&quot; }))
-{
-  @Html.TextBoxFor(m =&gt; m.UserName) 
-  @Html.ValidationMessageFor(m =&gt; m.UserName)
-  &lt;br /&gt;
-  @Html.PasswordFor(m =&gt; m.Password) 
-  @Html.ValidationMessageFor(m =&gt; m.Password)
-  &lt;br /&gt;
-  &lt;input type=&quot;submit&quot; value=&quot;Login&quot; /&gt;
 }
 </code></pre>
 

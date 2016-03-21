@@ -59,6 +59,33 @@
 				
 
 <h2>
+	<a href="#">Automapper 3.0 - This type is not supported on this platform when I use MSTest.exe ?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/01 10:12:20</p>
+<p>MSTest show following error:</p>
+<blockquote>
+<p>Source value:
+System.Data.DataTableReader ---&gt; System.PlatformNotSupportedException: Proxy generation not supported on this platform.</p>
+</blockquote>
+<p>To fix it, add an explicit call to something in AutoMapper.Net4.dll. For instance, with the class ListSourceMapper :</p>
+<pre><code>var useless = new ListSourceMapper();
+</code></pre>
+<p>Or you can</p>
+<pre><code>[TestClass]
+[DeploymentItem(&quot;AutoMapper.Net4.dll&quot;)]
+public class YourTest
+{
+	[TestMethod]
+	public void Test1()
+	{
+		...
+	}
+}
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">How to compile many typescript files in VS.NET 2013?</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/30 22:26:45</p>
@@ -356,15 +383,6 @@ function checkTimeout(data) {
 </blockquote>
 <p>to 1</p>
 <p><strong>Caution:</strong> if the reg key above is set to 0 (EULA was declined once) then the /accepteula will not work, you have to set the key to 1 manually (or delete it altogether).</p>
-
-
-<hr>
-<h2>
-	<a href="#">JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/25 12:29:33</p>
-<p>JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</p>
-<p>reference: https://issues.apache.org/jira/browse/WICKET-5404</p>
 
 
 <hr>

@@ -336,6 +336,22 @@ hexo s #deploy preview result
 
 <hr>
 <h2>
+	<a href="#">When debug a Typescript application in Google Chrome, the *.ts files are appear totally empty ?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/11/25 07:58:43</p>
+<p>You try to add following to your web.config</p>
+<pre><code>&lt;system.webServer&gt;
+  ...
+  &lt;staticContent&gt;
+    &lt;remove fileExtension=&quot;.tsx&quot; /&gt;
+    &lt;mimeMap fileExtension=&quot;.tsx&quot; mimeType=&quot;application/javascript&quot; /&gt;
+  &lt;/staticContent&gt;
+&lt;/system.webServer&gt;
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">nuget &#39;packages&#39; element is not declared warning</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2015/08/02 09:01:55</p>
@@ -423,33 +439,6 @@ Then, edit <packages> tag in packages.config file (add xmlns attribute):</p>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/06 07:31:40</p>
 <p>How to restore parameter info (argument list) shortcut with Resharper?</p>
 <p>If you go to the <strong>Visual Studio Tools -&gt; Options -&gt; Keyboard</strong> section, you can type the shortcut in the shortcut keys edit box and VS will show what commands are bound to that shortcut combination. So, hitting <strong>ctrl+shift+space</strong> will show you that is mapped to <strong>&quot;Edit.ParameterInfo&quot;</strong> for the Workfow Designer, and <strong>&quot;ReSharper.ReSharper_CompleteCodeSmart&quot;</strong> for the Text Editor and the XAML UI Designer. You can do a similar thing with <strong>ctrl+p</strong>.</p>
-
-
-<hr>
-<h2>
-	<a href="#">Automapper 3.0 - This type is not supported on this platform when I use MSTest.exe ?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/01 10:12:20</p>
-<p>MSTest show following error:</p>
-<blockquote>
-<p>Source value:
-System.Data.DataTableReader ---&gt; System.PlatformNotSupportedException: Proxy generation not supported on this platform.</p>
-</blockquote>
-<p>To fix it, add an explicit call to something in AutoMapper.Net4.dll. For instance, with the class ListSourceMapper :</p>
-<pre><code>var useless = new ListSourceMapper();
-</code></pre>
-<p>Or you can</p>
-<pre><code>[TestClass]
-[DeploymentItem(&quot;AutoMapper.Net4.dll&quot;)]
-public class YourTest
-{
-	[TestMethod]
-	public void Test1()
-	{
-		...
-	}
-}
-</code></pre>
 
 
 <hr>
