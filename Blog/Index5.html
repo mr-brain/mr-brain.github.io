@@ -59,6 +59,28 @@
 				
 
 <h2>
+	<a href="#">Database diagram support objects cannot be installed</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/31 09:57:52</p>
+<p>If you ever get a message like this when trying to create a diagram in SQL 2005/2008 Express.</p>
+<blockquote>
+<p>Database diagram support objects cannot be installed because this database does not have a valid owner.</p>
+</blockquote>
+<p>To continue, first use the Files page of the Database Properties dialog box or the ALTER AUTHORIZATION statement to set the database owner to a valid login, then add the database diagram support objects.</p>
+<p>Here's step by step what you have to do:</p>
+<pre><code>EXEC sp_dbcmptlevel 'yourDB', '90';
+go
+ALTER AUTHORIZATION ON DATABASE::yourDB TO &quot;yourLogin&quot;
+go
+use [yourDB]
+go
+EXECUTE AS USER = N'dbo' REVERT
+go
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">Microsoft FastCGI Error 0x80070585</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/31 09:53:26</p>
@@ -156,6 +178,21 @@ string s = (string)mi.Invoke(proxy, new object[]{});
 UnloadClass cls = asm.GetUnloadClass(&quot;Library1.MyClass1&quot;);
 string s = (string)cls.Invoke(&quot;Test&quot;);
 </code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Title:How do I get the &lt;Message&gt; msbuild task that shows up in the Visual Studio .NET project output?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/28 13:42:41</p>
+<pre><code class="language-xml">&lt;Target Name=&quot;BeforeBuild&quot;&gt;
+  &lt;Message Text=&quot;Justin Dearing Message&quot; /&gt;
+&lt;Target/&gt;
+</code></pre>
+<p>However, the messages don't show up in the Visual Studio .NET build output.</p>
+<p>To change the build output verbosity shown in the VS.NET output window, open the Options dialog and select the Build and Run settings below the Projects and Solutions node.</p>
+<p><img src="/Source/2014/05/msbuild-get-output-message/2014-05-28_134204.png" alt="options dialog" /></p>
+<p>Unless you explicitly specify a low message importance, your messages should show up at <font color='blue'>Normal</font> verbosity or higher.</p>
 
 
 <hr>
@@ -330,121 +367,6 @@ Hope this helps atleast for the newbies. Happy coding.</p>
 <p>The repository for high quality TypeScript type definitions. https://github.com/borisyankov/DefinitelyTyped#readme</p>
 <p>Usage: Include a line like this:</p>
 <pre><code>/// &lt;reference path=&quot;jquery.d.ts&quot; /&gt;
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">No exports were found that match the constraint contract name error</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/09/05 22:12:59</p>
-<p>This morning I faced a problem while creating my Visual Studio 2012 Library Project. It said &quot;no exports were found that match the constraint contract name&quot;</p>
-<p>I solved this problem by clearing Visual Studio Component Model Cache. Just delete or rename this folder:</p>
-<blockquote>
-<p>%AppData%..\Local\Microsoft\VisualStudio\11.0\ComponentModelCache</p>
-</blockquote>
-<p>Visual Studio Express 2012 has different paths. Visual Studio Express</p>
-<blockquote>
-<p>...\Users{user}\AppData\Local\Microsoft\WDExpress\11.0\ComponentModelCache</p>
-</blockquote>
-<p>With Visual Studio Express 2012 for Web</p>
-<blockquote>
-<p>...\Users{user}\AppData\Local\Microsoft\VWDExpress\11.0\ComponentModelCache</p>
-</blockquote>
-<p>When I running MyWebSite in .NET 4.0 and I can't get it working.</p>
-<blockquote>
-<p>HTTP error 500.22-Internal Server Error
-Detect ASP.NET setting does not apply to integrated Managed pipeline mode.</p>
-</blockquote>
-<p>If you still need to use the HTTP Module you need to configure it (.NET 4.0 framework) as follows:</p>
-<pre><code>&lt;system.webServer&gt;
-  &lt;modules runAllManagedModulesForAllRequests=&quot;true&quot;&gt;
-    &lt;add name=&quot;MyModule&quot; type=&quot;&lt;&lt;Namespace&gt;&gt;.&lt;&lt;Class&gt;&gt;, &lt;&lt;assembly&gt;&gt;&quot;/&gt;
-  &lt;/modules&gt;
-  &lt;validation validateIntegratedModeConfiguration=&quot;false&quot;/&gt;
-&lt;/system.webServer&gt;
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">TypeScript Syntax</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/09/04 22:12:59</p>
-<p>Declare variables</p>
-<pre><code>var i:number = 1;
-var s:string = &quot;text&quot;;
-</code></pre>
-<p>interface and class</p>
-<pre><code>interface IPersion{
-  firtname: string;
-  lastname: string;
-}
-
-class Student implements IPersion{
-  firtname: string;
-  lastname: string;
-  
-  constructor(public name: string){
-    this.firstname = name;
-    this.lastname = &quot;Student&quot;;
-  }
-  sayName()
-  {
-    return &quot;Student&quot;;
-  }
-}
-
-class Teacher extends Student{
-  constructor()
-  {
-    super(&quot;Flash&quot;);
-    this.lastname = &quot;Teacher&quot;;
-  }
-
-  sayName()
-  {
-    return &quot;Teacher&quot;;
-  }
-}
-</code></pre>
-<p>static method</p>
-<pre><code>class utils{
-  public static CopyProperties(source: any, target: any): void {
-    for (var prop in source) {
-      if (target[prop] !== undefined) {
-        target[prop] = source[prop];
-      }
-      else {
-        console.error(&quot;Cannot set undefined property: &quot; + prop);
-      }
-    }
-  }
-}
-
-utils.CopyProperties(source, dest);
-</code></pre>
-<p>create module in math.ts</p>
-<pre><code>module math{
-        export function MathAdd(a:number, b:number)
-        {
-                return a+b;
-        }
-}
-</code></pre>
-<p>use math module in test.ts</p>
-<pre><code>/// &lt;reference path=&quot;math.ts&quot; /&gt;
-var c:number = math.MathAdd(1, 2);
-</code></pre>
-<p>create module in file1.ts</p>
-<pre><code>export function MathAdd(a:number, b:number)
-{
-  return a+b;
-}
-</code></pre>
-<p>use file1 file module in test.ts</p>
-<pre><code>import f1 = module('file1')
-var c:number = f1.MathAdd(1, 2);
 </code></pre>
 
 

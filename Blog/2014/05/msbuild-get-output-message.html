@@ -60,27 +60,17 @@
 
 <ul class="list-group">
 	<h2>
-		<a href="#">Remove the last character in a string in T-SQL?</a>
+		<a href="#">Title:How do I get the &lt;Message&gt; msbuild task that shows up in the Visual Studio .NET project output?</a>
 	</h2>
-	<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/03 22:12:59</p>
-	<p>How do I remove the last character in a string in T-SQL?</p>
-<p>I.E.</p>
-<blockquote>
-<p>'TEST STRING'</p>
-</blockquote>
-<p>to return:</p>
-<blockquote>
-<p>'TEST STRIN'</p>
-</blockquote>
-<p>Sample code:</p>
-<pre><code>DECLARE @String VARCHAR(100)
-SET @String = 'TEST STRING'
-
--- Chop off the end character
-SET @String = LEFT(@String, LEN(@String) - 1)
-
-SELECT @String
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/28 13:42:41</p>
+	<pre><code class="language-xml">&lt;Target Name=&quot;BeforeBuild&quot;&gt;
+  &lt;Message Text=&quot;Justin Dearing Message&quot; /&gt;
+&lt;Target/&gt;
 </code></pre>
+<p>However, the messages don't show up in the Visual Studio .NET build output.</p>
+<p>To change the build output verbosity shown in the VS.NET output window, open the Options dialog and select the Build and Run settings below the Projects and Solutions node.</p>
+<p><img src="/Source/2014/05/msbuild-get-output-message/2014-05-28_134204.png" alt="options dialog" /></p>
+<p>Unless you explicitly specify a low message importance, your messages should show up at <font color='blue'>Normal</font> verbosity or higher.</p>
 
 
 </ul>
@@ -88,10 +78,10 @@ SELECT @String
 <!-- Pager -->
 <ul class="pager">
 		<li class="previous">
-			<a href="/Blog/2013/10/render-dynamic-model-in-razor-view-engine-and-aspnet-mvc.html">&larr; Older</a>
+			<a href="/Blog/2014/05/remove-the-last-character-in-a-string-in-tsql.html">&larr; Older</a>
 		</li>
 			<li class="next">
-			<a href="/Blog/2014/05/msbuild-get-output-message.html">Newer &rarr;</a>
+			<a href="/Blog/2014/05/why-isnt-there-an-assembly-unload-method.html">Newer &rarr;</a>
 		</li>
 </ul>
 

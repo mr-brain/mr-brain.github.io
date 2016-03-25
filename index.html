@@ -59,6 +59,41 @@
 				
 
 <h2>
+	<a href="#">T1.TinyIoc Example</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/25 20:22:45</p>
+<p><a href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
+<p>The following code is using t1.TinyIoc example</p>
+<pre><code>import t1 require(&quot;t1&quot;);
+class IMyKlass implements t1.IIocInterfaceChecker {
+	className: string = &quot;IMyKlass&quot;;
+	test(): number {
+		throw new Error(&quot;Not implement&quot;);
+	}
+}
+
+class MyKlass extends IMyKlass {
+	test(): number {
+		return 123;
+	}
+}
+
+t1.TinyIoc.registerType(IMyKlass, MyKlass);
+
+var obj: IMyKlass = Ioc.resolve(IMyKlass);
+var val = obj.test();
+expect(val).toBe(123);
+</code></pre>
+<p>If you need global instance</p>
+<pre><code>t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());
+</code></pre>
+<p>You can even</p>
+<pre><code>t1.TinyIoc.registerLazy(IMyKlass, () =&gt; new MyKlass());
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">Odds convert table</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/15 22:36:16</p>
@@ -430,15 +465,6 @@ Then, edit <packages> tag in packages.config file (add xmlns attribute):</p>
 <blockquote>
 <p>install-package nunit -version x.xx</p>
 </blockquote>
-
-
-<hr>
-<h2>
-	<a href="#">Resharper shortcut keys</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/06 07:31:40</p>
-<p>How to restore parameter info (argument list) shortcut with Resharper?</p>
-<p>If you go to the <strong>Visual Studio Tools -&gt; Options -&gt; Keyboard</strong> section, you can type the shortcut in the shortcut keys edit box and VS will show what commands are bound to that shortcut combination. So, hitting <strong>ctrl+shift+space</strong> will show you that is mapped to <strong>&quot;Edit.ParameterInfo&quot;</strong> for the Workfow Designer, and <strong>&quot;ReSharper.ReSharper_CompleteCodeSmart&quot;</strong> for the Text Editor and the XAML UI Designer. You can do a similar thing with <strong>ctrl+p</strong>.</p>
 
 
 <hr>

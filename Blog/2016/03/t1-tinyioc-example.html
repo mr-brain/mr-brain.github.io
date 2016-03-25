@@ -60,26 +60,36 @@
 
 <ul class="list-group">
 	<h2>
-		<a href="#">Remove the last character in a string in T-SQL?</a>
+		<a href="#">T1.TinyIoc Example</a>
 	</h2>
-	<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/03 22:12:59</p>
-	<p>How do I remove the last character in a string in T-SQL?</p>
-<p>I.E.</p>
-<blockquote>
-<p>'TEST STRING'</p>
-</blockquote>
-<p>to return:</p>
-<blockquote>
-<p>'TEST STRIN'</p>
-</blockquote>
-<p>Sample code:</p>
-<pre><code>DECLARE @String VARCHAR(100)
-SET @String = 'TEST STRING'
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/25 20:22:45</p>
+	<p><a href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
+<p>The following code is using t1.TinyIoc example</p>
+<pre><code>import t1 require(&quot;t1&quot;);
+class IMyKlass implements t1.IIocInterfaceChecker {
+	className: string = &quot;IMyKlass&quot;;
+	test(): number {
+		throw new Error(&quot;Not implement&quot;);
+	}
+}
 
--- Chop off the end character
-SET @String = LEFT(@String, LEN(@String) - 1)
+class MyKlass extends IMyKlass {
+	test(): number {
+		return 123;
+	}
+}
 
-SELECT @String
+t1.TinyIoc.registerType(IMyKlass, MyKlass);
+
+var obj: IMyKlass = Ioc.resolve(IMyKlass);
+var val = obj.test();
+expect(val).toBe(123);
+</code></pre>
+<p>If you need global instance</p>
+<pre><code>t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());
+</code></pre>
+<p>You can even</p>
+<pre><code>t1.TinyIoc.registerLazy(IMyKlass, () =&gt; new MyKlass());
 </code></pre>
 
 
@@ -88,10 +98,10 @@ SELECT @String
 <!-- Pager -->
 <ul class="pager">
 		<li class="previous">
-			<a href="/Blog/2013/10/render-dynamic-model-in-razor-view-engine-and-aspnet-mvc.html">&larr; Older</a>
+			<a href="/Blog/2016/03/odds-convert-table.html">&larr; Older</a>
 		</li>
 			<li class="next">
-			<a href="/Blog/2014/05/msbuild-get-output-message.html">Newer &rarr;</a>
+			<a href="/Blog/">Newer &rarr;</a>
 		</li>
 </ul>
 

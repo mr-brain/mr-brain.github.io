@@ -59,6 +59,15 @@
 				
 
 <h2>
+	<a href="#">Resharper shortcut keys</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/06 07:31:40</p>
+<p>How to restore parameter info (argument list) shortcut with Resharper?</p>
+<p>If you go to the <strong>Visual Studio Tools -&gt; Options -&gt; Keyboard</strong> section, you can type the shortcut in the shortcut keys edit box and VS will show what commands are bound to that shortcut combination. So, hitting <strong>ctrl+shift+space</strong> will show you that is mapped to <strong>&quot;Edit.ParameterInfo&quot;</strong> for the Workfow Designer, and <strong>&quot;ReSharper.ReSharper_CompleteCodeSmart&quot;</strong> for the Text Editor and the XAML UI Designer. You can do a similar thing with <strong>ctrl+p</strong>.</p>
+
+
+<hr>
+<h2>
 	<a href="#">Automapper 3.0 - This type is not supported on this platform when I use MSTest.exe ?</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/01 10:12:20</p>
@@ -368,21 +377,6 @@ function checkTimeout(data) {
 <p>Create a new project targeting same .NET framework and copy its Views/web.config file over top the one in your current project</p>
 </blockquote>
 <p>This will fix your problem.</p>
-
-
-<hr>
-<h2>
-	<a href="#">PsExec gets stuck on licence prompt when running non-interactively</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/04 13:42:15</p>
-<p>Use the <strong>/accepteula</strong> command-line switch to accept the licence agreement.</p>
-<p>Or set</p>
-<blockquote>
-<pre><code>HKCU\Software\Sysinternals\PsExec\EulaAccepted 
-</code></pre>
-</blockquote>
-<p>to 1</p>
-<p><strong>Caution:</strong> if the reg key above is set to 0 (EULA was declined once) then the /accepteula will not work, you have to set the key to 1 manually (or delete it altogether).</p>
 
 
 <hr>

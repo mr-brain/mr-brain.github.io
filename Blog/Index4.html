@@ -59,6 +59,23 @@
 				
 
 <h2>
+	<a href="#">NullReferenceException unexplained error in ASP.NET MVC</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/29 22:12:59</p>
+<pre><code>[NullReferenceException: Object reference not set to an instance of an object.]
+   System.Web.Mvc.&lt;ConvertResults&gt;d__2.MoveNext() +105
+   System.Web.Mvc.&lt;Validate&gt;d__1.MoveNext() +1050  System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext) +404
+</code></pre>
+<p>Please check your <em>Validate</em> function code in <strong><em>xxx</em>Model</strong> (inherited <em>IValidatableObject</em>). <font color='red'>You should not return null value.</font></p>
+<pre><code>public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)
+{
+  return null;   // this is error code
+}
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">Using Forms Authentication in ASP.NET MVC</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/25 22:12:59</p>
@@ -375,28 +392,6 @@ Parameter name: optionId</p>
 For Visual Studio 2012, it's 11.0 folder.</p>
 </blockquote>
 <p>I renamed <strong>ComponentModelCache</strong> to <strong>ComponentModelCache.Borked</strong> and restarted Visual Studio. It started right up and without any errors.</p>
-
-
-<hr>
-<h2>
-	<a href="#">Database diagram support objects cannot be installed</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/31 09:57:52</p>
-<p>If you ever get a message like this when trying to create a diagram in SQL 2005/2008 Express.</p>
-<blockquote>
-<p>Database diagram support objects cannot be installed because this database does not have a valid owner.</p>
-</blockquote>
-<p>To continue, first use the Files page of the Database Properties dialog box or the ALTER AUTHORIZATION statement to set the database owner to a valid login, then add the database diagram support objects.</p>
-<p>Here's step by step what you have to do:</p>
-<pre><code>EXEC sp_dbcmptlevel 'yourDB', '90';
-go
-ALTER AUTHORIZATION ON DATABASE::yourDB TO &quot;yourLogin&quot;
-go
-use [yourDB]
-go
-EXECUTE AS USER = N'dbo' REVERT
-go
-</code></pre>
 
 
 <hr>
