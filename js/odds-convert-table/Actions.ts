@@ -11,9 +11,9 @@ enum OddsActionType {
 	Calculate
 }
 
-enum OddsType{
-	Manila,
-	HK,
+export enum OddsType{
+	Malay,
+	Hk,
 	Euro,
 	Indo
 }

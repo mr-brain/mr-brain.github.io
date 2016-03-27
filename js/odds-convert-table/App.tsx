@@ -2,6 +2,7 @@
 	var baseUrl = "/js/odds-convert-table/";
 
 	require.config({
+		urlArgs: "v=20160307",
 		paths: {
 			"Actions": baseUrl + "Actions",
 			"ViewModels": baseUrl + "ViewModels",

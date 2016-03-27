@@ -14,6 +14,10 @@ import Store = require("OddsCalculatorStore");
 import Actions = require("Actions");
 import OddsConvertorState = Store.OddsCalculateState;
 
+import OddsType = Actions.OddsType;
+
+var _actions = Actions._appActions;
+
 export interface OddsConvertTableProps extends React.Props<OddsConvertTable> {
 }
 
@@ -37,10 +41,64 @@ export class OddsConvertTable extends FRefluxStoreComponent<OddsConvertTableProp
 		dom.setAttribute('autocomplete', 'off');
 	}
 
-	handleOnClick(event) {
+	handleOnClickCalculate(oddsType: OddsType, evt) {
+		var value = this.getOdds(oddsType);
+		if (value.toString() == "NaN") {
+			return;
+		}
+		_actions.Calculate(oddsType, value);
+	}
+
+	getOdds(oddsType: OddsType) : number{
+		var state = this.getStateFromStore();
+		switch (oddsType) {
+			default:
+			case OddsType.Malay:
+				return Number(state.malayOdds);
+			case OddsType.Hk:
+				return Number(state.hkOdds);
+			case OddsType.Euro:
+				return Number(state.euroOdds);
+			case OddsType.Indo:
+				return Number(state.indoOdds);
+		}
+	}
+
+	handleOnChage(oddsType: OddsType, evt) {
+		var value = evt.target.value;
+		var state = this.getStateFromStore();
+		switch (oddsType) {
+			default:
+			case OddsType.Malay:
+				state.malayOdds = value;
+				break;
+			case OddsType.Hk:
+				state.hkOdds = value;
+				break;
+			case OddsType.Euro:
+				state.euroOdds = value;
+				break;
+			case OddsType.Indo:
+				state.indoOdds = value;
+				break;
+		}
+		this.setState(state);
+	}
+
+	stringToNumber(s: string): number {
+		if (s == "") return 0;
+		return Number(s);
+	}
+
+	numberToString(n: number) :string {
+		if (n == undefined) {
+			return "";
+		}
+		return n.toString();
 	}
 
 	render() {
+		var state = this.getStateFromStore();
 		var self = this;
 
 		var contentStyle = {
@@ -55,6 +113,11 @@ export class OddsConvertTable extends FRefluxStoreComponent<OddsConvertTableProp
 			backgroundRepeat: 'no-repeat',
 		};
 
+		var malayOdds = state.malayOdds;
+		var hkOdds = state.hkOdds;
+		var euroOdds = state.euroOdds;
+		var indoOdds = state.indoOdds;
+
 		return (
 			<div>
 				<div className="cl-bar-title">
@@ -63,31 +126,38 @@ export class OddsConvertTable extends FRefluxStoreComponent<OddsConvertTableProp
 
 				<div className="cl-content cl" style={contentStyle}>
 					<div className="cl-article padded">
-						<button>Manila</button>
+						<button onClick={this.handleOnClickCalculate.bind(this, OddsType.Malay)}>
+							Malay
+						</button>
 						</div>
 					<div className="cl-form padded">
-						<input ref="manilaOdds" type="text" style={textStyle} />
+						<input ref="manilaOdds" type="text" style={textStyle} value={malayOdds} onChange={this.handleOnChage.bind(this, OddsType.Malay)} />
 						</div>
 
 					<div className="cl-article padded">
-						<button>HK</button>
+						<button onClick={this.handleOnClickCalculate.bind(this, OddsType.Hk) }>
+							HK
+							</button>
 						</div>
 					<div className="cl-form padded">
-						<input type="text" style={textStyle} />
+						<input type="text" style={textStyle} value={hkOdds} onChange={this.handleOnChage.bind(this, OddsType.Hk) }/>
 						</div>
 
 					<div className="cl-article padded">
-						<button>Euro</button>
+						<button onClick={this.handleOnClickCalculate.bind(this, OddsType.Euro) }>
+							Euro
+							</button>
 						</div>
 					<div className="cl-form padded">
-						<input type="text" style={textStyle} />
+						<input type="text" style={textStyle} value={euroOdds} onChange={this.handleOnChage.bind(this, OddsType.Euro) }/>
 						</div>
 
 					<div className="cl-article padded">
-						<button>Indo</button>
+						<button onClick={this.handleOnClickCalculate.bind(this, OddsType.Indo) }>
+							Indo</button>
 						</div>
 					<div className="cl-form padded">
-						<input type="text" style={textStyle} />
+						<input type="text" style={textStyle} value={indoOdds} onChange={this.handleOnChage.bind(this, OddsType.Indo) }/>
 						</div>
 
 					</div>

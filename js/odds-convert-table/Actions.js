@@ -9,13 +9,13 @@ define(["require", "exports", 't1'], function (require, exports, t1) {
     (function (OddsActionType) {
         OddsActionType[OddsActionType["Calculate"] = 0] = "Calculate";
     })(OddsActionType || (OddsActionType = {}));
-    var OddsType;
     (function (OddsType) {
-        OddsType[OddsType["Manila"] = 0] = "Manila";
-        OddsType[OddsType["HK"] = 1] = "HK";
+        OddsType[OddsType["Malay"] = 0] = "Malay";
+        OddsType[OddsType["Hk"] = 1] = "Hk";
         OddsType[OddsType["Euro"] = 2] = "Euro";
         OddsType[OddsType["Indo"] = 3] = "Indo";
-    })(OddsType || (OddsType = {}));
+    })(exports.OddsType || (exports.OddsType = {}));
+    var OddsType = exports.OddsType;
     var OddsActions = (function (_super) {
         __extends(OddsActions, _super);
         function OddsActions() {
