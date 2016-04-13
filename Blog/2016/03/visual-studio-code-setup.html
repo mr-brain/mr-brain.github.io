@@ -60,37 +60,50 @@
 
 <ul class="list-group">
 	<h2>
-		<a href="#">T1.TinyIoc Example</a>
+		<a href="#">Setting up TypeScript + Visual Studio Code development environment</a>
 	</h2>
-	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/25 20:22:45</p>
-	<p><a href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
-<p>The following code is using t1.TinyIoc example</p>
-<pre><code>import t1 require(&quot;t1&quot;);
-class IMyKlass implements t1.IIocInterfaceChecker {
-	className: string = &quot;IMyKlass&quot;;
-	test(): number {
-		throw new Error(&quot;Not implement&quot;);
-	}
-}
-
-class MyKlass extends IMyKlass {
-	test(): number {
-		return 123;
-	}
-}
-
-t1.TinyIoc.registerType(IMyKlass, MyKlass);
-
-var obj: IMyKlass = Ioc.resolve(IMyKlass);
-var val = obj.test();
-expect(val).toBe(123);
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/31 10:33:58</p>
+	<p>Let's get started!</p>
+<ul>
+<li>Download and installing <a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
+<li>Download and installing <a href="https://nodejs.org/en/download/">node.js 4.4.1</a></li>
+</ul>
+<p>Let's now install some VS code extensions.
+Open VS Code when you are ready and use Shift + Ctrl + p
+to access command panel.</p>
+<p>type &quot;install extensions&quot;</p>
+<p><img src="/Source/2016/03/visual-studio-code-setup/install-extensions.png" alt="install-extensions" /></p>
+<pre><code>ext install tslin
 </code></pre>
-<p>If you need global instance</p>
-<pre><code>t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());
+<p>Note The tslint extension requires a global installation of tslint:</p>
+<pre><code>npm install -g tslint
 </code></pre>
-<p>You can even</p>
-<pre><code>t1.TinyIoc.registerLazy(IMyKlass, () =&gt; new MyKlass());
+<p>then restart VS Code</p>
+<pre><code>ext install Wallaby.js
+
+
+&gt;mkdir ts-vscode-boilerplate
+&gt;cd ts-vscode-boilerplate
+&gt;npm init
 </code></pre>
+<p>We are now ready to install the third party dependencies:</p>
+<pre><code>$ npm install  --save-dev browser-sync
+$ npm install  --save-dev browserify
+$ npm install  --save-dev chai
+$ npm install  --save-dev gulp
+$ npm install  --save-dev gulp-istanbul
+$ npm install  --save-dev gulp-mocha
+$ npm install  --save-dev gulp-sourcemaps
+$ npm install  --save-dev gulp-tslint
+$ npm install  --save-dev gulp-typescript
+$ npm install  --save-dev gulp-uglify
+$ npm install  --save-dev run-sequence
+$ npm install  --save-dev tslint
+$ npm install  --save-dev typescript
+$ npm install  --save-dev vinyl-buffer
+$ npm install  --save-dev vinyl-source-stream
+</code></pre>
+<p>Open VS Code and Click preferences -&gt; “Workspace Settings”.</p>
 
 
 </ul>
@@ -98,10 +111,10 @@ expect(val).toBe(123);
 <!-- Pager -->
 <ul class="pager">
 		<li class="previous">
-			<a href="/Blog/2016/03/odds-convert-table.html">&larr; Older</a>
+			<a href="/Blog/2016/03/t1-tinyioc-example.html">&larr; Older</a>
 		</li>
 			<li class="next">
-			<a href="/Blog/2016/03/visual-studio-code-setup.html">Newer &rarr;</a>
+			<a href="/Blog/2016/04/install-git-server-on-windows.html">Newer &rarr;</a>
 		</li>
 </ul>
 

@@ -60,36 +60,19 @@
 
 <ul class="list-group">
 	<h2>
-		<a href="#">T1.TinyIoc Example</a>
+		<a href="#">Install .NET Core</a>
 	</h2>
-	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/25 20:22:45</p>
-	<p><a href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
-<p>The following code is using t1.TinyIoc example</p>
-<pre><code>import t1 require(&quot;t1&quot;);
-class IMyKlass implements t1.IIocInterfaceChecker {
-	className: string = &quot;IMyKlass&quot;;
-	test(): number {
-		throw new Error(&quot;Not implement&quot;);
-	}
-}
-
-class MyKlass extends IMyKlass {
-	test(): number {
-		return 123;
-	}
-}
-
-t1.TinyIoc.registerType(IMyKlass, MyKlass);
-
-var obj: IMyKlass = Ioc.resolve(IMyKlass);
-var val = obj.test();
-expect(val).toBe(123);
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/06 12:31:43</p>
+	<p>The best way to install .NET Core on Windows is to download the <a href="https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/1.0.0.001598/dotnet-win-x64.1.0.0.001598.exe">official MSI installer</a>. This installer will install the tools and put them on your PATH.</p>
+<p>If you are using Windows 7, Windows Server 2008 or Windows Server 2012 you will also need to install Visual C++ Redistributable for <a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual Studio 2012 Update 4</a> &amp; <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145">Visual C++ Redistributable for Visual Studio 2015</a> .</p>
+<p>Initialize some code</p>
+<pre><code>C:\&gt;mkdir hwapp
+C:\&gt;cd hwapp
+C:\&gt;dotnet new
 </code></pre>
-<p>If you need global instance</p>
-<pre><code>t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());
-</code></pre>
-<p>You can even</p>
-<pre><code>t1.TinyIoc.registerLazy(IMyKlass, () =&gt; new MyKlass());
+<p>The first command will restore the packages specified in the project.json file, and the second command will run the actual sample:</p>
+<pre><code>C:\&gt;dotnet restore
+C:\&gt;dotnet run
 </code></pre>
 
 
@@ -98,10 +81,10 @@ expect(val).toBe(123);
 <!-- Pager -->
 <ul class="pager">
 		<li class="previous">
-			<a href="/Blog/2016/03/odds-convert-table.html">&larr; Older</a>
+			<a href="/Blog/2016/04/install-aspnet5-dotnet-core1.html">&larr; Older</a>
 		</li>
 			<li class="next">
-			<a href="/Blog/2016/03/visual-studio-code-setup.html">Newer &rarr;</a>
+			<a href="/Blog/2016/04/create-electron-develop-environment.html">Newer &rarr;</a>
 		</li>
 </ul>
 

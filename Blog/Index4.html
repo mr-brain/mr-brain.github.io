@@ -59,6 +59,207 @@
 				
 
 <h2>
+	<a href="#">ASP.NET MVC Table Grid Post Form And Read Lines</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/11/30 18:47:47</p>
+<p>How can read the posted grid data line by line?</p>
+<p>You can create a Model for Stock and it can be bind to your view. Then you can pass list of stock objects to controller as below.</p>
+<p><strong>Stock Model</strong></p>
+<pre><code>public class Stock
+{
+    public int StockId { get; set; }
+    public int Amount { get; set; }
+    public decimal Price { get; set; }
+}
+</code></pre>
+<p><strong>View</strong></p>
+<pre><code>@model IEnumerable&lt;Stock&gt;
+&lt;form action=&quot;/Controler/ActionStockNew&quot; method=&quot;post&quot; id=&quot;form&quot;&gt;
+&lt;table&gt;
+    @for (int i = 0; i &lt; Model.Count(); i++)
+    {&lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type=&quot;text&quot; name=&quot;[@i].StockId&quot; /&gt;
+        &lt;/td&gt;
+        &lt;td&gt;
+            &lt;input type=&quot;text&quot; name=&quot;[@i].Amount&quot; /&gt;
+        &lt;/td&gt;
+        &lt;td&gt;
+            &lt;input type=&quot;text&quot; name=&quot;[@i].Price&quot; /&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    }
+&lt;/table&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Save&quot; /&gt;
+&lt;/form&gt;
+</code></pre>
+<p><strong>Controllers</strong></p>
+<pre><code>public ActionResult ActionStockNew()
+{
+    List&lt;Stock&gt; stockList = new List&lt;Stock&gt;();
+    // fill stock
+
+    return View(stockList);
+}
+
+[HttpPost]
+public ActionResult ActionStockNew(ICollection&lt;Stock&gt; stockList)
+{
+    // process
+}
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Overriding == operator. How to compare to null?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/11/21 22:12:59</p>
+<p>Here is a simplified example:</p>
+<pre><code>public static bool operator ==(ThreeDPoint a, ThreeDPoint b)
+{
+    if (a == null)
+    {
+         //any code here never gets executed!  We first die a slow painful death.
+    }
+    return a.Equals(b);
+}
+</code></pre>
+<p>However, what happens when a ThreeDPoint  object is null?</p>
+<p>You can't write:</p>
+<pre><code>ThreeDPoint  a;
+if (a == null)
+{
+    //fail!
+}
+</code></pre>
+<p>Use object.ReferenceEquals(person1, null) instead of the == operator:</p>
+<pre><code>public static bool operator ==(ThreeDPoint a, ThreeDPoint b)
+{
+    // If both are null, or both are same instance, return true.
+    if (System.Object.ReferenceEquals(a, b))
+    {
+        return true;
+    }
+
+    // If one is null, but not both, return false.
+    if (((object)a == null) || ((object)b == null))
+    {
+        return false;
+    }
+
+    // Return true if the fields match:
+    return a.x == b.x &amp;&amp; a.y == b.y &amp;&amp; a.z == b.z;
+}
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to compile razor views at compile time ?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/10/16 10:05:31</p>
+<p>Razor views are dynamically compiled by the ASP.NET runtime. If you want your views to be built at compile-time you could add the following option to your .csproj file:</p>
+<pre><code>&lt;PropertyGroup Condition=&quot; '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' &quot;&gt;
+	...
+    &lt;MvcBuildViews&gt;true&lt;/MvcBuildViews&gt;
+&lt;/PropertyGroup&gt;
+
+...
+&lt;Target Name=&quot;MvcBuildViews&quot; AfterTargets=&quot;AfterBuild&quot; Condition=&quot;'$(MvcBuildViews)'=='true'&quot;&gt;
+	&lt;AspNetCompiler VirtualPath=&quot;temp&quot; PhysicalPath=&quot;$(WebProjectOutputDir)&quot; /&gt;
+&lt;/Target&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to get VS.NET 2013 off-line Update 3 ?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/08/08 22:12:59</p>
+<p>Download VS.NET 2013 Update 3 online setup file from http://www.microsoft.com/en-US/download/details.aspx?id=43721</p>
+<p>Input following command</p>
+<blockquote>
+<p>VS2013.3.exe /layout</p>
+</blockquote>
+<p><img src="/Source/2014/08/https://dl.dropboxusercontent.com/u/13003046/images/VS2013-Update3.PNG" alt="img" /></p>
+<p>You will get the about 1.8G files in download folder.
+Click VS2013.exe will install VS.NET 2013 Update 3.</p>
+
+
+<hr>
+<h2>
+	<a href="#">C# Convert XML String to Object</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/07/04 22:12:59</p>
+<p>You need to use the xsd.exe tool which gets installed with the Windows SDK into a directory something similar to:</p>
+<pre><code>C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin
+</code></pre>
+<p>And on 64bit computers:</p>
+<pre><code>C:\Program Files (x86)\Microsoft SDKs\Windows\v6.0A\bin
+</code></pre>
+<p>On the first run, you use xsd.exe and you convert your sample XML into a XSD file (XML schema file):</p>
+<pre><code>xsd yourfile.xml
+</code></pre>
+<p>This gives you yourfile.xsd, which in a second step, you can convert again using xsd.exe into a C# class:</p>
+<pre><code>xsd yourfile.xsd /c
+</code></pre>
+<p>You can deserialize xml string to C# object:</p>
+<pre><code>StringReader sr = new StringReader(xmlStr);
+XmlSerializer mySerializer = new XmlSerializer(typeof(YourObject));
+YourObject obj = (YourObject)mySerializer.Deserialize(sr);
+</code></pre>
+<p>You can serialize object to <strong>simple</strong> xml string.
+First, you must declare namespace in YourObject:</p>
+<pre><code>public class YourObject
+{
+   public YourObject()
+   {
+    this._namespaces = new XmlSerializerNamespaces(new XmlQualifiedName[] {
+      new XmlQualifiedName(string.Empty, &quot;urn:Abracadabra&quot;) // Default Namespace
+    });
+  }
+
+  [XmlNamespaceDeclarations]
+  public XmlSerializerNamespaces Namespaces
+  {
+    get { return this._namespaces; }
+  }
+  private XmlSerializerNamespaces _namespaces;
+
+  ...
+}
+</code></pre>
+<p>Then you can start serialize obj to xml string:</p>
+<pre><code>MemoryStream ms = new MemoryStream();
+XmlSerializer mySerializer = new XmlSerializer(typeof(YourObject));
+mySerializer.Serialize(ms, obj, obj.Namespaces);
+ms.Position = 0;
+StreamReader sr = new StreamReader(ms);
+string strXml = sr.ReadToEnd();
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Display GMT date-time format string for C#</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/07/01 11:31:39</p>
+<p>The perform code is:</p>
+<pre><code>public static string GetGmtTimeString(this DateTime now)
+{
+  double gmt = TimeZoneInfo.Local.GetUtcOffset(now).TotalHours;
+  string gmtTime = string.Format(&quot;{0} GMT{1}{2}&quot;,
+    now.ToString(&quot;yyyy/MM/dd HH:mm:ss&quot;),
+      (gmt &gt;= 0) ? &quot;+&quot; : &quot;&quot;,
+      gmt);
+  return gmtTime;
+}
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">NullReferenceException unexplained error in ASP.NET MVC</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/29 22:12:59</p>
@@ -240,158 +441,6 @@ Extras &gt;&gt; ... more options, then tab bar Association.</p>
 <p>Would be better to write a lot of use.</p>
 <pre><code>distinctDatas = myList.DistinctBy(person =&gt; person.Name);
 </code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Get Class list for element with jQuery</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/05 22:12:59</p>
-<p>You can iterate and find the one you want:</p>
-<pre><code>var classList = $('#divId').attr('class').split(/\s+/);
-$.each( classList, function(index, item){
-    if (item === 'someClass') {
-       //do something
-    }
-});
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">jQuery Multiple Attribute Selector</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/04 22:12:59</p>
-<p>jQuery Multiple Attribute Selector</p>
-<blockquote>
-<p>input name=value <em>AND</em> name2=value2</p>
-</blockquote>
-<p>is perform following:</p>
-<pre><code>$['input[name=&quot;value&quot;][name2=&quot;value2&quot;]')
-</code></pre>
-<blockquote>
-<p>input name=value <em>OR</em> name2=value2</p>
-</blockquote>
-<p>is perform following:</p>
-<pre><code>$['input[name=&quot;value&quot;] , [name2=&quot;value2&quot;]')
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Unit Testing ASP.NET Web Site Project code stored in APP_Code</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/03 22:12:59</p>
-<p>Here's a Website.targets file you can include in unit testing solution. It (re)compiles website only when App_Code changes. Just add something in <strong>Test Project</strong> like</p>
-<pre><code>&lt;PropertyGroup&gt;
-    &lt;WebsiteName&gt;*MyWebsite*&lt;/WebsiteName&gt;
-    &lt;WebsitePath&gt;..&lt;/WebsitePath&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;Import Project=&quot;$(ProjectDir)\Website.targets&quot; &gt;&lt;/Import&gt;
-  &lt;Target Name=&quot;BeforeBuild&quot; DependsOnTargets=&quot;CompileWebsite&quot;&gt;
-  &lt;/Target&gt;
-</code></pre>
-<p>to your .csproj, customizing WebsiteName and WebsitePath and you should be ready to create <strong>Website.targets</strong> file in Test Project Folder:</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;!--
-    Target that compiles Website's App_Code to be used for testing
-  --&gt;
-&lt;Project DefaultTargets=&quot;CompileWebsite&quot; ToolsVersion=&quot;4.0&quot; xmlns=&quot;http://schemas.microsoft.com/developer/msbuild/2003&quot;&gt;
-  &lt;ItemGroup&gt;
-    &lt;AppCodeFiles Include=&quot;$(WebsitePath)\$(WebsiteName)\App_Code\**\*.*&quot; &gt;&lt;/AppCodeFiles&gt;
-  &lt;/ItemGroup&gt;
-  &lt;Target Name=&quot;CompileWebsite&quot; Inputs=&quot;@(AppCodeFiles)&quot; Outputs=&quot;$(ProjectDir)\PrecompiledWeb\bin\App_Code.dll&quot;&gt;
-    &lt;AspNetCompiler VirtualPath=&quot;$(WebsiteName)&quot; PhysicalPath=&quot;$(WebsitePath)\$(WebsiteName)&quot; TargetPath=&quot;$(ProjectDir)\PrecompiledWeb&quot; Force=&quot;true&quot; Debug=&quot;true&quot; &gt;&lt;/AspNetCompiler&gt;
-  &lt;/Target&gt;
-  &lt;Target Name=&quot;CleanWebsite&quot;&gt;
-    &lt;RemoveDir Directories=&quot;$(WebsitePath)\$(WebsiteName)\PrecompiledWeb&quot; &gt;&lt;/RemoveDir&gt;
-  &lt;/Target&gt;  
-&lt;/Project&gt;
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">How to deploy files for VS.NET Unit Test Project</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/03 22:12:59</p>
-<p>Here’s the easiest way to accomplish deploying folders to the TestResults folder:</p>
-<p>1.	Right click on the .testrunconfig file in your solution explorer.  For me, its LocalTestRun.testrunconfig.
-2.	Select Open With and select XML editor
-3.	Add a deployment item, specifying the relative path as the file name and an outputdirectory value of the directory name.  In my example, I want to deploy everything in the configuration directory to a folder called configuration in the testrun folder, so I’ve added the following entry:</p>
-<pre><code class="language-xml">&lt;Deployment&gt;
-  &lt;DeploymentItem filename=&quot;Services\Identity\Claim\ClaimService.Test\configuration\&quot; outputDirectory=&quot;configuration\&quot; &gt;&lt;/DeploymentItem&gt;
-&lt;/Deployment&gt;
-</code></pre>
-<p>Now when my tests execution, Visual Studio copies over all my configuration file entries and is able to load the app.config file successfully.</p>
-
-
-<hr>
-<h2>
-	<a href="#">log all methods using AutoFac interceptor</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/02 22:12:59</p>
-<p>Add references to:</p>
-<p>*	Autofac.dll (v3.1.1)
-*	Autofac.Extras.DynamicProxy2.dll (v3.0.2)
-*	Castle.Core.dll (Castle.Core 3.2.0 for .NETFramework v4.0 Client Profile)</p>
-<p>#Create Interceptors#
-Interceptors implement the Castle.DynamicProxy.IInterceptor interface. Here's a simple interceptor example that logs method calls including inputs and outputs:</p>
-<pre><code>public class LoggerClass : IInterceptor
-{
-	public void Intercept(IInvocation invocation)
-	{
-		Console.WriteLine(&quot;Calling method {0} with parameters {1}... &quot;,
-			invocation.Method.Name,
-			string.Join(&quot;, &quot;, invocation.Arguments.Select(a =&gt; (a ?? &quot;&quot;).ToString()).ToArray()));
-
-		invocation.Proceed();
-
-		Console.WriteLine(&quot;Done: result was {0}.&quot;, invocation.ReturnValue);
-	}
-}
-</code></pre>
-<p>#Register Interceptors with Autofac#
-Interceptors must be registered with the container. You can register them either as typed services or as named services. If you register them as named services, they must be named IInterceptor registrations.</p>
-<p>Which of these you choose depends on how you decide to associate interceptors with the types being intercepted.</p>
-<pre><code>// Named registration
-builder.Register(c =&gt; new LoggerClass())
-       .Named&lt;IInterceptor&gt;(&quot;log-calls&quot;);
-
-// Typed registration
-builder.Register(c =&gt; new LoggerClass());
-</code></pre>
-<p>#Enable Interception on Types#
-When you register a type being intercepted, you have to mark the type at registration time so Autofac knows to wire up that interception. You do this using the EnableInterfaceInterceptors() and EnableClassInterceptors() registration extensions.</p>
-<pre><code>ContainerBuilder cb = new ContainerBuilder();
-cb.RegisterType&lt;SomeType&gt;()
-	 .As&lt;ISomeInterface&gt;()
-	 .EnableInterfaceInterceptors()
-	 .InterceptedBy(typeof(LoggerClass));
-cb.Register(c =&gt; new LoggerClass());
-</code></pre>
-<p>Under the covers, EnableInterfaceInterceptors() creates an interface proxy that performs the interception, while EnableClassInterceptors() dynamically subclasses the target component to perform interception of virtual methods.</p>
-<p>Both techniques can be used in conjunction with the assembly scanning support, so you can configure batches of components using the same methods.</p>
-
-
-<hr>
-<h2>
-	<a href="#">Cannot see cs files after last rename VS.NET 2013 Projects</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/31 21:00:34</p>
-<p>After I rename VS.NET 2013 Project Name, I had this <strong>&quot;The 'Microsoft.VisualStudio.Editor.Implementation.EditorPackage' package did not load correctly.&quot;</strong> error message when I started up Visual Studio 2013.</p>
-<p><img src="/Source/2014/05/https://dl.dropboxusercontent.com/u/13003046/images/VS2013-ActivityLog-xml-Exception.png" alt="img" /></p>
-<p>This is telling me to open ActivityLog.xml, and hopefully an answer will be found.  So I opened up that file and found some error entries:</p>
-<blockquote>
-<p>No EditorOptionDefinition export found for the given option name: Graphics/Simple/Enable
-Parameter name: optionId</p>
-</blockquote>
-<p>For Visual Studio 2013, it’s located in the</p>
-<blockquote>
-<p>%LOCALAPPDATA%\Microsoft\VisualStudio\12.0 folder.
-For Visual Studio 2012, it's 11.0 folder.</p>
-</blockquote>
-<p>I renamed <strong>ComponentModelCache</strong> to <strong>ComponentModelCache.Borked</strong> and restarted Visual Studio. It started right up and without any errors.</p>
 
 
 <hr>

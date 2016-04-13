@@ -59,6 +59,162 @@
 				
 
 <h2>
+	<a href="#">Install Hexo</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/05 09:30:43</p>
+<h3>Create a GitHub Account</h3>
+<p>Create a new Repository name: &quot;username.github.io&quot;</p>
+<p>username must same as account name</p>
+<h3>Install Node.js</h3>
+<pre><code>npm install hexo -g
+npm init Blog
+cd Blog
+</code></pre>
+<p>npm install</p>
+<pre><code>npm install hexo-generator-index --save
+npm install hexo-generator-archive --save
+npm install hexo-generator-category --save
+npm install hexo-generator-tag --save
+npm install hexo-server --save
+npm install hexo-deployer-git --save
+npm install hexo-deployer-heroku --save
+npm install hexo-deployer-rsync --save
+npm install hexo-deployer-openshift --save
+npm install hexo-renderer-marked@0.2 --save
+npm install hexo-renderer-stylus@0.2 --save
+npm install hexo-generator-feed@1 --save
+npm install hexo-generator-sitemap@1 --save
+npm install hexo-tag-bootstrap --save
+npm install hexo-generator-search --save
+</code></pre>
+<p>Process the following command, and visit localhost:4000 to see the result</p>
+<pre><code>hexo server
+</code></pre>
+<p>The Following command that generate public folder, you can deploy it to your target site folder.</p>
+<pre><code>hexo g
+</code></pre>
+<p>Modify _config.yml file in Blog Folder</p>
+<pre><code>deploy:
+  type: git
+  repo: https://github.com/username/username.github.io.git
+  branch: master
+</code></pre>
+<p>Deploy to GitHub command</p>
+<pre><code>hexo d -g
+</code></pre>
+<p>Other</p>
+<pre><code>hexo n #Generate articles，or source\_posts manually edit/create md file
+hexo s #deploy preview result
+</code></pre>
+<p>Update Hexo</p>
+<pre><code>npm update -g
+</code></pre>
+<p>Install Other Theme</p>
+<pre><code>git clone https://github.com/MOxFIVE/hexo-theme-yelee.git themes/yelee		
+</code></pre>
+<p>Modify themes/yelee/_config.yml</p>
+
+
+<hr>
+<h2>
+	<a href="#">When debug a Typescript application in Google Chrome, the *.ts files are appear totally empty ?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/11/25 07:58:43</p>
+<p>You try to add following to your web.config</p>
+<pre><code>&lt;system.webServer&gt;
+  ...
+  &lt;staticContent&gt;
+    &lt;remove fileExtension=&quot;.tsx&quot; /&gt;
+    &lt;mimeMap fileExtension=&quot;.tsx&quot; mimeType=&quot;application/javascript&quot; /&gt;
+  &lt;/staticContent&gt;
+&lt;/system.webServer&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">nuget &#39;packages&#39; element is not declared warning</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/08/02 09:01:55</p>
+<p>not a showstopper but when using nuget in a project, it creates a packages.config file with this shape</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;packages&gt;
+   ... your packages
+&lt;/packages&gt;
+</code></pre>
+<p>this gives a warning in VS</p>
+<blockquote>
+<p>The 'packages' element is not declared.</p>
+</blockquote>
+<p>You can always make simple xsd schema for 'packages.config' to get rid of this warning. To do this, create file named &quot;packages.xsd&quot;:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; elementFormDefault=&quot;qualified&quot;
+      targetNamespace=&quot;urn:packages&quot; xmlns=&quot;urn:packages&quot;&gt;
+  &lt;xs:element name=&quot;packages&quot;&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element name=&quot;package&quot; maxOccurs=&quot;unbounded&quot;&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:attribute name=&quot;id&quot; type=&quot;xs:string&quot; use=&quot;required&quot; /&gt;
+            &lt;xs:attribute name=&quot;version&quot; type=&quot;xs:string&quot; use=&quot;required&quot; /&gt;
+            &lt;xs:attribute name=&quot;targetFramework&quot; type=&quot;xs:string&quot; use=&quot;optional&quot; /&gt;
+            &lt;xs:attribute name=&quot;allowedVersions&quot; type=&quot;xs:string&quot; use=&quot;optional&quot; /&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+      &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;
+</code></pre>
+<p>Location of this file (two options)</p>
+<p>In the same folder as 'packages.config' file,
+If you want to share packages.xsd across multiple projects, move it to the Visual Studio Schemas folder (the path may slightly differ, it's  D:\Program Files (x86)\Microsoft Visual Studio 10.0\Xml\Schemas for me).
+Then, edit <packages> tag in packages.config file (add xmlns attribute):</p>
+<pre><code>&lt;packages xmlns=&quot;urn:packages&quot;&gt;
+</code></pre>
+<p>Now the warning should disappear (even if packages.config file is open in Visual Studio).</p>
+
+
+<hr>
+<h2>
+	<a href="#">ASP.NET MVC throw Exception</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/07/27 16:04:37</p>
+<p>My application was working fine and after I did some upgrades I am getting this error.</p>
+<pre><code>	Attempt by 'System.Web.Mvc.PreApplicationStartCode.Start()' to critical method 'System.Web.WebPages.Razor.PreApplicationStartCode.Start()' failed
+</code></pre>
+<p>Please use this package from nuget</p>
+<p>Install-Package Microsoft.AspNet.Mvc -Version 5.2.2</p>
+
+
+<hr>
+<h2>
+	<a href="#">VS.NET 2013 Error</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/05/21 14:09:56</p>
+<p>Getting Error &quot;'Microsoft.VisualStudio.Editor.Implementation.EditorPackage' package did not load correctly&quot;?</p>
+<blockquote>
+<p>Please try to remove %LOCALAPPDATA%\Microsoft\VisualStudio\11.0\ComponentModelCache and restarting VS2012. Hope this will fix your issue.</p>
+</blockquote>
+
+
+<hr>
+<h2>
+	<a href="#">NuGet Manager Console</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/05/07 21:47:26</p>
+<p>List all available versions of a specific package?</p>
+<blockquote>
+<p>get-package -ListAvailable -AllVersions -filter nunit -source https://nuget.org/api/v2/</p>
+</blockquote>
+<p>How to install special version of package?</p>
+<blockquote>
+<p>install-package nunit -version x.xx</p>
+</blockquote>
+
+
+<hr>
+<h2>
 	<a href="#">Resharper shortcut keys</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/06 07:31:40</p>
@@ -135,248 +291,6 @@ C:\Users\xxx\AppData\Local\Microsoft\VisualStudio\12.0\Extensions\2q5cdx5o.qzv\T
   });
 });
 </code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">What is the GOOGLE_INPUT_CHEXT_FLAG in web pages?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/24 23:15:55</p>
-<p>Now a days I can see that just before the ending of the </body> tag something like below appears:</p>
-<pre><code>&lt;div id=&quot;GOOGLE_INPUT_CHEXT_FLAG&quot; style=&quot;display: none;&quot; input=&quot;&quot; input_stat=&quot;{}&quot;&gt;&lt;/div&gt;
-</code></pre>
-<p>I can see this in every webpages whenever I try to Inspect Element in Google Chrome.</p>
-<p>I have got the point. Its because of the extension: <strong>Google Input Tools (by Google)</strong>.</p>
-
-
-<hr>
-<h2>
-	<a href="#">angular tutor</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/24 22:44:12</p>
-<p>How to load Template in Angular?</p>
-<pre><code>public class HomeController : Controller
-{
-	public ActionResult Template(string id)
-	{
-		return PartialView(string.Format(&quot;~/Views/Home/Partials/{0}.cshtml&quot;, id));
-	}
-}
-</code></pre>
-<p>Then, we can use following code</p>
-<pre><code>&lt;div ng-include=&quot;'/Home/Template/Index'&quot;&gt;&lt;/div&gt;
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">angular with many errors in typescript typing files</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/16 22:42:13</p>
-<p>I have a problem with Visual Studio 2013 generating too many errors when using
-angular.d.ts typescript type file.</p>
-<p>all in jquery.d.ts, like the following errors:</p>
-<blockquote>
-<p>',' expected.</br>
-'=' expected.</br>
-Identifier expected.</p>
-</blockquote>
-<p>The most likely reason for this is that you are using an older version of TypeScript.
-The language is moving swiftly and some of the features in version 1.4 are particularly useful in definition files, so it is likely that you will need to upgrade to 1.4.</p>
-<p>Download version 1.4 <a href="https://visualstudiogallery.msdn.microsoft.com/2d42d8dc-e085-45eb-a30b-3f7d50d55304">here</a> (Updated 2015.01.16)</p>
-<p>However, Where can I find the TypeScript version installed in Visual Studio?
-you can simply do in Visual Studio Command Prompt:</p>
-<pre><code>tsc -v
-</code></pre>
-<p>It will display typescript version</p>
-<pre><code>Version 1.0.3.0
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Handling Session and Authentication Timeouts in ASP.NET MVC</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/15 11:48:48</p>
-<p>The SessionExpireFilterAttribute action filter is then automatically called before each action to check if Session&quot;UserName&quot; is null. If it determines a timeout has not occurred, it allows the actual called action to execute. Otherwise, it forces a redirect to a timeout notification page, which in turn redirects to the logon page to allow the user to re-logon.</p>
-<pre><code>[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
-public class SessionExpireFilterAttribute : ActionFilterAttribute
-{
-	public override void OnActionExecuting(ActionExecutingContext filterContext)
-	{
-		HttpContext ctx = HttpContext.Current;
-
-		// If the browser session or authentication session has expired...
-		if (ctx.Session[&quot;UserName&quot;] == null || !filterContext.HttpContext.Request.IsAuthenticated)
-		{
-			if (filterContext.HttpContext.Request.IsAjaxRequest())
-			{
-				// For AJAX requests, we're overriding the returned JSON result with a simple string,
-				// indicating to the calling JavaScript code that a redirect should be performed.
-				filterContext.Result = new JsonResult { Data = &quot;_LogonTimeoutRedirect_&quot; };
-			}
-			else
-			{
-				// For round-trip posts, we're forcing a redirect to Home/TimeoutRedirect/, which
-				// simply displays a temporary 5 second notification that they have timed out, and
-				// will, in turn, redirect to the logon page.
-				filterContext.Result = new RedirectToRouteResult(
-						new RouteValueDictionary {
-                    { &quot;Controller&quot;, &quot;Home&quot; },
-                    { &quot;Action&quot;, &quot;TimeoutRedirect&quot; }
-            });
-			}
-		}
-		base.OnActionExecuting(filterContext);
-	}
-}
-</code></pre>
-<p>We'll create a couple of action filters to provide cross-cutting checks for timeout scenarios. The first will normally be hit when the browser session has timed out, but will also handle if the authentication has timed out first:</p>
-<pre><code>[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
-public class SessionAuthorizeAttribute : AuthorizeAttribute
-{
-    protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
-    {
-        HttpContext ctx = HttpContext.Current;
- 
-        // If the browser session has expired...
-        if (ctx.Session[&quot;UserName&quot;] == null)
-        {
-            if (filterContext.HttpContext.Request.IsAjaxRequest())
-            {
-                // For AJAX requests, we're overriding the returned JSON result with a simple string,
-                // indicating to the calling JavaScript code that a redirect should be performed.
-                filterContext.Result = new JsonResult { Data = &quot;_LogonTimeoutRedirect_&quot; };
-            }
-            else
-            {
-                // For round-trip posts, we're forcing a redirect to Home/TimeoutRedirect/, which
-                // simply displays a temporary 5 second notification that they have timed out, and
-                // will, in turn, redirect to the logon page.
-                filterContext.Result = new RedirectToRouteResult(
-                    new RouteValueDictionary {
-                        { &quot;Controller&quot;, &quot;Home&quot; },
-                        { &quot;Action&quot;, &quot;TimeoutRedirect&quot; }
-                });
-            }
-        }
-        else if (filterContext.HttpContext.Request.IsAuthenticated)
-        {
-            // Otherwise the reason we got here was because the user didn't have access rights to the
-            // operation, and a 403 should be returned.
-            filterContext.Result = new HttpStatusCodeResult(403);
-        }
-        else
-        {
-            base.HandleUnauthorizedRequest(filterContext);
-        }
-    }
-}
-</code></pre>
-<p>The Timeout Warning Message Page</p>
-<pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;5;url=/Account/Logon/&quot; /&gt;
-&lt;h2&gt;
-  Sorry, but your session has timed out. You'll be redirected to the Log On page in 5 seconds...
-&lt;/h2&gt;
-</code></pre>
-<p>We can register global filter</p>
-<pre><code>public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-{
-	filters.Add(new HandleErrorAttribute());
-	filters.Add(new SessionExpireFilterAttribute());
-	filters.Add(new SessionAuthorizationAttribute());
-}
-</code></pre>
-<p>Client-Side Calling Code Sample</p>
-<pre><code>$.ajax({
-    url: &quot;/MyController/MyAction&quot;,
-    type: 'POST',
-    dataType: 'json',
-    data: jsonData,
-    contentType: 'application/json; charset=utf-8',
-    success: function (result) {
-        if (checkTimeout(result)) {
-            // There was no timeout, so continue processing...
-        }
-    },
-    error: function (result) {
-        if (checkTimeout(result)) {
-            // There was no timeout, so continue processing...
-        }
-    }
-});
-
-
-function checkTimeout(data) {
-    var thereIsStillTime = true;
-    if (data) {
-        if (data.responseText) {
-            if ((data.responseText.indexOf(&quot;&lt;title&gt;Log On&lt;/title&gt;&quot;) &gt; -1) || (data.responseText.indexOf(&quot;&lt;title&gt;Object moved&lt;/title&gt;&quot;) &gt; -1) || (data.responseText === '&quot;_LogonTimeoutRedirect_&quot;')) thereIsStillTime = false;
-        } else {
-            if (data == &quot;_Logon_&quot;) thereIsStillTime = false;
-        }
-        if (!thereIsStillTime) {
-            window.location.href = &quot;/Home/TimeoutRedirect&quot;;
-        }
-    } else {
-        $.ajax({
-            url: &quot;/Home/CheckTimeout/&quot;,
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            async: false,
-            complete: function (result) {
-                thereIsStillTime = checkTimeout(result);
-            }
-        });
-    }
-    return thereIsStillTime;
-}
-</code></pre>
-<p>In Web.config, we can control the session timeout</p>
-<pre><code>&lt;system.web&gt;
-  &lt;sessionState mode=&quot;InProc&quot; timeout=&quot;1&quot; cookieless=&quot;UseCookies&quot; /&gt;
-&lt;/system.web&gt;
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Found conflicts between different versions of the same dependent assemblies</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/11 21:58:35</p>
-<blockquote>
-<p>Found conflicts between different versions of the same dependent assembly. Please set the &quot;AutoGenerateBindingRedirects&quot; property to true in the project file. For more information, see http://go.microsoft.com/fwlink/?LinkId=294190.</p>
-</blockquote>
-<p>Considering there are about 50 references across the projects I have in this solution, that isn't particularly helpful.</p>
-<p>There is an easy way to get the compiler to spit out more information.</p>
-<ol>
-<li>In Visual Studio 2013 go to Tools &gt; Options.</li>
-<li>Select Project and Solutions &gt; Build and Run.</li>
-<li>Find the drop down MSBuild project build output verbosity. Here you can configure MSBuild to give you more information. By default it will be set to &quot;Minimal&quot;. Change this to &quot;Detailed'.</li>
-<li>Rebuild and view the Output window. Copy everything into notepad and search for the <strong>warning</strong> which should tell you which assemblies you need to look at.</li>
-</ol>
-
-
-<hr>
-<h2>
-	<a href="#">Razor View throwing &quot;The name &#39;model&#39; does not exist in the current context&quot;</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/04 13:48:50</p>
-<p>Razor is giving me this nonsensical error:</p>
-<blockquote>
-<p>The name 'model' does not exist in the current context.</p>
-</blockquote>
-<p>The part that makes literally zero sense is that this is causing the error:</p>
-<pre><code>		@model ICollection&lt;DataSourceByActive&gt;
-</code></pre>
-<p>I know for a fact that @model is proper Razor syntax.</p>
-<p>So why is this happening? How can I fix it?</p>
-<p>I think you have messed up the web.config file which lives in the Views folder.</p>
-<blockquote>
-<p>Create a new project targeting same .NET framework and copy its Views/web.config file over top the one in your current project</p>
-</blockquote>
-<p>This will fix your problem.</p>
 
 
 <hr>

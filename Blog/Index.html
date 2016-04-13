@@ -59,6 +59,241 @@
 				
 
 <h2>
+	<a href="#">how do I minify Javascript and CSS in the vs.net 2013 post-build step </a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/13 15:15:59</p>
+<p>Want Ajax Minifier to be packaged with your project? From the Ajax Minifier install folder, you can move AjaxMin.dll and AjaxMinTask.dll directly into your source directory. I put them in my App_Data folder. Once they're somewhere in your source, in Visual Studio right-click them, select Include in Project, and also change their Build Action property to None.</p>
+<p>Then in the code I included above, change</p>
+<pre><code>&lt;Import Project=&quot;$(MSBuildExtensionsPath)\Microsoft\Microsoft Ajax Minifier\ajaxmin.tasks&quot; /&gt;
+</code></pre>
+<p>to</p>
+<pre><code>&lt;UsingTask TaskName=&quot;AjaxMin&quot; AssemblyFile=&quot;$(MSBuildProjectDirectory)\App_Data\AjaxMinTask.dll&quot; /&gt;
+</code></pre>
+<p>Done.</p>
+<pre><code>&lt;UsingTask TaskName=&quot;AjaxMin&quot; AssemblyFile=&quot;$(MSBuildProjectDirectory)\DLL\AjaxMinTask.dll&quot; /&gt;
+  &lt;Target Name=&quot;AfterBuild&quot; Condition=&quot;'$(ConfigurationName)'=='Debug'&quot;&gt;
+    &lt;ItemGroup&gt;
+      &lt;JS Include=&quot;app\**\*.js&quot; Exclude=&quot;**\*.min.js;obj\**\*.*&quot; /&gt;
+      &lt;CSS Include=&quot;app\**\*.css&quot; Exclude=&quot;**\*.min.css;obj\**\*.*&quot; /&gt;
+    &lt;/ItemGroup&gt;
+    &lt;AjaxMin JsSourceFiles=&quot;@(JS)&quot; JsSourceExtensionPattern=&quot;\.js$&quot; JsTargetExtension=&quot;-min.js&quot; CssSourceFiles=&quot;@(CSS)&quot; CssSourceExtensionPattern=&quot;\.css$&quot; CssTargetExtension=&quot;-min.css&quot; /&gt;
+  &lt;/Target&gt;
+  &lt;PropertyGroup&gt;
+    &lt;CopyAllFilesToSingleFolderForPackageDependsOn&gt;
+		CustomCollectFiles;
+		$(CopyAllFilesToSingleFolderForPackageDependsOn);
+	  &lt;/CopyAllFilesToSingleFolderForPackageDependsOn&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;Target Name=&quot;CustomCollectFiles&quot;&gt;
+    &lt;ItemGroup&gt;
+      &lt;MinJS Include=&quot;**\*.jsMIN&quot; /&gt;
+      &lt;FilesForPackagingFromProject Include=&quot;%(MinJS.Identity)&quot;&gt;
+        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).js&lt;/DestinationRelativePath&gt;
+      &lt;/FilesForPackagingFromProject&gt;
+      &lt;MinCSS Include=&quot;**\*.cssMIN&quot; /&gt;
+      &lt;FilesForPackagingFromProject Include=&quot;%(MinCSS.Identity)&quot;&gt;
+        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).css&lt;/DestinationRelativePath&gt;
+      &lt;/FilesForPackagingFromProject&gt;
+    &lt;/ItemGroup&gt;
+  &lt;/Target&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">create electron develop environment</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/10 16:21:07</p>
+<p>install <a href="https://nodejs.org/en/download/">node.js</a>
+install <a href="">python 2.x</a></p>
+<pre><code>npm config set msvs_version 2015 --global
+</code></pre>
+<p>It must avoid each installation, for example:</p>
+<pre><code>npm install [package name] --msvs_version=2015
+</code></pre>
+<p>install electron-prebuilt</p>
+<pre><code>npm install electron-prebuilt --save
+</code></pre>
+<p>our application file system：</p>
+<pre><code>your-app/
+	├── package.json
+	├── app.js
+	├── webpack.config.js
+	└── app/
+    	├── main.html
+        └── main.jsx
+</code></pre>
+<p>run sample</p>
+<pre><code>./node_modules/.bin/electron .
+</code></pre>
+<p>you can pack your application</p>
+<pre><code>npm i electron-packager
+</code></pre>
+<p>modify package.json file</p>
+<pre><code>&quot;scripts&quot;: {
+    &quot;start&quot;: &quot;electron .&quot;,
+    &quot;build&quot;: &quot;electron-packager . MyFirstApp --ignore=node_modules/electron-* --platform=win32 --arch=x64 --version=0.32.3&quot;
+}
+</code></pre>
+<p>and run</p>
+<pre><code>npm run build
+</code></pre>
+<p>and use asar</p>
+<pre><code>npm i asar
+</code></pre>
+<p>modify package.json file</p>
+<pre><code>&quot;scripts&quot;: {
+    &quot;start&quot;: &quot;electron .&quot;,
+    &quot;build&quot;: &quot;electron-packager . MyFirstApp --ignore=node_modules/electron-* --platform=win32 --arch=x64 --version=0.32.3&quot;,
+    &quot;package&quot;: &quot;asar pack MyFirstApp-win32-x64/resources/app MyFirstApp-win32-x64/resources/app.asar &amp;&amp; rm -rf MyFirstApp-win32-x64/resources/app&quot;
+}
+</code></pre>
+<p>run package</p>
+<pre><code>npm run package
+</code></pre>
+<p>install webpack</p>
+<pre><code>npm install webpack --save
+npm insall webpack-target-electron-renderer --save
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Install .NET Core</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/06 12:31:43</p>
+<p>The best way to install .NET Core on Windows is to download the <a href="https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/1.0.0.001598/dotnet-win-x64.1.0.0.001598.exe">official MSI installer</a>. This installer will install the tools and put them on your PATH.</p>
+<p>If you are using Windows 7, Windows Server 2008 or Windows Server 2012 you will also need to install Visual C++ Redistributable for <a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual Studio 2012 Update 4</a> &amp; <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145">Visual C++ Redistributable for Visual Studio 2015</a> .</p>
+<p>Initialize some code</p>
+<pre><code>C:\&gt;mkdir hwapp
+C:\&gt;cd hwapp
+C:\&gt;dotnet new
+</code></pre>
+<p>The first command will restore the packages specified in the project.json file, and the second command will run the actual sample:</p>
+<pre><code>C:\&gt;dotnet restore
+C:\&gt;dotnet run
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Install ASP.NET 5 (.NET Core 1)</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/05 14:02:12</p>
+<p>Install <a href="https://go.microsoft.com/fwlink/?LinkId=627627">ASP.NET 5</a></p>
+<p>Enable the ASP.NET 5 command-line tools. Open a command-prompt and run:</p>
+<pre><code>dnvm upgrade
+</code></pre>
+<p>This will make the default .NET Execution Environment (DNX) active on the path.</p>
+<p>On Windows 7 and Windows Server 2008 R2 you will also need to install the <a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual C++ Redistributable for Visual Studio 2012 Update 4.</a></p>
+<pre><code>@powershell -NoProfile -ExecutionPolicy unrestricted -Command &quot;&amp;{$Branch='dev';iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.ps1'))}&quot;
+</code></pre>
+<p>Once this step is complete you should be able to run dnvm and see some help text.</p>
+<p>Use DNVM to install DNX for .NET Core:</p>
+<pre><code>dnvm upgrade -r coreclr
+</code></pre>
+<p>Use DNVM to install DNX for the full .NET Framework:</p>
+<pre><code>dnvm upgrade -r clr
+</code></pre>
+<p>Install the requested DNX version from the feed, create console application using .NET Core</p>
+<pre><code>dnvm install -a x64 -r coreclr 1.0.0-rc1-final
+</code></pre>
+<p>Install generator</p>
+<pre><code>npm install -g yo generator-aspnet
+</code></pre>
+<p>Create Develop folder and generate console project</p>
+<pre><code>yo aspnet
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Install Git Server on Windows</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/01 10:21:24</p>
+<p>Download &quot;Git 2.8.0 for Windows&quot; from <a href="https://git-scm.com/">git-scm site</a>
+Download Bitvise SSH Server (WinSSHD) 6.45 from <a href="https://www.bitvise.com/download-area">bitvise</a></p>
+<p>Install Git for windows and setup login account</p>
+<p><img src="/Source/2016/04/install-git-server-on-windows/install-git.png" alt="install git" /></p>
+<p>Create Git Repos Root Folder</p>
+<pre><code>D:/Demo/GitRepos
+</code></pre>
+<p>Create test folder and open bash command</p>
+<pre><code>C:/User/vdevp/GitRepos&gt;md test
+</code></pre>
+<p><img src="/Source/2016/04/install-git-server-on-windows/git-bash-here.png" alt="git-bash-here" /></p>
+<pre><code>vdevp@vdevp-PC MINGW64 /c/User/vdevp/GitRepos/test
+$ git init --bare
+</code></pre>
+<p>Git will create many initialize files</p>
+<p><img src="/Source/2016/04/install-git-server-on-windows/git-init.png" alt="git-init" /></p>
+<p>Go to your client PC and create test folder</p>
+<pre><code>D:/Demo/test
+</code></pre>
+<p>open Git bash command</p>
+<pre><code>$ git clone ssh://vdevp@192.168.2.3/~/GitRepos/test
+Cloning into 'test'...
+vdevp@192.168.2.3's password:
+'git-upload-pack' is not recognized as an internal or external command, operable program or batch file.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights and the repository exists.
+</code></pre>
+<p>If you see the error message, please go to Server add system PATH environment</p>
+<pre><code>C:\Program Files (x86)\Git\bin;C:\Program Files\Git\mingw64\libexec\git-core
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Setting up TypeScript + Visual Studio Code development environment</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/31 10:33:58</p>
+<p>Let's get started!</p>
+<ul>
+<li>Download and installing <a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
+<li>Download and installing <a href="https://nodejs.org/en/download/">node.js 4.4.1</a></li>
+</ul>
+<p>Let's now install some VS code extensions.
+Open VS Code when you are ready and use Shift + Ctrl + p
+to access command panel.</p>
+<p>type &quot;install extensions&quot;</p>
+<p><img src="/Source/2016/03/visual-studio-code-setup/install-extensions.png" alt="install-extensions" /></p>
+<pre><code>ext install tslin
+</code></pre>
+<p>Note The tslint extension requires a global installation of tslint:</p>
+<pre><code>npm install -g tslint
+</code></pre>
+<p>then restart VS Code</p>
+<pre><code>ext install Wallaby.js
+
+
+&gt;mkdir ts-vscode-boilerplate
+&gt;cd ts-vscode-boilerplate
+&gt;npm init
+</code></pre>
+<p>We are now ready to install the third party dependencies:</p>
+<pre><code>$ npm install  --save-dev browser-sync
+$ npm install  --save-dev browserify
+$ npm install  --save-dev chai
+$ npm install  --save-dev gulp
+$ npm install  --save-dev gulp-istanbul
+$ npm install  --save-dev gulp-mocha
+$ npm install  --save-dev gulp-sourcemaps
+$ npm install  --save-dev gulp-tslint
+$ npm install  --save-dev gulp-typescript
+$ npm install  --save-dev gulp-uglify
+$ npm install  --save-dev run-sequence
+$ npm install  --save-dev tslint
+$ npm install  --save-dev typescript
+$ npm install  --save-dev vinyl-buffer
+$ npm install  --save-dev vinyl-source-stream
+</code></pre>
+<p>Open VS Code and Click preferences -&gt; “Workspace Settings”.</p>
+
+
+<hr>
+<h2>
 	<a href="#">T1.TinyIoc Example</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/25 20:22:45</p>
@@ -309,162 +544,6 @@ define([&quot;require&quot;, &quot;exports&quot;, 'App'], function (require, exp
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Install Hexo</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/05 09:30:43</p>
-<h3>Create a GitHub Account</h3>
-<p>Create a new Repository name: &quot;username.github.io&quot;</p>
-<p>username must same as account name</p>
-<h3>Install Node.js</h3>
-<pre><code>npm install hexo -g
-npm init Blog
-cd Blog
-</code></pre>
-<p>npm install</p>
-<pre><code>npm install hexo-generator-index --save
-npm install hexo-generator-archive --save
-npm install hexo-generator-category --save
-npm install hexo-generator-tag --save
-npm install hexo-server --save
-npm install hexo-deployer-git --save
-npm install hexo-deployer-heroku --save
-npm install hexo-deployer-rsync --save
-npm install hexo-deployer-openshift --save
-npm install hexo-renderer-marked@0.2 --save
-npm install hexo-renderer-stylus@0.2 --save
-npm install hexo-generator-feed@1 --save
-npm install hexo-generator-sitemap@1 --save
-npm install hexo-tag-bootstrap --save
-npm install hexo-generator-search --save
-</code></pre>
-<p>Process the following command, and visit localhost:4000 to see the result</p>
-<pre><code>hexo server
-</code></pre>
-<p>The Following command that generate public folder, you can deploy it to your target site folder.</p>
-<pre><code>hexo g
-</code></pre>
-<p>Modify _config.yml file in Blog Folder</p>
-<pre><code>deploy:
-  type: git
-  repo: https://github.com/username/username.github.io.git
-  branch: master
-</code></pre>
-<p>Deploy to GitHub command</p>
-<pre><code>hexo d -g
-</code></pre>
-<p>Other</p>
-<pre><code>hexo n #Generate articles，or source\_posts manually edit/create md file
-hexo s #deploy preview result
-</code></pre>
-<p>Update Hexo</p>
-<pre><code>npm update -g
-</code></pre>
-<p>Install Other Theme</p>
-<pre><code>git clone https://github.com/MOxFIVE/hexo-theme-yelee.git themes/yelee		
-</code></pre>
-<p>Modify themes/yelee/_config.yml</p>
-
-
-<hr>
-<h2>
-	<a href="#">When debug a Typescript application in Google Chrome, the *.ts files are appear totally empty ?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/11/25 07:58:43</p>
-<p>You try to add following to your web.config</p>
-<pre><code>&lt;system.webServer&gt;
-  ...
-  &lt;staticContent&gt;
-    &lt;remove fileExtension=&quot;.tsx&quot; /&gt;
-    &lt;mimeMap fileExtension=&quot;.tsx&quot; mimeType=&quot;application/javascript&quot; /&gt;
-  &lt;/staticContent&gt;
-&lt;/system.webServer&gt;
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">nuget &#39;packages&#39; element is not declared warning</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/08/02 09:01:55</p>
-<p>not a showstopper but when using nuget in a project, it creates a packages.config file with this shape</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;packages&gt;
-   ... your packages
-&lt;/packages&gt;
-</code></pre>
-<p>this gives a warning in VS</p>
-<blockquote>
-<p>The 'packages' element is not declared.</p>
-</blockquote>
-<p>You can always make simple xsd schema for 'packages.config' to get rid of this warning. To do this, create file named &quot;packages.xsd&quot;:</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
-&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; elementFormDefault=&quot;qualified&quot;
-      targetNamespace=&quot;urn:packages&quot; xmlns=&quot;urn:packages&quot;&gt;
-  &lt;xs:element name=&quot;packages&quot;&gt;
-    &lt;xs:complexType&gt;
-      &lt;xs:sequence&gt;
-        &lt;xs:element name=&quot;package&quot; maxOccurs=&quot;unbounded&quot;&gt;
-          &lt;xs:complexType&gt;
-            &lt;xs:attribute name=&quot;id&quot; type=&quot;xs:string&quot; use=&quot;required&quot; /&gt;
-            &lt;xs:attribute name=&quot;version&quot; type=&quot;xs:string&quot; use=&quot;required&quot; /&gt;
-            &lt;xs:attribute name=&quot;targetFramework&quot; type=&quot;xs:string&quot; use=&quot;optional&quot; /&gt;
-            &lt;xs:attribute name=&quot;allowedVersions&quot; type=&quot;xs:string&quot; use=&quot;optional&quot; /&gt;
-          &lt;/xs:complexType&gt;
-        &lt;/xs:element&gt;
-      &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-  &lt;/xs:element&gt;
-&lt;/xs:schema&gt;
-</code></pre>
-<p>Location of this file (two options)</p>
-<p>In the same folder as 'packages.config' file,
-If you want to share packages.xsd across multiple projects, move it to the Visual Studio Schemas folder (the path may slightly differ, it's  D:\Program Files (x86)\Microsoft Visual Studio 10.0\Xml\Schemas for me).
-Then, edit <packages> tag in packages.config file (add xmlns attribute):</p>
-<pre><code>&lt;packages xmlns=&quot;urn:packages&quot;&gt;
-</code></pre>
-<p>Now the warning should disappear (even if packages.config file is open in Visual Studio).</p>
-
-
-<hr>
-<h2>
-	<a href="#">ASP.NET MVC throw Exception</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/07/27 16:04:37</p>
-<p>My application was working fine and after I did some upgrades I am getting this error.</p>
-<pre><code>	Attempt by 'System.Web.Mvc.PreApplicationStartCode.Start()' to critical method 'System.Web.WebPages.Razor.PreApplicationStartCode.Start()' failed
-</code></pre>
-<p>Please use this package from nuget</p>
-<p>Install-Package Microsoft.AspNet.Mvc -Version 5.2.2</p>
-
-
-<hr>
-<h2>
-	<a href="#">VS.NET 2013 Error</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/05/21 14:09:56</p>
-<p>Getting Error &quot;'Microsoft.VisualStudio.Editor.Implementation.EditorPackage' package did not load correctly&quot;?</p>
-<blockquote>
-<p>Please try to remove %LOCALAPPDATA%\Microsoft\VisualStudio\11.0\ComponentModelCache and restarting VS2012. Hope this will fix your issue.</p>
-</blockquote>
-
-
-<hr>
-<h2>
-	<a href="#">NuGet Manager Console</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/05/07 21:47:26</p>
-<p>List all available versions of a specific package?</p>
-<blockquote>
-<p>get-package -ListAvailable -AllVersions -filter nunit -source https://nuget.org/api/v2/</p>
-</blockquote>
-<p>How to install special version of package?</p>
-<blockquote>
-<p>install-package nunit -version x.xx</p>
-</blockquote>
 
 
 <hr>

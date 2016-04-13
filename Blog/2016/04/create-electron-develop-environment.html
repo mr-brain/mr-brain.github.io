@@ -60,36 +60,59 @@
 
 <ul class="list-group">
 	<h2>
-		<a href="#">T1.TinyIoc Example</a>
+		<a href="#">create electron develop environment</a>
 	</h2>
-	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/25 20:22:45</p>
-	<p><a href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
-<p>The following code is using t1.TinyIoc example</p>
-<pre><code>import t1 require(&quot;t1&quot;);
-class IMyKlass implements t1.IIocInterfaceChecker {
-	className: string = &quot;IMyKlass&quot;;
-	test(): number {
-		throw new Error(&quot;Not implement&quot;);
-	}
-}
-
-class MyKlass extends IMyKlass {
-	test(): number {
-		return 123;
-	}
-}
-
-t1.TinyIoc.registerType(IMyKlass, MyKlass);
-
-var obj: IMyKlass = Ioc.resolve(IMyKlass);
-var val = obj.test();
-expect(val).toBe(123);
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/10 16:21:07</p>
+	<p>install <a href="https://nodejs.org/en/download/">node.js</a>
+install <a href="">python 2.x</a></p>
+<pre><code>npm config set msvs_version 2015 --global
 </code></pre>
-<p>If you need global instance</p>
-<pre><code>t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());
+<p>It must avoid each installation, for example:</p>
+<pre><code>npm install [package name] --msvs_version=2015
 </code></pre>
-<p>You can even</p>
-<pre><code>t1.TinyIoc.registerLazy(IMyKlass, () =&gt; new MyKlass());
+<p>install electron-prebuilt</p>
+<pre><code>npm install electron-prebuilt --save
+</code></pre>
+<p>our application file system：</p>
+<pre><code>your-app/
+	├── package.json
+	├── app.js
+	├── webpack.config.js
+	└── app/
+    	├── main.html
+        └── main.jsx
+</code></pre>
+<p>run sample</p>
+<pre><code>./node_modules/.bin/electron .
+</code></pre>
+<p>you can pack your application</p>
+<pre><code>npm i electron-packager
+</code></pre>
+<p>modify package.json file</p>
+<pre><code>&quot;scripts&quot;: {
+    &quot;start&quot;: &quot;electron .&quot;,
+    &quot;build&quot;: &quot;electron-packager . MyFirstApp --ignore=node_modules/electron-* --platform=win32 --arch=x64 --version=0.32.3&quot;
+}
+</code></pre>
+<p>and run</p>
+<pre><code>npm run build
+</code></pre>
+<p>and use asar</p>
+<pre><code>npm i asar
+</code></pre>
+<p>modify package.json file</p>
+<pre><code>&quot;scripts&quot;: {
+    &quot;start&quot;: &quot;electron .&quot;,
+    &quot;build&quot;: &quot;electron-packager . MyFirstApp --ignore=node_modules/electron-* --platform=win32 --arch=x64 --version=0.32.3&quot;,
+    &quot;package&quot;: &quot;asar pack MyFirstApp-win32-x64/resources/app MyFirstApp-win32-x64/resources/app.asar &amp;&amp; rm -rf MyFirstApp-win32-x64/resources/app&quot;
+}
+</code></pre>
+<p>run package</p>
+<pre><code>npm run package
+</code></pre>
+<p>install webpack</p>
+<pre><code>npm install webpack --save
+npm insall webpack-target-electron-renderer --save
 </code></pre>
 
 
@@ -98,10 +121,10 @@ expect(val).toBe(123);
 <!-- Pager -->
 <ul class="pager">
 		<li class="previous">
-			<a href="/Blog/2016/03/odds-convert-table.html">&larr; Older</a>
+			<a href="/Blog/2016/04/install-net-core.html">&larr; Older</a>
 		</li>
 			<li class="next">
-			<a href="/Blog/2016/03/visual-studio-code-setup.html">Newer &rarr;</a>
+			<a href="/Blog/2016/04/minify-javascript-in-vsnet.html">Newer &rarr;</a>
 		</li>
 </ul>
 

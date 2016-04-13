@@ -60,36 +60,43 @@
 
 <ul class="list-group">
 	<h2>
-		<a href="#">T1.TinyIoc Example</a>
+		<a href="#">how do I minify Javascript and CSS in the vs.net 2013 post-build step </a>
 	</h2>
-	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/25 20:22:45</p>
-	<p><a href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
-<p>The following code is using t1.TinyIoc example</p>
-<pre><code>import t1 require(&quot;t1&quot;);
-class IMyKlass implements t1.IIocInterfaceChecker {
-	className: string = &quot;IMyKlass&quot;;
-	test(): number {
-		throw new Error(&quot;Not implement&quot;);
-	}
-}
-
-class MyKlass extends IMyKlass {
-	test(): number {
-		return 123;
-	}
-}
-
-t1.TinyIoc.registerType(IMyKlass, MyKlass);
-
-var obj: IMyKlass = Ioc.resolve(IMyKlass);
-var val = obj.test();
-expect(val).toBe(123);
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/13 15:15:59</p>
+	<p>Want Ajax Minifier to be packaged with your project? From the Ajax Minifier install folder, you can move AjaxMin.dll and AjaxMinTask.dll directly into your source directory. I put them in my App_Data folder. Once they're somewhere in your source, in Visual Studio right-click them, select Include in Project, and also change their Build Action property to None.</p>
+<p>Then in the code I included above, change</p>
+<pre><code>&lt;Import Project=&quot;$(MSBuildExtensionsPath)\Microsoft\Microsoft Ajax Minifier\ajaxmin.tasks&quot; /&gt;
 </code></pre>
-<p>If you need global instance</p>
-<pre><code>t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());
+<p>to</p>
+<pre><code>&lt;UsingTask TaskName=&quot;AjaxMin&quot; AssemblyFile=&quot;$(MSBuildProjectDirectory)\App_Data\AjaxMinTask.dll&quot; /&gt;
 </code></pre>
-<p>You can even</p>
-<pre><code>t1.TinyIoc.registerLazy(IMyKlass, () =&gt; new MyKlass());
+<p>Done.</p>
+<pre><code>&lt;UsingTask TaskName=&quot;AjaxMin&quot; AssemblyFile=&quot;$(MSBuildProjectDirectory)\DLL\AjaxMinTask.dll&quot; /&gt;
+  &lt;Target Name=&quot;AfterBuild&quot; Condition=&quot;'$(ConfigurationName)'=='Debug'&quot;&gt;
+    &lt;ItemGroup&gt;
+      &lt;JS Include=&quot;app\**\*.js&quot; Exclude=&quot;**\*.min.js;obj\**\*.*&quot; /&gt;
+      &lt;CSS Include=&quot;app\**\*.css&quot; Exclude=&quot;**\*.min.css;obj\**\*.*&quot; /&gt;
+    &lt;/ItemGroup&gt;
+    &lt;AjaxMin JsSourceFiles=&quot;@(JS)&quot; JsSourceExtensionPattern=&quot;\.js$&quot; JsTargetExtension=&quot;-min.js&quot; CssSourceFiles=&quot;@(CSS)&quot; CssSourceExtensionPattern=&quot;\.css$&quot; CssTargetExtension=&quot;-min.css&quot; /&gt;
+  &lt;/Target&gt;
+  &lt;PropertyGroup&gt;
+    &lt;CopyAllFilesToSingleFolderForPackageDependsOn&gt;
+		CustomCollectFiles;
+		$(CopyAllFilesToSingleFolderForPackageDependsOn);
+	  &lt;/CopyAllFilesToSingleFolderForPackageDependsOn&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;Target Name=&quot;CustomCollectFiles&quot;&gt;
+    &lt;ItemGroup&gt;
+      &lt;MinJS Include=&quot;**\*.jsMIN&quot; /&gt;
+      &lt;FilesForPackagingFromProject Include=&quot;%(MinJS.Identity)&quot;&gt;
+        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).js&lt;/DestinationRelativePath&gt;
+      &lt;/FilesForPackagingFromProject&gt;
+      &lt;MinCSS Include=&quot;**\*.cssMIN&quot; /&gt;
+      &lt;FilesForPackagingFromProject Include=&quot;%(MinCSS.Identity)&quot;&gt;
+        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).css&lt;/DestinationRelativePath&gt;
+      &lt;/FilesForPackagingFromProject&gt;
+    &lt;/ItemGroup&gt;
+  &lt;/Target&gt;
 </code></pre>
 
 
@@ -98,10 +105,10 @@ expect(val).toBe(123);
 <!-- Pager -->
 <ul class="pager">
 		<li class="previous">
-			<a href="/Blog/2016/03/odds-convert-table.html">&larr; Older</a>
+			<a href="/Blog/2016/04/create-electron-develop-environment.html">&larr; Older</a>
 		</li>
 			<li class="next">
-			<a href="/Blog/2016/03/visual-studio-code-setup.html">Newer &rarr;</a>
+			<a href="/Blog/">Newer &rarr;</a>
 		</li>
 </ul>
 

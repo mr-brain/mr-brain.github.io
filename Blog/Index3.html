@@ -59,6 +59,248 @@
 				
 
 <h2>
+	<a href="#">Json.NET Serialize/Deserialize methods</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/15 09:33:32</p>
+<p>The following example demonstrates the use Strong type, JObject, Dynamic different approaches to deal with JSON serialization / deserialization.</p>
+<pre><code>public class Food
+{
+	public DateTime d { get; set; }
+	public int n { get; set; }
+	public string s { get; set; }
+	public int[] a { get; set; }
+}
+</code></pre>
+<p>Lab1:Using Strong Type to deserialize</p>
+<pre><code>Food f = JsonConvert.DeserializeObject&lt;Food&gt;(jsonString);
+</code></pre>
+<p>Lab2:Using JObject to deserialize</p>
+<pre><code>JObject jo = JObject.Parse(jsonString);
+DateTime d = jo.Property(&quot;d&quot;).Value.Value&lt;DateTime&gt;();
+int n = jo[&quot;n&quot;].Value&lt;int&gt;();
+string s = jo[&quot;s&quot;].Value&lt;string&gt;();
+int[] ary = jo[&quot;a&quot;].Value&lt;JArray&gt;()
+  .Select(o =&gt; o.Value&lt;int&gt;()).ToArray();
+</code></pre>
+<p>Lab3:Using Dynamic to deserialize</p>
+<pre><code>JObject jo = JObject.Parse(jsonString);
+dynamic dyna = jo as dynamic;
+
+DateTime d = dyna.d;
+int n = dyna.n;
+string s = dyna.s;
+var ary = ((JArray)jo[&quot;a&quot;]).Cast&lt;dynamic&gt;().ToArray();
+</code></pre>
+<p>Deserialize Performance: Lab2 &gt; Lab1 ~= Lab2</p>
+<p>Lab4:Using Strong Type to serialize</p>
+<pre><code>Food f = new Food()
+{
+	d = new DateTime(2015, 1, 1),
+	n = 12345,
+	s = &quot;MR-Brain&quot;,
+	a = new int[] { 1, 2, 3, 4, 5 }
+};
+string json = JsonConvert.SerializeObject(f);
+</code></pre>
+<p>Lab5:Using JObject to serialize</p>
+<pre><code>JObject jo = new JObject();
+jo.Add(new JProperty(&quot;d&quot;, new DateTime(2015, 1, 1)));
+jo.Add(new JProperty(&quot;n&quot;, 12345));
+jo.Add(new JProperty(&quot;s&quot;, &quot;MR-Brain&quot;));
+jo.Add(new JProperty(&quot;a&quot;, new JArray(1, 2, 3, 4, 5)));
+string json = jo.ToString(Formatting.None);
+</code></pre>
+<p>Lab6:Using Dynamic to serialize</p>
+<pre><code>dynamic dyna = new JObject();
+dyna.d = new DateTime(2015, 1, 1);
+dyna.n = 12345;
+dyna.s = &quot;MR-Brain&quot;;
+dyna.a = new JArray(1, 2, 3, 4, 5);
+string json = dyna.ToString(Formatting.None);
+</code></pre>
+<p>Serialize Performance: Lab5 &gt; Lab4 &gt; Lab6</p>
+
+
+<hr>
+<h2>
+	<a href="#">Why can&#39;t I get the Jenkins Powershell plugin to work?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/14 23:20:04</p>
+<p>PowerShell says “execution of scripts is disabled on this system.”</p>
+<p>Jenkins powershell plugin is running 32 bit Powershell</p>
+<pre><code>64-bit:  C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe
+32-bit:  C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+</code></pre>
+<p>you can run following</p>
+<pre><code>&gt; C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe
+PS C:\hoge &gt; Set-ExecutionPolicy RemoteSigned
+PS C:\hoge &gt; exit
+
+&gt; C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+PS C:\hoge &gt; Set-ExecutionPolicy RemoteSigned
+PS C:\hoge &gt; exit
+</code></pre>
+<p>Or you can</p>
+<pre><code>set-executionpolicy -executionpolicy unrestricted
+set-executionpolicy -executionpolicy -Scope LocalMachine unrestricted
+get-executionpolicy -list
+</code></pre>
+<p>Other Information</p>
+<pre><code>powershell.exe -executionpolicy unrestricted -command .\test.ps1
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How can I run PowerShell with the .NET 4 runtime?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/09 22:37:00</p>
+<p>Enabling Execution of PowerShell PS1 Scripts</p>
+<pre><code>Set-ExecutionPolicy Unrestricted
+</code></pre>
+<p>You can see exactly what versions Powershell is using by examining the value of <em>$PSVersionTable</em></p>
+<p><img src="/Source/2015/02/https://dl.dropboxusercontent.com/u/13003046/images/PSVersionTable2.png" alt="PSVersionTable2" /></p>
+<p>Notice the value or CLRVersion begins with a &quot;2&quot;.</p>
+<p>Being lazy, of course, we hate manual steps, so here is a small PowerShell script that will automatically create and place the necessary files. Be aware that the script as shown below will overwrite existing .config files.</p>
+<pre><code>$config_text = @&quot;
+&lt;?xml version=&quot;1.0&quot;?&gt; 
+&lt;configuration&gt; 
+    &lt;startup useLegacyV2RuntimeActivationPolicy=&quot;true&quot;&gt; 
+        &lt;supportedRuntime version=&quot;v4.0.30319&quot;/&gt; 
+        &lt;supportedRuntime version=&quot;v2.0.50727&quot;/&gt; 
+    &lt;/startup&gt; 
+&lt;/configuration&gt;
+&quot;@
+
+$config_text| Out-File $pshome\powershell.exe.config
+$config_text| Out-File $pshome\powershell_ise.exe.config
+</code></pre>
+<p>Start PowerShell as an Administrator an then run the script.</p>
+<p>Now restart PowerShell and examine the value of $PSVersionTable.</p>
+<p><img src="/Source/2015/02/https://dl.dropboxusercontent.com/u/13003046/images/PSVersionTable4.png" alt="PSVersionTable4" /></p>
+<p>And now your .NET 4.0 module will load correctly.</p>
+
+
+<hr>
+<h2>
+	<a href="#">Autofac global interface interceptor with Autofac.Extras.DynamicProxy2</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/01/15 19:30:46</p>
+<p>You can't really do EnableInterfaceInterceptors <em>globally</em>.</p>
+<p>But you can add the interceptors dynamically and it requires a little work. The way to go is to create a custom Autofac.Module that attaches to all component registrations. I'll show it to you in an example.</p>
+<pre><code>public class InterceptorModule : Autofac.Module
+{
+  // This is a private constant from the Autofac.Extras.DynamicProxy2 assembly
+  // that is needed to &quot;poke&quot; interceptors into registrations.
+  const string InterceptorsPropertyName = &quot;Autofac.Extras.DynamicProxy2.RegistrationExtensions.InterceptorsPropertyName&quot;;
+
+  protected override void Load(ContainerBuilder builder)
+  {
+    // Register global interceptors here.
+    builder.Register(c =&gt; new CallLogger(Console.Out));
+  }
+
+  protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
+  {
+    // Here is where you define your &quot;global interceptor list&quot;
+    var interceptorServices = new Service[] { 
+		new TypedService(typeof(CallLogger)) 
+	};
+
+    // Append the global interceptors to any existing list, or create a new interceptor
+    // list if none are specified. Note this info will only be used by registrations
+    // that are set to have interceptors enabled. It'll be ignored by others.
+    object existing;
+    if (registration.Metadata.TryGetValue(InterceptorsPropertyName, out existing))
+    {
+      registration.Metadata[InterceptorsPropertyName] =
+        ((IEnumerable&lt;Service&gt;)existing).Concat(interceptorServices).Distinct();
+    }
+    else
+    {
+      registration.Metadata.Add(InterceptorsPropertyName, interceptorServices);
+    }
+  }
+}
+</code></pre>
+<p>To make it work, you register the module along with the rest of your dependencies.</p>
+<pre><code>builder.RegisterType&lt;YourType&gt;()
+   .As&lt;YourIInterface&gt;()
+   .EnableInterfaceInterceptors();
+// Here's the magic module:
+builder.RegisterModule&lt;InterceptorModule&gt;();
+var container = builder.Build();
+</code></pre>
+<p>If you run these registrations and resolve, You can see the interceptor works as you'll see the CallLogger output.</p>
+
+
+<hr>
+<h2>
+	<a href="#">How To Catch HttpRequestValidationException</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/01/13 22:12:59</p>
+<p>If you've worked with ASP.NET for any length of time, you have worried about how to handle the Yellow Screen of Death. You know, the one that says:</p>
+<pre><code>HttpRequestValidationException: A potentially dangerous Request.Form value was detected from the client...
+</code></pre>
+<p>or something similar.</p>
+<p>The common refrain is turn off request validation, but there are times when you want to use the built-in validation functions. You just want a friendlier error for your user.</p>
+<p>This code could be better thought out, but here it is anyway:</p>
+<pre><code>void Application_Error(object sender, EventArgs e) 
+{ 
+  // Code that runs when an unhandled error occurs
+  Exception ex = Server.GetLastError();
+  if (ex is HttpRequestValidationException)
+  {
+    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(
+      &quot;http://&quot; + Request.Url.Authority + Request.ApplicationPath + &quot;/HttpRequestValidationException.aspx&quot;);
+    HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+
+    Response.Clear();
+    Response.ClearHeaders();
+    for (int i = 0; i &lt; response.Headers.Count; i++)
+      Response.AddHeader(response.Headers.GetKey(i), response.Headers.Get(i));
+    Response.StatusCode = (int)response.StatusCode;
+
+    System.IO.Stream src = response.GetResponseStream();
+    while (true) {
+      int b = src.ReadByte();
+      if (b == -1) break;
+      Response.OutputStream.WriteByte((byte)b);
+    }
+
+    response.Close();
+    Response.End(); 
+}
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Using Browser Link in Visual Studio 2013</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/29 15:18:50</p>
+<p><img src="/Source/2014/12/https://dl.dropboxusercontent.com/u/13003046/images/InspectMode.png" alt="InspectMode" /></p>
+<p>Web Essentials adds a number of other great Browser Link extensions that are available through the Web Essentials toolbar. Download <a href="http://vswebessentials.com/download">Web Essentials</a> to try out these great new features.</p>
+<p><em>Inspect Mode</em> – Allows you to highlight an element in the browser and the corresponding code will be highlighted in Visual Studio.</p>
+<p><em>Design Mode</em> – Allows you to edit the content of an element in the browser and the corresponding code will be updated in Visual Studio. This even works if the HTML was generated by Razor code!</p>
+<p><em>Track Unused CSS</em> – Enters a CSS tracking mode that helps you find unused CSS.</p>
+<p><strong>Enabling Browser Link for Static HTML Files</strong>
+To enable Browser Link for static HTML files, add the following to your Web.config file.</p>
+<pre><code>&lt;configuration&gt;
+  &lt;system.webServer&gt;    
+    &lt;handlers&gt;
+      &lt;add name=&quot;Browser Link for HTML&quot; path=&quot;*.html&quot; verb=&quot;*&quot; 
+           type=&quot;System.Web.StaticFileHandler, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; 
+           resourceType=&quot;File&quot; preCondition=&quot;integratedMode&quot; /&gt;
+    &lt;/handlers&gt;
+  &lt;/system.webServer&gt;    
+&lt;/configuration&gt;
+</code></pre>
+<p>Document reference url from <a href="http://www.asp.net/visual-studio/overview/2013/using-browser-link">microsoft</a></p>
+
+
+<hr>
+<h2>
 	<a href="#">JavaScript JSON date conversion</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/26 09:53:12</p>
@@ -158,207 +400,6 @@ All you need to do is create a NuGet.Config file next to your .sln file, contain
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/04 09:31:12</p>
 <p>I recently noticed that a Need password prompt after resuming from hibernation mode.</p>
 <p>You can download MicrosoftFixit50636.msi from Microsoft website (http://support.microsoft.com/kb/949918/en).</p>
-
-
-<hr>
-<h2>
-	<a href="#">ASP.NET MVC Table Grid Post Form And Read Lines</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/11/30 18:47:47</p>
-<p>How can read the posted grid data line by line?</p>
-<p>You can create a Model for Stock and it can be bind to your view. Then you can pass list of stock objects to controller as below.</p>
-<p><strong>Stock Model</strong></p>
-<pre><code>public class Stock
-{
-    public int StockId { get; set; }
-    public int Amount { get; set; }
-    public decimal Price { get; set; }
-}
-</code></pre>
-<p><strong>View</strong></p>
-<pre><code>@model IEnumerable&lt;Stock&gt;
-&lt;form action=&quot;/Controler/ActionStockNew&quot; method=&quot;post&quot; id=&quot;form&quot;&gt;
-&lt;table&gt;
-    @for (int i = 0; i &lt; Model.Count(); i++)
-    {&lt;tr&gt;
-        &lt;td&gt;
-            &lt;input type=&quot;text&quot; name=&quot;[@i].StockId&quot; /&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-            &lt;input type=&quot;text&quot; name=&quot;[@i].Amount&quot; /&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-            &lt;input type=&quot;text&quot; name=&quot;[@i].Price&quot; /&gt;
-        &lt;/td&gt;
-    &lt;/tr&gt;
-    }
-&lt;/table&gt;
-&lt;input type=&quot;submit&quot; value=&quot;Save&quot; /&gt;
-&lt;/form&gt;
-</code></pre>
-<p><strong>Controllers</strong></p>
-<pre><code>public ActionResult ActionStockNew()
-{
-    List&lt;Stock&gt; stockList = new List&lt;Stock&gt;();
-    // fill stock
-
-    return View(stockList);
-}
-
-[HttpPost]
-public ActionResult ActionStockNew(ICollection&lt;Stock&gt; stockList)
-{
-    // process
-}
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Overriding == operator. How to compare to null?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/11/21 22:12:59</p>
-<p>Here is a simplified example:</p>
-<pre><code>public static bool operator ==(ThreeDPoint a, ThreeDPoint b)
-{
-    if (a == null)
-    {
-         //any code here never gets executed!  We first die a slow painful death.
-    }
-    return a.Equals(b);
-}
-</code></pre>
-<p>However, what happens when a ThreeDPoint  object is null?</p>
-<p>You can't write:</p>
-<pre><code>ThreeDPoint  a;
-if (a == null)
-{
-    //fail!
-}
-</code></pre>
-<p>Use object.ReferenceEquals(person1, null) instead of the == operator:</p>
-<pre><code>public static bool operator ==(ThreeDPoint a, ThreeDPoint b)
-{
-    // If both are null, or both are same instance, return true.
-    if (System.Object.ReferenceEquals(a, b))
-    {
-        return true;
-    }
-
-    // If one is null, but not both, return false.
-    if (((object)a == null) || ((object)b == null))
-    {
-        return false;
-    }
-
-    // Return true if the fields match:
-    return a.x == b.x &amp;&amp; a.y == b.y &amp;&amp; a.z == b.z;
-}
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">How to compile razor views at compile time ?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/10/16 10:05:31</p>
-<p>Razor views are dynamically compiled by the ASP.NET runtime. If you want your views to be built at compile-time you could add the following option to your .csproj file:</p>
-<pre><code>&lt;PropertyGroup Condition=&quot; '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' &quot;&gt;
-	...
-    &lt;MvcBuildViews&gt;true&lt;/MvcBuildViews&gt;
-&lt;/PropertyGroup&gt;
-
-...
-&lt;Target Name=&quot;MvcBuildViews&quot; AfterTargets=&quot;AfterBuild&quot; Condition=&quot;'$(MvcBuildViews)'=='true'&quot;&gt;
-	&lt;AspNetCompiler VirtualPath=&quot;temp&quot; PhysicalPath=&quot;$(WebProjectOutputDir)&quot; /&gt;
-&lt;/Target&gt;
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">How to get VS.NET 2013 off-line Update 3 ?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/08/08 22:12:59</p>
-<p>Download VS.NET 2013 Update 3 online setup file from http://www.microsoft.com/en-US/download/details.aspx?id=43721</p>
-<p>Input following command</p>
-<blockquote>
-<p>VS2013.3.exe /layout</p>
-</blockquote>
-<p><img src="/Source/2014/08/https://dl.dropboxusercontent.com/u/13003046/images/VS2013-Update3.PNG" alt="img" /></p>
-<p>You will get the about 1.8G files in download folder.
-Click VS2013.exe will install VS.NET 2013 Update 3.</p>
-
-
-<hr>
-<h2>
-	<a href="#">C# Convert XML String to Object</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/07/04 22:12:59</p>
-<p>You need to use the xsd.exe tool which gets installed with the Windows SDK into a directory something similar to:</p>
-<pre><code>C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin
-</code></pre>
-<p>And on 64bit computers:</p>
-<pre><code>C:\Program Files (x86)\Microsoft SDKs\Windows\v6.0A\bin
-</code></pre>
-<p>On the first run, you use xsd.exe and you convert your sample XML into a XSD file (XML schema file):</p>
-<pre><code>xsd yourfile.xml
-</code></pre>
-<p>This gives you yourfile.xsd, which in a second step, you can convert again using xsd.exe into a C# class:</p>
-<pre><code>xsd yourfile.xsd /c
-</code></pre>
-<p>You can deserialize xml string to C# object:</p>
-<pre><code>StringReader sr = new StringReader(xmlStr);
-XmlSerializer mySerializer = new XmlSerializer(typeof(YourObject));
-YourObject obj = (YourObject)mySerializer.Deserialize(sr);
-</code></pre>
-<p>You can serialize object to <strong>simple</strong> xml string.
-First, you must declare namespace in YourObject:</p>
-<pre><code>public class YourObject
-{
-   public YourObject()
-   {
-    this._namespaces = new XmlSerializerNamespaces(new XmlQualifiedName[] {
-      new XmlQualifiedName(string.Empty, &quot;urn:Abracadabra&quot;) // Default Namespace
-    });
-  }
-
-  [XmlNamespaceDeclarations]
-  public XmlSerializerNamespaces Namespaces
-  {
-    get { return this._namespaces; }
-  }
-  private XmlSerializerNamespaces _namespaces;
-
-  ...
-}
-</code></pre>
-<p>Then you can start serialize obj to xml string:</p>
-<pre><code>MemoryStream ms = new MemoryStream();
-XmlSerializer mySerializer = new XmlSerializer(typeof(YourObject));
-mySerializer.Serialize(ms, obj, obj.Namespaces);
-ms.Position = 0;
-StreamReader sr = new StreamReader(ms);
-string strXml = sr.ReadToEnd();
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Display GMT date-time format string for C#</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/07/01 11:31:39</p>
-<p>The perform code is:</p>
-<pre><code>public static string GetGmtTimeString(this DateTime now)
-{
-  double gmt = TimeZoneInfo.Local.GetUtcOffset(now).TotalHours;
-  string gmtTime = string.Format(&quot;{0} GMT{1}{2}&quot;,
-    now.ToString(&quot;yyyy/MM/dd HH:mm:ss&quot;),
-      (gmt &gt;= 0) ? &quot;+&quot; : &quot;&quot;,
-      gmt);
-  return gmtTime;
-}
-</code></pre>
 
 
 <hr>

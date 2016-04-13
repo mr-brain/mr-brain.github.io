@@ -59,6 +59,248 @@
 				
 
 <h2>
+	<a href="#">What is the GOOGLE_INPUT_CHEXT_FLAG in web pages?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/24 23:15:55</p>
+<p>Now a days I can see that just before the ending of the </body> tag something like below appears:</p>
+<pre><code>&lt;div id=&quot;GOOGLE_INPUT_CHEXT_FLAG&quot; style=&quot;display: none;&quot; input=&quot;&quot; input_stat=&quot;{}&quot;&gt;&lt;/div&gt;
+</code></pre>
+<p>I can see this in every webpages whenever I try to Inspect Element in Google Chrome.</p>
+<p>I have got the point. Its because of the extension: <strong>Google Input Tools (by Google)</strong>.</p>
+
+
+<hr>
+<h2>
+	<a href="#">angular tutor</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/24 22:44:12</p>
+<p>How to load Template in Angular?</p>
+<pre><code>public class HomeController : Controller
+{
+	public ActionResult Template(string id)
+	{
+		return PartialView(string.Format(&quot;~/Views/Home/Partials/{0}.cshtml&quot;, id));
+	}
+}
+</code></pre>
+<p>Then, we can use following code</p>
+<pre><code>&lt;div ng-include=&quot;'/Home/Template/Index'&quot;&gt;&lt;/div&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">angular with many errors in typescript typing files</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/16 22:42:13</p>
+<p>I have a problem with Visual Studio 2013 generating too many errors when using
+angular.d.ts typescript type file.</p>
+<p>all in jquery.d.ts, like the following errors:</p>
+<blockquote>
+<p>',' expected.</br>
+'=' expected.</br>
+Identifier expected.</p>
+</blockquote>
+<p>The most likely reason for this is that you are using an older version of TypeScript.
+The language is moving swiftly and some of the features in version 1.4 are particularly useful in definition files, so it is likely that you will need to upgrade to 1.4.</p>
+<p>Download version 1.4 <a href="https://visualstudiogallery.msdn.microsoft.com/2d42d8dc-e085-45eb-a30b-3f7d50d55304">here</a> (Updated 2015.01.16)</p>
+<p>However, Where can I find the TypeScript version installed in Visual Studio?
+you can simply do in Visual Studio Command Prompt:</p>
+<pre><code>tsc -v
+</code></pre>
+<p>It will display typescript version</p>
+<pre><code>Version 1.0.3.0
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Handling Session and Authentication Timeouts in ASP.NET MVC</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/15 11:48:48</p>
+<p>The SessionExpireFilterAttribute action filter is then automatically called before each action to check if Session&quot;UserName&quot; is null. If it determines a timeout has not occurred, it allows the actual called action to execute. Otherwise, it forces a redirect to a timeout notification page, which in turn redirects to the logon page to allow the user to re-logon.</p>
+<pre><code>[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+public class SessionExpireFilterAttribute : ActionFilterAttribute
+{
+	public override void OnActionExecuting(ActionExecutingContext filterContext)
+	{
+		HttpContext ctx = HttpContext.Current;
+
+		// If the browser session or authentication session has expired...
+		if (ctx.Session[&quot;UserName&quot;] == null || !filterContext.HttpContext.Request.IsAuthenticated)
+		{
+			if (filterContext.HttpContext.Request.IsAjaxRequest())
+			{
+				// For AJAX requests, we're overriding the returned JSON result with a simple string,
+				// indicating to the calling JavaScript code that a redirect should be performed.
+				filterContext.Result = new JsonResult { Data = &quot;_LogonTimeoutRedirect_&quot; };
+			}
+			else
+			{
+				// For round-trip posts, we're forcing a redirect to Home/TimeoutRedirect/, which
+				// simply displays a temporary 5 second notification that they have timed out, and
+				// will, in turn, redirect to the logon page.
+				filterContext.Result = new RedirectToRouteResult(
+						new RouteValueDictionary {
+                    { &quot;Controller&quot;, &quot;Home&quot; },
+                    { &quot;Action&quot;, &quot;TimeoutRedirect&quot; }
+            });
+			}
+		}
+		base.OnActionExecuting(filterContext);
+	}
+}
+</code></pre>
+<p>We'll create a couple of action filters to provide cross-cutting checks for timeout scenarios. The first will normally be hit when the browser session has timed out, but will also handle if the authentication has timed out first:</p>
+<pre><code>[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+public class SessionAuthorizeAttribute : AuthorizeAttribute
+{
+    protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+    {
+        HttpContext ctx = HttpContext.Current;
+ 
+        // If the browser session has expired...
+        if (ctx.Session[&quot;UserName&quot;] == null)
+        {
+            if (filterContext.HttpContext.Request.IsAjaxRequest())
+            {
+                // For AJAX requests, we're overriding the returned JSON result with a simple string,
+                // indicating to the calling JavaScript code that a redirect should be performed.
+                filterContext.Result = new JsonResult { Data = &quot;_LogonTimeoutRedirect_&quot; };
+            }
+            else
+            {
+                // For round-trip posts, we're forcing a redirect to Home/TimeoutRedirect/, which
+                // simply displays a temporary 5 second notification that they have timed out, and
+                // will, in turn, redirect to the logon page.
+                filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary {
+                        { &quot;Controller&quot;, &quot;Home&quot; },
+                        { &quot;Action&quot;, &quot;TimeoutRedirect&quot; }
+                });
+            }
+        }
+        else if (filterContext.HttpContext.Request.IsAuthenticated)
+        {
+            // Otherwise the reason we got here was because the user didn't have access rights to the
+            // operation, and a 403 should be returned.
+            filterContext.Result = new HttpStatusCodeResult(403);
+        }
+        else
+        {
+            base.HandleUnauthorizedRequest(filterContext);
+        }
+    }
+}
+</code></pre>
+<p>The Timeout Warning Message Page</p>
+<pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;5;url=/Account/Logon/&quot; /&gt;
+&lt;h2&gt;
+  Sorry, but your session has timed out. You'll be redirected to the Log On page in 5 seconds...
+&lt;/h2&gt;
+</code></pre>
+<p>We can register global filter</p>
+<pre><code>public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+{
+	filters.Add(new HandleErrorAttribute());
+	filters.Add(new SessionExpireFilterAttribute());
+	filters.Add(new SessionAuthorizationAttribute());
+}
+</code></pre>
+<p>Client-Side Calling Code Sample</p>
+<pre><code>$.ajax({
+    url: &quot;/MyController/MyAction&quot;,
+    type: 'POST',
+    dataType: 'json',
+    data: jsonData,
+    contentType: 'application/json; charset=utf-8',
+    success: function (result) {
+        if (checkTimeout(result)) {
+            // There was no timeout, so continue processing...
+        }
+    },
+    error: function (result) {
+        if (checkTimeout(result)) {
+            // There was no timeout, so continue processing...
+        }
+    }
+});
+
+
+function checkTimeout(data) {
+    var thereIsStillTime = true;
+    if (data) {
+        if (data.responseText) {
+            if ((data.responseText.indexOf(&quot;&lt;title&gt;Log On&lt;/title&gt;&quot;) &gt; -1) || (data.responseText.indexOf(&quot;&lt;title&gt;Object moved&lt;/title&gt;&quot;) &gt; -1) || (data.responseText === '&quot;_LogonTimeoutRedirect_&quot;')) thereIsStillTime = false;
+        } else {
+            if (data == &quot;_Logon_&quot;) thereIsStillTime = false;
+        }
+        if (!thereIsStillTime) {
+            window.location.href = &quot;/Home/TimeoutRedirect&quot;;
+        }
+    } else {
+        $.ajax({
+            url: &quot;/Home/CheckTimeout/&quot;,
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: false,
+            complete: function (result) {
+                thereIsStillTime = checkTimeout(result);
+            }
+        });
+    }
+    return thereIsStillTime;
+}
+</code></pre>
+<p>In Web.config, we can control the session timeout</p>
+<pre><code>&lt;system.web&gt;
+  &lt;sessionState mode=&quot;InProc&quot; timeout=&quot;1&quot; cookieless=&quot;UseCookies&quot; /&gt;
+&lt;/system.web&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Found conflicts between different versions of the same dependent assemblies</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/11 21:58:35</p>
+<blockquote>
+<p>Found conflicts between different versions of the same dependent assembly. Please set the &quot;AutoGenerateBindingRedirects&quot; property to true in the project file. For more information, see http://go.microsoft.com/fwlink/?LinkId=294190.</p>
+</blockquote>
+<p>Considering there are about 50 references across the projects I have in this solution, that isn't particularly helpful.</p>
+<p>There is an easy way to get the compiler to spit out more information.</p>
+<ol>
+<li>In Visual Studio 2013 go to Tools &gt; Options.</li>
+<li>Select Project and Solutions &gt; Build and Run.</li>
+<li>Find the drop down MSBuild project build output verbosity. Here you can configure MSBuild to give you more information. By default it will be set to &quot;Minimal&quot;. Change this to &quot;Detailed'.</li>
+<li>Rebuild and view the Output window. Copy everything into notepad and search for the <strong>warning</strong> which should tell you which assemblies you need to look at.</li>
+</ol>
+
+
+<hr>
+<h2>
+	<a href="#">Razor View throwing &quot;The name &#39;model&#39; does not exist in the current context&quot;</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/04 13:48:50</p>
+<p>Razor is giving me this nonsensical error:</p>
+<blockquote>
+<p>The name 'model' does not exist in the current context.</p>
+</blockquote>
+<p>The part that makes literally zero sense is that this is causing the error:</p>
+<pre><code>		@model ICollection&lt;DataSourceByActive&gt;
+</code></pre>
+<p>I know for a fact that @model is proper Razor syntax.</p>
+<p>So why is this happening? How can I fix it?</p>
+<p>I think you have messed up the web.config file which lives in the Views folder.</p>
+<blockquote>
+<p>Create a new project targeting same .NET framework and copy its Views/web.config file over top the one in your current project</p>
+</blockquote>
+<p>This will fix your problem.</p>
+
+
+<hr>
+<h2>
 	<a href="#">PsExec gets stuck on licence prompt when running non-interactively</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/04 13:42:15</p>
@@ -114,248 +356,6 @@
 &lt;/configuration&gt;
 </code></pre>
 <p>Restart VS.NET 2013, NuGet will place packages in the new location.</p>
-
-
-<hr>
-<h2>
-	<a href="#">Json.NET Serialize/Deserialize methods</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/15 09:33:32</p>
-<p>The following example demonstrates the use Strong type, JObject, Dynamic different approaches to deal with JSON serialization / deserialization.</p>
-<pre><code>public class Food
-{
-	public DateTime d { get; set; }
-	public int n { get; set; }
-	public string s { get; set; }
-	public int[] a { get; set; }
-}
-</code></pre>
-<p>Lab1:Using Strong Type to deserialize</p>
-<pre><code>Food f = JsonConvert.DeserializeObject&lt;Food&gt;(jsonString);
-</code></pre>
-<p>Lab2:Using JObject to deserialize</p>
-<pre><code>JObject jo = JObject.Parse(jsonString);
-DateTime d = jo.Property(&quot;d&quot;).Value.Value&lt;DateTime&gt;();
-int n = jo[&quot;n&quot;].Value&lt;int&gt;();
-string s = jo[&quot;s&quot;].Value&lt;string&gt;();
-int[] ary = jo[&quot;a&quot;].Value&lt;JArray&gt;()
-  .Select(o =&gt; o.Value&lt;int&gt;()).ToArray();
-</code></pre>
-<p>Lab3:Using Dynamic to deserialize</p>
-<pre><code>JObject jo = JObject.Parse(jsonString);
-dynamic dyna = jo as dynamic;
-
-DateTime d = dyna.d;
-int n = dyna.n;
-string s = dyna.s;
-var ary = ((JArray)jo[&quot;a&quot;]).Cast&lt;dynamic&gt;().ToArray();
-</code></pre>
-<p>Deserialize Performance: Lab2 &gt; Lab1 ~= Lab2</p>
-<p>Lab4:Using Strong Type to serialize</p>
-<pre><code>Food f = new Food()
-{
-	d = new DateTime(2015, 1, 1),
-	n = 12345,
-	s = &quot;MR-Brain&quot;,
-	a = new int[] { 1, 2, 3, 4, 5 }
-};
-string json = JsonConvert.SerializeObject(f);
-</code></pre>
-<p>Lab5:Using JObject to serialize</p>
-<pre><code>JObject jo = new JObject();
-jo.Add(new JProperty(&quot;d&quot;, new DateTime(2015, 1, 1)));
-jo.Add(new JProperty(&quot;n&quot;, 12345));
-jo.Add(new JProperty(&quot;s&quot;, &quot;MR-Brain&quot;));
-jo.Add(new JProperty(&quot;a&quot;, new JArray(1, 2, 3, 4, 5)));
-string json = jo.ToString(Formatting.None);
-</code></pre>
-<p>Lab6:Using Dynamic to serialize</p>
-<pre><code>dynamic dyna = new JObject();
-dyna.d = new DateTime(2015, 1, 1);
-dyna.n = 12345;
-dyna.s = &quot;MR-Brain&quot;;
-dyna.a = new JArray(1, 2, 3, 4, 5);
-string json = dyna.ToString(Formatting.None);
-</code></pre>
-<p>Serialize Performance: Lab5 &gt; Lab4 &gt; Lab6</p>
-
-
-<hr>
-<h2>
-	<a href="#">Why can&#39;t I get the Jenkins Powershell plugin to work?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/14 23:20:04</p>
-<p>PowerShell says “execution of scripts is disabled on this system.”</p>
-<p>Jenkins powershell plugin is running 32 bit Powershell</p>
-<pre><code>64-bit:  C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe
-32-bit:  C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
-</code></pre>
-<p>you can run following</p>
-<pre><code>&gt; C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe
-PS C:\hoge &gt; Set-ExecutionPolicy RemoteSigned
-PS C:\hoge &gt; exit
-
-&gt; C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
-PS C:\hoge &gt; Set-ExecutionPolicy RemoteSigned
-PS C:\hoge &gt; exit
-</code></pre>
-<p>Or you can</p>
-<pre><code>set-executionpolicy -executionpolicy unrestricted
-set-executionpolicy -executionpolicy -Scope LocalMachine unrestricted
-get-executionpolicy -list
-</code></pre>
-<p>Other Information</p>
-<pre><code>powershell.exe -executionpolicy unrestricted -command .\test.ps1
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">How can I run PowerShell with the .NET 4 runtime?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/09 22:37:00</p>
-<p>Enabling Execution of PowerShell PS1 Scripts</p>
-<pre><code>Set-ExecutionPolicy Unrestricted
-</code></pre>
-<p>You can see exactly what versions Powershell is using by examining the value of <em>$PSVersionTable</em></p>
-<p><img src="/Source/2015/02/https://dl.dropboxusercontent.com/u/13003046/images/PSVersionTable2.png" alt="PSVersionTable2" /></p>
-<p>Notice the value or CLRVersion begins with a &quot;2&quot;.</p>
-<p>Being lazy, of course, we hate manual steps, so here is a small PowerShell script that will automatically create and place the necessary files. Be aware that the script as shown below will overwrite existing .config files.</p>
-<pre><code>$config_text = @&quot;
-&lt;?xml version=&quot;1.0&quot;?&gt; 
-&lt;configuration&gt; 
-    &lt;startup useLegacyV2RuntimeActivationPolicy=&quot;true&quot;&gt; 
-        &lt;supportedRuntime version=&quot;v4.0.30319&quot;/&gt; 
-        &lt;supportedRuntime version=&quot;v2.0.50727&quot;/&gt; 
-    &lt;/startup&gt; 
-&lt;/configuration&gt;
-&quot;@
-
-$config_text| Out-File $pshome\powershell.exe.config
-$config_text| Out-File $pshome\powershell_ise.exe.config
-</code></pre>
-<p>Start PowerShell as an Administrator an then run the script.</p>
-<p>Now restart PowerShell and examine the value of $PSVersionTable.</p>
-<p><img src="/Source/2015/02/https://dl.dropboxusercontent.com/u/13003046/images/PSVersionTable4.png" alt="PSVersionTable4" /></p>
-<p>And now your .NET 4.0 module will load correctly.</p>
-
-
-<hr>
-<h2>
-	<a href="#">Autofac global interface interceptor with Autofac.Extras.DynamicProxy2</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/01/15 19:30:46</p>
-<p>You can't really do EnableInterfaceInterceptors <em>globally</em>.</p>
-<p>But you can add the interceptors dynamically and it requires a little work. The way to go is to create a custom Autofac.Module that attaches to all component registrations. I'll show it to you in an example.</p>
-<pre><code>public class InterceptorModule : Autofac.Module
-{
-  // This is a private constant from the Autofac.Extras.DynamicProxy2 assembly
-  // that is needed to &quot;poke&quot; interceptors into registrations.
-  const string InterceptorsPropertyName = &quot;Autofac.Extras.DynamicProxy2.RegistrationExtensions.InterceptorsPropertyName&quot;;
-
-  protected override void Load(ContainerBuilder builder)
-  {
-    // Register global interceptors here.
-    builder.Register(c =&gt; new CallLogger(Console.Out));
-  }
-
-  protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
-  {
-    // Here is where you define your &quot;global interceptor list&quot;
-    var interceptorServices = new Service[] { 
-		new TypedService(typeof(CallLogger)) 
-	};
-
-    // Append the global interceptors to any existing list, or create a new interceptor
-    // list if none are specified. Note this info will only be used by registrations
-    // that are set to have interceptors enabled. It'll be ignored by others.
-    object existing;
-    if (registration.Metadata.TryGetValue(InterceptorsPropertyName, out existing))
-    {
-      registration.Metadata[InterceptorsPropertyName] =
-        ((IEnumerable&lt;Service&gt;)existing).Concat(interceptorServices).Distinct();
-    }
-    else
-    {
-      registration.Metadata.Add(InterceptorsPropertyName, interceptorServices);
-    }
-  }
-}
-</code></pre>
-<p>To make it work, you register the module along with the rest of your dependencies.</p>
-<pre><code>builder.RegisterType&lt;YourType&gt;()
-   .As&lt;YourIInterface&gt;()
-   .EnableInterfaceInterceptors();
-// Here's the magic module:
-builder.RegisterModule&lt;InterceptorModule&gt;();
-var container = builder.Build();
-</code></pre>
-<p>If you run these registrations and resolve, You can see the interceptor works as you'll see the CallLogger output.</p>
-
-
-<hr>
-<h2>
-	<a href="#">How To Catch HttpRequestValidationException</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/01/13 22:12:59</p>
-<p>If you've worked with ASP.NET for any length of time, you have worried about how to handle the Yellow Screen of Death. You know, the one that says:</p>
-<pre><code>HttpRequestValidationException: A potentially dangerous Request.Form value was detected from the client...
-</code></pre>
-<p>or something similar.</p>
-<p>The common refrain is turn off request validation, but there are times when you want to use the built-in validation functions. You just want a friendlier error for your user.</p>
-<p>This code could be better thought out, but here it is anyway:</p>
-<pre><code>void Application_Error(object sender, EventArgs e) 
-{ 
-  // Code that runs when an unhandled error occurs
-  Exception ex = Server.GetLastError();
-  if (ex is HttpRequestValidationException)
-  {
-    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(
-      &quot;http://&quot; + Request.Url.Authority + Request.ApplicationPath + &quot;/HttpRequestValidationException.aspx&quot;);
-    HttpWebResponse response = (HttpWebResponse)req.GetResponse();
-
-    Response.Clear();
-    Response.ClearHeaders();
-    for (int i = 0; i &lt; response.Headers.Count; i++)
-      Response.AddHeader(response.Headers.GetKey(i), response.Headers.Get(i));
-    Response.StatusCode = (int)response.StatusCode;
-
-    System.IO.Stream src = response.GetResponseStream();
-    while (true) {
-      int b = src.ReadByte();
-      if (b == -1) break;
-      Response.OutputStream.WriteByte((byte)b);
-    }
-
-    response.Close();
-    Response.End(); 
-}
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Using Browser Link in Visual Studio 2013</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/29 15:18:50</p>
-<p><img src="/Source/2014/12/https://dl.dropboxusercontent.com/u/13003046/images/InspectMode.png" alt="InspectMode" /></p>
-<p>Web Essentials adds a number of other great Browser Link extensions that are available through the Web Essentials toolbar. Download <a href="http://vswebessentials.com/download">Web Essentials</a> to try out these great new features.</p>
-<p><em>Inspect Mode</em> – Allows you to highlight an element in the browser and the corresponding code will be highlighted in Visual Studio.</p>
-<p><em>Design Mode</em> – Allows you to edit the content of an element in the browser and the corresponding code will be updated in Visual Studio. This even works if the HTML was generated by Razor code!</p>
-<p><em>Track Unused CSS</em> – Enters a CSS tracking mode that helps you find unused CSS.</p>
-<p><strong>Enabling Browser Link for Static HTML Files</strong>
-To enable Browser Link for static HTML files, add the following to your Web.config file.</p>
-<pre><code>&lt;configuration&gt;
-  &lt;system.webServer&gt;    
-    &lt;handlers&gt;
-      &lt;add name=&quot;Browser Link for HTML&quot; path=&quot;*.html&quot; verb=&quot;*&quot; 
-           type=&quot;System.Web.StaticFileHandler, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; 
-           resourceType=&quot;File&quot; preCondition=&quot;integratedMode&quot; /&gt;
-    &lt;/handlers&gt;
-  &lt;/system.webServer&gt;    
-&lt;/configuration&gt;
-</code></pre>
-<p>Document reference url from <a href="http://www.asp.net/visual-studio/overview/2013/using-browser-link">microsoft</a></p>
 
 
 <hr>

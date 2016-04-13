@@ -59,6 +59,181 @@
 				
 
 <h2>
+	<a href="#">dir file whose File size is greater than 1024KB</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/08/19 22:12:59</p>
+<p>Powershell: dir file whose File size is greater than 1024KB</p>
+<p>The following example perform is will list the files with .pdf extensions. where-object will filter the result set to files with length greater than 1MB. format-table will format the final output to display only the name of the file</p>
+<p>ls *.pdf -Recurse | where-object {$_.length -gt 1048576} | format-table -property Name</p>
+
+
+<hr>
+<h2>
+	<a href="#">C# 5.0 CallerMemberName </a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/08/18 22:12:59</p>
+<p>My new favorite C# language feature: CallerMemberName</p>
+<p>This is how a property with INotifyPropertyChanged support looks like pre C# 4.5:</p>
+<pre><code>public string OldStylePropertyChanged
+{
+  get { return _oldStyle; }
+  set
+  {
+    if (value != _oldStyle)
+    {
+      _oldStyle = value;
+      OnPropertyChangedOldStyle(&quot;OldStylePropertyChanged&quot;);
+    }
+  }
+}
+private void OnPropertyChangedOldStyle(string propertyName)
+{
+  var handler = PropertyChanged;
+  if (handler != null)
+  {
+    handler(this, new PropertyChangedEventArgs(propertyName));
+  }
+}
+</code></pre>
+<p>And this is how it will look like when we apply the use of CallerMemberName in our PropertyChanged method:</p>
+<pre><code>public string DynamicTitle
+{
+  get { return _dynamicTitle; }
+  set
+  {
+    if (value != _dynamicTitle)
+    {
+      _dynamicTitle = value;
+      OnPropertyChanged();
+    }
+  }
+}
+private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+{
+  var handler = PropertyChanged;
+  if (handler != null)
+  {
+    handler(this, new PropertyChangedEventArgs(propertyName));
+  }
+}
+</code></pre>
+<p>Some more really cool additions to CallerMemberName is the following Parameter attributes:</p>
+<p>*	[CallerMemberName]
+*	[CallerFilePath]
+*	[CallerLineNumber]</p>
+<p>The name of the attributes is straight forward and easy to understand, so I doubt that I would have to describe them in detail, instead, let's look at an example straight from MSDN on how to use them.</p>
+<pre><code>public sealed class Logger
+{
+  public void TraceMessage(string message,
+       [CallerMemberName] string memberName = &quot;&quot;,
+       [CallerFilePath] string sourceFilePath = &quot;&quot;,
+       [CallerLineNumber] int sourceLineNumber = 0)
+  {
+    Debug.WriteLine(&quot;message: &quot; + message);
+    Debug.WriteLine(&quot;member name: &quot; + memberName);
+    Debug.WriteLine(&quot;source file path: &quot; + sourceFilePath);
+    Debug.WriteLine(&quot;source line number: &quot; + sourceLineNumber);
+  }
+}
+</code></pre>
+<p>Happy hacking!</p>
+
+
+<hr>
+<h2>
+	<a href="#">Resolving Dependent .NET Assembly Version Conflicts</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/07/28 22:12:59</p>
+<p>I ran into an interesting error message this morning while run application.</p>
+<blockquote>
+<p>------ Build started: Project: UnitTests, Configuration: Debug Any CPU ------
+Consider app.config remapping of assembly &quot;yourAssembly, Culture=neutral, PublicKeyToken=xxx&quot;
+from Version &quot;2.2.0.0&quot; [] to Version &quot;2.2.8.0&quot;
+[C:\Demo\yourAssembly.dll] to solve conflict and get rid of warning.
+C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\Microsoft.Common.targets :
+warning MSB3247: Found conflicts between different versions of the same dependent assembly.</p>
+</blockquote>
+<p>This occurs because YourApp depends on a different version of the your Assembly.</p>
+<p>Fortunately, the error message gives you all you need to know to fix the problem. I added an App.config file to the project with the following XML.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;configuration&gt;
+  &lt;runtime&gt;
+    &lt;assemblyBinding xmlns=&quot;urn:schemas-microsoft-com:asm.v1&quot;&gt;
+      &lt;dependentAssembly&gt;
+        &lt;assemblyIdentity name=&quot;myAssembly&quot; publicKeyToken=&quot;96D09A1EB7F44A77&quot; culture=&quot;neutral&quot;/&gt;
+        &lt;bindingRedirect oldVersion=&quot;0.0.0.0-2.2.8.0&quot; newVersion=&quot;2.2.8.0&quot;/&gt;
+      &lt;/dependentAssembly&gt;
+    &lt;/assemblyBinding&gt;
+  &lt;/runtime&gt;
+&lt;/configuration&gt; 
+</code></pre>
+<p>How to find public key token for a .NET DLL or assembly?</p>
+<p>Use the following command,</p>
+<blockquote>
+<p>sn -T myDLL.dll</p>
+</blockquote>
+<p>This will give you the public key token. Remember one thing this only works if the assembly has to be strongly signed.</p>
+<p>Example</p>
+<pre><code>C:\WINNT\Microsoft.NET\Framework\v3.5&gt;sn -T myDll.dll
+Microsoft (R) .NET Framework Strong Name Utility  Version 3.5.21022.8
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Public key token is x77x5x561934x089
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to redirect to a specific version of .net assembly at runtime?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/06/05 22:12:59</p>
+<p>We can redirect to a specific version of a .net assembly by using configuration file as below:</p>
+<pre><code class="language-xml">&lt;configuration&gt;
+  &lt;runtime&gt;
+    &lt;assemblyBinding xmlns=&quot;urn:schemas-microsoft-com:asm.v1&quot;&gt;
+      &lt;dependentAssembly&gt;
+        &lt;assemblyIdentity name=&quot;myAssembly&quot;
+          publicKeyToken=&quot;32ab4ba45e0a69a1&quot;
+          culture=&quot;en-us&quot; /&gt;
+        &lt;!-- Assembly versions can be redirected in application, 
+          publisher policy, or machine configuration files. --&gt;
+        &lt;bindingRedirect oldVersion=&quot;1.0.0.0&quot; newVersion=&quot;2.0.0.0&quot; /&gt;
+      &lt;/dependentAssembly&gt;
+    &lt;/assemblyBinding&gt;
+  &lt;/runtime&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to move windows that open up offscreen?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/06/03 22:12:59</p>
+<p>1.	Press <em>ALT</em> + <em>SPACE</em> to bring up the system menu (you won't see it because it is off screen)
+2.	Press <em>M</em> to select the &quot;Move&quot; menu choice.
+3.	Press one of the arrow keys to initiate the movement.</p>
+<p>Now just use the mouse to place the window where you want.</p>
+<p>In fact, as long as we remember a few shortcuts, you can easily solve this small problem:</p>
+<p>「Shift」＋「Win」＋ Left/Right Arrow: You can work around the screen to quickly switch windows.</p>
+<p>「Alt」＋ Space ＋「M」:  Can move the cursor quickly &quot;stick&quot; to the currently displayed warning window,  when you move the mouse,  you can drag the window to the front of the visible screen.</p>
+
+
+<hr>
+<h2>
+	<a href="#">VMware Bridged Network stops working after sleep/hibernate on Windows Host.</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2010/07/10 10:12:59</p>
+<p>Running VMware Workstation 6.5 (or above 6.5). My Bridged networking stops working after Windows sleeps or hibernates. A restart is required to restore its operation. NAT networking works fine.
+Anyone have any ideas how to restore it without a reboot?</p>
+<p>Please run the following two commands in a cmd as administrator:</p>
+<pre><code>net stop vmnetbridge
+net start vmnetbridge
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">Multi-line PL/SQL command with .NET OracleCommand</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2010/06/19 10:12:59</p>
@@ -149,135 +324,12 @@ var qry = l.AsQueryable().
 
 
 <hr>
-<h2>
-	<a href="#">DataConfig Class</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2008/09/15 10:12:59</p>
-<p>Introduction
-Each database connection parameters set different. DataConfig so you can easily set these parameters.</p>
-<p>Assembly:T1.Data.dll
-Namespace:T1.Data</p>
-<p>DataConfig Properties:</p>
-<p>*	ProviderType ProviderType
-*	string Server
-*	string Database
-*	string LoginId
-*	string Password</p>
-<p>Through the above property setting, you can easily export a variety of different database connection string.
-Using the code:</p>
-<pre><code>DataConfig cfg = new DataConfig();
-cfg.ProviderType = ProviderType.SqlServer;
-cfg.Server = &quot;172.0.0.1&quot;;
-cfg.Database = &quot;Northwind&quot;;
-cfg.LoginId = &quot;sa&quot;;
-cfg.Password = &quot;123&quot;;
-console.WriteLine(cfg.ConnectString);
-</code></pre>
-<p>If you wish change to Oracle...</p>
-<pre><code>cfg.ProviderType = ProviderType.Oracle;
-console.WriteLine(cfg.ConnectString);
-</code></pre>
-<p>Even if you wish change to SqlExpress...</p>
-<pre><code>cfg.ProviderType = ProviderType.SqlExpress;
-console.WriteLine(cfg.ConnectString);
-</code></pre>
-<p>In addition you can also simplify the traditional connection string in app.Config file.</p>
-<p><add name="db1" connectionString="Data Source=172.0.0.1;Network Library=DBMSSOCN;Initial Catalog=Northwind;User ID=sa;Password=123"></add></p>
-<p>Change to...</p>
-<pre><code class="language-xml">&lt;add name=&quot;db1&quot; connectionString=&quot;ProviderType=SqlServer;Server=172.0.0.1;Database=Northwind;User ID=sa;Password=123&quot;&gt;&lt;/add&gt;
-</code></pre>
-<p>If you wish change to Oracle connection string...</p>
-<pre><code class="language-xml">&lt;add name=&quot;db1&quot; connectionString=&quot;ProviderType=Oracle;Server=172.0.0.1;Database=Northwind;User ID=sa;Password=123&quot;&gt;&lt;/add&gt;
-</code></pre>
-<p>With DataConfig, you do not have to remember some special database connection parameters.</p>
-
-
-<hr>
-<h2>
-	<a href="#">DynamicProperty Class</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2008/09/05 10:12:59</p>
-<p>Introduction
-Some programming tasks require dynamic nature of properties exposed by an object. E.g. it might be needed to access object property by a given key, it might be needed to get all object properties and iterate over them. Dynamic properties are useful when you need to manage them at runtime, when your object is already instantiated.</p>
-<p>In this article we are going to create simple implementation of dynamic properties using C# programming language. We'll use generics for our dynamic properties to make the implementation more flexible and to avoid boxing operations when value types are used for underlying property values.</p>
-<p>*	Assembly:T1.dll
-*	Namespace:T1.Common</p>
-<p>Using the code</p>
-<pre><code>MyClass c1 = new MyClass();
-c1.Name = &quot;123&quot;;
-int i = c1.ID;
-</code></pre>
-<p>Using .NET Invoke Method</p>
-<pre><code>MyClass c1 = new MyClass();
-PropertyInfo pi = c1.GetProperty(&quot;Name&quot;);
-pi.SetValue(c1, &quot;123&quot;);
-pi = c1.GetProperty(&quot;ID&quot;);
-int i = (int)pi.GetValue(c1, null);
-</code></pre>
-<p>Using DynamicProperty Method</p>
-<pre><code>MyClass c1 = new MyClass();
-var setName = DynamicProperty.SetProperty(&quot;Name&quot;);
-setName(c1, &quot;123&quot;);
-var getID = DynamicProperty.GetProperty(&quot;ID&quot;);
-int i = getID(c1);
-</code></pre>
-<p>DynamicProperty Method is fast than Invoke Method.</p>
-
-
-<hr>
-<h2>
-	<a href="#">ValueHelper Class</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2008/09/01 10:12:59</p>
-<p>Introduction
-If you want to clone the same object of class, you must inherit &quot;ICloneable&quot; interface and implement Clone() method for clone function. Now only through ValueHelper Class can be simple to complete this goal.</p>
-<p>*	Assembly:T1.dll
-*	Namespace:T1.Common</p>
-<p>Using the code:</p>
-<pre><code>MyClass a = new MyClass();
-a.Id = 123;
-a.Name = &quot;abc&quot;;
-MyClass b = new MyClass();
-b.Id = a.Id;
-b.Name = a.Name;
-Console.WriteLine(&quot;b Id={0} Name={1}&quot;, b.Id, b.Name);
-</code></pre>
-<p>And the following code in the same</p>
-<pre><code>MyClass a = new MyClass();
-a.Id = 123;
-a.Name = &quot;abc&quot;;
-MyClass b = new MyClass();
-ValueHelper.CopyData(a, b);
-Console.WriteLine(&quot;b Id={0} Name={1}&quot;, b.Id, b.Name);
-</code></pre>
-<p>You can also use Property.GetValue/SetValue to achieve the same purpose, but ValueHelper.CopyData performance on faster than the Property.GetValue/SetValue.</p>
-<p>ValueHelper Class copy only int/float/string... basic types of variables, do not copy the object type variable.</p>
-<p>Therefore, the following code to try to copy the a.Item object will be skipped.</p>
-<pre><code>class MyClass1
-{
-	public string ID{get; set;}
-}
-
-class MyClass2
-{
-	public string Name{get; set;}
-	public MyClass1 Item{get; set;}
-}
-
-MyClass2 a = new MyClass2();
-a.Name = &quot;abc&quot;;
-a.Item = new MyClass1();
-a.ID = &quot;123&quot;;
-MyClass2 b = new MyClass2();
-ValueHelper.CopyData(a, b); 
-//b.Item will be null.
-</code></pre>
-
-
-<hr>
 
 <!-- Pager -->
 <ul class="pager">
+		<li class="previous">
+			<a href="Index8.html">&larr; Older</a>
+		</li>
 			<li class="next">
 			<a href="Index6.html">Newer &rarr;</a>
 		</li>

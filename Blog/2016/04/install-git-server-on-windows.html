@@ -60,36 +60,39 @@
 
 <ul class="list-group">
 	<h2>
-		<a href="#">T1.TinyIoc Example</a>
+		<a href="#">Install Git Server on Windows</a>
 	</h2>
-	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/25 20:22:45</p>
-	<p><a href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
-<p>The following code is using t1.TinyIoc example</p>
-<pre><code>import t1 require(&quot;t1&quot;);
-class IMyKlass implements t1.IIocInterfaceChecker {
-	className: string = &quot;IMyKlass&quot;;
-	test(): number {
-		throw new Error(&quot;Not implement&quot;);
-	}
-}
-
-class MyKlass extends IMyKlass {
-	test(): number {
-		return 123;
-	}
-}
-
-t1.TinyIoc.registerType(IMyKlass, MyKlass);
-
-var obj: IMyKlass = Ioc.resolve(IMyKlass);
-var val = obj.test();
-expect(val).toBe(123);
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/01 10:21:24</p>
+	<p>Download &quot;Git 2.8.0 for Windows&quot; from <a href="https://git-scm.com/">git-scm site</a>
+Download Bitvise SSH Server (WinSSHD) 6.45 from <a href="https://www.bitvise.com/download-area">bitvise</a></p>
+<p>Install Git for windows and setup login account</p>
+<p><img src="/Source/2016/04/install-git-server-on-windows/install-git.png" alt="install git" /></p>
+<p>Create Git Repos Root Folder</p>
+<pre><code>D:/Demo/GitRepos
 </code></pre>
-<p>If you need global instance</p>
-<pre><code>t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());
+<p>Create test folder and open bash command</p>
+<pre><code>C:/User/vdevp/GitRepos&gt;md test
 </code></pre>
-<p>You can even</p>
-<pre><code>t1.TinyIoc.registerLazy(IMyKlass, () =&gt; new MyKlass());
+<p><img src="/Source/2016/04/install-git-server-on-windows/git-bash-here.png" alt="git-bash-here" /></p>
+<pre><code>vdevp@vdevp-PC MINGW64 /c/User/vdevp/GitRepos/test
+$ git init --bare
+</code></pre>
+<p>Git will create many initialize files</p>
+<p><img src="/Source/2016/04/install-git-server-on-windows/git-init.png" alt="git-init" /></p>
+<p>Go to your client PC and create test folder</p>
+<pre><code>D:/Demo/test
+</code></pre>
+<p>open Git bash command</p>
+<pre><code>$ git clone ssh://vdevp@192.168.2.3/~/GitRepos/test
+Cloning into 'test'...
+vdevp@192.168.2.3's password:
+'git-upload-pack' is not recognized as an internal or external command, operable program or batch file.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights and the repository exists.
+</code></pre>
+<p>If you see the error message, please go to Server add system PATH environment</p>
+<pre><code>C:\Program Files (x86)\Git\bin;C:\Program Files\Git\mingw64\libexec\git-core
 </code></pre>
 
 
@@ -98,10 +101,10 @@ expect(val).toBe(123);
 <!-- Pager -->
 <ul class="pager">
 		<li class="previous">
-			<a href="/Blog/2016/03/odds-convert-table.html">&larr; Older</a>
+			<a href="/Blog/2016/03/visual-studio-code-setup.html">&larr; Older</a>
 		</li>
 			<li class="next">
-			<a href="/Blog/2016/03/visual-studio-code-setup.html">Newer &rarr;</a>
+			<a href="/Blog/2016/04/install-aspnet5-dotnet-core1.html">Newer &rarr;</a>
 		</li>
 </ul>
 

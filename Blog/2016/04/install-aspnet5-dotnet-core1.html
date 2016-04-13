@@ -60,36 +60,32 @@
 
 <ul class="list-group">
 	<h2>
-		<a href="#">T1.TinyIoc Example</a>
+		<a href="#">Install ASP.NET 5 (.NET Core 1)</a>
 	</h2>
-	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/25 20:22:45</p>
-	<p><a href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
-<p>The following code is using t1.TinyIoc example</p>
-<pre><code>import t1 require(&quot;t1&quot;);
-class IMyKlass implements t1.IIocInterfaceChecker {
-	className: string = &quot;IMyKlass&quot;;
-	test(): number {
-		throw new Error(&quot;Not implement&quot;);
-	}
-}
-
-class MyKlass extends IMyKlass {
-	test(): number {
-		return 123;
-	}
-}
-
-t1.TinyIoc.registerType(IMyKlass, MyKlass);
-
-var obj: IMyKlass = Ioc.resolve(IMyKlass);
-var val = obj.test();
-expect(val).toBe(123);
+	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/05 14:02:12</p>
+	<p>Install <a href="https://go.microsoft.com/fwlink/?LinkId=627627">ASP.NET 5</a></p>
+<p>Enable the ASP.NET 5 command-line tools. Open a command-prompt and run:</p>
+<pre><code>dnvm upgrade
 </code></pre>
-<p>If you need global instance</p>
-<pre><code>t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());
+<p>This will make the default .NET Execution Environment (DNX) active on the path.</p>
+<p>On Windows 7 and Windows Server 2008 R2 you will also need to install the <a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual C++ Redistributable for Visual Studio 2012 Update 4.</a></p>
+<pre><code>@powershell -NoProfile -ExecutionPolicy unrestricted -Command &quot;&amp;{$Branch='dev';iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.ps1'))}&quot;
 </code></pre>
-<p>You can even</p>
-<pre><code>t1.TinyIoc.registerLazy(IMyKlass, () =&gt; new MyKlass());
+<p>Once this step is complete you should be able to run dnvm and see some help text.</p>
+<p>Use DNVM to install DNX for .NET Core:</p>
+<pre><code>dnvm upgrade -r coreclr
+</code></pre>
+<p>Use DNVM to install DNX for the full .NET Framework:</p>
+<pre><code>dnvm upgrade -r clr
+</code></pre>
+<p>Install the requested DNX version from the feed, create console application using .NET Core</p>
+<pre><code>dnvm install -a x64 -r coreclr 1.0.0-rc1-final
+</code></pre>
+<p>Install generator</p>
+<pre><code>npm install -g yo generator-aspnet
+</code></pre>
+<p>Create Develop folder and generate console project</p>
+<pre><code>yo aspnet
 </code></pre>
 
 
@@ -98,10 +94,10 @@ expect(val).toBe(123);
 <!-- Pager -->
 <ul class="pager">
 		<li class="previous">
-			<a href="/Blog/2016/03/odds-convert-table.html">&larr; Older</a>
+			<a href="/Blog/2016/04/install-git-server-on-windows.html">&larr; Older</a>
 		</li>
 			<li class="next">
-			<a href="/Blog/2016/03/visual-studio-code-setup.html">Newer &rarr;</a>
+			<a href="/Blog/2016/04/install-net-core.html">Newer &rarr;</a>
 		</li>
 </ul>
 

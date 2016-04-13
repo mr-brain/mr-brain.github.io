@@ -59,6 +59,243 @@
 				
 
 <h2>
+	<a href="#">Why isn&#39;t there an Assembly. Unload method?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/31 08:13:57</p>
+<p>Please refer to this article (http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx).</p>
+<p>Memory consumption been eating more and more?</p>
+<pre><code>do
+{
+  Assembly.LoadFrom(&quot;Library1.dll&quot;);
+}while( true );
+</code></pre>
+<p>The result is NO. It will only keep a copy of Library1 Assembly in Memory, And never been release.
+But I need the plugin Mechanism for Load/Unload Assembly.</p>
+<p>How to load and unload Library1 Assembly?
+Step1: Create the Library1 Project.</p>
+<pre><code>[Serializable]
+public class MyClass1
+{
+  public string Test()
+  {
+    return &quot;abc&quot;;
+  }
+}
+</code></pre>
+<p>Step 2: Create the Test Project.</p>
+<pre><code>AppDomainSetup ads = new AppDomainSetup();
+ShadowCopyFiles = &quot;true&quot;;
+var myAppDomain = AppDomain.CreateDomain(&quot;MyAppDomainName&quot;, null, ads);
+</code></pre>
+<p>The follow code will load Library1.dll file.</p>
+<pre><code>object proxy = myAppDomain.CreateInstanceFromAndUnwrap(&quot;Library1.dll&quot;, &quot;Library1.MyClass1&quot;);
+</code></pre>
+<p>Invoke the Test Method.</p>
+<pre><code>MethodInfo mi = proxy.GetType().GetMethod(&quot;Test&quot;, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+string s = (string)mi.Invoke(proxy, new object[]{});
+</code></pre>
+<p>Unload the Library1.dll file.</p>
+<pre><code>AppDomain.Unload(myAppDomain);
+</code></pre>
+<p>If you use T1 Common Library. You can write the following simple code.</p>
+<pre><code>UnloadAssembly asm = UnloadAssembly.Load(&quot;Library1.dll&quot;);
+UnloadClass cls = asm.GetUnloadClass(&quot;Library1.MyClass1&quot;);
+string s = (string)cls.Invoke(&quot;Test&quot;);
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Title:How do I get the &lt;Message&gt; msbuild task that shows up in the Visual Studio .NET project output?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/28 13:42:41</p>
+<pre><code class="language-xml">&lt;Target Name=&quot;BeforeBuild&quot;&gt;
+  &lt;Message Text=&quot;Justin Dearing Message&quot; /&gt;
+&lt;Target/&gt;
+</code></pre>
+<p>However, the messages don't show up in the Visual Studio .NET build output.</p>
+<p>To change the build output verbosity shown in the VS.NET output window, open the Options dialog and select the Build and Run settings below the Projects and Solutions node.</p>
+<p><img src="/Source/2014/05/msbuild-get-output-message/2014-05-28_134204.png" alt="options dialog" /></p>
+<p>Unless you explicitly specify a low message importance, your messages should show up at <font color='blue'>Normal</font> verbosity or higher.</p>
+
+
+<hr>
+<h2>
+	<a href="#">Remove the last character in a string in T-SQL?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/05/03 22:12:59</p>
+<p>How do I remove the last character in a string in T-SQL?</p>
+<p>I.E.</p>
+<blockquote>
+<p>'TEST STRING'</p>
+</blockquote>
+<p>to return:</p>
+<blockquote>
+<p>'TEST STRIN'</p>
+</blockquote>
+<p>Sample code:</p>
+<pre><code>DECLARE @String VARCHAR(100)
+SET @String = 'TEST STRING'
+
+-- Chop off the end character
+SET @String = LEFT(@String, LEN(@String) - 1)
+
+SELECT @String
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Render dynamic model in Razor view engine and ASP.NET MVC</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/10/13 22:12:59</p>
+<p>When I try to render a view whose model type is specified as: @model dynamic</p>
+<p>by using the following code:</p>
+<pre><code>@{ Html.RenderPartial(&quot;PartialView&quot;, Model.UserProfile); }
+</code></pre>
+<p>I get the following exception:</p>
+<blockquote>
+<p>'System.Web.Mvc.HtmlHelper<dynamic>' has no applicable method named 'RenderPartial'
+but appears to have an extension method by that name.
+Extension methods cannot be dynamically dispatched.
+Consider casting the dynamic arguments or calling the extension method without the extension method syntax.</p>
+</blockquote>
+<p>Answer: It appears that the view where I was placing the RenderPartial code had a dynamic model, and thus, MVC couldn't choose the correct method to use. Casting the model in the RenderPartial call to the correct type fixed the issue.</p>
+<pre><code>@Html.Partial(&quot;_PartialView&quot;, (ModelClass)View.UserProfile)
+@{ Html.RenderPartial(&quot;PartialView&quot;, (ModelClass)Model.UserProfile); }
+</code></pre>
+<p>When you send the anonymous type model to the view:</p>
+<pre><code>return View(new {x=4, y=6});
+</code></pre>
+<p>It show that using anonymous types is not supported, however, there is a workaround, you can use an ExpandoObject, convert it to Expando</p>
+<pre><code>using T1.Web.Mvc4;
+return View(new {x=4, y=6}.ToExpando());
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Adding the Global.asax.cs file in Asp.net WebSite</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/09/08 22:12:59</p>
+<p>If we use Asp.net Web Application (File -&gt; New-&gt; Project-&gt; Asp.net Web Application), we can add Global.asax as well as Global.asax.cs file.</p>
+<p>However, if we use Asp.net Web site (File-&gt;New-&gt;Website-&gt;Asp.net Website), it is not the case. By default we will have Global.asax file only and not the Global.asax.cs file.</p>
+<p>The structure of the Global.asax file is as under</p>
+<pre><code>&lt;%@ Application Language=&quot;C#&quot; %&gt;
+&lt;script runat=&quot;server&quot;&gt;
+void Application_Start(object sender, EventArgs e)
+{
+  // Code that runs on application startup
+}
+void Application_End(object sender, EventArgs e)
+{
+  //  Code that runs on application shutdown
+}
+void Application_Error(object sender, EventArgs e)
+{
+  // Code that runs when an unhandled error occurs
+}
+void Session_Start(object sender, EventArgs e)
+{
+  // Code that runs when a new session is started
+}
+void Session_End(object sender, EventArgs e)
+{
+}      
+&lt;/script&gt;
+</code></pre>
+<p>So how can we add a Global.asax.cs file for a Asp.net Web site project? Let us observer the same in the below steps</p>
+<p>Step 1: Right click App_Code -&gt; Add New Item -&gt; Class -&gt; Rename it as Global.cs . Then click on the Add button.</p>
+<p>Step 2: In the Global.cs file that got created, decorate it by inheriting the class from System.Web.HttpApplication</p>
+<p>So the Global.asax.cs file will now look like</p>
+<pre><code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+public class Global : System.Web.HttpApplication
+{
+  public Global()
+  {
+    // TODO: Add constructor logic here
+  }
+
+  protected void Application_Start(object sender, EventArgs e)
+  {
+  }
+        
+  protected void Session_Start(object sender, EventArgs e)
+  {
+  }
+
+  protected void Session_End(object sender, EventArgs e)
+  {
+  }
+  
+  protected void Application_End(object sender, EventArgs e)
+  {
+  }
+}
+</code></pre>
+<p>Step 3: Now, from the Global.asax file, remove the entire script code and change the</p>
+<pre><code>&lt;%@ Application Language=&quot;C#&quot; %&gt;
+</code></pre>
+<p>to</p>
+<pre><code>&lt;%@ Application Language=&quot;C#&quot; CodeBehind=&quot;~/App_Code/Global.asax.cs&quot; Inherits=&quot;Global&quot; %&gt;
+</code></pre>
+<p>That's it. Now run the application and it will work
+Hope this helps atleast for the newbies. Happy coding.</p>
+
+
+<hr>
+<h2>
+	<a href="#">Install TypeScript-0.9.1</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/09/06 22:12:59</p>
+<p>Compile-on-Save With TypeScript 0.8.2, we've enabled the ability to compile a project when source files in the project are saved, circumventing the usual manual compile step.</p>
+<p>Download TypeScript for Visual Studio 2012 and 2013 http://www.microsoft.com/en-us/download/details.aspx?id=34790</p>
+<p>For this to work, you need to enable the global setting in Tools-&gt;Options-&gt;Text Editor-&gt;TypeScript-&gt;Project. Specifically, enable &quot;Automatically compile TypeScript files which are part of a project&quot;.</p>
+<p>Next, you need to make sure your Visual Studio project uses the new TypeScript targets file. You can do this in one of two ways. New projects created with the TypeScript 0.8.2 release will automatically include a link to this targets file (as will the new version of the Windows 8 sample in the samples directory). For projects made with previous versions, you will need to edit the project file by right-clicking the project, selecting &quot;Unload Project&quot;, right-clicking the project, selecting &quot;Edit&quot;, and updating the project XML with the following:</p>
+<p>For each TypeScript file in your project, change the build action to 'TypeScriptCompile':</p>
+<pre><code>&lt;TypeScriptCompile Include=&quot;app.ts&quot; /&gt;
+</code></pre>
+<p>Then additionally add (or replace if you had an older PreBuild action for TypeScript) the following at the end of your project file to include TypeScript compilation in your project.</p>
+<p>For JavaScript projects (.jsproj):</p>
+<pre><code>&lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.VisualStudio.$(WMSJSProject).targets&quot; /&gt;
+  &lt;PropertyGroup Condition=&quot;'$(Configuration)' == 'Debug'&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;true&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;true&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;PropertyGroup Condition=&quot;'$(Configuration)' == 'Release'&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;false&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;false&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot; /&gt;
+</code></pre>
+<p>For C#-style projects (.csproj):</p>
+<pre><code> &lt;PropertyGroup Condition=&quot;'$(Configuration)' == 'Debug'&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;true&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;true&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;PropertyGroup Condition=&quot;'$(Configuration)' == 'Release'&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;false&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;false&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot; /&gt;
+</code></pre>
+<p>PS:Web Essentials 2012 is a feature of Visual Studio 2012 expansion plug For v3.0: Remove all support for the TypeScript (http://madskristensen.net/post/Web-Essentials-2013-Where-is-the-TypeScript-support.aspx) This was because many of those features were built directly in to Visual Studio 2013 and therefore no longer needed support by Web Essentials.</p>
+<p>The repository for high quality TypeScript type definitions. https://github.com/borisyankov/DefinitelyTyped#readme</p>
+<p>Usage: Include a line like this:</p>
+<pre><code>/// &lt;reference path=&quot;jquery.d.ts&quot; /&gt;
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">No exports were found that match the constraint contract name error</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2013/09/05 22:12:59</p>
@@ -234,181 +471,6 @@ is not registered for COM Interop. Please register it with regasm.exe /tlb.</p>
 <blockquote>
 <p>https://connect.microsoft.com/VisualStudio/Downloads/DownloadDetails.aspx?DownloadID=10671</p>
 </blockquote>
-
-
-<hr>
-<h2>
-	<a href="#">dir file whose File size is greater than 1024KB</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/08/19 22:12:59</p>
-<p>Powershell: dir file whose File size is greater than 1024KB</p>
-<p>The following example perform is will list the files with .pdf extensions. where-object will filter the result set to files with length greater than 1MB. format-table will format the final output to display only the name of the file</p>
-<p>ls *.pdf -Recurse | where-object {$_.length -gt 1048576} | format-table -property Name</p>
-
-
-<hr>
-<h2>
-	<a href="#">C# 5.0 CallerMemberName </a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/08/18 22:12:59</p>
-<p>My new favorite C# language feature: CallerMemberName</p>
-<p>This is how a property with INotifyPropertyChanged support looks like pre C# 4.5:</p>
-<pre><code>public string OldStylePropertyChanged
-{
-  get { return _oldStyle; }
-  set
-  {
-    if (value != _oldStyle)
-    {
-      _oldStyle = value;
-      OnPropertyChangedOldStyle(&quot;OldStylePropertyChanged&quot;);
-    }
-  }
-}
-private void OnPropertyChangedOldStyle(string propertyName)
-{
-  var handler = PropertyChanged;
-  if (handler != null)
-  {
-    handler(this, new PropertyChangedEventArgs(propertyName));
-  }
-}
-</code></pre>
-<p>And this is how it will look like when we apply the use of CallerMemberName in our PropertyChanged method:</p>
-<pre><code>public string DynamicTitle
-{
-  get { return _dynamicTitle; }
-  set
-  {
-    if (value != _dynamicTitle)
-    {
-      _dynamicTitle = value;
-      OnPropertyChanged();
-    }
-  }
-}
-private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-{
-  var handler = PropertyChanged;
-  if (handler != null)
-  {
-    handler(this, new PropertyChangedEventArgs(propertyName));
-  }
-}
-</code></pre>
-<p>Some more really cool additions to CallerMemberName is the following Parameter attributes:</p>
-<p>*	[CallerMemberName]
-*	[CallerFilePath]
-*	[CallerLineNumber]</p>
-<p>The name of the attributes is straight forward and easy to understand, so I doubt that I would have to describe them in detail, instead, let's look at an example straight from MSDN on how to use them.</p>
-<pre><code>public sealed class Logger
-{
-  public void TraceMessage(string message,
-       [CallerMemberName] string memberName = &quot;&quot;,
-       [CallerFilePath] string sourceFilePath = &quot;&quot;,
-       [CallerLineNumber] int sourceLineNumber = 0)
-  {
-    Debug.WriteLine(&quot;message: &quot; + message);
-    Debug.WriteLine(&quot;member name: &quot; + memberName);
-    Debug.WriteLine(&quot;source file path: &quot; + sourceFilePath);
-    Debug.WriteLine(&quot;source line number: &quot; + sourceLineNumber);
-  }
-}
-</code></pre>
-<p>Happy hacking!</p>
-
-
-<hr>
-<h2>
-	<a href="#">Resolving Dependent .NET Assembly Version Conflicts</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/07/28 22:12:59</p>
-<p>I ran into an interesting error message this morning while run application.</p>
-<blockquote>
-<p>------ Build started: Project: UnitTests, Configuration: Debug Any CPU ------
-Consider app.config remapping of assembly &quot;yourAssembly, Culture=neutral, PublicKeyToken=xxx&quot;
-from Version &quot;2.2.0.0&quot; [] to Version &quot;2.2.8.0&quot;
-[C:\Demo\yourAssembly.dll] to solve conflict and get rid of warning.
-C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\Microsoft.Common.targets :
-warning MSB3247: Found conflicts between different versions of the same dependent assembly.</p>
-</blockquote>
-<p>This occurs because YourApp depends on a different version of the your Assembly.</p>
-<p>Fortunately, the error message gives you all you need to know to fix the problem. I added an App.config file to the project with the following XML.</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;configuration&gt;
-  &lt;runtime&gt;
-    &lt;assemblyBinding xmlns=&quot;urn:schemas-microsoft-com:asm.v1&quot;&gt;
-      &lt;dependentAssembly&gt;
-        &lt;assemblyIdentity name=&quot;myAssembly&quot; publicKeyToken=&quot;96D09A1EB7F44A77&quot; culture=&quot;neutral&quot;/&gt;
-        &lt;bindingRedirect oldVersion=&quot;0.0.0.0-2.2.8.0&quot; newVersion=&quot;2.2.8.0&quot;/&gt;
-      &lt;/dependentAssembly&gt;
-    &lt;/assemblyBinding&gt;
-  &lt;/runtime&gt;
-&lt;/configuration&gt; 
-</code></pre>
-<p>How to find public key token for a .NET DLL or assembly?</p>
-<p>Use the following command,</p>
-<blockquote>
-<p>sn -T myDLL.dll</p>
-</blockquote>
-<p>This will give you the public key token. Remember one thing this only works if the assembly has to be strongly signed.</p>
-<p>Example</p>
-<pre><code>C:\WINNT\Microsoft.NET\Framework\v3.5&gt;sn -T myDll.dll
-Microsoft (R) .NET Framework Strong Name Utility  Version 3.5.21022.8
-Copyright (c) Microsoft Corporation.  All rights reserved.
-
-Public key token is x77x5x561934x089
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">How to redirect to a specific version of .net assembly at runtime?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/06/05 22:12:59</p>
-<p>We can redirect to a specific version of a .net assembly by using configuration file as below:</p>
-<pre><code class="language-xml">&lt;configuration&gt;
-  &lt;runtime&gt;
-    &lt;assemblyBinding xmlns=&quot;urn:schemas-microsoft-com:asm.v1&quot;&gt;
-      &lt;dependentAssembly&gt;
-        &lt;assemblyIdentity name=&quot;myAssembly&quot;
-          publicKeyToken=&quot;32ab4ba45e0a69a1&quot;
-          culture=&quot;en-us&quot; /&gt;
-        &lt;!-- Assembly versions can be redirected in application, 
-          publisher policy, or machine configuration files. --&gt;
-        &lt;bindingRedirect oldVersion=&quot;1.0.0.0&quot; newVersion=&quot;2.0.0.0&quot; /&gt;
-      &lt;/dependentAssembly&gt;
-    &lt;/assemblyBinding&gt;
-  &lt;/runtime&gt;
-&lt;/configuration&gt;
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">How to move windows that open up offscreen?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/06/03 22:12:59</p>
-<p>1.	Press <em>ALT</em> + <em>SPACE</em> to bring up the system menu (you won't see it because it is off screen)
-2.	Press <em>M</em> to select the &quot;Move&quot; menu choice.
-3.	Press one of the arrow keys to initiate the movement.</p>
-<p>Now just use the mouse to place the window where you want.</p>
-<p>In fact, as long as we remember a few shortcuts, you can easily solve this small problem:</p>
-<p>「Shift」＋「Win」＋ Left/Right Arrow: You can work around the screen to quickly switch windows.</p>
-<p>「Alt」＋ Space ＋「M」:  Can move the cursor quickly &quot;stick&quot; to the currently displayed warning window,  when you move the mouse,  you can drag the window to the front of the visible screen.</p>
-
-
-<hr>
-<h2>
-	<a href="#">VMware Bridged Network stops working after sleep/hibernate on Windows Host.</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2010/07/10 10:12:59</p>
-<p>Running VMware Workstation 6.5 (or above 6.5). My Bridged networking stops working after Windows sleeps or hibernates. A restart is required to restore its operation. NAT networking works fine.
-Anyone have any ideas how to restore it without a reboot?</p>
-<p>Please run the following two commands in a cmd as administrator:</p>
-<pre><code>net stop vmnetbridge
-net start vmnetbridge
-</code></pre>
 
 
 <hr>
