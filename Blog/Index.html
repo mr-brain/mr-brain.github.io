@@ -59,6 +59,265 @@
 				
 
 <h2>
+	<a href="#">## Setting up a TypeScript + Visual Studio Code development environment</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/05/28 22:55:35</p>
+<ul>
+<li>Download and installing Visual Studio Code</li>
+<li>Download node.js</li>
+</ul>
+<p>Open VS Code when you are ready and use Shift + Command + p to access the command panel.
+Go ahead and type &quot;install extensions&quot;: and type</p>
+<pre><code>tslint
+</code></pre>
+<p>go to node.js cmd</p>
+<pre><code>npm install -g tslint
+</code></pre>
+<p>install VS code extensions</p>
+<pre><code>Wallaby.js
+</code></pre>
+<hr />
+<p>Create a new folder for your project and create a new package.json file:</p>
+<p>$ mkdir ts-vscode-boilerplate
+$ cd ts-vscode-boilerplate
+$ npm init</p>
+<p>We are now ready to install the third party dependencies:</p>
+<pre><code>npm install  --save-dev browser-sync
+npm install  --save-dev browserify
+npm install  --save-dev chai
+npm install  --save-dev gulp
+npm install  --save-dev gulp-istanbul
+npm install  --save-dev gulp-mocha
+npm install  --save-dev gulp-sourcemaps
+npm install  --save-dev gulp-tslint
+npm install  --save-dev gulp-typescript
+npm install  --save-dev gulp-uglify
+npm install  --save-dev run-sequence
+npm install  --save-dev tslint
+npm install  --save-dev typescript
+npm install  --save-dev vinyl-buffer
+npm install  --save-dev vinyl-source-stream
+</code></pre>
+<p>Configuring your VS Code preferences
+Click on 「Workspace Settings」. Two files should be displayed on screen:</p>
+
+
+<hr>
+<h2>
+	<a href="#">##Develop Electron App</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/05/28 19:40:16</p>
+<ul>
+<li>
+<p>Download node.js v4.4.5 LTS msi version from <a href="https://nodejs.org/en/download/">nodejs.org website</a></p>
+</li>
+<li>
+<p>Download python 2.7.1 from <a href="https://www.python.org/downloads/windows/">python.org website</a></p>
+<p>set system environment path PYTHON=&quot;C:\Python27\python.exe&quot;</p>
+</li>
+</ul>
+<ul>
+<li>
+<p>Install <a href="https://www.visualstudio.com/zh-tw/products/visual-studio-community-vs.aspx">Visual Studio Community 2015</a></p>
+<p>Visual C++ -&gt;
+Visual C++ 2015
+Common Windows Application Develop Tool -&gt;
+Tool (1.2) &amp; Windows 10 SDK (10.0.10586)
+Windows 10 SDK (10.0.10586)</p>
+</li>
+</ul>
+<p>Enter cmd.exe</p>
+<pre><code>$npm config set msvs_version 2015 --global
+
+(這樣可避免每次安裝都要下參數 npm install [package name] --msvs_version=2015)
+
+$npm install electron-prebuilt --save
+</code></pre>
+<p>每次開發新的 Electron App 時, 先建立目錄 C:\sample-app1, 然後到 cmd c:\sample-app1</p>
+<pre><code>sample-app1/
+	├── package.json
+	├── main.js
+	├── webpack.config.js
+	└── app/
+		├── mainWindow.html
+		└── mainWindow.jsx
+</code></pre>
+<ul>
+<li>
+<p>建立 package.json</p>
+<p>{
+&quot;name&quot;: &quot;electron-example&quot;,
+&quot;version&quot;: &quot;0.1.0&quot;,
+&quot;main&quot;: &quot;main.js&quot;
+}</p>
+</li>
+</ul>
+<p>註：如果 package.json 沒有指定 main 欄位，Electron 預設會使用 index.js 這個檔案。</p>
+<p>main.js
+'use strict';</p>
+<pre><code>const electron = require('electron');
+// app: 控制應用程式生命週期的模組
+const app = electron.app;
+// BrowserWindow: 建立系統原生視窗 (native window) 的模組
+const BrowserWindow = electron.BrowserWindow;
+
+// 保留一個全域的物件關聯以避免 JavaScript 物件 GC 機製造成視窗自動關閉
+let mainWindow;
+
+function createWindow () {
+	// 建立 browser window
+	mainWindow = new BrowserWindow({width: 800, height: 600});
+
+	// 載入 mainWindow.html 作為畫面
+	mainWindow.loadURL('file://' + __dirname + '/app/mainWindow.html');
+
+	// 開啟開發者工具
+	mainWindow.webContents.openDevTools();
+
+	// 當 browser window 被關閉時，會送出 'closed' 訊號，並執行相關的 callback
+	mainWindow.on('closed', function() {
+		// 將此 window 物件解除關聯。
+		// 如果你的應用程式支援多視窗，通常會將這些物件存在一個陣列裡面。
+		// 現在就是刪除對應的視窗物件的時機。
+		mainWindow = null;
+	});
+}
+
+// 當 Electron 完成初始化並且可以開始建立視窗的時候，
+// 會發送 'ready' 訊號，並執行對應的 callback
+// 我們指定收到 'ready' 訊號時，執行 createWindow()
+app.on('ready', createWindow);
+
+// 當所有視窗都關閉時，結束應用程式 ( app.quit() )
+app.on('window-all-closed', function () {
+	// OS X 的使用習慣是當所有視窗關閉的時候，上方的 menu bar 仍然維持開啟
+	// 此時應用程式還沒有完全關閉，除非使用者強制按 Cmd + Q
+	if (process.platform !== 'darwin') {
+		app.quit();
+	}
+});
+
+app.on('activate', function () {
+	// OS X 通常在應用程式已經起來了，但是所有視窗關閉的時候，還可以重新建立主視窗
+	if (mainWindow === null) {
+		createWindow();
+	}
+});
+</code></pre>
+<p>而 app/mainWindow.html 是你想要在視窗中顯示的內容</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;UTF-8&quot;&gt;
+	&lt;title&gt;My Electron-React app&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id=&quot;content&quot;&gt;
+		Hello World!!
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>在 sample-app1 裡面安裝套件 	</p>
+<pre><code>$npm install electron-prebuilt
+</code></pre>
+<p>執行</p>
+<pre><code>$ node_modules/.bin/electron .
+其中第二個路徑是 package.json 所在的目錄 
+</code></pre>
+<hr />
+<p>執行 webpack 產生新的 app/built/mainWindow.js</p>
+<pre><code>$ ./node_modules/.bin/webpack
+</code></pre>
+<p>Start Run</p>
+<pre><code>$ node_modules\.bin\electron .
+</code></pre>
+<p>為了方便未來容易使用，我們將指令放到 package.json ,</p>
+<pre><code>&quot;scripts&quot;: {
+	&quot;start&quot;: &quot;./node_modules/.bin/electron ./&quot;,
+	&quot;electron-rebuild&quot;: &quot;./node_modules/.bin/electron-rebuild&quot;,
+	&quot;webpack&quot;: &quot;./node_modules/.bin/webpack&quot;
+}
+</code></pre>
+<p>之後只需要</p>
+<pre><code>$ npm run webpack &amp;&amp; npm start
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Integrating gulp into VS.NET</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/21 15:26:59</p>
+<pre><code>$npm install -g gulp
+
+$npm install gulp-autoprefixer --save-dev
+</code></pre>
+<p>在專案下的根目錄建立 gulpfile.js</p>
+<p><strong>EXTENDING OUR .CSPROJ WITH CUSTOM TARGETS</strong></p>
+<p>Manually edit your .csproj file and at the bottom (must be after all Import lines) we're going to add some new content.</p>
+<pre><code>&lt;PropertyGroup&gt;
+  &lt;CompileDependsOn&gt;
+    $(CompileDependsOn);
+    GulpBuild;
+  &lt;/CompileDependsOn&gt;
+&lt;/PropertyGroup&gt;
+&lt;Target Name=&quot;GulpBuild&quot; DependsOnTargets=&quot;CompileTypeScript&quot;&gt;
+  &lt;Exec Command=&quot;npm install&quot; /&gt;
+  &lt;Exec Command=&quot;gulp&quot; /&gt;
+&lt;/Target&gt;
+</code></pre>
+<p>What about triggering a gulp cleanup script when we clean our solution in Visual Studio?  It's a very similar extension:</p>
+<pre><code>&lt;PropertyGroup&gt;
+  &lt;CleanDependsOn&gt;
+    $(CleanDependsOn);
+    GulpClean
+  &lt;/CleanDependsOn&gt;
+&lt;/PropertyGroup&gt;
+&lt;Target Name=&quot;GulpClean&quot;&gt;
+  &lt;Exec Command=&quot;gulp clean&quot; /&gt;
+&lt;/Target&gt;
+</code></pre>
+<p>HOOKING INTO WEB DEPLOY</p>
+<pre><code>&lt;PropertyGroup&gt;
+  &lt;CopyAllFilesToSingleFolderForPackageDependsOn&gt;
+    $(CopyAllFilesToSingleFolderForPackageDependsOn);
+    CollectGulpOutput;
+  &lt;/CopyAllFilesToSingleFolderForPackageDependsOn&gt;
+  &lt;CopyAllFilesToSingleFolderForMsdeployDependsOn&gt;
+    $(CopyAllFilesToSingleFolderForMsdeployDependsOn);
+    CollectGulpOutput;
+  &lt;/CopyAllFilesToSingleFolderForMsdeployDependsOn&gt;
+&lt;/PropertyGroup&gt;
+&lt;Target Name=&quot;CollectGulpOutput&quot;&gt;
+  &lt;ItemGroup&gt;
+    &lt;_CustomFiles Include=&quot;build\**\*&quot; /&gt;
+    &lt;FilesForPackagingFromProject Include=&quot;%(_CustomFiles.Identity)&quot;&gt;
+      &lt;DestinationRelativePath&gt;build\%(RecursiveDir)%(Filename)%(Extension)&lt;/DestinationRelativePath&gt;
+    &lt;/FilesForPackagingFromProject&gt;
+  &lt;/ItemGroup&gt;
+  &lt;Message Text=&quot;CollectGulpOutput list: %(_CustomFiles.Identity)&quot; /&gt;
+&lt;/Target&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to encode space path in MSBuild?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/14 13:13:57</p>
+<p>I'm using the property MSBuildProjectDirectory with MSBuild.
+The project is located in:</p>
+<pre><code>C:\Program Files (x86)\Jenkins\workspace\MyProject
+</code></pre>
+<p>and MSBuild will get a &quot;The system cannot find the file specified&quot; error.</p>
+<p>please instead of</p>
+<pre><code>$([MSBuild]::Unescape('$(MSBuildProjectDirectory)'))
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">how do I minify Javascript and CSS in the vs.net 2013 post-build step </a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/13 15:15:59</p>
@@ -159,12 +418,12 @@ npm insall webpack-target-electron-renderer --save
 
 <hr>
 <h2>
-	<a href="#">Install .NET Core</a>
+	<a href="#">Install .NET Core 1.0</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/06 12:31:43</p>
 <p>The best way to install .NET Core on Windows is to download the <a href="https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/1.0.0.001598/dotnet-win-x64.1.0.0.001598.exe">official MSI installer</a>. This installer will install the tools and put them on your PATH.</p>
 <p>If you are using Windows 7, Windows Server 2008 or Windows Server 2012 you will also need to install Visual C++ Redistributable for <a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual Studio 2012 Update 4</a> &amp; <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145">Visual C++ Redistributable for Visual Studio 2015</a> .</p>
-<p>Initialize some code</p>
+<p>Initialize some code for console application</p>
 <pre><code>C:\&gt;mkdir hwapp
 C:\&gt;cd hwapp
 C:\&gt;dotnet new
@@ -172,6 +431,32 @@ C:\&gt;dotnet new
 <p>The first command will restore the packages specified in the project.json file, and the second command will run the actual sample:</p>
 <pre><code>C:\&gt;dotnet restore
 C:\&gt;dotnet run
+</code></pre>
+<p>update npm</p>
+<pre><code>npm install -g npm
+</code></pre>
+<p>Initialize yo</p>
+<pre><code>npm install -g yo
+npm install -g generator-webapp
+npm install -g generator-aspnet
+</code></pre>
+<p>To scaffold a new aspnet project, run:</p>
+<pre><code>yo aspnet
+</code></pre>
+<p><img src="/Source/2016/04/install-net-core%5Cyo-aspnet.png" alt="yo-aspnet" /></p>
+<p>Now lets create using Visual Studio yo extension, <a href="https://marketplace.visualstudio.com/items?itemName=samverschueren.yo">install yo extension first</a>.</p>
+<p>Intellisense Key Bindings for Visual Studio Code</p>
+<p>|
+|Key	|Command	|Command id
+|Ctrl+Space	|Trigger Suggest	|editor.action.triggerSuggest</p>
+<p>Add Static Files packages and restore &quot;project.json&quot;</p>
+<pre><code>&quot;dependencies&quot;: {
+	...,
+	&quot;Microsoft.AspNet.StaticFiles&quot;: &quot;1.0.0-rc1-final&quot;
+}
+</code></pre>
+<p>From the Command Palette in VS Code</p>
+<pre><code>dotnet restore
 </code></pre>
 
 
@@ -290,260 +575,6 @@ $ npm install  --save-dev vinyl-buffer
 $ npm install  --save-dev vinyl-source-stream
 </code></pre>
 <p>Open VS Code and Click preferences -&gt; “Workspace Settings”.</p>
-
-
-<hr>
-<h2>
-	<a href="#">T1.TinyIoc Example</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/25 20:22:45</p>
-<p><a href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
-<p>The following code is using t1.TinyIoc example</p>
-<pre><code>import t1 require(&quot;t1&quot;);
-class IMyKlass implements t1.IIocInterfaceChecker {
-	className: string = &quot;IMyKlass&quot;;
-	test(): number {
-		throw new Error(&quot;Not implement&quot;);
-	}
-}
-
-class MyKlass extends IMyKlass {
-	test(): number {
-		return 123;
-	}
-}
-
-t1.TinyIoc.registerType(IMyKlass, MyKlass);
-
-var obj: IMyKlass = Ioc.resolve(IMyKlass);
-var val = obj.test();
-expect(val).toBe(123);
-</code></pre>
-<p>If you need global instance</p>
-<pre><code>t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());
-</code></pre>
-<p>You can even</p>
-<pre><code>t1.TinyIoc.registerLazy(IMyKlass, () =&gt; new MyKlass());
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Odds convert table</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/15 22:36:16</p>
-<iframe src="/Source/odds-convert-table.html" width=480 height=740 frameborder=0>
-</iframe>
-
-
-<hr>
-<h2>
-	<a href="#">Create Custom IIS URL Rewrite Provider</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/13 11:03:35</p>
-<p>Developing a Custom Rewrite Provider for URL Rewrite Module</p>
-<h3>Creating a Visual Studio C# Class Library Project</h3>
-<ul>
-<li>add references to Microsoft.Web.Iis.Rewrite.dll located in &quot;%ProgramFiles%\Reference Assemblies\Microsoft\IIS&quot;.</li>
-</ul>
-<p>Rewrite providers must be placed in the .NET Global Assembly Cache (GAC)</p>
-<ul>
-<li>To sign the assembly, In the Signing tab check &quot;Sign the assembly&quot; check box.</li>
-</ul>
-<p>In the combo box, select the option &lt;New…&gt; to create a new key. In the &quot;Create Strong Name Key&quot; dialog, type DemoKey.snk as the name for the key and uncheck the Protect my key file with a password check box. Click OK.</p>
-<p><img src="/Source/2016/03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-4.png" alt="iis-url-rewrite" /></p>
-<ul>
-<li>Select the &quot;Build Events&quot; tab and add the following &quot;Post-build event&quot; command line:</li>
-</ul>
-<p>CALL &quot;%VS90COMNTOOLS%\vsvars32.bat&quot; &gt; NULL
-gacutil.exe /if &quot;$(TargetPath)&quot;</p>
-<p>Note: if you use Visual Studio 2010 then replace %VS90COMNTOOLS% with %VS100COMNTOOLS%.</p>
-<h3>Implementing the provider interfaces</h3>
-<pre><code>public class CdnRewriteProvider : IRewriteProvider, IProviderDescriptor
-{
-}
-</code></pre>
-<h3>Registering and configuring the provider</h3>
-<ul>
-<li>Open IIS Manager and select the URL Rewrite feature</li>
-</ul>
-<p><img src="/Source/2016/03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-1.png" alt="Step1" /></p>
-<p><img src="/Source/2016/03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-2.png" alt="Step2" /></p>
-<p><img src="/Source/2016/03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-3.png" alt="Step3" /></p>
-<p>This completes the registration and configuration of a rewrite provider. As a result the web.config file for the default web site will contain the following XML code inside of the <rewrite> section:</p>
-<pre><code>&lt;system.webServer&gt;
-	&lt;rewrite&gt;
-		&lt;providers&gt;
-			&lt;provider name=&quot;T1.IisUrlRewriteModule&quot; type=&quot;T1.IisUrlRewriteModule.CdnRewriteProvider, T1.IisUrlRewriteModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd92a3df2f0d20b9&quot;&gt;
-				&lt;settings&gt;
-					&lt;add key=&quot;config&quot; value=&quot;aaa&quot; /&gt;
-				&lt;/settings&gt;
-			&lt;/provider&gt;
-		&lt;/providers&gt;
-	&lt;/rewrite&gt;
-&lt;/system.webServer&gt;
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">React + FReflux</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/05 16:58:20</p>
-<h3>React Flow</h3>
-<p><img src="/Source/2016/03/reflux/Flux.png" alt="React Flow" /></p>
-<h4>Create Actions</h4>
-<pre><code>import $ = require('jquery');
-import t1 = require('t1');
-import FReflux = t1.FReflux;
-import FRefluxActions = t1.FRefluxActions;
-
-enum Demo1ActionType {
-	Request
-}
-
-export class Demo1Actions extends FRefluxActions&lt;Demo1ActionType&gt; {
-	constructor() {
-		super(Demo1ActionType);
-	}
-
-	Request(name: string) {
-		this.dispatchEvent(Demo1ActionType.Request, name);
-	}
-}
-</code></pre>
-<h4>Create Store</h4>
-<pre><code>import t1 = require('t1');
-import FReflux = t1.FReflux;
-import FRefluxStore = t1.FRefluxStore;
-
-export class Demo1State {
-	name: string;
-}
-
-
-export class Demo1Store extends FRefluxStore&lt;Demo1State&gt; {
-	_state: Demo1State = new Demo1State();
-
-	constructor(actions: FRefluxActions&lt;any&gt;[]) {
-		super(actions);
-	}
-
-	getState(): Demo1State {
-		return this._state;
-	}
-}
-</code></pre>
-<h4>Create Main View</h4>
-<pre><code>export interface MobileDemo1Props extends React.Props&lt;MobileDemo1&gt; {
-	history: any;
-}
-
-export class MobileDemo1 extends FRefluxStoreComponent&lt;MobileDemo1Props, Demo1State&gt; {
-	constructor() {
-		this.name = &quot;MobileDemo1&quot;;
-		super(_app1Store);
-	}
-
-	componentWillMount() {
-	}
-
-	componentWillUnmount() {
-	}
-
-	componentDidMount() {
-		super.componentDidMount();
-	}
-
-	navigate() {
-		console.log(this.props);
-		this.props.history.pushState(null, &quot;/&quot;);
-		//this.props.history.replaceState(null, &quot;/&quot;);
-	}
-
-	render() {
-		return (
-			&lt;div&gt;React-Router Demo1
-				&lt;Link to='Panel1'&gt;Panel1&lt;/Link&gt;
-				&lt;Link to='Panel2'&gt;&lt;button className=&quot;btn btn-success&quot;&gt;Panel2&lt;/button&gt;&lt;/Link&gt;
-				&lt;button onClick={this.navigate.bind(this)}&gt;TEST&lt;/button&gt;
-				{this.props.children}
-			&lt;/div&gt;
-		);
-	}
-}
-</code></pre>
-<h4>Create Panel1 View</h4>
-<pre><code>interface Panel1Props extends React.Props&lt;Panel1&gt; {
-}
-
-
-class Panel1 extends FRefluxReducerComponent&lt;Panel1Props, Demo1State&gt; {
-	constructor() {
-		super();
-	}
-
-	getStateFromStore(state: Demo1State): Demo1State {
-		return state;
-	}
-
-	render() {
-		return (
-			&lt;div&gt;
-				Hello Panel-1
-			&lt;/div&gt;
-		);
-	}
-}
-</code></pre>
-<h3>Render</h3>
-<pre><code>import * as Router from 'react-router';
-import { Route, IndexRoute, Link } from 'react-router';
-
-var routeMap = (
-		&lt;Route path=&quot;/&quot; component={MobileDemo1}&gt;
-				&lt;IndexRoute component={Panel1}/&gt;
-				&lt;Route path=&quot;Panel1&quot; component={Panel1}/&gt;
-        &lt;Route path=&quot;Panel2&quot; component={Panel2}/&gt;
-        &lt;Route path=&quot;*&quot; component={NotFoundPage} /&gt;
-    &lt;/Route&gt;
-);
-
-ReactDOM.render(
-	&lt;Router.Router history={Router.browserHistory}&gt;
-		{routeMap}
-	&lt;/Router.Router&gt;, 
-	document.getElementById('app1')
-);
-</code></pre>
-<h3>Main.js</h3>
-<pre><code>(function(){
-	var baseUrl = &quot;/js/Samples/ReactRouterDemo1/&quot;;
-
-	require.config({
-		paths: {
-			&quot;App&quot;: baseUrl + &quot;App&quot;,
-		}
-	});
-})();
-
-define([&quot;require&quot;, &quot;exports&quot;, 'App'], function (require, exports, app) {
-});
-</code></pre>
-<h3>HTML</h3>
-<pre><code>&lt;html&gt;
-&lt;head&gt;
-	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot; /&gt;
-	&lt;title&gt;React Router Demo1&lt;/title&gt;
-	&lt;script src=&quot;~/js/requirejs-config.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;~/Scripts/require.js&quot; data-main=&quot;/js/Samples/ReactRouterDemo1/Main.js&quot;&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-	&lt;div id=&quot;app1&quot;&gt;
-	&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
 
 
 <hr>

@@ -59,6 +59,86 @@
 				
 
 <h2>
+	<a href="#">Resharper shortcut keys</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/06 07:31:40</p>
+<p>How to restore parameter info (argument list) shortcut with Resharper?</p>
+<p>If you go to the <strong>Visual Studio Tools -&gt; Options -&gt; Keyboard</strong> section, you can type the shortcut in the shortcut keys edit box and VS will show what commands are bound to that shortcut combination. So, hitting <strong>ctrl+shift+space</strong> will show you that is mapped to <strong>&quot;Edit.ParameterInfo&quot;</strong> for the Workfow Designer, and <strong>&quot;ReSharper.ReSharper_CompleteCodeSmart&quot;</strong> for the Text Editor and the XAML UI Designer. You can do a similar thing with <strong>ctrl+p</strong>.</p>
+
+
+<hr>
+<h2>
+	<a href="#">Automapper 3.0 - This type is not supported on this platform when I use MSTest.exe ?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/01 10:12:20</p>
+<p>MSTest show following error:</p>
+<blockquote>
+<p>Source value:
+System.Data.DataTableReader ---&gt; System.PlatformNotSupportedException: Proxy generation not supported on this platform.</p>
+</blockquote>
+<p>To fix it, add an explicit call to something in AutoMapper.Net4.dll. For instance, with the class ListSourceMapper :</p>
+<pre><code>var useless = new ListSourceMapper();
+</code></pre>
+<p>Or you can</p>
+<pre><code>[TestClass]
+[DeploymentItem(&quot;AutoMapper.Net4.dll&quot;)]
+public class YourTest
+{
+	[TestMethod]
+	public void Test1()
+	{
+		...
+	}
+}
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to compile many typescript files in VS.NET 2013?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/30 22:26:45</p>
+<p>We can add following MSBuild script in your csproj file.</p>
+<pre><code>&lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot;
+    Condition=&quot;Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\$(TypeScriptToolsVersion)\Microsoft.TypeScript.targets')&quot; /&gt;
+&lt;Target Name=&quot;CombineT1&quot; BeforeTargets=&quot;PrepareForBuild&quot;&gt;
+  &lt;ItemGroup&gt;
+    &lt;T1TypeScriptFiles Include=&quot;$(projectDir)Scripts\t1\*.ts;&quot; Exclude=&quot;$(projectDir)\Scripts\**\*.d.ts;&quot; /&gt;
+  &lt;/ItemGroup&gt;
+  &lt;WriteLinesToFile File=&quot;$(projectDir)Scripts\t1\typescriptcompiler.input&quot; Lines=&quot;@(T1TypeScriptFiles)&quot; Overwrite=&quot;true&quot; Encoding=&quot;UTF-8&quot; /&gt;
+  &lt;Exec Command=&quot;&amp;quot;$(MSBuildProgramFiles32)\Microsoft SDKs\TypeScript\$(TypeScriptToolsVersion)\tsc&amp;quot; --out $(projectDir)Scripts\t1\t1.js --target ES5 @$(projectDir)Scripts\t1\typescriptcompiler.input&quot; CustomErrorRegularExpression=&quot;\.ts\([0-9]+,[0-9]+\):(.*)&quot;&gt;
+  &lt;/Exec&gt;
+&lt;/Target&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Jasmine Errors in VS.NET 2013 </a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/28 09:56:34</p>
+<p>I get the following error:</p>
+<blockquote>
+<p>Script:
+C:\Users\xxx\AppData\Local\Microsoft\VisualStudio\12.0\Extensions\2q5cdx5o.qzv\TestFiles\Jasmine\v2\jasmine.js</p>
+</blockquote>
+<p>Error: 'null' is not an object (evaluating 'currentSpec.expect') #665</p>
+<p>I find the root cause:</p>
+<pre><code>describe(&quot;[TS]Test&quot;, function () {
+  expect(&quot;&quot;).toBe(&quot;&quot;);
+});
+</code></pre>
+<p>I forgot to add the 'it' statement around my expect.</p>
+<pre><code>describe(&quot;[TS]Test&quot;, function () {
+  it(&quot;test&quot;,() =&gt; {
+	expect(&quot;&quot;).toBe(&quot;&quot;);
+  });
+});
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">What is the GOOGLE_INPUT_CHEXT_FLAG in web pages?</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/24 23:15:55</p>
@@ -297,65 +377,6 @@ function checkTimeout(data) {
 <p>Create a new project targeting same .NET framework and copy its Views/web.config file over top the one in your current project</p>
 </blockquote>
 <p>This will fix your problem.</p>
-
-
-<hr>
-<h2>
-	<a href="#">PsExec gets stuck on licence prompt when running non-interactively</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/04 13:42:15</p>
-<p>Use the <strong>/accepteula</strong> command-line switch to accept the licence agreement.</p>
-<p>Or set</p>
-<blockquote>
-<pre><code>HKCU\Software\Sysinternals\PsExec\EulaAccepted 
-</code></pre>
-</blockquote>
-<p>to 1</p>
-<p><strong>Caution:</strong> if the reg key above is set to 0 (EULA was declined once) then the /accepteula will not work, you have to set the key to 1 manually (or delete it altogether).</p>
-
-
-<hr>
-<h2>
-	<a href="#">JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/25 12:29:33</p>
-<p>JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</p>
-<p>reference: https://issues.apache.org/jira/browse/WICKET-5404</p>
-
-
-<hr>
-<h2>
-	<a href="#">VS.NET found the WebAPI reference error</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/17 23:41:15</p>
-<p>I've created a MVC 4 Web API Application inside my solution, but I changed nuget package default location. So I'm getting 2 errors right now.</p>
-<blockquote>
-<p>'System.Web.Http.HttpConfiguration' does not contain a definition for 'MapHttpAttributeRoutes' and no extension method 'MapHttpAttributeRoutes' accepting a first argument of type 'System.Web.Http.HttpConfiguration' could be found (are you missing a using directive or an assembly reference?)</p>
-</blockquote>
-<p>A forced reinstall of WebAPI could do the job:</p>
-<pre><code>update-package microsoft.aspnet.webapi -reinstall -project yourProject
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Is it possible to share the location of Nuget packages for multiple projects ?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/17 22:50:48</p>
-<p>Nuget version 2.1</p>
-<p>There is now official documentation on how to control the package locations. The release notes for 2.1 specifies the following configuration in a nuget.config file.</p>
-<p>Please modify NuGet.config file in</p>
-<pre><code>C:\Users\MrBrain\AppData\Roaming\NuGet\NuGet.Config
-</code></pre>
-<p>and add following</p>
-<pre><code>&lt;configuration&gt;
-  &lt;config&gt;
-    &lt;add key=&quot;repositoryPath&quot; value=&quot;C:\thePathToMyPackagesFolder&quot; &gt;&lt;/add&gt;
-  &lt;/config&gt;
-  ... 
-&lt;/configuration&gt;
-</code></pre>
-<p>Restart VS.NET 2013, NuGet will place packages in the new location.</p>
 
 
 <hr>

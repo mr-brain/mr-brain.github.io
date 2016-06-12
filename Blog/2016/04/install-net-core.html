@@ -60,12 +60,12 @@
 
 <ul class="list-group">
 	<h2>
-		<a href="#">Install .NET Core</a>
+		<a href="#">Install .NET Core 1.0</a>
 	</h2>
 	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/04/06 12:31:43</p>
 	<p>The best way to install .NET Core on Windows is to download the <a href="https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/1.0.0.001598/dotnet-win-x64.1.0.0.001598.exe">official MSI installer</a>. This installer will install the tools and put them on your PATH.</p>
 <p>If you are using Windows 7, Windows Server 2008 or Windows Server 2012 you will also need to install Visual C++ Redistributable for <a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual Studio 2012 Update 4</a> &amp; <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145">Visual C++ Redistributable for Visual Studio 2015</a> .</p>
-<p>Initialize some code</p>
+<p>Initialize some code for console application</p>
 <pre><code>C:\&gt;mkdir hwapp
 C:\&gt;cd hwapp
 C:\&gt;dotnet new
@@ -73,6 +73,32 @@ C:\&gt;dotnet new
 <p>The first command will restore the packages specified in the project.json file, and the second command will run the actual sample:</p>
 <pre><code>C:\&gt;dotnet restore
 C:\&gt;dotnet run
+</code></pre>
+<p>update npm</p>
+<pre><code>npm install -g npm
+</code></pre>
+<p>Initialize yo</p>
+<pre><code>npm install -g yo
+npm install -g generator-webapp
+npm install -g generator-aspnet
+</code></pre>
+<p>To scaffold a new aspnet project, run:</p>
+<pre><code>yo aspnet
+</code></pre>
+<p><img src="/Source/2016/04/install-net-core%5Cyo-aspnet.png" alt="yo-aspnet" /></p>
+<p>Now lets create using Visual Studio yo extension, <a href="https://marketplace.visualstudio.com/items?itemName=samverschueren.yo">install yo extension first</a>.</p>
+<p>Intellisense Key Bindings for Visual Studio Code</p>
+<p>|
+|Key	|Command	|Command id
+|Ctrl+Space	|Trigger Suggest	|editor.action.triggerSuggest</p>
+<p>Add Static Files packages and restore &quot;project.json&quot;</p>
+<pre><code>&quot;dependencies&quot;: {
+	...,
+	&quot;Microsoft.AspNet.StaticFiles&quot;: &quot;1.0.0-rc1-final&quot;
+}
+</code></pre>
+<p>From the Command Palette in VS Code</p>
+<pre><code>dotnet restore
 </code></pre>
 
 

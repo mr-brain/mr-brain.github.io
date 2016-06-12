@@ -59,6 +59,65 @@
 				
 
 <h2>
+	<a href="#">PsExec gets stuck on licence prompt when running non-interactively</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/04 13:42:15</p>
+<p>Use the <strong>/accepteula</strong> command-line switch to accept the licence agreement.</p>
+<p>Or set</p>
+<blockquote>
+<pre><code>HKCU\Software\Sysinternals\PsExec\EulaAccepted 
+</code></pre>
+</blockquote>
+<p>to 1</p>
+<p><strong>Caution:</strong> if the reg key above is set to 0 (EULA was declined once) then the /accepteula will not work, you have to set the key to 1 manually (or delete it altogether).</p>
+
+
+<hr>
+<h2>
+	<a href="#">JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/25 12:29:33</p>
+<p>JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</p>
+<p>reference: https://issues.apache.org/jira/browse/WICKET-5404</p>
+
+
+<hr>
+<h2>
+	<a href="#">VS.NET found the WebAPI reference error</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/17 23:41:15</p>
+<p>I've created a MVC 4 Web API Application inside my solution, but I changed nuget package default location. So I'm getting 2 errors right now.</p>
+<blockquote>
+<p>'System.Web.Http.HttpConfiguration' does not contain a definition for 'MapHttpAttributeRoutes' and no extension method 'MapHttpAttributeRoutes' accepting a first argument of type 'System.Web.Http.HttpConfiguration' could be found (are you missing a using directive or an assembly reference?)</p>
+</blockquote>
+<p>A forced reinstall of WebAPI could do the job:</p>
+<pre><code>update-package microsoft.aspnet.webapi -reinstall -project yourProject
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Is it possible to share the location of Nuget packages for multiple projects ?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/17 22:50:48</p>
+<p>Nuget version 2.1</p>
+<p>There is now official documentation on how to control the package locations. The release notes for 2.1 specifies the following configuration in a nuget.config file.</p>
+<p>Please modify NuGet.config file in</p>
+<pre><code>C:\Users\MrBrain\AppData\Roaming\NuGet\NuGet.Config
+</code></pre>
+<p>and add following</p>
+<pre><code>&lt;configuration&gt;
+  &lt;config&gt;
+    &lt;add key=&quot;repositoryPath&quot; value=&quot;C:\thePathToMyPackagesFolder&quot; &gt;&lt;/add&gt;
+  &lt;/config&gt;
+  ... 
+&lt;/configuration&gt;
+</code></pre>
+<p>Restart VS.NET 2013, NuGet will place packages in the new location.</p>
+
+
+<hr>
+<h2>
 	<a href="#">Json.NET Serialize/Deserialize methods</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2015/02/15 09:33:32</p>
@@ -297,109 +356,6 @@ To enable Browser Link for static HTML files, add the following to your Web.conf
 &lt;/configuration&gt;
 </code></pre>
 <p>Document reference url from <a href="http://www.asp.net/visual-studio/overview/2013/using-browser-link">microsoft</a></p>
-
-
-<hr>
-<h2>
-	<a href="#">JavaScript JSON date conversion</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/26 09:53:12</p>
-<p>In JavaScript's Date type, after JSON.stringify() will return ISO-8601 format (yyyy-MM-ddTHH: mm: ss.fffZ); interestingly, the JSON.parse() return a string, and not restored to the original Date type.</p>
-<p>ISO-8601 format will revert back to the Date of demand, to achieve through JSON.parse() function of Reviver. Examples are as follows:</p>
-<pre><code>var dateReviver = function (key, value) {
-    var a;
-    if (typeof value === 'string') {
-        a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);
-        if (a) {
-            return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4], +a[5], +a[6]));
-        }
-        a = /^\/Date\((.*?)\)\/$/.exec(value);
-        if (a) {
-          return new Date(parseInt(a[1]));
-        }
-    }
-    return value;
-};
-</code></pre>
-<p>We can invoke it as following:</p>
-<pre><code>var strJson = &quot;\&quot;2014-12-25T07:27:13.851Z\&quot;&quot;;
-var result = JSON.parse(strJson, dateReviver);
-
-strJson = &quot;\&quot;&quot;/Date(1330444800000)/\&quot;&quot;;
-result = JSON.parse(strJson, dateReviver);
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Automatic Package Restore in Visual Studio</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/24 17:16:25</p>
-<p>We can add the pre-build event for each of the project that require the packages.config</p>
-<pre><code>cd $(ProjectDir)
-nuget restore -source http://www.nuget.org/api/v2/ -packagesdirectory ../packages
-</code></pre>
-<p>What if you have custom package sources?
-All you need to do is create a NuGet.Config file next to your .sln file, containing:</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;configuration&gt;
-  &lt;packageSources&gt;
-    &lt;add key=&quot;nuget.org&quot; value=&quot;https://www.nuget.org/api/v2/&quot; /&gt;
-    &lt;add key=&quot;aspnetwebstacknightlyrelease&quot; value=&quot;https://www.myget.org/f/aspnetwebstacknightlyrelease/&quot; /&gt;
-  &lt;/packageSources&gt;
-&lt;/configuration&gt;
-</code></pre>
-<p>Note that if you have private package sources that you want to keep out of your repo, you can add them to</p>
-<pre><code>%APPDATA%\NuGet\Nuget.config (see this page) for details.
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">How to avoid BeginInvoke before a handle has been created? </a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/22 22:12:59</p>
-<p>Invoke or BeginInvoke cannot be called on a control until the window handle has been created.</p>
-<pre><code>public static class ControlExtension
-{
-    public static void SafeInvoke(this Control uiElement, Action updater, bool forceSynchronous)
-    {
-        if (uiElement == null) {
-            throw new ArgumentNullException(&quot;uiElement&quot;);
-        }
-
-        if (uiElement.InvokeRequired) {
-            if (forceSynchronous) {
-                uiElement.Invoke((Action)delegate
-                {
-                    SafeInvoke(uiElement, updater, forceSynchronous);
-                });
-            }
-            else {
-                uiElement.BeginInvoke((Action)delegate
-                {
-                    SafeInvoke(uiElement, updater, forceSynchronous);
-                });
-            }
-        }
-        else {
-            if (uiElement.IsDisposed) {
-                throw new ObjectDisposedException(&quot;Control is already disposed.&quot;);
-            }
-            updater();
-        }
-    }
-}
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Outlook 2007 requiring a Password When Resuming from Hibernation </a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/04 09:31:12</p>
-<p>I recently noticed that a Need password prompt after resuming from hibernation mode.</p>
-<p>You can download MicrosoftFixit50636.msi from Microsoft website (http://support.microsoft.com/kb/949918/en).</p>
 
 
 <hr>

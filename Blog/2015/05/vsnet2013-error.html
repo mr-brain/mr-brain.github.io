@@ -67,6 +67,19 @@
 <blockquote>
 <p>Please try to remove %LOCALAPPDATA%\Microsoft\VisualStudio\11.0\ComponentModelCache and restarting VS2012. Hope this will fix your issue.</p>
 </blockquote>
+<p>Getting Error &quot;Object reference not set to an instance of an object.&quot; when open test project in VS.NET 2013?</p>
+<p>Maybe this helps:</p>
+<p>Delete the contents from the following folders:</p>
+<ul>
+<li>C:\Users{user}\AppData\Local\Microsoft\VisualStudio</li>
+<li>C:\Users{user}\AppData\Local\Microsoft\VSCommon</li>
+</ul>
+<p>Sometimes, you need to go to:</p>
+<ul>
+<li>[x64] C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE</li>
+<li>[x86] C:\Program Files\Microsoft Visual Studio 14.0\Common7\IDE</li>
+</ul>
+<p>and run devenv /resetuserdata.</p>
 
 
 </ul>

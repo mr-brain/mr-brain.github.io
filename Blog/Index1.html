@@ -59,6 +59,260 @@
 				
 
 <h2>
+	<a href="#">T1.TinyIoc Example</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/25 20:22:45</p>
+<p><a href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
+<p>The following code is using t1.TinyIoc example</p>
+<pre><code>import t1 require(&quot;t1&quot;);
+class IMyKlass implements t1.IIocInterfaceChecker {
+	className: string = &quot;IMyKlass&quot;;
+	test(): number {
+		throw new Error(&quot;Not implement&quot;);
+	}
+}
+
+class MyKlass extends IMyKlass {
+	test(): number {
+		return 123;
+	}
+}
+
+t1.TinyIoc.registerType(IMyKlass, MyKlass);
+
+var obj: IMyKlass = Ioc.resolve(IMyKlass);
+var val = obj.test();
+expect(val).toBe(123);
+</code></pre>
+<p>If you need global instance</p>
+<pre><code>t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());
+</code></pre>
+<p>You can even</p>
+<pre><code>t1.TinyIoc.registerLazy(IMyKlass, () =&gt; new MyKlass());
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Odds convert table</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/15 22:36:16</p>
+<iframe src="/Source/odds-convert-table.html" width=480 height=740 frameborder=0>
+</iframe>
+
+
+<hr>
+<h2>
+	<a href="#">Create Custom IIS URL Rewrite Provider</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/13 11:03:35</p>
+<p>Developing a Custom Rewrite Provider for URL Rewrite Module</p>
+<h3>Creating a Visual Studio C# Class Library Project</h3>
+<ul>
+<li>add references to Microsoft.Web.Iis.Rewrite.dll located in &quot;%ProgramFiles%\Reference Assemblies\Microsoft\IIS&quot;.</li>
+</ul>
+<p>Rewrite providers must be placed in the .NET Global Assembly Cache (GAC)</p>
+<ul>
+<li>To sign the assembly, In the Signing tab check &quot;Sign the assembly&quot; check box.</li>
+</ul>
+<p>In the combo box, select the option &lt;New…&gt; to create a new key. In the &quot;Create Strong Name Key&quot; dialog, type DemoKey.snk as the name for the key and uncheck the Protect my key file with a password check box. Click OK.</p>
+<p><img src="/Source/2016/03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-4.png" alt="iis-url-rewrite" /></p>
+<ul>
+<li>Select the &quot;Build Events&quot; tab and add the following &quot;Post-build event&quot; command line:</li>
+</ul>
+<p>CALL &quot;%VS90COMNTOOLS%\vsvars32.bat&quot; &gt; NULL
+gacutil.exe /if &quot;$(TargetPath)&quot;</p>
+<p>Note: if you use Visual Studio 2010 then replace %VS90COMNTOOLS% with %VS100COMNTOOLS%.</p>
+<h3>Implementing the provider interfaces</h3>
+<pre><code>public class CdnRewriteProvider : IRewriteProvider, IProviderDescriptor
+{
+}
+</code></pre>
+<h3>Registering and configuring the provider</h3>
+<ul>
+<li>Open IIS Manager and select the URL Rewrite feature</li>
+</ul>
+<p><img src="/Source/2016/03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-1.png" alt="Step1" /></p>
+<p><img src="/Source/2016/03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-2.png" alt="Step2" /></p>
+<p><img src="/Source/2016/03/create-custom-iis-url-rewrite-provider/iis-url-rewrite-3.png" alt="Step3" /></p>
+<p>This completes the registration and configuration of a rewrite provider. As a result the web.config file for the default web site will contain the following XML code inside of the <rewrite> section:</p>
+<pre><code>&lt;system.webServer&gt;
+	&lt;rewrite&gt;
+		&lt;providers&gt;
+			&lt;provider name=&quot;T1.IisUrlRewriteModule&quot; type=&quot;T1.IisUrlRewriteModule.CdnRewriteProvider, T1.IisUrlRewriteModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd92a3df2f0d20b9&quot;&gt;
+				&lt;settings&gt;
+					&lt;add key=&quot;config&quot; value=&quot;aaa&quot; /&gt;
+				&lt;/settings&gt;
+			&lt;/provider&gt;
+		&lt;/providers&gt;
+	&lt;/rewrite&gt;
+&lt;/system.webServer&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">React + FReflux</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/05 16:58:20</p>
+<h3>React Flow</h3>
+<p><img src="/Source/2016/03/reflux/Flux.png" alt="React Flow" /></p>
+<h4>Create Actions</h4>
+<pre><code>import $ = require('jquery');
+import t1 = require('t1');
+import FReflux = t1.FReflux;
+import FRefluxActions = t1.FRefluxActions;
+
+enum Demo1ActionType {
+	Request
+}
+
+export class Demo1Actions extends FRefluxActions&lt;Demo1ActionType&gt; {
+	constructor() {
+		super(Demo1ActionType);
+	}
+
+	Request(name: string) {
+		this.dispatchEvent(Demo1ActionType.Request, name);
+	}
+}
+</code></pre>
+<h4>Create Store</h4>
+<pre><code>import t1 = require('t1');
+import FReflux = t1.FReflux;
+import FRefluxStore = t1.FRefluxStore;
+
+export class Demo1State {
+	name: string;
+}
+
+
+export class Demo1Store extends FRefluxStore&lt;Demo1State&gt; {
+	_state: Demo1State = new Demo1State();
+
+	constructor(actions: FRefluxActions&lt;any&gt;[]) {
+		super(actions);
+	}
+
+	getState(): Demo1State {
+		return this._state;
+	}
+}
+</code></pre>
+<h4>Create Main View</h4>
+<pre><code>export interface MobileDemo1Props extends React.Props&lt;MobileDemo1&gt; {
+	history: any;
+}
+
+export class MobileDemo1 extends FRefluxStoreComponent&lt;MobileDemo1Props, Demo1State&gt; {
+	constructor() {
+		this.name = &quot;MobileDemo1&quot;;
+		super(_app1Store);
+	}
+
+	componentWillMount() {
+	}
+
+	componentWillUnmount() {
+	}
+
+	componentDidMount() {
+		super.componentDidMount();
+	}
+
+	navigate() {
+		console.log(this.props);
+		this.props.history.pushState(null, &quot;/&quot;);
+		//this.props.history.replaceState(null, &quot;/&quot;);
+	}
+
+	render() {
+		return (
+			&lt;div&gt;React-Router Demo1
+				&lt;Link to='Panel1'&gt;Panel1&lt;/Link&gt;
+				&lt;Link to='Panel2'&gt;&lt;button className=&quot;btn btn-success&quot;&gt;Panel2&lt;/button&gt;&lt;/Link&gt;
+				&lt;button onClick={this.navigate.bind(this)}&gt;TEST&lt;/button&gt;
+				{this.props.children}
+			&lt;/div&gt;
+		);
+	}
+}
+</code></pre>
+<h4>Create Panel1 View</h4>
+<pre><code>interface Panel1Props extends React.Props&lt;Panel1&gt; {
+}
+
+
+class Panel1 extends FRefluxReducerComponent&lt;Panel1Props, Demo1State&gt; {
+	constructor() {
+		super();
+	}
+
+	getStateFromStore(state: Demo1State): Demo1State {
+		return state;
+	}
+
+	render() {
+		return (
+			&lt;div&gt;
+				Hello Panel-1
+			&lt;/div&gt;
+		);
+	}
+}
+</code></pre>
+<h3>Render</h3>
+<pre><code>import * as Router from 'react-router';
+import { Route, IndexRoute, Link } from 'react-router';
+
+var routeMap = (
+		&lt;Route path=&quot;/&quot; component={MobileDemo1}&gt;
+				&lt;IndexRoute component={Panel1}/&gt;
+				&lt;Route path=&quot;Panel1&quot; component={Panel1}/&gt;
+        &lt;Route path=&quot;Panel2&quot; component={Panel2}/&gt;
+        &lt;Route path=&quot;*&quot; component={NotFoundPage} /&gt;
+    &lt;/Route&gt;
+);
+
+ReactDOM.render(
+	&lt;Router.Router history={Router.browserHistory}&gt;
+		{routeMap}
+	&lt;/Router.Router&gt;, 
+	document.getElementById('app1')
+);
+</code></pre>
+<h3>Main.js</h3>
+<pre><code>(function(){
+	var baseUrl = &quot;/js/Samples/ReactRouterDemo1/&quot;;
+
+	require.config({
+		paths: {
+			&quot;App&quot;: baseUrl + &quot;App&quot;,
+		}
+	});
+})();
+
+define([&quot;require&quot;, &quot;exports&quot;, 'App'], function (require, exports, app) {
+});
+</code></pre>
+<h3>HTML</h3>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot; /&gt;
+	&lt;title&gt;React Router Demo1&lt;/title&gt;
+	&lt;script src=&quot;~/js/requirejs-config.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;~/Scripts/require.js&quot; data-main=&quot;/js/Samples/ReactRouterDemo1/Main.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id=&quot;app1&quot;&gt;
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+
+<hr>
+<h2>
 	<a href="#">Install Hexo</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2016/03/05 09:30:43</p>
@@ -196,6 +450,19 @@ Then, edit <packages> tag in packages.config file (add xmlns attribute):</p>
 <blockquote>
 <p>Please try to remove %LOCALAPPDATA%\Microsoft\VisualStudio\11.0\ComponentModelCache and restarting VS2012. Hope this will fix your issue.</p>
 </blockquote>
+<p>Getting Error &quot;Object reference not set to an instance of an object.&quot; when open test project in VS.NET 2013?</p>
+<p>Maybe this helps:</p>
+<p>Delete the contents from the following folders:</p>
+<ul>
+<li>C:\Users{user}\AppData\Local\Microsoft\VisualStudio</li>
+<li>C:\Users{user}\AppData\Local\Microsoft\VSCommon</li>
+</ul>
+<p>Sometimes, you need to go to:</p>
+<ul>
+<li>[x64] C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE</li>
+<li>[x86] C:\Program Files\Microsoft Visual Studio 14.0\Common7\IDE</li>
+</ul>
+<p>and run devenv /resetuserdata.</p>
 
 
 <hr>
@@ -211,86 +478,6 @@ Then, edit <packages> tag in packages.config file (add xmlns attribute):</p>
 <blockquote>
 <p>install-package nunit -version x.xx</p>
 </blockquote>
-
-
-<hr>
-<h2>
-	<a href="#">Resharper shortcut keys</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/06 07:31:40</p>
-<p>How to restore parameter info (argument list) shortcut with Resharper?</p>
-<p>If you go to the <strong>Visual Studio Tools -&gt; Options -&gt; Keyboard</strong> section, you can type the shortcut in the shortcut keys edit box and VS will show what commands are bound to that shortcut combination. So, hitting <strong>ctrl+shift+space</strong> will show you that is mapped to <strong>&quot;Edit.ParameterInfo&quot;</strong> for the Workfow Designer, and <strong>&quot;ReSharper.ReSharper_CompleteCodeSmart&quot;</strong> for the Text Editor and the XAML UI Designer. You can do a similar thing with <strong>ctrl+p</strong>.</p>
-
-
-<hr>
-<h2>
-	<a href="#">Automapper 3.0 - This type is not supported on this platform when I use MSTest.exe ?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/04/01 10:12:20</p>
-<p>MSTest show following error:</p>
-<blockquote>
-<p>Source value:
-System.Data.DataTableReader ---&gt; System.PlatformNotSupportedException: Proxy generation not supported on this platform.</p>
-</blockquote>
-<p>To fix it, add an explicit call to something in AutoMapper.Net4.dll. For instance, with the class ListSourceMapper :</p>
-<pre><code>var useless = new ListSourceMapper();
-</code></pre>
-<p>Or you can</p>
-<pre><code>[TestClass]
-[DeploymentItem(&quot;AutoMapper.Net4.dll&quot;)]
-public class YourTest
-{
-	[TestMethod]
-	public void Test1()
-	{
-		...
-	}
-}
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">How to compile many typescript files in VS.NET 2013?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/30 22:26:45</p>
-<p>We can add following MSBuild script in your csproj file.</p>
-<pre><code>&lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot;
-    Condition=&quot;Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\$(TypeScriptToolsVersion)\Microsoft.TypeScript.targets')&quot; /&gt;
-&lt;Target Name=&quot;CombineT1&quot; BeforeTargets=&quot;PrepareForBuild&quot;&gt;
-  &lt;ItemGroup&gt;
-    &lt;T1TypeScriptFiles Include=&quot;$(projectDir)Scripts\t1\*.ts;&quot; Exclude=&quot;$(projectDir)\Scripts\**\*.d.ts;&quot; /&gt;
-  &lt;/ItemGroup&gt;
-  &lt;WriteLinesToFile File=&quot;$(projectDir)Scripts\t1\typescriptcompiler.input&quot; Lines=&quot;@(T1TypeScriptFiles)&quot; Overwrite=&quot;true&quot; Encoding=&quot;UTF-8&quot; /&gt;
-  &lt;Exec Command=&quot;&amp;quot;$(MSBuildProgramFiles32)\Microsoft SDKs\TypeScript\$(TypeScriptToolsVersion)\tsc&amp;quot; --out $(projectDir)Scripts\t1\t1.js --target ES5 @$(projectDir)Scripts\t1\typescriptcompiler.input&quot; CustomErrorRegularExpression=&quot;\.ts\([0-9]+,[0-9]+\):(.*)&quot;&gt;
-  &lt;/Exec&gt;
-&lt;/Target&gt;
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Jasmine Errors in VS.NET 2013 </a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2015/03/28 09:56:34</p>
-<p>I get the following error:</p>
-<blockquote>
-<p>Script:
-C:\Users\xxx\AppData\Local\Microsoft\VisualStudio\12.0\Extensions\2q5cdx5o.qzv\TestFiles\Jasmine\v2\jasmine.js</p>
-</blockquote>
-<p>Error: 'null' is not an object (evaluating 'currentSpec.expect') #665</p>
-<p>I find the root cause:</p>
-<pre><code>describe(&quot;[TS]Test&quot;, function () {
-  expect(&quot;&quot;).toBe(&quot;&quot;);
-});
-</code></pre>
-<p>I forgot to add the 'it' statement around my expect.</p>
-<pre><code>describe(&quot;[TS]Test&quot;, function () {
-  it(&quot;test&quot;,() =&gt; {
-	expect(&quot;&quot;).toBe(&quot;&quot;);
-  });
-});
-</code></pre>
 
 
 <hr>

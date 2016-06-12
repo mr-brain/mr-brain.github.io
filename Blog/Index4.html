@@ -59,6 +59,109 @@
 				
 
 <h2>
+	<a href="#">JavaScript JSON date conversion</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/26 09:53:12</p>
+<p>In JavaScript's Date type, after JSON.stringify() will return ISO-8601 format (yyyy-MM-ddTHH: mm: ss.fffZ); interestingly, the JSON.parse() return a string, and not restored to the original Date type.</p>
+<p>ISO-8601 format will revert back to the Date of demand, to achieve through JSON.parse() function of Reviver. Examples are as follows:</p>
+<pre><code>var dateReviver = function (key, value) {
+    var a;
+    if (typeof value === 'string') {
+        a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);
+        if (a) {
+            return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4], +a[5], +a[6]));
+        }
+        a = /^\/Date\((.*?)\)\/$/.exec(value);
+        if (a) {
+          return new Date(parseInt(a[1]));
+        }
+    }
+    return value;
+};
+</code></pre>
+<p>We can invoke it as following:</p>
+<pre><code>var strJson = &quot;\&quot;2014-12-25T07:27:13.851Z\&quot;&quot;;
+var result = JSON.parse(strJson, dateReviver);
+
+strJson = &quot;\&quot;&quot;/Date(1330444800000)/\&quot;&quot;;
+result = JSON.parse(strJson, dateReviver);
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Automatic Package Restore in Visual Studio</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/24 17:16:25</p>
+<p>We can add the pre-build event for each of the project that require the packages.config</p>
+<pre><code>cd $(ProjectDir)
+nuget restore -source http://www.nuget.org/api/v2/ -packagesdirectory ../packages
+</code></pre>
+<p>What if you have custom package sources?
+All you need to do is create a NuGet.Config file next to your .sln file, containing:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;configuration&gt;
+  &lt;packageSources&gt;
+    &lt;add key=&quot;nuget.org&quot; value=&quot;https://www.nuget.org/api/v2/&quot; /&gt;
+    &lt;add key=&quot;aspnetwebstacknightlyrelease&quot; value=&quot;https://www.myget.org/f/aspnetwebstacknightlyrelease/&quot; /&gt;
+  &lt;/packageSources&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>Note that if you have private package sources that you want to keep out of your repo, you can add them to</p>
+<pre><code>%APPDATA%\NuGet\Nuget.config (see this page) for details.
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">How to avoid BeginInvoke before a handle has been created? </a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/22 22:12:59</p>
+<p>Invoke or BeginInvoke cannot be called on a control until the window handle has been created.</p>
+<pre><code>public static class ControlExtension
+{
+    public static void SafeInvoke(this Control uiElement, Action updater, bool forceSynchronous)
+    {
+        if (uiElement == null) {
+            throw new ArgumentNullException(&quot;uiElement&quot;);
+        }
+
+        if (uiElement.InvokeRequired) {
+            if (forceSynchronous) {
+                uiElement.Invoke((Action)delegate
+                {
+                    SafeInvoke(uiElement, updater, forceSynchronous);
+                });
+            }
+            else {
+                uiElement.BeginInvoke((Action)delegate
+                {
+                    SafeInvoke(uiElement, updater, forceSynchronous);
+                });
+            }
+        }
+        else {
+            if (uiElement.IsDisposed) {
+                throw new ObjectDisposedException(&quot;Control is already disposed.&quot;);
+            }
+            updater();
+        }
+    }
+}
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">Outlook 2007 requiring a Password When Resuming from Hibernation </a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/12/04 09:31:12</p>
+<p>I recently noticed that a Need password prompt after resuming from hibernation mode.</p>
+<p>You can download MicrosoftFixit50636.msi from Microsoft website (http://support.microsoft.com/kb/949918/en).</p>
+
+
+<hr>
+<h2>
 	<a href="#">ASP.NET MVC Table Grid Post Form And Read Lines</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2014/11/30 18:47:47</p>
@@ -255,191 +358,6 @@ string strXml = sr.ReadToEnd();
       gmt);
   return gmtTime;
 }
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">NullReferenceException unexplained error in ASP.NET MVC</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/29 22:12:59</p>
-<pre><code>[NullReferenceException: Object reference not set to an instance of an object.]
-   System.Web.Mvc.&lt;ConvertResults&gt;d__2.MoveNext() +105
-   System.Web.Mvc.&lt;Validate&gt;d__1.MoveNext() +1050  System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext) +404
-</code></pre>
-<p>Please check your <em>Validate</em> function code in <strong><em>xxx</em>Model</strong> (inherited <em>IValidatableObject</em>). <font color='red'>You should not return null value.</font></p>
-<pre><code>public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)
-{
-  return null;   // this is error code
-}
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Using Forms Authentication in ASP.NET MVC</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/25 22:12:59</p>
-<p>In Web.config</p>
-<pre><code>&lt;configuration&gt;
-  &lt;system.web&gt;
-    &lt;authentication mode=&quot;Forms&quot;&gt;
-      &lt;forms defaultUrl=&quot;~/Home/Index/&quot; loginUrl=&quot;~/Home/Login/&quot; timeout=&quot;30&quot; &gt;&lt;/forms&gt;
-    &lt;/authentication&gt;
-    &lt;authorization&gt;
-      &lt;deny users=&quot;?&quot;&gt;&lt;/deny&gt;
-    &lt;/authorization&gt;
-  &lt;/system.web&gt;
-  &lt;location path=&quot;Scripts&quot;&gt;
-    &lt;system.web&gt;
-	  &lt;authorization&gt;
-	    &lt;allow users=&quot;*&quot;&gt;&lt;/allow&gt;
-	  &lt;/authorization&gt;
-	&lt;/system.web&gt;
-  &lt;/location&gt;
-&lt;/configuration&gt;
-</code></pre>
-<p>Create LoginViewModel.cs</p>
-<pre><code>public class LoginViewModel : IValidatableObject
-{
-	[DisplayFormat(ConvertEmptyStringToNull = false)]
-	public string ReturnUrl { get; set; }
-
-	[DisplayFormat(ConvertEmptyStringToNull = false)]
-	[Required]
-	public string UserName { get; set; }
-
-	[DisplayFormat(ConvertEmptyStringToNull = false)]
-	[Required]
-	[DataType(DataType.Password)]
-	[Display(Name = &quot;Password&quot;)]
-	public string Password { get; set; }
-
-	[Display(Name = &quot;Remember me?&quot;)]
-	public bool RememberMe { get; set; }
-
-	public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)
-	{
-		return null;
-	}
-}
-</code></pre>
-<p>Create HomeController.cs</p>
-<pre><code>public class HomeController : Controller
-{
-	[AllowAnonymous]
-	public ActionResult Login(string ReturnUrl)
-	{
-		//ReturnUrl: url that is before user login
-		var vm = new LoginViewModel() { ReturnUrl = ReturnUrl };
-		return View(vm);
-	}
-
-	[AllowAnonymous]
-	[HttpPost]
-	public ActionResult Login(LoginViewModel model)
-	{
-		//
-		if( !ModelState.IsValid )
-		{
-			return View(model);
-		}
-
-		//todo check login account and password
-		if (false)
-		{
-          ...
-		}
-
-		FormsAuthentication.RedirectFromLoginPage(model.UserName, false);
-		return Redirect(FormsAuthentication.GetRedirectUrl(model.UserName, false));
-	}
-	[AllowAnonymous]
-    public ActionResult Logout()
-    {
-        Session.Abandon();
-        FormsAuthentication.SignOut();
-        return RedirectToAction(&quot;Login&quot;, &quot;Home&quot;);
-    }
-</code></pre>
-<p>In Home/Login.cshtml</p>
-<pre><code>@using (Html.BeginForm(&quot;Login&quot;, &quot;Home&quot;, new { ReturnUrl=Model.ReturnUrl }, FormMethod.Post, new { autocomplete=&quot;off&quot; }))
-{
-  @Html.TextBoxFor(m =&gt; m.UserName) 
-  @Html.ValidationMessageFor(m =&gt; m.UserName)
-  &lt;br /&gt;
-  @Html.PasswordFor(m =&gt; m.Password) 
-  @Html.ValidationMessageFor(m =&gt; m.Password)
-  &lt;br /&gt;
-  &lt;input type=&quot;submit&quot; value=&quot;Login&quot; /&gt;
-}
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">How do i use the Q-Dir internal file association rules eg 7-Zip? </a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/11 22:12:59</p>
-<p><em>Example 1:</em>
-Eg: For 7-zip, with 7-zip in the default Program Files folder.</p>
-<blockquote>
-<p><em>.zip;</em>.rar=C:\Program Files\7-Zip\7zFM.exe</p>
-</blockquote>
-<p><em>Example 2:</em>
-Q-Dir is on the USB Stik and Notepad++ also.
-The file extension &quot;txt&quot;, &quot;cpp&quot;, &quot;pl&quot;, &quot;ini&quot;, &quot;php&quot;, &quot;cgi&quot; to be with Notepad++ open.</p>
-<blockquote>
-<p><em>.txt;</em>.cpp;<em>.pl;</em>.ini;<em>.php;</em>.cgi=%drive%/npp/unicode/notepad++.exe</p>
-</blockquote>
-<p>Or even for portable 7-Zip :</p>
-<blockquote>
-<p><em>.zip;</em>.rar;<em>.7z;</em>.tar;<em>.iso;</em>.lzh=%drive%/7-Zip/7zFM.exe</p>
-</blockquote>
-<p>%drive% is a placeholder for the drive from which to Q-Dir is started.
-In the case of: the Q-Dir path is &quot;M:/Q-Dir/Q-Dir.exe&quot; then would be %drive% a placeholder for &quot;M:&quot;.</p>
-<p>This allows you to define yourself,
-through the menu :
-Extras &gt;&gt; ... more options, then tab bar Association.</p>
-<p><img src="/Source/2014/06/https://dl.dropboxusercontent.com/u/13003046/images/Assoziation_in_Q_Dir.png" alt="img" /></p>
-
-
-<hr>
-<h2>
-	<a href="#">Select distinct using linq</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2014/06/05 22:12:59</p>
-<p>Using <a href="https://code.google.com/p/morelinq/">morelinq</a> you can use DistinctBy:</p>
-<pre><code>myList.DistinctBy(x =&gt; x.id);
-</code></pre>
-<p>Otherwise, you can use a group:</p>
-<pre><code>myList.GroupBy(x =&gt; x.id)
-	.Select(g =&gt; g.First());
-</code></pre>
-<p>Or you can use linq syntax</p>
-<pre><code>distinctData = from tb1 in myList
-	group tb1 by tb1.id into g
-	select g.First();
-</code></pre>
-<p>You can create custom extension method:</p>
-<pre><code>public static class EnumerableExtender
-{
-	public static IEnumerable&lt;TSource&gt; DistinctBy&lt;TSource, TKey&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector)
-	{
-		HashSet&lt;TKey&gt; seenKeys = new HashSet&lt;TKey&gt;();
-		foreach (TSource element in source)
-		{
-			var elementValue = keySelector(element);
-			if (seenKeys.Add(elementValue))
-			{
-				yield return element;
-			}
-		}
-	}
-}
-</code></pre>
-<p>Would be better to write a lot of use.</p>
-<pre><code>distinctDatas = myList.DistinctBy(person =&gt; person.Name);
 </code></pre>
 
 

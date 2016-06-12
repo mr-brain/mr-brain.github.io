@@ -59,6 +59,185 @@
 				
 
 <h2>
+	<a href="#">No exports were found that match the constraint contract name error</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/09/05 22:12:59</p>
+<p>This morning I faced a problem while creating my Visual Studio 2012 Library Project. It said &quot;no exports were found that match the constraint contract name&quot;</p>
+<p>I solved this problem by clearing Visual Studio Component Model Cache. Just delete or rename this folder:</p>
+<blockquote>
+<p>%AppData%..\Local\Microsoft\VisualStudio\11.0\ComponentModelCache</p>
+</blockquote>
+<p>Visual Studio Express 2012 has different paths. Visual Studio Express</p>
+<blockquote>
+<p>...\Users{user}\AppData\Local\Microsoft\WDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>With Visual Studio Express 2012 for Web</p>
+<blockquote>
+<p>...\Users{user}\AppData\Local\Microsoft\VWDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>When I running MyWebSite in .NET 4.0 and I can't get it working.</p>
+<blockquote>
+<p>HTTP error 500.22-Internal Server Error
+Detect ASP.NET setting does not apply to integrated Managed pipeline mode.</p>
+</blockquote>
+<p>If you still need to use the HTTP Module you need to configure it (.NET 4.0 framework) as follows:</p>
+<pre><code>&lt;system.webServer&gt;
+  &lt;modules runAllManagedModulesForAllRequests=&quot;true&quot;&gt;
+    &lt;add name=&quot;MyModule&quot; type=&quot;&lt;&lt;Namespace&gt;&gt;.&lt;&lt;Class&gt;&gt;, &lt;&lt;assembly&gt;&gt;&quot;/&gt;
+  &lt;/modules&gt;
+  &lt;validation validateIntegratedModeConfiguration=&quot;false&quot;/&gt;
+&lt;/system.webServer&gt;
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">TypeScript Syntax</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/09/04 22:12:59</p>
+<p>Declare variables</p>
+<pre><code>var i:number = 1;
+var s:string = &quot;text&quot;;
+</code></pre>
+<p>interface and class</p>
+<pre><code>interface IPersion{
+  firtname: string;
+  lastname: string;
+}
+
+class Student implements IPersion{
+  firtname: string;
+  lastname: string;
+  
+  constructor(public name: string){
+    this.firstname = name;
+    this.lastname = &quot;Student&quot;;
+  }
+  sayName()
+  {
+    return &quot;Student&quot;;
+  }
+}
+
+class Teacher extends Student{
+  constructor()
+  {
+    super(&quot;Flash&quot;);
+    this.lastname = &quot;Teacher&quot;;
+  }
+
+  sayName()
+  {
+    return &quot;Teacher&quot;;
+  }
+}
+</code></pre>
+<p>static method</p>
+<pre><code>class utils{
+  public static CopyProperties(source: any, target: any): void {
+    for (var prop in source) {
+      if (target[prop] !== undefined) {
+        target[prop] = source[prop];
+      }
+      else {
+        console.error(&quot;Cannot set undefined property: &quot; + prop);
+      }
+    }
+  }
+}
+
+utils.CopyProperties(source, dest);
+</code></pre>
+<p>create module in math.ts</p>
+<pre><code>module math{
+        export function MathAdd(a:number, b:number)
+        {
+                return a+b;
+        }
+}
+</code></pre>
+<p>use math module in test.ts</p>
+<pre><code>/// &lt;reference path=&quot;math.ts&quot; /&gt;
+var c:number = math.MathAdd(1, 2);
+</code></pre>
+<p>create module in file1.ts</p>
+<pre><code>export function MathAdd(a:number, b:number)
+{
+  return a+b;
+}
+</code></pre>
+<p>use file1 file module in test.ts</p>
+<pre><code>import f1 = module('file1')
+var c:number = f1.MathAdd(1, 2);
+</code></pre>
+
+
+<hr>
+<h2>
+	<a href="#">What&#39;s the thing in .net version?</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/08/26 12:39:01</p>
+<p>|Visual Studio|.NET								|MVC        |EF  |Released     |
+|--		      |:--								|--         |--  |--           |
+|VS2002       |1.0								|N/A        |N/A |January 2002 |
+|VS2003	      |1.1								|N/A        |N/A |April 2003   |
+|VS2005       |2.0								|N/A        |N/A |November 2005|
+|VS2008       |2.0,3.0,3.5						|N/A        |N/A |November 2007|
+|VS2008SP1    |2.0,3.0,3.5SP1					|Add-in 1.0 |Yes |August 2008  |
+|VS2010SP1    |2.0,3.0,3.5,4.0					|2.0,3.0    |Yes |April 2010   |
+|VS2010SP1    |2.0,3.0,3.5SP1,4.0				|2.0,3.0    |Yes |March 2011   |
+|VS2012       |2.0,3.0,3.5,4.0,4.5				|3.0,4.0    |Yes |August 2012  |
+|VS2012SP2    |2.0,3.0,3.5,4.0,4.5				|3.0,4.0    |Yes |April 2013   |
+|VS2012SP3    |2.0,3.0,3.5,4.0,4.5				|3.0,4.0    |Yes |June 2013    |
+|VS2013	      |2.0,3.0,3.5,4.0,4.5.1			|4.0        |Yes |October 2013 |
+|VS2015	      |2.0,3.0,3.5,4.0,4.5.1,4.5.2,4.6	|			|Yes | |</p>
+<p>VS2010SP1: When you have SP1 installed you'll see instead: Microsoft Visual Studio 2010 Version 10.0.40219.1 SP1Rel Microsoft .NET Framework Version 4.0.30319 SP1Rel</p>
+<p>VS2012SP2: Add Fakes Framework that is the next generation of Moles &amp; Stubs. (http://research.microsoft.com/en-us/projects/moles/) Fakes is different from Moles, however, so moving from Moles to Fakes will require some modifications to your code. The Moles framework will not be supported in Visual Studio 2012.</p>
+<p>|C# 	|.NET	|CLR	|MVC    |Razor	|Not support OS
+|--     |--		|--		|--     |--		|--
+|C# 1.0 |1.0	|1.0	|N/A    |N/A	|
+|C# 1.2 |1.1	|1.1	|N/A    |N/A	|
+|C# 2.0 |2.0	|2.0	|MVC1   |N/A	|
+|C# 3.0 |3.5	|2.0	|MVC2   |N/A	|
+|C# 4.0 |4.0	|4.0	|MVC3,4	|Razor	|
+|C# 5.0 |4.5	|4.0	|MVC4   | 		|XP,2003
+|		|4.5.1	|4.0	|		| 		|
+|		|4.5.2	|4.0	|		| 		|</p>
+<p>C# 1.2 Features: First version to call Dispose on IEnumerators which implemented IDisposable</p>
+<p>C# 2.0 Features: Generics, anonymous methods, nullable types</p>
+<p>C# 3.0 Features: Lambda expressions, extension methods, expression trees, implicit type(var), query expressions</p>
+<p>C# 4.0 Features: Late binding(dynamic), named arguments and optional</p>
+<p>C# 5.0 Features: Async programming, caller info attributes</p>
+<p>|VS.NET |Path
+|--     |--
+|VS2008 |&quot;C:\Program Files\Microsoft Visual Studio 9.0&quot;
+|VS2010 |&quot;C:\Program Files\Microsoft Visual Studio 10.0&quot;
+|VS2012 |&quot;C:\Program Files\Microsoft Visual Studio 11.0&quot;
+|VS2013 |&quot;C:\Program Files\Microsoft Visual Studio 12.0&quot;</p>
+<p>There are some known issues using EF 4.x in a .NET 4.5 project.
+We recommend installing a pre-release version of EF 5, which is designed to work with .NET 4.5</p>
+<p>Update: 2015.03.15</p>
+
+
+<hr>
+<h2>
+	<a href="#">Microsoft.VisualStudio.Shell.Interop.dll ERROR</a>
+</h2>
+<p><span class="glyphicon glyphicon-time"></span> Posted on 2013/08/19 22:12:59</p>
+<p>VS 2008, COM interop, and Microsoft.VisualStudio.Shell.Interop.dll</p>
+<p>When I try to compile our VsPackages with VS 2008 the compilation fails. The compilation fails with the message:</p>
+<blockquote>
+<p>The assembly 'Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
+is not registered for COM Interop. Please register it with regasm.exe /tlb.</p>
+</blockquote>
+<p>This is a known bug that was discovered right as VS2008 was going out the door. Microsoft have a fix in place (to be delivered with VS 2008 SP1)</p>
+<blockquote>
+<p>https://connect.microsoft.com/VisualStudio/Downloads/DownloadDetails.aspx?DownloadID=10671</p>
+</blockquote>
+
+
+<hr>
+<h2>
 	<a href="#">dir file whose File size is greater than 1024KB</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> Posted on 2013/08/19 22:12:59</p>
@@ -229,97 +408,6 @@ Anyone have any ideas how to restore it without a reboot?</p>
 <p>Please run the following two commands in a cmd as administrator:</p>
 <pre><code>net stop vmnetbridge
 net start vmnetbridge
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Multi-line PL/SQL command with .NET OracleCommand</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2010/06/19 10:12:59</p>
-<p>I'm using System.Data.OracleClient.OracleCommand to create a table and fill it out with some data. The query I am using runs OK in PS/SQL Developer, however when I'm trying to execute it from within .NET application I'm getting this error:</p>
-<blockquote>
-<p>ORA-06550: line 1, column 20:
-PLS-00103: Encountered the symbol &quot;&quot; when expecting one of the following:</p>
-<p>begin function package pragma procedure subtype type use form current cursor</p>
-</blockquote>
-<p>Here is some code:</p>
-<pre><code>var text = @&quot;declare cnt number;
-begin
-
-select count(*) into cnt from all_tables
-where table_name = 'TABLE_A';
-
-
-if cnt = 1 then
-begin 
-execute immediate 'truncate table TABLE_A';
-execute immediate 'drop table TABLE_A';
-end;
-end if;
-
-execute immediate 'create table TABLE_A as 
-(SELECT DISTINCT v.ID, g.ext_id FROM VIEW_A v
-JOIN TABLE_B B ON v.id = B.Id
-WHERE YEAR1 = ''2008'')';
-
-end;&quot;);
-cmd.CommandText = text;
-cmd.ExecuteNonQuery();
-</code></pre>
-<p>Search Google, finally found:
-I think you need to lose just the '\r' characters.</p>
-<pre><code>text = text.Replace(&quot;\r\n&quot;, &quot;\n&quot;);
-cmd.CommandText = text;
-cmd.ExecuteNonQuery();
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">How to make T-SQL to filter criteria is case-sensitive?</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2010/01/24 10:12:59</p>
-<p>Basically, add more &quot;Collate SQL_Latin1_General_CP1_CI_AS&quot; in after the conditions, it should be followed would be a case-sensitive.</p>
-<pre><code>SELECT *
-FROM dbo.CaseSensitiveTest
-WHERE Value1 LIKE '%Test%' Collate SQL_Latin1_General_CP1_CI_AS
-GO
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Copy vdi file of Virtualbox</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2009/01/15 10:12:59</p>
-<p>VirtualBox often used to test the system, but the most troublesome is that VirtualBox to use uuid to control vdi file, so there is no way to use copy commands to copy vdi file.</p>
-<p>Therefore, if you want to copy a vdi file, you must use the following command to re-generate a new uuid.</p>
-<pre><code>VBoxManage clonevdi Orig.vdi New.vdi
-</code></pre>
-<p>If you copy the exhausted only to find, there are still commands can be remedied.</p>
-<pre><code>VBoxManage internalcommands setvdiuuid New.vdi
-</code></pre>
-
-
-<hr>
-<h2>
-	<a href="#">Dynamic Linq To Object</a>
-</h2>
-<p><span class="glyphicon glyphicon-time"></span> Posted on 2008/12/08 10:12:59</p>
-<p>Q: I need to filter a generic list with a dynamic query:</p>
-<pre><code>List&lt;string&gt; l; 
-var x = l.Where(*dynamic query*)
-</code></pre>
-<p>How would i do this using LINQ?
-but it appears to not work with objects that use IEnumerable(generic lists included).
-Can anyone offer any ideas?</p>
-<p>Answers</p>
-<blockquote>
-<p>Assuming you mean a string-based query: the dynamic LINQ library will work fine; just call .AsQueryable() first:</p>
-</blockquote>
-<pre><code>string s = *dynamic query*
-var qry = l.AsQueryable().
 </code></pre>
 
 
