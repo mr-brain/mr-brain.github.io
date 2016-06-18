@@ -60,7 +60,7 @@
 
 <ul class="list-group">
 	<h2>
-		<a href="#">##Develop Electron App</a>
+		<a href="#">Develop Electron App</a>
 	</h2>
 	<p><span class="glyphicon glyphicon-time"></span> Posted on 2016/05/28 19:40:16</p>
 	<ul>
@@ -85,11 +85,12 @@ Windows 10 SDK (10.0.10586)</p>
 <p>Enter cmd.exe</p>
 <pre><code>$npm config set msvs_version 2015 --global
 
-(這樣可避免每次安裝都要下參數 npm install [package name] --msvs_version=2015)
+The above can avoid the following parameters for each installation
+npm install [package name] --msvs_version=2015
 
 $npm install electron-prebuilt --save
 </code></pre>
-<p>每次開發新的 Electron App 時, 先建立目錄 C:\sample-app1, 然後到 cmd c:\sample-app1</p>
+<p>Each development new Electron App, first create folder C:\sample-app1, and cmd c:\sample-app1</p>
 <pre><code>sample-app1/
 	├── package.json
 	├── main.js
@@ -100,7 +101,7 @@ $npm install electron-prebuilt --save
 </code></pre>
 <ul>
 <li>
-<p>建立 package.json</p>
+<p>Create package.json file</p>
 <p>{
 &quot;name&quot;: &quot;electron-example&quot;,
 &quot;version&quot;: &quot;0.1.0&quot;,
@@ -108,59 +109,55 @@ $npm install electron-prebuilt --save
 }</p>
 </li>
 </ul>
-<p>註：如果 package.json 沒有指定 main 欄位，Electron 預設會使用 index.js 這個檔案。</p>
+<p>PS：If package.json Not specified main field，Electron default use index.js file.</p>
 <p>main.js
 'use strict';</p>
 <pre><code>const electron = require('electron');
-// app: 控制應用程式生命週期的模組
+// app: Control application lifecycle module
 const app = electron.app;
-// BrowserWindow: 建立系統原生視窗 (native window) 的模組
+
+// BrowserWindow: Create a native window module
 const BrowserWindow = electron.BrowserWindow;
 
-// 保留一個全域的物件關聯以避免 JavaScript 物件 GC 機製造成視窗自動關閉
+// Reserve a global object to avoid JavaScript object GC resulting window automatically closes
 let mainWindow;
 
 function createWindow () {
-	// 建立 browser window
+	// Create browser window
 	mainWindow = new BrowserWindow({width: 800, height: 600});
 
-	// 載入 mainWindow.html 作為畫面
+	// Load mainWindow.html for view
 	mainWindow.loadURL('file://' + __dirname + '/app/mainWindow.html');
 
-	// 開啟開發者工具
+	// Open Developer Tools
 	mainWindow.webContents.openDevTools();
 
-	// 當 browser window 被關閉時，會送出 'closed' 訊號，並執行相關的 callback
+	// When browser window closed，will send 'closed' signal，and run callback
 	mainWindow.on('closed', function() {
-		// 將此 window 物件解除關聯。
-		// 如果你的應用程式支援多視窗，通常會將這些物件存在一個陣列裡面。
-		// 現在就是刪除對應的視窗物件的時機。
 		mainWindow = null;
 	});
 }
 
-// 當 Electron 完成初始化並且可以開始建立視窗的時候，
-// 會發送 'ready' 訊號，並執行對應的 callback
-// 我們指定收到 'ready' 訊號時，執行 createWindow()
+// When Electron initialization is completed and begin establish the new window，
+// will send 'ready' signal，and run callback
 app.on('ready', createWindow);
 
-// 當所有視窗都關閉時，結束應用程式 ( app.quit() )
+// app quit
 app.on('window-all-closed', function () {
-	// OS X 的使用習慣是當所有視窗關閉的時候，上方的 menu bar 仍然維持開啟
-	// 此時應用程式還沒有完全關閉，除非使用者強制按 Cmd + Q
+	// For OSX User platform, force user press Cmd + Q
 	if (process.platform !== 'darwin') {
 		app.quit();
 	}
 });
 
 app.on('activate', function () {
-	// OS X 通常在應用程式已經起來了，但是所有視窗關閉的時候，還可以重新建立主視窗
+	// For OSX
 	if (mainWindow === null) {
 		createWindow();
 	}
 });
 </code></pre>
-<p>而 app/mainWindow.html 是你想要在視窗中顯示的內容</p>
+<p>app/mainWindow.html is show window view</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -174,28 +171,29 @@ app.on('activate', function () {
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-<p>在 sample-app1 裡面安裝套件 	</p>
+<p>In sample-app1 Folder, install package 	</p>
 <pre><code>$npm install electron-prebuilt
 </code></pre>
-<p>執行</p>
+<p>Run</p>
 <pre><code>$ node_modules/.bin/electron .
-其中第二個路徑是 package.json 所在的目錄 
+
+Second parameter is: package.json Folder path 
 </code></pre>
 <hr />
-<p>執行 webpack 產生新的 app/built/mainWindow.js</p>
+<p>Run webpack to generate new app/built/mainWindow.js file</p>
 <pre><code>$ ./node_modules/.bin/webpack
 </code></pre>
 <p>Start Run</p>
 <pre><code>$ node_modules\.bin\electron .
 </code></pre>
-<p>為了方便未來容易使用，我們將指令放到 package.json ,</p>
+<p>In order to facilitate future easy to use，we will put instructions into package.json ,</p>
 <pre><code>&quot;scripts&quot;: {
 	&quot;start&quot;: &quot;./node_modules/.bin/electron ./&quot;,
 	&quot;electron-rebuild&quot;: &quot;./node_modules/.bin/electron-rebuild&quot;,
 	&quot;webpack&quot;: &quot;./node_modules/.bin/webpack&quot;
 }
 </code></pre>
-<p>之後只需要</p>
+<p>After only need to run</p>
 <pre><code>$ npm run webpack &amp;&amp; npm start
 </code></pre>
 
