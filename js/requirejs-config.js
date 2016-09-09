@@ -9,8 +9,8 @@
 		//"react-with-addons": "react-0_13_3/react-with-addons",
 		"react-with-addons": "react-with-addons-0.14.0",
 		"react-dom": "react-dom-0.14.3",
-		//"react-router": "ReactRouter-1.0",	//https://npmcdn.com/
-		"react-router": "ReactRouter-2.0",	//https://npmcdn.com/
+		//"react-router": "ReactRouter-1.0",	//https://unpkg.com/
+		"react-router": "ReactRouter-2.0",	//https://unpkg.com/
 		"reflux": "refluxjs-0_3_0/dist/reflux",
 		"require": "require-2.1.20-min",
 		"react-redux": "react-redux-4_0_0/dist/react-redux",
