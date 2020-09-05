@@ -145,7 +145,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2015/03/01/2015/03/angular-tutor/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2015/03/01/2015/03/psexec-gets-stuck-on-licence-prompt-when-running-noninteractively/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -159,7 +159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/03/01/2015/03/angular-tutor/" class="post-title-link" itemprop="url">angular tutor</a>
+            <a href="/2015/03/01/2015/03/psexec-gets-stuck-on-licence-prompt-when-running-noninteractively/" class="post-title-link" itemprop="url">PsExec gets stuck on licence prompt when running non-interactively</a>
         </h2>
 
         <div class="post-meta">
@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:33:44" itemprop="dateModified" datetime="2020-09-05T18:33:44+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:31:52" itemprop="dateModified" datetime="2020-09-05T18:31:52+08:00">2020-09-05</time>
               </span>
 
           
@@ -190,11 +190,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>How to load Template in Angular?</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class HomeController : Controller</span><br><span class="line">&#123;</span><br><span class="line">	public ActionResult Template(string id)</span><br><span class="line">	&#123;</span><br><span class="line">		return PartialView(string.Format(&quot;~&#x2F;Views&#x2F;Home&#x2F;Partials&#x2F;&#123;0&#125;.cshtml&quot;, id));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Then, we can use following code</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div ng-include&#x3D;&quot;&#39;&#x2F;Home&#x2F;Template&#x2F;Index&#39;&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+          <p>Use the <strong>/accepteula</strong> command-line switch to accept the licence agreement.</p>
+<p>Or set</p>
+<blockquote>
+<pre><code>    HKCU\Software\Sysinternals\PsExec\EulaAccepted</code></pre>
+</blockquote>
+<p>to 1</p>
+<p><strong>Caution:</strong> if the reg key above is set to 0 (EULA was declined once) then the /accepteula will not work, you have to set the key to 1 manually (or delete it altogether).</p>
 
       
     </div>
@@ -214,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2015/03/01/2015/03/handling-session-and-authentication-timeouts-in-aspnet-mvc/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2015/03/01/2015/03/razor-view-throwing-the-name-model-does-not-exist-in-the-current-context/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -228,7 +230,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/03/01/2015/03/handling-session-and-authentication-timeouts-in-aspnet-mvc/" class="post-title-link" itemprop="url">Handling Session and Authentication Timeouts in ASP.NET MVC</a>
+            <a href="/2015/03/01/2015/03/razor-view-throwing-the-name-model-does-not-exist-in-the-current-context/" class="post-title-link" itemprop="url">Razor View throwing "The name 'model' does not exist in the current context"</a>
         </h2>
 
         <div class="post-meta">
@@ -245,7 +247,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:32:49" itemprop="dateModified" datetime="2020-09-05T18:32:49+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:31:30" itemprop="dateModified" datetime="2020-09-05T18:31:30+08:00">2020-09-05</time>
               </span>
 
           
@@ -259,23 +261,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>The SessionExpireFilterAttribute action filter is then automatically called before each action to check if Session”UserName” is null. If it determines a timeout has not occurred, it allows the actual called action to execute. Otherwise, it forces a redirect to a timeout notification page, which in turn redirects to the logon page to allow the user to re-logon.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited &#x3D; true, AllowMultiple &#x3D; true)]</span><br><span class="line">public class SessionExpireFilterAttribute : ActionFilterAttribute</span><br><span class="line">&#123;</span><br><span class="line">	public override void OnActionExecuting(ActionExecutingContext filterContext)</span><br><span class="line">	&#123;</span><br><span class="line">		HttpContext ctx &#x3D; HttpContext.Current;</span><br><span class="line"></span><br><span class="line">		&#x2F;&#x2F; If the browser session or authentication session has expired...</span><br><span class="line">		if (ctx.Session[&quot;UserName&quot;] &#x3D;&#x3D; null || !filterContext.HttpContext.Request.IsAuthenticated)</span><br><span class="line">		&#123;</span><br><span class="line">			if (filterContext.HttpContext.Request.IsAjaxRequest())</span><br><span class="line">			&#123;</span><br><span class="line">				&#x2F;&#x2F; For AJAX requests, we&#39;re overriding the returned JSON result with a simple string,</span><br><span class="line">				&#x2F;&#x2F; indicating to the calling JavaScript code that a redirect should be performed.</span><br><span class="line">				filterContext.Result &#x3D; new JsonResult &#123; Data &#x3D; &quot;_LogonTimeoutRedirect_&quot; &#125;;</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				&#x2F;&#x2F; For round-trip posts, we&#39;re forcing a redirect to Home&#x2F;TimeoutRedirect&#x2F;, which</span><br><span class="line">				&#x2F;&#x2F; simply displays a temporary 5 second notification that they have timed out, and</span><br><span class="line">				&#x2F;&#x2F; will, in turn, redirect to the logon page.</span><br><span class="line">				filterContext.Result &#x3D; new RedirectToRouteResult(</span><br><span class="line">						new RouteValueDictionary &#123;</span><br><span class="line">                       &#123; &quot;Controller&quot;, &quot;Home&quot; &#125;,</span><br><span class="line">                       &#123; &quot;Action&quot;, &quot;TimeoutRedirect&quot; &#125;</span><br><span class="line">               &#125;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		base.OnActionExecuting(filterContext);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <p>Razor is giving me this nonsensical error:</p>
+<blockquote>
+<p>The name ‘model’ does not exist in the current context.</p>
+</blockquote>
+<p>The part that makes literally zero sense is that this is causing the error:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@model ICollection&lt;DataSourceByActive&gt;</span><br></pre></td></tr></table></figure>
 
-<p>We’ll create a couple of action filters to provide cross-cutting checks for timeout scenarios. The first will normally be hit when the browser session has timed out, but will also handle if the authentication has timed out first:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited &#x3D; true, AllowMultiple &#x3D; true)]</span><br><span class="line">public class SessionAuthorizeAttribute : AuthorizeAttribute</span><br><span class="line">&#123;</span><br><span class="line">    protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)</span><br><span class="line">    &#123;</span><br><span class="line">        HttpContext ctx &#x3D; HttpContext.Current;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; If the browser session has expired...</span><br><span class="line">        if (ctx.Session[&quot;UserName&quot;] &#x3D;&#x3D; null)</span><br><span class="line">        &#123;</span><br><span class="line">            if (filterContext.HttpContext.Request.IsAjaxRequest())</span><br><span class="line">            &#123;</span><br><span class="line">                &#x2F;&#x2F; For AJAX requests, we&#39;re overriding the returned JSON result with a simple string,</span><br><span class="line">                &#x2F;&#x2F; indicating to the calling JavaScript code that a redirect should be performed.</span><br><span class="line">                filterContext.Result &#x3D; new JsonResult &#123; Data &#x3D; &quot;_LogonTimeoutRedirect_&quot; &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                &#x2F;&#x2F; For round-trip posts, we&#39;re forcing a redirect to Home&#x2F;TimeoutRedirect&#x2F;, which</span><br><span class="line">                &#x2F;&#x2F; simply displays a temporary 5 second notification that they have timed out, and</span><br><span class="line">                &#x2F;&#x2F; will, in turn, redirect to the logon page.</span><br><span class="line">                filterContext.Result &#x3D; new RedirectToRouteResult(</span><br><span class="line">                    new RouteValueDictionary &#123;</span><br><span class="line">                        &#123; &quot;Controller&quot;, &quot;Home&quot; &#125;,</span><br><span class="line">                        &#123; &quot;Action&quot;, &quot;TimeoutRedirect&quot; &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        else if (filterContext.HttpContext.Request.IsAuthenticated)</span><br><span class="line">        &#123;</span><br><span class="line">            &#x2F;&#x2F; Otherwise the reason we got here was because the user didn&#39;t have access rights to the</span><br><span class="line">            &#x2F;&#x2F; operation, and a 403 should be returned.</span><br><span class="line">            filterContext.Result &#x3D; new HttpStatusCodeResult(403);</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            base.HandleUnauthorizedRequest(filterContext);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>The Timeout Warning Message Page</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta http-equiv&#x3D;&quot;refresh&quot; content&#x3D;&quot;5;url&#x3D;&#x2F;Account&#x2F;Logon&#x2F;&quot; &#x2F;&gt;</span><br><span class="line">&lt;h2&gt;</span><br><span class="line">  Sorry, but your session has timed out. You&#39;ll be redirected to the Log On page in 5 seconds...</span><br><span class="line">&lt;&#x2F;h2&gt;</span><br></pre></td></tr></table></figure>
-
-<p>We can register global filter</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void RegisterGlobalFilters(GlobalFilterCollection filters)</span><br><span class="line">   &#123;</span><br><span class="line">	filters.Add(new HandleErrorAttribute());</span><br><span class="line">	filters.Add(new SessionExpireFilterAttribute());</span><br><span class="line">	filters.Add(new SessionAuthorizationAttribute());</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>Client-Side Calling Code Sample</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: &quot;&#x2F;MyController&#x2F;MyAction&quot;,</span><br><span class="line">    type: &#39;POST&#39;,</span><br><span class="line">    dataType: &#39;json&#39;,</span><br><span class="line">    data: jsonData,</span><br><span class="line">    contentType: &#39;application&#x2F;json; charset&#x3D;utf-8&#39;,</span><br><span class="line">    success: function (result) &#123;</span><br><span class="line">        if (checkTimeout(result)) &#123;</span><br><span class="line">            &#x2F;&#x2F; There was no timeout, so continue processing...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    error: function (result) &#123;</span><br><span class="line">        if (checkTimeout(result)) &#123;</span><br><span class="line">            &#x2F;&#x2F; There was no timeout, so continue processing...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function checkTimeout(data) &#123;</span><br><span class="line">    var thereIsStillTime &#x3D; true;</span><br><span class="line">    if (data) &#123;</span><br><span class="line">        if (data.responseText) &#123;</span><br><span class="line">            if ((data.responseText.indexOf(&quot;&lt;title&gt;Log On&lt;&#x2F;title&gt;&quot;) &gt; -1) || (data.responseText.indexOf(&quot;&lt;title&gt;Object moved&lt;&#x2F;title&gt;&quot;) &gt; -1) || (data.responseText &#x3D;&#x3D;&#x3D; &#39;&quot;_LogonTimeoutRedirect_&quot;&#39;)) thereIsStillTime &#x3D; false;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (data &#x3D;&#x3D; &quot;_Logon_&quot;) thereIsStillTime &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">        if (!thereIsStillTime) &#123;</span><br><span class="line">            window.location.href &#x3D; &quot;&#x2F;Home&#x2F;TimeoutRedirect&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url: &quot;&#x2F;Home&#x2F;CheckTimeout&#x2F;&quot;,</span><br><span class="line">            type: &#39;POST&#39;,</span><br><span class="line">            dataType: &#39;json&#39;,</span><br><span class="line">            contentType: &#39;application&#x2F;json; charset&#x3D;utf-8&#39;,</span><br><span class="line">            async: false,</span><br><span class="line">            complete: function (result) &#123;</span><br><span class="line">                thereIsStillTime &#x3D; checkTimeout(result);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    return thereIsStillTime;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>In Web.config, we can control the session timeout</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;system.web&gt;</span><br><span class="line">  &lt;sessionState mode&#x3D;&quot;InProc&quot; timeout&#x3D;&quot;1&quot; cookieless&#x3D;&quot;UseCookies&quot; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;system.web&gt;</span><br></pre></td></tr></table></figure>
+<p>I know for a fact that @model is proper Razor syntax.</p>
+<p>So why is this happening? How can I fix it?</p>
+<p>I think you have messed up the web.config file which lives in the Views folder.</p>
+<blockquote>
+<p>Create a new project targeting same .NET framework and copy its Views/web.config file over top the one in your current project</p>
+</blockquote>
+<p>This will fix your problem.</p>
 
       
     </div>
@@ -445,6 +444,72 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2015/02/01/2015/02/jquery-1101-does-not-work-well-with-ie11-upgrade-to-1102/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/02/01/2015/02/jquery-1101-does-not-work-well-with-ie11-upgrade-to-1102/" class="post-title-link" itemprop="url">JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-02-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-02-01T08:00:00+08:00">2015-02-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:35:23" itemprop="dateModified" datetime="2020-09-05T18:35:23+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</p>
+<p>reference: <a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/WICKET-5404">https://issues.apache.org/jira/browse/WICKET-5404</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2015/02/01/2015/02/jsonnet-serializedeserialize-methods/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -532,7 +597,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2015/02/01/2015/02/jquery-1101-does-not-work-well-with-ie11-upgrade-to-1102/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2015/02/01/2015/02/vsnet-found-the-webapi-reference-error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -546,7 +611,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/02/01/2015/02/jquery-1101-does-not-work-well-with-ie11-upgrade-to-1102/" class="post-title-link" itemprop="url">JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</a>
+            <a href="/2015/02/01/2015/02/vsnet-found-the-webapi-reference-error/" class="post-title-link" itemprop="url">VS.NET found the WebAPI reference error</a>
         </h2>
 
         <div class="post-meta">
@@ -563,7 +628,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:35:23" itemprop="dateModified" datetime="2020-09-05T18:35:23+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:34:46" itemprop="dateModified" datetime="2020-09-05T18:34:46+08:00">2020-09-05</time>
               </span>
 
           
@@ -577,8 +642,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>JQuery 1.10.1 does not work well with IE11, upgrade to 1.10.2</p>
-<p>reference: <a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/WICKET-5404">https://issues.apache.org/jira/browse/WICKET-5404</a></p>
+          <p>I’ve created a MVC 4 Web API Application inside my solution, but I changed nuget package default location. So I’m getting 2 errors right now.</p>
+<blockquote>
+<p>‘System.Web.Http.HttpConfiguration’ does not contain a definition for ‘MapHttpAttributeRoutes’ and no extension method ‘MapHttpAttributeRoutes’ accepting a first argument of type ‘System.Web.Http.HttpConfiguration’ could be found (are you missing a using directive or an assembly reference?)</p>
+</blockquote>
+<p>A forced reinstall of WebAPI could do the job:</p>
+<blockquote>
+<pre><code>update-package microsoft.aspnet.webapi -reinstall -project yourProject</code></pre>
+</blockquote>
 
       
     </div>
@@ -676,7 +747,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2015/02/01/2015/02/vsnet-found-the-webapi-reference-error/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2015/01/01/2015/01/autofac-global-interface-interceptor-with-autofacextrasdynamicproxy2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -690,7 +761,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/02/01/2015/02/vsnet-found-the-webapi-reference-error/" class="post-title-link" itemprop="url">VS.NET found the WebAPI reference error</a>
+            <a href="/2015/01/01/2015/01/autofac-global-interface-interceptor-with-autofacextrasdynamicproxy2/" class="post-title-link" itemprop="url">Autofac global interface interceptor with Autofac.Extras.DynamicProxy2</a>
         </h2>
 
         <div class="post-meta">
@@ -700,14 +771,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2015-02-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-02-01T08:00:00+08:00">2015-02-01</time>
+              <time title="Created: 2015-01-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-01-01T08:00:00+08:00">2015-01-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:34:46" itemprop="dateModified" datetime="2020-09-05T18:34:46+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:36:46" itemprop="dateModified" datetime="2020-09-05T18:36:46+08:00">2020-09-05</time>
               </span>
 
           
@@ -721,14 +792,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>I’ve created a MVC 4 Web API Application inside my solution, but I changed nuget package default location. So I’m getting 2 errors right now.</p>
-<blockquote>
-<p>‘System.Web.Http.HttpConfiguration’ does not contain a definition for ‘MapHttpAttributeRoutes’ and no extension method ‘MapHttpAttributeRoutes’ accepting a first argument of type ‘System.Web.Http.HttpConfiguration’ could be found (are you missing a using directive or an assembly reference?)</p>
-</blockquote>
-<p>A forced reinstall of WebAPI could do the job:</p>
-<blockquote>
-<pre><code>update-package microsoft.aspnet.webapi -reinstall -project yourProject</code></pre>
-</blockquote>
+          <p>You can’t really do EnableInterfaceInterceptors <em>globally</em>.</p>
+<p>But you can add the interceptors dynamically and it requires a little work. The way to go is to create a custom Autofac.Module that attaches to all component registrations. I’ll show it to you in an example.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public class InterceptorModule : Autofac.Module</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; This is a private constant from the Autofac.Extras.DynamicProxy2 assembly</span><br><span class="line">  &#x2F;&#x2F; that is needed to &quot;poke&quot; interceptors into registrations.</span><br><span class="line">  const string InterceptorsPropertyName &#x3D; &quot;Autofac.Extras.DynamicProxy2.RegistrationExtensions.InterceptorsPropertyName&quot;;</span><br><span class="line"></span><br><span class="line">  protected override void Load(ContainerBuilder builder)</span><br><span class="line">  &#123;</span><br><span class="line">    &#x2F;&#x2F; Register global interceptors here.</span><br><span class="line">    builder.Register(c &#x3D;&gt; new CallLogger(Console.Out));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)</span><br><span class="line">  &#123;</span><br><span class="line">    &#x2F;&#x2F; Here is where you define your &quot;global interceptor list&quot;</span><br><span class="line">    var interceptorServices &#x3D; new Service[] &#123;</span><br><span class="line">		new TypedService(typeof(CallLogger))</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Append the global interceptors to any existing list, or create a new interceptor</span><br><span class="line">    &#x2F;&#x2F; list if none are specified. Note this info will only be used by registrations</span><br><span class="line">    &#x2F;&#x2F; that are set to have interceptors enabled. It&#39;ll be ignored by others.</span><br><span class="line">    object existing;</span><br><span class="line">    if (registration.Metadata.TryGetValue(InterceptorsPropertyName, out existing))</span><br><span class="line">    &#123;</span><br><span class="line">      registration.Metadata[InterceptorsPropertyName] &#x3D;</span><br><span class="line">        ((IEnumerable&lt;Service&gt;)existing).Concat(interceptorServices).Distinct();</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">      registration.Metadata.Add(InterceptorsPropertyName, interceptorServices);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>To make it work, you register the module along with the rest of your dependencies.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">builder.RegisterType&lt;YourType&gt;()</span><br><span class="line">      .As&lt;YourIInterface&gt;()</span><br><span class="line">      .EnableInterfaceInterceptors();</span><br><span class="line">&#x2F;&#x2F; Here&#39;s the magic module:</span><br><span class="line">builder.RegisterModule&lt;InterceptorModule&gt;();</span><br><span class="line">var container &#x3D; builder.Build();</span><br></pre></td></tr></table></figure>
+
+<p>If you run these registrations and resolve, You can see the interceptor works as you’ll see the CallLogger output.</p>
 
       
     </div>
@@ -800,78 +871,6 @@
 <p>The common refrain is turn off request validation, but there are times when you want to use the built-in validation functions. You just want a friendlier error for your user.</p>
 <p>This code could be better thought out, but here it is anyway:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">void Application_Error(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; Code that runs when an unhandled error occurs</span><br><span class="line">  Exception ex &#x3D; Server.GetLastError();</span><br><span class="line">  if (ex is HttpRequestValidationException)</span><br><span class="line">  &#123;</span><br><span class="line">    HttpWebRequest req &#x3D; (HttpWebRequest)WebRequest.Create(</span><br><span class="line">      &quot;http:&#x2F;&#x2F;&quot; + Request.Url.Authority + Request.ApplicationPath + &quot;&#x2F;HttpRequestValidationException.aspx&quot;);</span><br><span class="line">    HttpWebResponse response &#x3D; (HttpWebResponse)req.GetResponse();</span><br><span class="line"></span><br><span class="line">    Response.Clear();</span><br><span class="line">    Response.ClearHeaders();</span><br><span class="line">    for (int i &#x3D; 0; i &lt; response.Headers.Count; i++)</span><br><span class="line">      Response.AddHeader(response.Headers.GetKey(i), response.Headers.Get(i));</span><br><span class="line">    Response.StatusCode &#x3D; (int)response.StatusCode;</span><br><span class="line"></span><br><span class="line">    System.IO.Stream src &#x3D; response.GetResponseStream();</span><br><span class="line">    while (true) &#123;</span><br><span class="line">      int b &#x3D; src.ReadByte();</span><br><span class="line">      if (b &#x3D;&#x3D; -1) break;</span><br><span class="line">      Response.OutputStream.WriteByte((byte)b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    response.Close();</span><br><span class="line">    Response.End();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2015/01/01/2015/01/autofac-global-interface-interceptor-with-autofacextrasdynamicproxy2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/01/01/2015/01/autofac-global-interface-interceptor-with-autofacextrasdynamicproxy2/" class="post-title-link" itemprop="url">Autofac global interface interceptor with Autofac.Extras.DynamicProxy2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-01-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-01-01T08:00:00+08:00">2015-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:36:46" itemprop="dateModified" datetime="2020-09-05T18:36:46+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>You can’t really do EnableInterfaceInterceptors <em>globally</em>.</p>
-<p>But you can add the interceptors dynamically and it requires a little work. The way to go is to create a custom Autofac.Module that attaches to all component registrations. I’ll show it to you in an example.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public class InterceptorModule : Autofac.Module</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; This is a private constant from the Autofac.Extras.DynamicProxy2 assembly</span><br><span class="line">  &#x2F;&#x2F; that is needed to &quot;poke&quot; interceptors into registrations.</span><br><span class="line">  const string InterceptorsPropertyName &#x3D; &quot;Autofac.Extras.DynamicProxy2.RegistrationExtensions.InterceptorsPropertyName&quot;;</span><br><span class="line"></span><br><span class="line">  protected override void Load(ContainerBuilder builder)</span><br><span class="line">  &#123;</span><br><span class="line">    &#x2F;&#x2F; Register global interceptors here.</span><br><span class="line">    builder.Register(c &#x3D;&gt; new CallLogger(Console.Out));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)</span><br><span class="line">  &#123;</span><br><span class="line">    &#x2F;&#x2F; Here is where you define your &quot;global interceptor list&quot;</span><br><span class="line">    var interceptorServices &#x3D; new Service[] &#123;</span><br><span class="line">		new TypedService(typeof(CallLogger))</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Append the global interceptors to any existing list, or create a new interceptor</span><br><span class="line">    &#x2F;&#x2F; list if none are specified. Note this info will only be used by registrations</span><br><span class="line">    &#x2F;&#x2F; that are set to have interceptors enabled. It&#39;ll be ignored by others.</span><br><span class="line">    object existing;</span><br><span class="line">    if (registration.Metadata.TryGetValue(InterceptorsPropertyName, out existing))</span><br><span class="line">    &#123;</span><br><span class="line">      registration.Metadata[InterceptorsPropertyName] &#x3D;</span><br><span class="line">        ((IEnumerable&lt;Service&gt;)existing).Concat(interceptorServices).Distinct();</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">      registration.Metadata.Add(InterceptorsPropertyName, interceptorServices);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>To make it work, you register the module along with the rest of your dependencies.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">builder.RegisterType&lt;YourType&gt;()</span><br><span class="line">      .As&lt;YourIInterface&gt;()</span><br><span class="line">      .EnableInterfaceInterceptors();</span><br><span class="line">&#x2F;&#x2F; Here&#39;s the magic module:</span><br><span class="line">builder.RegisterModule&lt;InterceptorModule&gt;();</span><br><span class="line">var container &#x3D; builder.Build();</span><br></pre></td></tr></table></figure>
-
-<p>If you run these registrations and resolve, You can see the interceptor works as you’ll see the CallLogger output.</p>
 
       
     </div>

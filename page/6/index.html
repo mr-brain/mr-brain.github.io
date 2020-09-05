@@ -526,7 +526,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/how-do-i-use-the-qdir-internal-file-association-rules-eg-7zip/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/nullreferenceexception-unexplained-error-in-aspnet-mvc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -540,7 +540,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/06/01/2014/06/how-do-i-use-the-qdir-internal-file-association-rules-eg-7zip/" class="post-title-link" itemprop="url">How do i use the Q-Dir internal file association rules eg 7-Zip?</a>
+            <a href="/2014/06/01/2014/06/nullreferenceexception-unexplained-error-in-aspnet-mvc/" class="post-title-link" itemprop="url">NullReferenceException unexplained error in ASP.NET MVC</a>
         </h2>
 
         <div class="post-meta">
@@ -557,7 +557,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:42:44" itemprop="dateModified" datetime="2020-09-05T18:42:44+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:41:07" itemprop="dateModified" datetime="2020-09-05T18:41:07+08:00">2020-09-05</time>
               </span>
 
           
@@ -571,21 +571,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><em>Example 1:</em><br>Eg: For 7-zip, with 7-zip in the default Program Files folder.</p>
-<blockquote>
-<p><em>.zip;</em>.rar=C:\Program Files\7-Zip\7zFM.exe</p>
-</blockquote>
-<p><em>Example 2:</em><br>Q-Dir is on the USB Stik and Notepad++ also.<br>The file extension “txt”, “cpp”, “pl”, “ini”, “php”, “cgi” to be with Notepad++ open.</p>
-<blockquote>
-<p><em>.txt;</em>.cpp;<em>.pl;</em>.ini;<em>.php;</em>.cgi=%drive%/npp/unicode/notepad++.exe</p>
-</blockquote>
-<p>Or even for portable 7-Zip :</p>
-<blockquote>
-<p><em>.zip;</em>.rar;<em>.7z;</em>.tar;<em>.iso;</em>.lzh=%drive%/7-Zip/7zFM.exe</p>
-</blockquote>
-<p>%drive% is a placeholder for the drive from which to Q-Dir is started.<br>In the case of: the Q-Dir path is “M:/Q-Dir/Q-Dir.exe” then would be %drive% a placeholder for “M:”.</p>
-<p>This allows you to define yourself,<br>through the menu :<br>Extras &gt;&gt; … more options, then tab bar Association.</p>
-<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/Assoziation_in_Q_Dir.png" alt="img"></p>
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[NullReferenceException: Object reference not set to an instance of an object.]</span><br><span class="line">   System.Web.Mvc.&lt;ConvertResults&gt;d__2.MoveNext() +105</span><br><span class="line">   System.Web.Mvc.&lt;Validate&gt;d__1.MoveNext() +1050  System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext) +404</span><br></pre></td></tr></table></figure>
+
+<p>Please check your <em>Validate</em> function code in <strong><em>xxx</em>Model</strong> (inherited <em>IValidatableObject</em>). <font color='red'>You should not return null value.</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)</span><br><span class="line">&#123;</span><br><span class="line">  return null;   &#x2F;&#x2F; this is error code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -683,7 +672,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/nullreferenceexception-unexplained-error-in-aspnet-mvc/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -697,7 +686,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/06/01/2014/06/nullreferenceexception-unexplained-error-in-aspnet-mvc/" class="post-title-link" itemprop="url">NullReferenceException unexplained error in ASP.NET MVC</a>
+            <a href="/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/" class="post-title-link" itemprop="url">Unit Testing ASP.NET Web Site Project code stored in APP_Code</a>
         </h2>
 
         <div class="post-meta">
@@ -714,7 +703,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:41:07" itemprop="dateModified" datetime="2020-09-05T18:41:07+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:40:42" itemprop="dateModified" datetime="2020-09-05T18:40:42+08:00">2020-09-05</time>
               </span>
 
           
@@ -728,10 +717,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[NullReferenceException: Object reference not set to an instance of an object.]</span><br><span class="line">   System.Web.Mvc.&lt;ConvertResults&gt;d__2.MoveNext() +105</span><br><span class="line">   System.Web.Mvc.&lt;Validate&gt;d__1.MoveNext() +1050  System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext) +404</span><br></pre></td></tr></table></figure>
+          <p>Here’s a Website.targets file you can include in unit testing solution. It (re)compiles website only when App_Code changes. Just add something in <strong>Test Project</strong> like</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;PropertyGroup&gt;</span><br><span class="line">    &lt;WebsiteName&gt;*MyWebsite*&lt;&#x2F;WebsiteName&gt;</span><br><span class="line">    &lt;WebsitePath&gt;..&lt;&#x2F;WebsitePath&gt;</span><br><span class="line">  &lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">  &lt;Import Project&#x3D;&quot;$(ProjectDir)\Website.targets&quot; &gt;&lt;&#x2F;Import&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;BeforeBuild&quot; DependsOnTargets&#x3D;&quot;CompileWebsite&quot;&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
 
-<p>Please check your <em>Validate</em> function code in <strong><em>xxx</em>Model</strong> (inherited <em>IValidatableObject</em>). <font color='red'>You should not return null value.</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)</span><br><span class="line">&#123;</span><br><span class="line">  return null;   &#x2F;&#x2F; this is error code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>to your .csproj, customizing WebsiteName and WebsitePath and you should be ready to create <strong>Website.targets</strong> file in Test Project Folder:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">    Target that compiles Website&#39;s App_Code to be used for testing</span><br><span class="line">  --&gt;</span><br><span class="line">&lt;Project DefaultTargets&#x3D;&quot;CompileWebsite&quot; ToolsVersion&#x3D;&quot;4.0&quot; xmlns&#x3D;&quot;http:&#x2F;&#x2F;schemas.microsoft.com&#x2F;developer&#x2F;msbuild&#x2F;2003&quot;&gt;</span><br><span class="line">  &lt;ItemGroup&gt;</span><br><span class="line">    &lt;AppCodeFiles Include&#x3D;&quot;$(WebsitePath)\$(WebsiteName)\App_Code\**\*.*&quot; &gt;&lt;&#x2F;AppCodeFiles&gt;</span><br><span class="line">  &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CompileWebsite&quot; Inputs&#x3D;&quot;@(AppCodeFiles)&quot; Outputs&#x3D;&quot;$(ProjectDir)\PrecompiledWeb\bin\App_Code.dll&quot;&gt;</span><br><span class="line">    &lt;AspNetCompiler VirtualPath&#x3D;&quot;$(WebsiteName)&quot; PhysicalPath&#x3D;&quot;$(WebsitePath)\$(WebsiteName)&quot; TargetPath&#x3D;&quot;$(ProjectDir)\PrecompiledWeb&quot; Force&#x3D;&quot;true&quot; Debug&#x3D;&quot;true&quot; &gt;&lt;&#x2F;AspNetCompiler&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CleanWebsite&quot;&gt;</span><br><span class="line">    &lt;RemoveDir Directories&#x3D;&quot;$(WebsitePath)\$(WebsiteName)\PrecompiledWeb&quot; &gt;&lt;&#x2F;RemoveDir&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">&lt;&#x2F;Project&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -826,7 +816,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/how-do-i-use-the-qdir-internal-file-association-rules-eg-7zip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -840,7 +830,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/" class="post-title-link" itemprop="url">Unit Testing ASP.NET Web Site Project code stored in APP_Code</a>
+            <a href="/2014/06/01/2014/06/how-do-i-use-the-qdir-internal-file-association-rules-eg-7zip/" class="post-title-link" itemprop="url">How do i use the Q-Dir internal file association rules eg 7-Zip?</a>
         </h2>
 
         <div class="post-meta">
@@ -857,7 +847,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:40:42" itemprop="dateModified" datetime="2020-09-05T18:40:42+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:42:44" itemprop="dateModified" datetime="2020-09-05T18:42:44+08:00">2020-09-05</time>
               </span>
 
           
@@ -871,11 +861,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Here’s a Website.targets file you can include in unit testing solution. It (re)compiles website only when App_Code changes. Just add something in <strong>Test Project</strong> like</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;PropertyGroup&gt;</span><br><span class="line">    &lt;WebsiteName&gt;*MyWebsite*&lt;&#x2F;WebsiteName&gt;</span><br><span class="line">    &lt;WebsitePath&gt;..&lt;&#x2F;WebsitePath&gt;</span><br><span class="line">  &lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">  &lt;Import Project&#x3D;&quot;$(ProjectDir)\Website.targets&quot; &gt;&lt;&#x2F;Import&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;BeforeBuild&quot; DependsOnTargets&#x3D;&quot;CompileWebsite&quot;&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
-
-<p>to your .csproj, customizing WebsiteName and WebsitePath and you should be ready to create <strong>Website.targets</strong> file in Test Project Folder:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">    Target that compiles Website&#39;s App_Code to be used for testing</span><br><span class="line">  --&gt;</span><br><span class="line">&lt;Project DefaultTargets&#x3D;&quot;CompileWebsite&quot; ToolsVersion&#x3D;&quot;4.0&quot; xmlns&#x3D;&quot;http:&#x2F;&#x2F;schemas.microsoft.com&#x2F;developer&#x2F;msbuild&#x2F;2003&quot;&gt;</span><br><span class="line">  &lt;ItemGroup&gt;</span><br><span class="line">    &lt;AppCodeFiles Include&#x3D;&quot;$(WebsitePath)\$(WebsiteName)\App_Code\**\*.*&quot; &gt;&lt;&#x2F;AppCodeFiles&gt;</span><br><span class="line">  &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CompileWebsite&quot; Inputs&#x3D;&quot;@(AppCodeFiles)&quot; Outputs&#x3D;&quot;$(ProjectDir)\PrecompiledWeb\bin\App_Code.dll&quot;&gt;</span><br><span class="line">    &lt;AspNetCompiler VirtualPath&#x3D;&quot;$(WebsiteName)&quot; PhysicalPath&#x3D;&quot;$(WebsitePath)\$(WebsiteName)&quot; TargetPath&#x3D;&quot;$(ProjectDir)\PrecompiledWeb&quot; Force&#x3D;&quot;true&quot; Debug&#x3D;&quot;true&quot; &gt;&lt;&#x2F;AspNetCompiler&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CleanWebsite&quot;&gt;</span><br><span class="line">    &lt;RemoveDir Directories&#x3D;&quot;$(WebsitePath)\$(WebsiteName)\PrecompiledWeb&quot; &gt;&lt;&#x2F;RemoveDir&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">&lt;&#x2F;Project&gt;</span><br></pre></td></tr></table></figure>
+          <p><em>Example 1:</em><br>Eg: For 7-zip, with 7-zip in the default Program Files folder.</p>
+<blockquote>
+<p><em>.zip;</em>.rar=C:\Program Files\7-Zip\7zFM.exe</p>
+</blockquote>
+<p><em>Example 2:</em><br>Q-Dir is on the USB Stik and Notepad++ also.<br>The file extension “txt”, “cpp”, “pl”, “ini”, “php”, “cgi” to be with Notepad++ open.</p>
+<blockquote>
+<p><em>.txt;</em>.cpp;<em>.pl;</em>.ini;<em>.php;</em>.cgi=%drive%/npp/unicode/notepad++.exe</p>
+</blockquote>
+<p>Or even for portable 7-Zip :</p>
+<blockquote>
+<p><em>.zip;</em>.rar;<em>.7z;</em>.tar;<em>.iso;</em>.lzh=%drive%/7-Zip/7zFM.exe</p>
+</blockquote>
+<p>%drive% is a placeholder for the drive from which to Q-Dir is started.<br>In the case of: the Q-Dir path is “M:/Q-Dir/Q-Dir.exe” then would be %drive% a placeholder for “M:”.</p>
+<p>This allows you to define yourself,<br>through the menu :<br>Extras &gt;&gt; … more options, then tab bar Association.</p>
+<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/Assoziation_in_Q_Dir.png" alt="img"></p>
 
       
     </div>

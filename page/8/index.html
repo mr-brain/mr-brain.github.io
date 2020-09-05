@@ -145,6 +145,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/" class="post-title-link" itemprop="url">No exports were found that match the constraint contract name error</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-09-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-09-01T08:00:00+08:00">2013-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:01:47" itemprop="dateModified" datetime="2020-09-05T18:01:47+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>This morning I faced a problem while creating my Visual Studio 2012 Library Project. It said “no exports were found that match the constraint contract name”</p>
+<p>I solved this problem by clearing Visual Studio Component Model Cache. Just delete or rename this folder:</p>
+<blockquote>
+<p>%AppData%..\Local\Microsoft\VisualStudio\11.0\ComponentModelCache</p>
+</blockquote>
+<p>Visual Studio Express 2012 has different paths. Visual Studio Express</p>
+<blockquote>
+<p>…\Users{user}\AppData\Local\Microsoft\WDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>With Visual Studio Express 2012 for Web</p>
+<blockquote>
+<p>…\Users{user}\AppData\Local\Microsoft\VWDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>When I running MyWebSite in .NET 4.0 and I can’t get it working.</p>
+<blockquote>
+<p>HTTP error 500.22-Internal Server Error<br>Detect ASP.NET setting does not apply to integrated Managed pipeline mode.</p>
+</blockquote>
+<p>If you still need to use the HTTP Module you need to configure it (.NET 4.0 framework) as follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;system.webServer&gt;</span><br><span class="line">  &lt;modules runAllManagedModulesForAllRequests&#x3D;&quot;true&quot;&gt;</span><br><span class="line">    &lt;add name&#x3D;&quot;MyModule&quot; type&#x3D;&quot;&lt;&lt;Namespace&gt;&gt;.&lt;&lt;Class&gt;&gt;, &lt;&lt;assembly&gt;&gt;&quot;&#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;modules&gt;</span><br><span class="line">  &lt;validation validateIntegratedModeConfiguration&#x3D;&quot;false&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;system.webServer&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2013/09/01/2013/09/typescript-syntax/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -229,7 +312,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2013/08/01/2013/08/c-50-callermembername/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -243,7 +326,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/" class="post-title-link" itemprop="url">No exports were found that match the constraint contract name error</a>
+            <a href="/2013/08/01/2013/08/c-50-callermembername/" class="post-title-link" itemprop="url">C# 5.0 CallerMemberName</a>
         </h2>
 
         <div class="post-meta">
@@ -253,14 +336,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2013-09-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-09-01T08:00:00+08:00">2013-09-01</time>
+              <time title="Created: 2013-08-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-08-01T08:00:00+08:00">2013-08-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:01:47" itemprop="dateModified" datetime="2020-09-05T18:01:47+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 17:58:29" itemprop="dateModified" datetime="2020-09-05T17:58:29+08:00">2020-09-05</time>
               </span>
 
           
@@ -274,25 +357,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>This morning I faced a problem while creating my Visual Studio 2012 Library Project. It said “no exports were found that match the constraint contract name”</p>
-<p>I solved this problem by clearing Visual Studio Component Model Cache. Just delete or rename this folder:</p>
-<blockquote>
-<p>%AppData%..\Local\Microsoft\VisualStudio\11.0\ComponentModelCache</p>
-</blockquote>
-<p>Visual Studio Express 2012 has different paths. Visual Studio Express</p>
-<blockquote>
-<p>…\Users{user}\AppData\Local\Microsoft\WDExpress\11.0\ComponentModelCache</p>
-</blockquote>
-<p>With Visual Studio Express 2012 for Web</p>
-<blockquote>
-<p>…\Users{user}\AppData\Local\Microsoft\VWDExpress\11.0\ComponentModelCache</p>
-</blockquote>
-<p>When I running MyWebSite in .NET 4.0 and I can’t get it working.</p>
-<blockquote>
-<p>HTTP error 500.22-Internal Server Error<br>Detect ASP.NET setting does not apply to integrated Managed pipeline mode.</p>
-</blockquote>
-<p>If you still need to use the HTTP Module you need to configure it (.NET 4.0 framework) as follows:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;system.webServer&gt;</span><br><span class="line">  &lt;modules runAllManagedModulesForAllRequests&#x3D;&quot;true&quot;&gt;</span><br><span class="line">    &lt;add name&#x3D;&quot;MyModule&quot; type&#x3D;&quot;&lt;&lt;Namespace&gt;&gt;.&lt;&lt;Class&gt;&gt;, &lt;&lt;assembly&gt;&gt;&quot;&#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;modules&gt;</span><br><span class="line">  &lt;validation validateIntegratedModeConfiguration&#x3D;&quot;false&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;system.webServer&gt;</span><br></pre></td></tr></table></figure>
+          <p>My new favorite C# language feature: CallerMemberName</p>
+<p>This is how a property with INotifyPropertyChanged support looks like pre C# 4.5:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string OldStylePropertyChanged</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _oldStyle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _oldStyle)</span><br><span class="line">    &#123;</span><br><span class="line">      _oldStyle &#x3D; value;</span><br><span class="line">      OnPropertyChangedOldStyle(&quot;OldStylePropertyChanged&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChangedOldStyle(string propertyName)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>And this is how it will look like when we apply the use of CallerMemberName in our PropertyChanged method:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string DynamicTitle</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _dynamicTitle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _dynamicTitle)</span><br><span class="line">    &#123;</span><br><span class="line">      _dynamicTitle &#x3D; value;</span><br><span class="line">      OnPropertyChanged();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChanged([CallerMemberName] string propertyName &#x3D; null)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Some more really cool additions to CallerMemberName is the following Parameter attributes:</p>
+<ul>
+<li>[CallerMemberName]</li>
+<li>[CallerFilePath]</li>
+<li>[CallerLineNumber]</li>
+</ul>
+<p>The name of the attributes is straight forward and easy to understand, so I doubt that I would have to describe them in detail, instead, let’s look at an example straight from MSDN on how to use them.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public sealed class Logger</span><br><span class="line">&#123;</span><br><span class="line">  public void TraceMessage(string message,</span><br><span class="line">       [CallerMemberName] string memberName &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerFilePath] string sourceFilePath &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerLineNumber] int sourceLineNumber &#x3D; 0)</span><br><span class="line">  &#123;</span><br><span class="line">    Debug.WriteLine(&quot;message: &quot; + message);</span><br><span class="line">    Debug.WriteLine(&quot;member name: &quot; + memberName);</span><br><span class="line">    Debug.WriteLine(&quot;source file path: &quot; + sourceFilePath);</span><br><span class="line">    Debug.WriteLine(&quot;source line number: &quot; + sourceLineNumber);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Happy hacking!</p>
 
       
     </div>
@@ -360,87 +441,6 @@
           <p>Powershell: dir file whose File size is greater than 1024KB</p>
 <p>The following example perform is will list the files with .pdf extensions. where-object will filter the result set to files with length greater than 1MB. format-table will format the final output to display only the name of the file</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls *.pdf -Recurse | where-object &#123;$_.length -gt 1048576&#125; | format-table -property Name</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2013/08/01/2013/08/c-50-callermembername/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/08/01/2013/08/c-50-callermembername/" class="post-title-link" itemprop="url">C# 5.0 CallerMemberName</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2013-08-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-08-01T08:00:00+08:00">2013-08-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:58:29" itemprop="dateModified" datetime="2020-09-05T17:58:29+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>My new favorite C# language feature: CallerMemberName</p>
-<p>This is how a property with INotifyPropertyChanged support looks like pre C# 4.5:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string OldStylePropertyChanged</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _oldStyle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _oldStyle)</span><br><span class="line">    &#123;</span><br><span class="line">      _oldStyle &#x3D; value;</span><br><span class="line">      OnPropertyChangedOldStyle(&quot;OldStylePropertyChanged&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChangedOldStyle(string propertyName)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>And this is how it will look like when we apply the use of CallerMemberName in our PropertyChanged method:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string DynamicTitle</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _dynamicTitle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _dynamicTitle)</span><br><span class="line">    &#123;</span><br><span class="line">      _dynamicTitle &#x3D; value;</span><br><span class="line">      OnPropertyChanged();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChanged([CallerMemberName] string propertyName &#x3D; null)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Some more really cool additions to CallerMemberName is the following Parameter attributes:</p>
-<ul>
-<li>[CallerMemberName]</li>
-<li>[CallerFilePath]</li>
-<li>[CallerLineNumber]</li>
-</ul>
-<p>The name of the attributes is straight forward and easy to understand, so I doubt that I would have to describe them in detail, instead, let’s look at an example straight from MSDN on how to use them.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public sealed class Logger</span><br><span class="line">&#123;</span><br><span class="line">  public void TraceMessage(string message,</span><br><span class="line">       [CallerMemberName] string memberName &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerFilePath] string sourceFilePath &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerLineNumber] int sourceLineNumber &#x3D; 0)</span><br><span class="line">  &#123;</span><br><span class="line">    Debug.WriteLine(&quot;message: &quot; + message);</span><br><span class="line">    Debug.WriteLine(&quot;member name: &quot; + memberName);</span><br><span class="line">    Debug.WriteLine(&quot;source file path: &quot; + sourceFilePath);</span><br><span class="line">    Debug.WriteLine(&quot;source line number: &quot; + sourceLineNumber);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Happy hacking!</p>
 
       
     </div>

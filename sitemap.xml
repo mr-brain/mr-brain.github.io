@@ -648,13 +648,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/VM/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/tags/PL-SQL/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
@@ -669,63 +662,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/Windows/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/dotnet/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/powershell/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/vs-net/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/Typescript/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/typescript/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/aspnet/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/sqlserver/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/iis/</loc>
+    <loc>http://example.com/tags/VM/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -733,13 +670,6 @@
   
   <url>
     <loc>http://example.com/tags/javascript/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/t-sql/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -760,14 +690,35 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/window/</loc>
+    <loc>http://example.com/tags/dotnet/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/VS-NET/</loc>
+    <loc>http://example.com/tags/sqlserver/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/iis/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/vs-net/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/t-sql/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -775,6 +726,20 @@
   
   <url>
     <loc>http://example.com/tags/nuget/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/powershell/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/typescript/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -789,6 +754,20 @@
   
   <url>
     <loc>http://example.com/tags/asp-net/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/window/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/VS-NET/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -823,6 +802,13 @@
   </url>
   
   <url>
+    <loc>http://example.com/tags/Typescript/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/git/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
@@ -831,6 +817,20 @@
   
   <url>
     <loc>http://example.com/tags/resharper/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Windows/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/aspnet/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

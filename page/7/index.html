@@ -282,7 +282,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2014/05/01/2014/05/cannot-see-cs-files-after-last-rename-vsnet-2013-projects/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -296,7 +296,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/05/01/2014/05/cannot-see-cs-files-after-last-rename-vsnet-2013-projects/" class="post-title-link" itemprop="url">Cannot see cs files after last rename VS.NET 2013 Projects</a>
+            <a href="/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/" class="post-title-link" itemprop="url">Database diagram support objects cannot be installed</a>
         </h2>
 
         <div class="post-meta">
@@ -313,7 +313,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:04:09" itemprop="dateModified" datetime="2020-09-05T18:04:09+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:05:15" itemprop="dateModified" datetime="2020-09-05T18:05:15+08:00">2020-09-05</time>
               </span>
 
           
@@ -327,17 +327,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>After I rename VS.NET 2013 Project Name, I had this <strong>“The ‘Microsoft.VisualStudio.Editor.Implementation.EditorPackage’ package did not load correctly.”</strong> error message when I started up Visual Studio 2013.</p>
-<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/VS2013-ActivityLog-xml-Exception.png" alt="img"></p>
-<p>This is telling me to open ActivityLog.xml, and hopefully an answer will be found. So I opened up that file and found some error entries:</p>
+          <p>If you ever get a message like this when trying to create a diagram in SQL 2005/2008 Express.</p>
 <blockquote>
-<p>No EditorOptionDefinition export found for the given option name: Graphics/Simple/Enable<br>Parameter name: optionId</p>
+<p>Database diagram support objects cannot be installed because this database does not have a valid owner.</p>
+<p>To continue, first use the Files page of the Database Properties dialog box or the ALTER AUTHORIZATION statement to set the database owner to a valid login, then add the database diagram support objects.</p>
 </blockquote>
-<p>For Visual Studio 2013, it’s located in the</p>
-<blockquote>
-<p>%LOCALAPPDATA%\Microsoft\VisualStudio\12.0 folder.<br>For Visual Studio 2012, it’s 11.0 folder.</p>
-</blockquote>
-<p>I renamed <strong>ComponentModelCache</strong> to <strong>ComponentModelCache.Borked</strong> and restarted Visual Studio. It started right up and without any errors.</p>
+<p>Here’s step by step what you have to do:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_dbcmptlevel &#39;yourDB&#39;, &#39;90&#39;;</span><br><span class="line">go</span><br><span class="line">ALTER AUTHORIZATION ON DATABASE::yourDB TO &quot;yourLogin&quot;</span><br><span class="line">go</span><br><span class="line">use [yourDB]</span><br><span class="line">go</span><br><span class="line">EXECUTE AS USER &#x3D; N&#39;dbo&#39; REVERT</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -426,6 +422,81 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2014/05/01/2014/05/cannot-see-cs-files-after-last-rename-vsnet-2013-projects/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/05/01/2014/05/cannot-see-cs-files-after-last-rename-vsnet-2013-projects/" class="post-title-link" itemprop="url">Cannot see cs files after last rename VS.NET 2013 Projects</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:04:09" itemprop="dateModified" datetime="2020-09-05T18:04:09+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>After I rename VS.NET 2013 Project Name, I had this <strong>“The ‘Microsoft.VisualStudio.Editor.Implementation.EditorPackage’ package did not load correctly.”</strong> error message when I started up Visual Studio 2013.</p>
+<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/VS2013-ActivityLog-xml-Exception.png" alt="img"></p>
+<p>This is telling me to open ActivityLog.xml, and hopefully an answer will be found. So I opened up that file and found some error entries:</p>
+<blockquote>
+<p>No EditorOptionDefinition export found for the given option name: Graphics/Simple/Enable<br>Parameter name: optionId</p>
+</blockquote>
+<p>For Visual Studio 2013, it’s located in the</p>
+<blockquote>
+<p>%LOCALAPPDATA%\Microsoft\VisualStudio\12.0 folder.<br>For Visual Studio 2012, it’s 11.0 folder.</p>
+</blockquote>
+<p>I renamed <strong>ComponentModelCache</strong> to <strong>ComponentModelCache.Borked</strong> and restarted Visual Studio. It started right up and without any errors.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2014/05/01/2014/05/msbuild-get-output-message/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -477,77 +548,6 @@
 <p>To change the build output verbosity shown in the VS.NET output window, open the Options dialog and select the Build and Run settings below the Projects and Solutions node.</p>
 <p><img src="msbuild-get-output-message/2014-05-28_134204.png" alt="options dialog"></p>
 <p>Unless you explicitly specify a low message importance, your messages should show up at <font color='blue'>Normal</font> verbosity or higher.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/" class="post-title-link" itemprop="url">Database diagram support objects cannot be installed</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:05:15" itemprop="dateModified" datetime="2020-09-05T18:05:15+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>If you ever get a message like this when trying to create a diagram in SQL 2005/2008 Express.</p>
-<blockquote>
-<p>Database diagram support objects cannot be installed because this database does not have a valid owner.</p>
-<p>To continue, first use the Files page of the Database Properties dialog box or the ALTER AUTHORIZATION statement to set the database owner to a valid login, then add the database diagram support objects.</p>
-</blockquote>
-<p>Here’s step by step what you have to do:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_dbcmptlevel &#39;yourDB&#39;, &#39;90&#39;;</span><br><span class="line">go</span><br><span class="line">ALTER AUTHORIZATION ON DATABASE::yourDB TO &quot;yourLogin&quot;</span><br><span class="line">go</span><br><span class="line">use [yourDB]</span><br><span class="line">go</span><br><span class="line">EXECUTE AS USER &#x3D; N&#39;dbo&#39; REVERT</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
 
       
     </div>
