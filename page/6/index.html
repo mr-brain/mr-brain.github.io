@@ -229,7 +229,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/get-class-list-for-element-with-jquery/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/how-do-i-use-the-qdir-internal-file-association-rules-eg-7zip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -243,7 +243,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/06/01/2014/06/get-class-list-for-element-with-jquery/" class="post-title-link" itemprop="url">Get Class list for element with jQuery</a>
+            <a href="/2014/06/01/2014/06/how-do-i-use-the-qdir-internal-file-association-rules-eg-7zip/" class="post-title-link" itemprop="url">How do i use the Q-Dir internal file association rules eg 7-Zip?</a>
         </h2>
 
         <div class="post-meta">
@@ -260,7 +260,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:43:02" itemprop="dateModified" datetime="2020-09-05T18:43:02+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:42:44" itemprop="dateModified" datetime="2020-09-05T18:42:44+08:00">2020-09-05</time>
               </span>
 
           
@@ -274,8 +274,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>You can iterate and find the one you want:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var classList &#x3D; $(&#39;#divId&#39;).attr(&#39;class&#39;).split(&#x2F;\s+&#x2F;);</span><br><span class="line">$.each( classList, function(index, item)&#123;</span><br><span class="line">    if (item &#x3D;&#x3D;&#x3D; &#39;someClass&#39;) &#123;</span><br><span class="line">       &#x2F;&#x2F;do something</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+          <p><em>Example 1:</em><br>Eg: For 7-zip, with 7-zip in the default Program Files folder.</p>
+<blockquote>
+<p><em>.zip;</em>.rar=C:\Program Files\7-Zip\7zFM.exe</p>
+</blockquote>
+<p><em>Example 2:</em><br>Q-Dir is on the USB Stik and Notepad++ also.<br>The file extension “txt”, “cpp”, “pl”, “ini”, “php”, “cgi” to be with Notepad++ open.</p>
+<blockquote>
+<p><em>.txt;</em>.cpp;<em>.pl;</em>.ini;<em>.php;</em>.cgi=%drive%/npp/unicode/notepad++.exe</p>
+</blockquote>
+<p>Or even for portable 7-Zip :</p>
+<blockquote>
+<p><em>.zip;</em>.rar;<em>.7z;</em>.tar;<em>.iso;</em>.lzh=%drive%/7-Zip/7zFM.exe</p>
+</blockquote>
+<p>%drive% is a placeholder for the drive from which to Q-Dir is started.<br>In the case of: the Q-Dir path is “M:/Q-Dir/Q-Dir.exe” then would be %drive% a placeholder for “M:”.</p>
+<p>This allows you to define yourself,<br>through the menu :<br>Extras &gt;&gt; … more options, then tab bar Association.</p>
+<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/Assoziation_in_Q_Dir.png" alt="img"></p>
 
       
     </div>
@@ -672,6 +685,72 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/get-class-list-for-element-with-jquery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/01/2014/06/get-class-list-for-element-with-jquery/" class="post-title-link" itemprop="url">Get Class list for element with jQuery</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:43:02" itemprop="dateModified" datetime="2020-09-05T18:43:02+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>You can iterate and find the one you want:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var classList &#x3D; $(&#39;#divId&#39;).attr(&#39;class&#39;).split(&#x2F;\s+&#x2F;);</span><br><span class="line">$.each( classList, function(index, item)&#123;</span><br><span class="line">    if (item &#x3D;&#x3D;&#x3D; &#39;someClass&#39;) &#123;</span><br><span class="line">       &#x2F;&#x2F;do something</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -797,85 +876,6 @@
 
 <p>In Home/Login.cshtml</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@using (Html.BeginForm(&quot;Login&quot;, &quot;Home&quot;, new &#123; ReturnUrl&#x3D;Model.ReturnUrl &#125;, FormMethod.Post, new &#123; autocomplete&#x3D;&quot;off&quot; &#125;))</span><br><span class="line">&#123;</span><br><span class="line">  @Html.TextBoxFor(m &#x3D;&gt; m.UserName)</span><br><span class="line">  @Html.ValidationMessageFor(m &#x3D;&gt; m.UserName)</span><br><span class="line">  &lt;br &#x2F;&gt;</span><br><span class="line">  @Html.PasswordFor(m &#x3D;&gt; m.Password)</span><br><span class="line">  @Html.ValidationMessageFor(m &#x3D;&gt; m.Password)</span><br><span class="line">  &lt;br &#x2F;&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;Login&quot; &#x2F;&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/how-do-i-use-the-qdir-internal-file-association-rules-eg-7zip/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/06/01/2014/06/how-do-i-use-the-qdir-internal-file-association-rules-eg-7zip/" class="post-title-link" itemprop="url">How do i use the Q-Dir internal file association rules eg 7-Zip?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:42:44" itemprop="dateModified" datetime="2020-09-05T18:42:44+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em>Example 1:</em><br>Eg: For 7-zip, with 7-zip in the default Program Files folder.</p>
-<blockquote>
-<p><em>.zip;</em>.rar=C:\Program Files\7-Zip\7zFM.exe</p>
-</blockquote>
-<p><em>Example 2:</em><br>Q-Dir is on the USB Stik and Notepad++ also.<br>The file extension “txt”, “cpp”, “pl”, “ini”, “php”, “cgi” to be with Notepad++ open.</p>
-<blockquote>
-<p><em>.txt;</em>.cpp;<em>.pl;</em>.ini;<em>.php;</em>.cgi=%drive%/npp/unicode/notepad++.exe</p>
-</blockquote>
-<p>Or even for portable 7-Zip :</p>
-<blockquote>
-<p><em>.zip;</em>.rar;<em>.7z;</em>.tar;<em>.iso;</em>.lzh=%drive%/7-Zip/7zFM.exe</p>
-</blockquote>
-<p>%drive% is a placeholder for the drive from which to Q-Dir is started.<br>In the case of: the Q-Dir path is “M:/Q-Dir/Q-Dir.exe” then would be %drive% a placeholder for “M:”.</p>
-<p>This allows you to define yourself,<br>through the menu :<br>Extras &gt;&gt; … more options, then tab bar Association.</p>
-<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/Assoziation_in_Q_Dir.png" alt="img"></p>
 
       
     </div>
