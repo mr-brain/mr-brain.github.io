@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="In Web.config 1234567891011121314151617&lt;configuration&gt;  &lt;system.web&gt;    &lt;authentication mode&#x3D;&quot;Forms&quot;&gt;      &lt;forms defaultUrl&#x3D;&quot;~&#x2F;Home&#x2F;Index&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Using Forms Authentication in ASP.NET MVC">
+<meta property="og:url" content="http://example.com/2014/06/01/2014/06/using-forms-authentication-in-aspnet-mvc/index.html">
+<meta property="og:site_name" content="Elegance C#">
+<meta property="og:description" content="In Web.config 1234567891011121314151617&lt;configuration&gt;  &lt;system.web&gt;    &lt;authentication mode&#x3D;&quot;Forms&quot;&gt;      &lt;forms defaultUrl&#x3D;&quot;~&#x2F;Home&#x2F;Index&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2014-06-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-05T10:40:31.176Z">
+<meta property="article:author" content="Mr-Brain">
+<meta property="article:tag" content="c#">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2014/06/01/2014/06/using-forms-authentication-in-aspnet-mvc/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Using Forms Authentication in ASP.NET MVC | Elegance C#</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Elegance C#</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2014/06/01/2014/06/using-forms-authentication-in-aspnet-mvc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Using Forms Authentication in ASP.NET MVC
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:40:31" itemprop="dateModified" datetime="2020-09-05T18:40:31+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>In Web.config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;system.web&gt;</span><br><span class="line">    &lt;authentication mode&#x3D;&quot;Forms&quot;&gt;</span><br><span class="line">      &lt;forms defaultUrl&#x3D;&quot;~&#x2F;Home&#x2F;Index&#x2F;&quot; loginUrl&#x3D;&quot;~&#x2F;Home&#x2F;Login&#x2F;&quot; timeout&#x3D;&quot;30&quot; &gt;&lt;&#x2F;forms&gt;</span><br><span class="line">    &lt;&#x2F;authentication&gt;</span><br><span class="line">    &lt;authorization&gt;</span><br><span class="line">      &lt;deny users&#x3D;&quot;?&quot;&gt;&lt;&#x2F;deny&gt;</span><br><span class="line">    &lt;&#x2F;authorization&gt;</span><br><span class="line">  &lt;&#x2F;system.web&gt;</span><br><span class="line">  &lt;location path&#x3D;&quot;Scripts&quot;&gt;</span><br><span class="line">    &lt;system.web&gt;</span><br><span class="line">	  &lt;authorization&gt;</span><br><span class="line">	    &lt;allow users&#x3D;&quot;*&quot;&gt;&lt;&#x2F;allow&gt;</span><br><span class="line">	  &lt;&#x2F;authorization&gt;</span><br><span class="line">	&lt;&#x2F;system.web&gt;</span><br><span class="line">  &lt;&#x2F;location&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Create LoginViewModel.cs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class LoginViewModel : IValidatableObject</span><br><span class="line">&#123;</span><br><span class="line">	[DisplayFormat(ConvertEmptyStringToNull &#x3D; false)]</span><br><span class="line">	public string ReturnUrl &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	[DisplayFormat(ConvertEmptyStringToNull &#x3D; false)]</span><br><span class="line">	[Required]</span><br><span class="line">	public string UserName &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	[DisplayFormat(ConvertEmptyStringToNull &#x3D; false)]</span><br><span class="line">	[Required]</span><br><span class="line">	[DataType(DataType.Password)]</span><br><span class="line">	[Display(Name &#x3D; &quot;Password&quot;)]</span><br><span class="line">	public string Password &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	[Display(Name &#x3D; &quot;Remember me?&quot;)]</span><br><span class="line">	public bool RememberMe &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)</span><br><span class="line">	&#123;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Create HomeController.cs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class HomeController : Controller</span><br><span class="line">&#123;</span><br><span class="line">	[AllowAnonymous]</span><br><span class="line">	public ActionResult Login(string ReturnUrl)</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;ReturnUrl: url that is before user login</span><br><span class="line">		var vm &#x3D; new LoginViewModel() &#123; ReturnUrl &#x3D; ReturnUrl &#125;;</span><br><span class="line">		return View(vm);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	[AllowAnonymous]</span><br><span class="line">	[HttpPost]</span><br><span class="line">	public ActionResult Login(LoginViewModel model)</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;</span><br><span class="line">		if( !ModelState.IsValid )</span><br><span class="line">		&#123;</span><br><span class="line">			return View(model);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		&#x2F;&#x2F;todo check login account and password</span><br><span class="line">		if (false)</span><br><span class="line">		&#123;</span><br><span class="line">             ...</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		FormsAuthentication.RedirectFromLoginPage(model.UserName, false);</span><br><span class="line">		return Redirect(FormsAuthentication.GetRedirectUrl(model.UserName, false));</span><br><span class="line">	&#125;</span><br><span class="line">	[AllowAnonymous]</span><br><span class="line">       public ActionResult Logout()</span><br><span class="line">       &#123;</span><br><span class="line">           Session.Abandon();</span><br><span class="line">           FormsAuthentication.SignOut();</span><br><span class="line">           return RedirectToAction(&quot;Login&quot;, &quot;Home&quot;);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<p>In Home/Login.cshtml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@using (Html.BeginForm(&quot;Login&quot;, &quot;Home&quot;, new &#123; ReturnUrl&#x3D;Model.ReturnUrl &#125;, FormMethod.Post, new &#123; autocomplete&#x3D;&quot;off&quot; &#125;))</span><br><span class="line">&#123;</span><br><span class="line">  @Html.TextBoxFor(m &#x3D;&gt; m.UserName)</span><br><span class="line">  @Html.ValidationMessageFor(m &#x3D;&gt; m.UserName)</span><br><span class="line">  &lt;br &#x2F;&gt;</span><br><span class="line">  @Html.PasswordFor(m &#x3D;&gt; m.Password)</span><br><span class="line">  @Html.ValidationMessageFor(m &#x3D;&gt; m.Password)</span><br><span class="line">  &lt;br &#x2F;&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;Login&quot; &#x2F;&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/c/" rel="tag"># c#</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/05/01/2014/05/a-mixedmode-assembly-exception-message-been-showed/" rel="prev" title="A “mixed-mode assembly exception” Message been showed.">
+      <i class="fa fa-chevron-left"></i> A “mixed-mode assembly exception” Message been showed.
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/" rel="next" title="Unit Testing ASP.NET Web Site Project code stored in APP_Code">
+      Unit Testing ASP.NET Web Site Project code stored in APP_Code <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr-Brain"
+      src="/images/mr-brain.png">
+  <p class="site-author-name" itemprop="name">Mr-Brain</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://www.nuget.org/packages/T1.Standard/" title="Nuget T1.Standard → https:&#x2F;&#x2F;www.nuget.org&#x2F;packages&#x2F;T1.Standard&#x2F;" rel="noopener" target="_blank"><i class="fab fa-nuget fa-fw"></i>Nuget T1.Standard</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr-Brain</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
