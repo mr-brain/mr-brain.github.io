@@ -634,20 +634,6 @@
 
   
   <url>
-    <loc>http://example.com/tags/C/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/VM/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/tags/T-SQL/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
@@ -670,6 +656,13 @@
   
   <url>
     <loc>http://example.com/tags/Windows/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/C/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -760,14 +753,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/VS-NET/</loc>
+    <loc>http://example.com/tags/window/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/window/</loc>
+    <loc>http://example.com/tags/VS-NET/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -802,6 +795,20 @@
   </url>
   
   <url>
+    <loc>http://example.com/tags/VM/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/hexo/</loc>
+    <lastmod>2020-09-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/Javascript/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
@@ -817,13 +824,6 @@
   
   <url>
     <loc>http://example.com/tags/VSCode/</loc>
-    <lastmod>2020-09-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/hexo/</loc>
     <lastmod>2020-09-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
