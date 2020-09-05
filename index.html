@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+<meta name="google-site-verification" content="dOYdAhQf3e0cENjlDUSq-BI2mNhX7mbvohGZX6GVNo4" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.1.1">
@@ -591,6 +592,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2016/04/01/2016/04/install-aspnet5-dotnet-core1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/04/01/2016/04/install-aspnet5-dotnet-core1/" class="post-title-link" itemprop="url">Install ASP.NET 5 (.NET Core 1)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:27:00" itemprop="dateModified" datetime="2020-09-05T18:27:00+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Install <a target="_blank" rel="noopener" href="https://go.microsoft.com/fwlink/?LinkId=627627">ASP.NET 5</a></p>
+<p>Enable the ASP.NET 5 command-line tools. Open a command-prompt and run:</p>
+<blockquote>
+<p>dnvm upgrade</p>
+</blockquote>
+<p>This will make the default .NET Execution Environment (DNX) active on the path.</p>
+<p>On Windows 7 and Windows Server 2008 R2 you will also need to install the <a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual C++ Redistributable for Visual Studio 2012 Update 4.</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@powershell -NoProfile -ExecutionPolicy unrestricted -Command &quot;&amp;&#123;$Branch&#x3D;&#39;dev&#39;;iex ((new-object net.webclient).DownloadString(&#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;aspnet&#x2F;Home&#x2F;dev&#x2F;dnvminstall.ps1&#39;))&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Once this step is complete you should be able to run dnvm and see some help text.</p>
+<p>Use DNVM to install DNX for .NET Core:</p>
+<blockquote>
+<pre><code>dnvm upgrade -r coreclr</code></pre>
+</blockquote>
+<p>Use DNVM to install DNX for the full .NET Framework:</p>
+<blockquote>
+<pre><code>dnvm upgrade -r clr</code></pre>
+</blockquote>
+<p>Install the requested DNX version from the feed, create console application using .NET Core</p>
+<blockquote>
+<pre><code>dnvm install -a x64 -r coreclr 1.0.0-rc1-final</code></pre>
+</blockquote>
+<p>Install generator</p>
+<blockquote>
+<pre><code>npm install -g yo generator-aspnet</code></pre>
+</blockquote>
+<p>Create Develop folder and generate console project</p>
+<blockquote>
+<pre><code>yo aspnet</code></pre>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2016/04/01/2016/04/install-git-server-on-windows/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -769,6 +864,79 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2016/04/01/2016/04/minify-javascript-in-vsnet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/04/01/2016/04/minify-javascript-in-vsnet/" class="post-title-link" itemprop="url">how do I minify Javascript and CSS in the vs.net 2013 post-build step</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 17:38:55" itemprop="dateModified" datetime="2020-09-05T17:38:55+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Want Ajax Minifier to be packaged with your project? From the Ajax Minifier install folder, you can move AjaxMin.dll and AjaxMinTask.dll directly into your source directory. I put them in my App_Data folder. Once they’re somewhere in your source, in Visual Studio right-click them, select Include in Project, and also change their Build Action property to None.</p>
+<p>Then in the code I included above, change</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Import Project&#x3D;&quot;$(MSBuildExtensionsPath)\Microsoft\Microsoft Ajax Minifier\ajaxmin.tasks&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>to</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;UsingTask TaskName&#x3D;&quot;AjaxMin&quot; AssemblyFile&#x3D;&quot;$(MSBuildProjectDirectory)\App_Data\AjaxMinTask.dll&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Done.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;UsingTask TaskName&#x3D;&quot;AjaxMin&quot; AssemblyFile&#x3D;&quot;$(MSBuildProjectDirectory)\DLL\AjaxMinTask.dll&quot; &#x2F;&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;AfterBuild&quot; Condition&#x3D;&quot;&#39;$(ConfigurationName)&#39;&#x3D;&#x3D;&#39;Debug&#39;&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;JS Include&#x3D;&quot;app\**\*.js&quot; Exclude&#x3D;&quot;**\*.min.js;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">      &lt;CSS Include&#x3D;&quot;app\**\*.css&quot; Exclude&#x3D;&quot;**\*.min.css;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">    &lt;AjaxMin JsSourceFiles&#x3D;&quot;@(JS)&quot; JsSourceExtensionPattern&#x3D;&quot;\.js$&quot; JsTargetExtension&#x3D;&quot;-min.js&quot; CssSourceFiles&#x3D;&quot;@(CSS)&quot; CssSourceExtensionPattern&#x3D;&quot;\.css$&quot; CssTargetExtension&#x3D;&quot;-min.css&quot; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">  &lt;PropertyGroup&gt;</span><br><span class="line">    &lt;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">		CustomCollectFiles;</span><br><span class="line">		$(CopyAllFilesToSingleFolderForPackageDependsOn);</span><br><span class="line">	  &lt;&#x2F;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">  &lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CustomCollectFiles&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;MinJS Include&#x3D;&quot;**\*.jsMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinJS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).js&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">      &lt;MinCSS Include&#x3D;&quot;**\*.cssMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinCSS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).css&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2016/04/01/2016/04/integrating-gulp-into-vs-net/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -826,173 +994,6 @@
 
 <p>HOOKING INTO WEB DEPLOY</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;PropertyGroup&gt;</span><br><span class="line">  &lt;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">    $(CopyAllFilesToSingleFolderForPackageDependsOn);</span><br><span class="line">    CollectGulpOutput;</span><br><span class="line">  &lt;&#x2F;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">  &lt;CopyAllFilesToSingleFolderForMsdeployDependsOn&gt;</span><br><span class="line">    $(CopyAllFilesToSingleFolderForMsdeployDependsOn);</span><br><span class="line">    CollectGulpOutput;</span><br><span class="line">  &lt;&#x2F;CopyAllFilesToSingleFolderForMsdeployDependsOn&gt;</span><br><span class="line">&lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">&lt;Target Name&#x3D;&quot;CollectGulpOutput&quot;&gt;</span><br><span class="line">  &lt;ItemGroup&gt;</span><br><span class="line">    &lt;_CustomFiles Include&#x3D;&quot;build\**\*&quot; &#x2F;&gt;</span><br><span class="line">    &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(_CustomFiles.Identity)&quot;&gt;</span><br><span class="line">      &lt;DestinationRelativePath&gt;build\%(RecursiveDir)%(Filename)%(Extension)&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">    &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">  &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;Message Text&#x3D;&quot;CollectGulpOutput list: %(_CustomFiles.Identity)&quot; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2016/04/01/2016/04/install-aspnet5-dotnet-core1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/04/01/2016/04/install-aspnet5-dotnet-core1/" class="post-title-link" itemprop="url">Install ASP.NET 5 (.NET Core 1)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:27:00" itemprop="dateModified" datetime="2020-09-05T18:27:00+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Install <a target="_blank" rel="noopener" href="https://go.microsoft.com/fwlink/?LinkId=627627">ASP.NET 5</a></p>
-<p>Enable the ASP.NET 5 command-line tools. Open a command-prompt and run:</p>
-<blockquote>
-<p>dnvm upgrade</p>
-</blockquote>
-<p>This will make the default .NET Execution Environment (DNX) active on the path.</p>
-<p>On Windows 7 and Windows Server 2008 R2 you will also need to install the <a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual C++ Redistributable for Visual Studio 2012 Update 4.</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@powershell -NoProfile -ExecutionPolicy unrestricted -Command &quot;&amp;&#123;$Branch&#x3D;&#39;dev&#39;;iex ((new-object net.webclient).DownloadString(&#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;aspnet&#x2F;Home&#x2F;dev&#x2F;dnvminstall.ps1&#39;))&#125;&quot;</span><br></pre></td></tr></table></figure>
-
-<p>Once this step is complete you should be able to run dnvm and see some help text.</p>
-<p>Use DNVM to install DNX for .NET Core:</p>
-<blockquote>
-<pre><code>dnvm upgrade -r coreclr</code></pre>
-</blockquote>
-<p>Use DNVM to install DNX for the full .NET Framework:</p>
-<blockquote>
-<pre><code>dnvm upgrade -r clr</code></pre>
-</blockquote>
-<p>Install the requested DNX version from the feed, create console application using .NET Core</p>
-<blockquote>
-<pre><code>dnvm install -a x64 -r coreclr 1.0.0-rc1-final</code></pre>
-</blockquote>
-<p>Install generator</p>
-<blockquote>
-<pre><code>npm install -g yo generator-aspnet</code></pre>
-</blockquote>
-<p>Create Develop folder and generate console project</p>
-<blockquote>
-<pre><code>yo aspnet</code></pre>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2016/04/01/2016/04/minify-javascript-in-vsnet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/04/01/2016/04/minify-javascript-in-vsnet/" class="post-title-link" itemprop="url">how do I minify Javascript and CSS in the vs.net 2013 post-build step</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:38:55" itemprop="dateModified" datetime="2020-09-05T17:38:55+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Want Ajax Minifier to be packaged with your project? From the Ajax Minifier install folder, you can move AjaxMin.dll and AjaxMinTask.dll directly into your source directory. I put them in my App_Data folder. Once they’re somewhere in your source, in Visual Studio right-click them, select Include in Project, and also change their Build Action property to None.</p>
-<p>Then in the code I included above, change</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Import Project&#x3D;&quot;$(MSBuildExtensionsPath)\Microsoft\Microsoft Ajax Minifier\ajaxmin.tasks&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>to</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;UsingTask TaskName&#x3D;&quot;AjaxMin&quot; AssemblyFile&#x3D;&quot;$(MSBuildProjectDirectory)\App_Data\AjaxMinTask.dll&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>Done.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;UsingTask TaskName&#x3D;&quot;AjaxMin&quot; AssemblyFile&#x3D;&quot;$(MSBuildProjectDirectory)\DLL\AjaxMinTask.dll&quot; &#x2F;&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;AfterBuild&quot; Condition&#x3D;&quot;&#39;$(ConfigurationName)&#39;&#x3D;&#x3D;&#39;Debug&#39;&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;JS Include&#x3D;&quot;app\**\*.js&quot; Exclude&#x3D;&quot;**\*.min.js;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">      &lt;CSS Include&#x3D;&quot;app\**\*.css&quot; Exclude&#x3D;&quot;**\*.min.css;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">    &lt;AjaxMin JsSourceFiles&#x3D;&quot;@(JS)&quot; JsSourceExtensionPattern&#x3D;&quot;\.js$&quot; JsTargetExtension&#x3D;&quot;-min.js&quot; CssSourceFiles&#x3D;&quot;@(CSS)&quot; CssSourceExtensionPattern&#x3D;&quot;\.css$&quot; CssTargetExtension&#x3D;&quot;-min.css&quot; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">  &lt;PropertyGroup&gt;</span><br><span class="line">    &lt;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">		CustomCollectFiles;</span><br><span class="line">		$(CopyAllFilesToSingleFolderForPackageDependsOn);</span><br><span class="line">	  &lt;&#x2F;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">  &lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CustomCollectFiles&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;MinJS Include&#x3D;&quot;**\*.jsMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinJS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).js&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">      &lt;MinCSS Include&#x3D;&quot;**\*.cssMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinCSS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).css&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
