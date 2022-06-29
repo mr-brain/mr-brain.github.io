@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://mr-brain.github.io/2022/06/28/2022/06/ParseCommandLine/</loc>
+    
+    <lastmod>2022-06-29</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/2022/06/05/2022/06/LinqToDataTableExtension/</loc>
+    
+    <lastmod>2022-06-29</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/2022/06/05/2022/06/TreeBuilder/</loc>
+    
+    <lastmod>2022-06-29</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://mr-brain.github.io/2016/03/01/2016/03/t1-tinyioc-example/</loc>
     
     <lastmod>2020-09-05</lastmod>
@@ -634,13 +655,6 @@
 
   
   <url>
-    <loc>http://mr-brain.github.io/tags/C/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://mr-brain.github.io/tags/VM/</loc>
     <lastmod>2022-06-29</lastmod>
     <changefreq>daily</changefreq>
@@ -655,48 +669,6 @@
   </url>
   
   <url>
-    <loc>http://mr-brain.github.io/tags/T-SQL/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://mr-brain.github.io/tags/dotnet/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://mr-brain.github.io/tags/vs-net/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://mr-brain.github.io/tags/sqlserver/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://mr-brain.github.io/tags/iis/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://mr-brain.github.io/tags/t-sql/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://mr-brain.github.io/tags/VMWare/</loc>
     <lastmod>2022-06-29</lastmod>
     <changefreq>daily</changefreq>
@@ -704,14 +676,14 @@
   </url>
   
   <url>
-    <loc>http://mr-brain.github.io/tags/javascript/</loc>
+    <loc>http://mr-brain.github.io/tags/T-SQL/</loc>
     <lastmod>2022-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://mr-brain.github.io/tags/7-zip/</loc>
+    <loc>http://mr-brain.github.io/tags/C/</loc>
     <lastmod>2022-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -725,6 +697,20 @@
   </url>
   
   <url>
+    <loc>http://mr-brain.github.io/tags/vs-net/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/tags/dotnet/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://mr-brain.github.io/tags/nuget/</loc>
     <lastmod>2022-06-29</lastmod>
     <changefreq>daily</changefreq>
@@ -732,35 +718,14 @@
   </url>
   
   <url>
+    <loc>http://mr-brain.github.io/tags/javascript/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://mr-brain.github.io/tags/powershell/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://mr-brain.github.io/tags/typescript/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://mr-brain.github.io/tags/google/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://mr-brain.github.io/tags/window/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://mr-brain.github.io/tags/VS-NET/</loc>
     <lastmod>2022-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -781,6 +746,20 @@
   </url>
   
   <url>
+    <loc>http://mr-brain.github.io/tags/typescript/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/tags/google/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://mr-brain.github.io/tags/Typescript/</loc>
     <lastmod>2022-06-29</lastmod>
     <changefreq>daily</changefreq>
@@ -788,7 +767,14 @@
   </url>
   
   <url>
-    <loc>http://mr-brain.github.io/tags/git/</loc>
+    <loc>http://mr-brain.github.io/tags/Windows/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/tags/aspnet/</loc>
     <lastmod>2022-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -816,13 +802,6 @@
   </url>
   
   <url>
-    <loc>http://mr-brain.github.io/tags/Windows/</loc>
-    <lastmod>2022-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://mr-brain.github.io/tags/VSCode/</loc>
     <lastmod>2022-06-29</lastmod>
     <changefreq>daily</changefreq>
@@ -830,12 +809,68 @@
   </url>
   
   <url>
-    <loc>http://mr-brain.github.io/tags/aspnet/</loc>
+    <loc>http://mr-brain.github.io/tags/git/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/tags/t1/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/tags/sqlserver/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/tags/t-sql/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/tags/iis/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/tags/7-zip/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/tags/window/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://mr-brain.github.io/tags/VS-NET/</loc>
     <lastmod>2022-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
 
+  
+  <url>
+    <loc>http://mr-brain.github.io/categories/t1-standard/</loc>
+    <lastmod>2022-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
   
 </urlset>

@@ -155,6 +155,238 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2022/06/28/2022/06/ParseCommandLine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/28/2022/06/ParseCommandLine/" class="post-title-link" itemprop="url">Parse Line Str to Command Args</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-28 17:00:00" itemprop="dateCreated datePublished" datetime="2022-06-28T17:00:00+08:00">2022-06-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-29 09:00:54" itemprop="dateModified" datetime="2022-06-29T09:00:54+08:00">2022-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/t1-standard/" itemprop="url" rel="index"><span itemprop="name">t1.standard</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="parse-line-str-to-command-args"><a href="#parse-line-str-to-command-args" class="headerlink" title="parse line str to command args"></a>parse line str to command args</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var commandLine &#x3D; @&quot;1 2&quot;;</span><br><span class="line"></span><br><span class="line">var args &#x3D; commandLine</span><br><span class="line">	.ParseCommandArgs()</span><br><span class="line">	.ToArray();</span><br><span class="line"></span><br><span class="line">var expected &#x3D; new[]</span><br><span class="line">&#123;</span><br><span class="line">	&quot;1&quot;,</span><br><span class="line">	&quot;2&quot;</span><br><span class="line">&#125;;</span><br><span class="line">expected.ToExpectedObject().ShouldEqual(args);</span><br></pre></td></tr></table></figure>
+
+
+<p>ParseCommandArgs will cut the string according to single or double quotation marks.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var commandLine &#x3D; @&quot;1 &#39;2 3&#39;&quot;;</span><br><span class="line"></span><br><span class="line">var args &#x3D; commandLine</span><br><span class="line">	.ParseCommandArgs()</span><br><span class="line">	.ToArray();</span><br><span class="line"></span><br><span class="line">var expected &#x3D; new[]</span><br><span class="line">&#123;</span><br><span class="line">	&quot;1&quot;,</span><br><span class="line">	&quot;&#39;2 3&#39;&quot;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">expected.ToExpectedObject().ShouldEqual(args);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2022/06/05/2022/06/LinqToDataTableExtension/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/05/2022/06/LinqToDataTableExtension/" class="post-title-link" itemprop="url">Linq To DataTable</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-05 14:00:00" itemprop="dateCreated datePublished" datetime="2022-06-05T14:00:00+08:00">2022-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-29 08:55:11" itemprop="dateModified" datetime="2022-06-29T08:55:11+08:00">2022-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/t1-standard/" itemprop="url" rel="index"><span itemprop="name">t1.standard</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="T1-Standard-Linq-LinqToDataTableExtension"><a href="#T1-Standard-Linq-LinqToDataTableExtension" class="headerlink" title="T1.Standard.Linq.LinqToDataTableExtension"></a>T1.Standard.Linq.LinqToDataTableExtension</h2><h3 id="string-object-Dictionary-List-to-DataTable-Sample"><a href="#string-object-Dictionary-List-to-DataTable-Sample" class="headerlink" title="string/object Dictionary List to DataTable Sample"></a>string/object Dictionary List to DataTable Sample</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var dictList &#x3D; new List&lt;Dictionary&lt;string, object&gt;&gt; &#123;</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 1&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Jack&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 2&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Flash&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var datatable &#x3D; dictList.ToDataTable();</span><br></pre></td></tr></table></figure>
+
+<h3 id="string-object-Dictionary-List-Deep-to-DataTable-Sample"><a href="#string-object-Dictionary-List-Deep-to-DataTable-Sample" class="headerlink" title="string/object Dictionary List Deep to DataTable Sample"></a>string/object Dictionary List Deep to DataTable Sample</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var dictList &#x3D; new List&lt;Dictionary&lt;string, object&gt;&gt; &#123;</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 1&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Jack&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;,</span><br><span class="line">		&#123;&quot;Price&quot;, null&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 2&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Flash&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;,</span><br><span class="line">		&#123;&quot;Price&quot;, 123m&#125;,</span><br><span class="line">		&#123;&quot;Home&quot;, null&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var datatable &#x3D; dictList.DeepToDataTable();</span><br><span class="line"></span><br><span class="line">Assert.Equal(typeof(decimal), dt.Columns[&quot;Price&quot;]!.DataType);</span><br><span class="line">Assert.Equal(typeof(string), dt.Columns[&quot;Home&quot;]!.DataType);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2022/06/05/2022/06/TreeBuilder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/05/2022/06/TreeBuilder/" class="post-title-link" itemprop="url">Tree Builder</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-05 14:00:00" itemprop="dateCreated datePublished" datetime="2022-06-05T14:00:00+08:00">2022-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-29 08:50:55" itemprop="dateModified" datetime="2022-06-29T08:50:55+08:00">2022-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/t1-standard/" itemprop="url" rel="index"><span itemprop="name">t1.standard</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="T1-Standard-Collections-TreeBuilder"><a href="#T1-Standard-Collections-TreeBuilder" class="headerlink" title="T1.Standard.Collections.TreeBuilder"></a>T1.Standard.Collections.TreeBuilder</h2><h3 id="ReduceTree"><a href="#ReduceTree" class="headerlink" title="ReduceTree"></a>ReduceTree</h3><p>Universal way to convert List of items to Tree, Build the tree as completely as possible</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">var userList &#x3D; new[]</span><br><span class="line">&#123;</span><br><span class="line">	 new MyUser &#123; Path &#x3D; &quot;&quot;, Name &#x3D; &quot;A1&quot; &#125;,</span><br><span class="line">	 new MyUser &#123; Path &#x3D; &quot;&quot;, Name &#x3D; &quot;A2&quot; &#125;,</span><br><span class="line">	 new MyUser &#123; Path &#x3D; &quot;demo&quot;, Name &#x3D; &quot;B1&quot; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var actual &#x3D; _treeBuilder.ReduceTree(userList,</span><br><span class="line">	 x &#x3D;&gt; x.Path,</span><br><span class="line">	 x &#x3D;&gt; _treeBuilder.GetParentPath(x),</span><br><span class="line">	 x &#x3D;&gt; _treeBuilder.QueryParentPaths(x.Path)</span><br><span class="line">).ToList();</span><br><span class="line"></span><br><span class="line">var expected &#x3D; new List&lt;TreeBuilder.TreeItem&lt;MyUser, string&gt;&gt;</span><br><span class="line">&#123;</span><br><span class="line">	 new TreeBuilder.TreeItem&lt;MyUser, string&gt;()</span><br><span class="line">	 &#123;</span><br><span class="line">		  Id &#x3D; &quot;&quot;,</span><br><span class="line">		  ParentId &#x3D; null,</span><br><span class="line">		  Item &#x3D; new MyUser &#123;Path &#x3D; &quot;&quot;, Name &#x3D; &quot;A1&quot;&#125;,</span><br><span class="line">		  Children &#x3D; new List&lt;TreeBuilder.TreeItem&lt;MyUser, string&gt;&gt;()</span><br><span class="line">	 &#125;,</span><br><span class="line">	 new TreeBuilder.TreeItem&lt;MyUser, string&gt;()</span><br><span class="line">	 &#123;</span><br><span class="line">		  Id &#x3D; &quot;&quot;,</span><br><span class="line">		  ParentId &#x3D; null,</span><br><span class="line">		  Item &#x3D; new MyUser &#123;Path &#x3D; &quot;&quot;, Name &#x3D; &quot;A2&quot;&#125;,</span><br><span class="line">		  Children &#x3D; new List&lt;TreeBuilder.TreeItem&lt;MyUser, string&gt;&gt;()</span><br><span class="line">	 &#125;,</span><br><span class="line">	 new TreeBuilder.TreeItem&lt;MyUser, string&gt;()</span><br><span class="line">	 &#123;</span><br><span class="line">		  Id &#x3D; &quot;demo&quot;,</span><br><span class="line">		  ParentId &#x3D; null,</span><br><span class="line">		  Item &#x3D; new MyUser &#123;Path &#x3D; &quot;demo&quot;, Name &#x3D; &quot;B1&quot;&#125;,</span><br><span class="line">		  Children &#x3D; new List&lt;TreeBuilder.TreeItem&lt;MyUser, string&gt;&gt;()</span><br><span class="line">	 &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">expected.ToExpectedObject().ShouldEqual(actual);</span><br></pre></td></tr></table></figure>
+
+<h3 id="GenerateTree"><a href="#GenerateTree" class="headerlink" title="GenerateTree"></a>GenerateTree</h3><p>This will only create a fully structured tree</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var userList &#x3D; new[]</span><br><span class="line">&#123;</span><br><span class="line">	 new MyUser &#123;Path &#x3D; &quot;&quot;, Name &#x3D; &quot;A1&quot;&#125;,</span><br><span class="line">	 new MyUser &#123;Path &#x3D; &quot;demo&#x2F;name&quot;, Name &#x3D; &quot;C1&quot;&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var actual &#x3D; _treeBuilder.GenerateTree(userList,</span><br><span class="line">	 x &#x3D;&gt; x.Path,</span><br><span class="line">	 x &#x3D;&gt; _treeBuilder.GetParentPath(x.Path)</span><br><span class="line">).ToList();</span><br><span class="line"></span><br><span class="line">var expected &#x3D; new List&lt;TreeBuilder.TreeItem&lt;MyUser, string&gt;&gt;</span><br><span class="line">&#123;</span><br><span class="line">	 new TreeBuilder.TreeItem&lt;MyUser, string&gt;()</span><br><span class="line">	 &#123;</span><br><span class="line">		  Id &#x3D; &quot;&quot;,</span><br><span class="line">		  ParentId &#x3D; null,</span><br><span class="line">		  Item &#x3D; new MyUser &#123;Path &#x3D; &quot;&quot;, Name &#x3D; &quot;A1&quot;&#125;,</span><br><span class="line">		  Children &#x3D; new List&lt;TreeBuilder.TreeItem&lt;MyUser, string&gt;&gt;()</span><br><span class="line">	 &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">expected.ToExpectedObject().ShouldEqual(actual);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2020/09/05/2020/09/Convert-DataTable-To-Object/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -202,94 +434,6 @@
 
 <p>You can also convert to ‘IEnumerable&lt;object&gt;’</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dataTable = <span class="keyword">new</span> DataTable();</span><br><span class="line">IEnumerable&lt;<span class="keyword">object</span>&gt; list = dataTable.Cast(<span class="keyword">typeof</span>(User));</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/05/01/2016/05/setting-up-visual-studio-code/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/05/01/2016/05/setting-up-visual-studio-code/" class="post-title-link" itemprop="url">Setting up a TypeScript + Visual Studio Code development environment</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-05-01T08:00:00+08:00">2016-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:21:12" itemprop="dateModified" datetime="2020-09-05T18:21:12+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>Download and installing Visual Studio Code</li>
-<li>Download node.js</li>
-</ul>
-<p>Open VS Code when you are ready and use Shift + Command + p to access the command panel.<br>Go ahead and type “install extensions”: and type</p>
-<blockquote>
-<p>tslint</p>
-</blockquote>
-<p>go to node.js cmd</p>
-<blockquote>
-<p>npm install -g tslint</p>
-</blockquote>
-<p>install VS code extensions</p>
-<blockquote>
-<p>Wallaby.js</p>
-</blockquote>
-<hr>
-<p>Create a new folder for your project and create a new package.json file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir ts-vscode-boilerplate</span><br><span class="line">$ cd ts-vscode-boilerplate</span><br><span class="line">$ npm init</span><br></pre></td></tr></table></figure>
-
-<p>We are now ready to install the third party dependencies:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">npm install  --save-dev browser-sync</span><br><span class="line">npm install  --save-dev browserify</span><br><span class="line">npm install  --save-dev chai</span><br><span class="line">npm install  --save-dev gulp</span><br><span class="line">npm install  --save-dev gulp-istanbul</span><br><span class="line">npm install  --save-dev gulp-mocha</span><br><span class="line">npm install  --save-dev gulp-sourcemaps</span><br><span class="line">npm install  --save-dev gulp-tslint</span><br><span class="line">npm install  --save-dev gulp-typescript</span><br><span class="line">npm install  --save-dev gulp-uglify</span><br><span class="line">npm install  --save-dev run-sequence</span><br><span class="line">npm install  --save-dev tslint</span><br><span class="line">npm install  --save-dev typescript</span><br><span class="line">npm install  --save-dev vinyl-buffer</span><br><span class="line">npm install  --save-dev vinyl-source-stream</span><br></pre></td></tr></table></figure>
-
-<p>Configuring your VS Code preferences<br>Click on 「Workspace Settings」. Two files should be displayed on screen:</p>
 
       
     </div>
@@ -407,6 +551,94 @@
 <blockquote>
 <p>$ npm run webpack &amp;&amp; npm start</p>
 </blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/05/01/2016/05/setting-up-visual-studio-code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/01/2016/05/setting-up-visual-studio-code/" class="post-title-link" itemprop="url">Setting up a TypeScript + Visual Studio Code development environment</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-05-01T08:00:00+08:00">2016-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:21:12" itemprop="dateModified" datetime="2020-09-05T18:21:12+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>Download and installing Visual Studio Code</li>
+<li>Download node.js</li>
+</ul>
+<p>Open VS Code when you are ready and use Shift + Command + p to access the command panel.<br>Go ahead and type “install extensions”: and type</p>
+<blockquote>
+<p>tslint</p>
+</blockquote>
+<p>go to node.js cmd</p>
+<blockquote>
+<p>npm install -g tslint</p>
+</blockquote>
+<p>install VS code extensions</p>
+<blockquote>
+<p>Wallaby.js</p>
+</blockquote>
+<hr>
+<p>Create a new folder for your project and create a new package.json file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir ts-vscode-boilerplate</span><br><span class="line">$ cd ts-vscode-boilerplate</span><br><span class="line">$ npm init</span><br></pre></td></tr></table></figure>
+
+<p>We are now ready to install the third party dependencies:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">npm install  --save-dev browser-sync</span><br><span class="line">npm install  --save-dev browserify</span><br><span class="line">npm install  --save-dev chai</span><br><span class="line">npm install  --save-dev gulp</span><br><span class="line">npm install  --save-dev gulp-istanbul</span><br><span class="line">npm install  --save-dev gulp-mocha</span><br><span class="line">npm install  --save-dev gulp-sourcemaps</span><br><span class="line">npm install  --save-dev gulp-tslint</span><br><span class="line">npm install  --save-dev gulp-typescript</span><br><span class="line">npm install  --save-dev gulp-uglify</span><br><span class="line">npm install  --save-dev run-sequence</span><br><span class="line">npm install  --save-dev tslint</span><br><span class="line">npm install  --save-dev typescript</span><br><span class="line">npm install  --save-dev vinyl-buffer</span><br><span class="line">npm install  --save-dev vinyl-source-stream</span><br></pre></td></tr></table></figure>
+
+<p>Configuring your VS Code preferences<br>Click on 「Workspace Settings」. Two files should be displayed on screen:</p>
 
       
     </div>
@@ -687,100 +919,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/install-aspnet5-dotnet-core1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/04/01/2016/04/install-aspnet5-dotnet-core1/" class="post-title-link" itemprop="url">Install ASP.NET 5 (.NET Core 1)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:27:00" itemprop="dateModified" datetime="2020-09-05T18:27:00+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Install <a target="_blank" rel="noopener" href="https://go.microsoft.com/fwlink/?LinkId=627627">ASP.NET 5</a></p>
-<p>Enable the ASP.NET 5 command-line tools. Open a command-prompt and run:</p>
-<blockquote>
-<p>dnvm upgrade</p>
-</blockquote>
-<p>This will make the default .NET Execution Environment (DNX) active on the path.</p>
-<p>On Windows 7 and Windows Server 2008 R2 you will also need to install the <a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual C++ Redistributable for Visual Studio 2012 Update 4.</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@powershell -NoProfile -ExecutionPolicy unrestricted -Command &quot;&amp;&#123;$Branch&#x3D;&#39;dev&#39;;iex ((new-object net.webclient).DownloadString(&#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;aspnet&#x2F;Home&#x2F;dev&#x2F;dnvminstall.ps1&#39;))&#125;&quot;</span><br></pre></td></tr></table></figure>
-
-<p>Once this step is complete you should be able to run dnvm and see some help text.</p>
-<p>Use DNVM to install DNX for .NET Core:</p>
-<blockquote>
-<pre><code>dnvm upgrade -r coreclr</code></pre>
-</blockquote>
-<p>Use DNVM to install DNX for the full .NET Framework:</p>
-<blockquote>
-<pre><code>dnvm upgrade -r clr</code></pre>
-</blockquote>
-<p>Install the requested DNX version from the feed, create console application using .NET Core</p>
-<blockquote>
-<pre><code>dnvm install -a x64 -r coreclr 1.0.0-rc1-final</code></pre>
-</blockquote>
-<p>Install generator</p>
-<blockquote>
-<pre><code>npm install -g yo generator-aspnet</code></pre>
-</blockquote>
-<p>Create Develop folder and generate console project</p>
-<blockquote>
-<pre><code>yo aspnet</code></pre>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/install-net-core/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -869,159 +1007,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/integrating-gulp-into-vs-net/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/04/01/2016/04/integrating-gulp-into-vs-net/" class="post-title-link" itemprop="url">Integrating gulp into VS.NET</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:27:49" itemprop="dateModified" datetime="2020-09-05T18:27:49+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$npm install -g gulp</span><br><span class="line">$npm install gulp-autoprefixer --save-dev</span><br></pre></td></tr></table></figure>
-
-<p>Create gulpfile.js file in root project path folder</p>
-<p><strong>EXTENDING OUR .CSPROJ WITH CUSTOM TARGETS</strong></p>
-<p>Manually edit your .csproj file and at the bottom (must be after all Import lines) we’re going to add some new content.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;PropertyGroup&gt;</span><br><span class="line">  &lt;CompileDependsOn&gt;</span><br><span class="line">    $(CompileDependsOn);</span><br><span class="line">    GulpBuild;</span><br><span class="line">  &lt;&#x2F;CompileDependsOn&gt;</span><br><span class="line">&lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">&lt;Target Name&#x3D;&quot;GulpBuild&quot; DependsOnTargets&#x3D;&quot;CompileTypeScript&quot;&gt;</span><br><span class="line">  &lt;Exec Command&#x3D;&quot;npm install&quot; &#x2F;&gt;</span><br><span class="line">  &lt;Exec Command&#x3D;&quot;gulp&quot; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
-
-<p>What about triggering a gulp cleanup script when we clean our solution in Visual Studio? It’s a very similar extension:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;PropertyGroup&gt;</span><br><span class="line">  &lt;CleanDependsOn&gt;</span><br><span class="line">    $(CleanDependsOn);</span><br><span class="line">    GulpClean</span><br><span class="line">  &lt;&#x2F;CleanDependsOn&gt;</span><br><span class="line">&lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">&lt;Target Name&#x3D;&quot;GulpClean&quot;&gt;</span><br><span class="line">  &lt;Exec Command&#x3D;&quot;gulp clean&quot; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
-
-<p>HOOKING INTO WEB DEPLOY</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;PropertyGroup&gt;</span><br><span class="line">  &lt;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">    $(CopyAllFilesToSingleFolderForPackageDependsOn);</span><br><span class="line">    CollectGulpOutput;</span><br><span class="line">  &lt;&#x2F;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">  &lt;CopyAllFilesToSingleFolderForMsdeployDependsOn&gt;</span><br><span class="line">    $(CopyAllFilesToSingleFolderForMsdeployDependsOn);</span><br><span class="line">    CollectGulpOutput;</span><br><span class="line">  &lt;&#x2F;CopyAllFilesToSingleFolderForMsdeployDependsOn&gt;</span><br><span class="line">&lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">&lt;Target Name&#x3D;&quot;CollectGulpOutput&quot;&gt;</span><br><span class="line">  &lt;ItemGroup&gt;</span><br><span class="line">    &lt;_CustomFiles Include&#x3D;&quot;build\**\*&quot; &#x2F;&gt;</span><br><span class="line">    &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(_CustomFiles.Identity)&quot;&gt;</span><br><span class="line">      &lt;DestinationRelativePath&gt;build\%(RecursiveDir)%(Filename)%(Extension)&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">    &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">  &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;Message Text&#x3D;&quot;CollectGulpOutput list: %(_CustomFiles.Identity)&quot; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/minify-javascript-in-vsnet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/04/01/2016/04/minify-javascript-in-vsnet/" class="post-title-link" itemprop="url">how do I minify Javascript and CSS in the vs.net 2013 post-build step</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:38:55" itemprop="dateModified" datetime="2020-09-05T17:38:55+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Want Ajax Minifier to be packaged with your project? From the Ajax Minifier install folder, you can move AjaxMin.dll and AjaxMinTask.dll directly into your source directory. I put them in my App_Data folder. Once they’re somewhere in your source, in Visual Studio right-click them, select Include in Project, and also change their Build Action property to None.</p>
-<p>Then in the code I included above, change</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Import Project&#x3D;&quot;$(MSBuildExtensionsPath)\Microsoft\Microsoft Ajax Minifier\ajaxmin.tasks&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>to</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;UsingTask TaskName&#x3D;&quot;AjaxMin&quot; AssemblyFile&#x3D;&quot;$(MSBuildProjectDirectory)\App_Data\AjaxMinTask.dll&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>Done.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;UsingTask TaskName&#x3D;&quot;AjaxMin&quot; AssemblyFile&#x3D;&quot;$(MSBuildProjectDirectory)\DLL\AjaxMinTask.dll&quot; &#x2F;&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;AfterBuild&quot; Condition&#x3D;&quot;&#39;$(ConfigurationName)&#39;&#x3D;&#x3D;&#39;Debug&#39;&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;JS Include&#x3D;&quot;app\**\*.js&quot; Exclude&#x3D;&quot;**\*.min.js;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">      &lt;CSS Include&#x3D;&quot;app\**\*.css&quot; Exclude&#x3D;&quot;**\*.min.css;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">    &lt;AjaxMin JsSourceFiles&#x3D;&quot;@(JS)&quot; JsSourceExtensionPattern&#x3D;&quot;\.js$&quot; JsTargetExtension&#x3D;&quot;-min.js&quot; CssSourceFiles&#x3D;&quot;@(CSS)&quot; CssSourceExtensionPattern&#x3D;&quot;\.css$&quot; CssTargetExtension&#x3D;&quot;-min.css&quot; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">  &lt;PropertyGroup&gt;</span><br><span class="line">    &lt;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">		CustomCollectFiles;</span><br><span class="line">		$(CopyAllFilesToSingleFolderForPackageDependsOn);</span><br><span class="line">	  &lt;&#x2F;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">  &lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CustomCollectFiles&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;MinJS Include&#x3D;&quot;**\*.jsMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinJS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).js&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">      &lt;MinCSS Include&#x3D;&quot;**\*.cssMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinCSS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).css&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1089,12 +1078,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

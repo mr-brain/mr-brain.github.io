@@ -155,6 +155,221 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/03/01/2015/03/jasmine-errors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/03/01/2015/03/jasmine-errors/" class="post-title-link" itemprop="url">Jasmine Errors in VS.NET 2013</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-03-01T08:00:00+08:00">2015-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:32:18" itemprop="dateModified" datetime="2020-09-05T18:32:18+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>I get the following error:</p>
+<blockquote>
+<p>Script:<br>C:\Users\xxx\AppData\Local\Microsoft\VisualStudio\12.0\Extensions\2q5cdx5o.qzv\TestFiles\Jasmine\v2\jasmine.js</p>
+<p>Error: ‘null’ is not an object (evaluating ‘currentSpec.expect’) #665</p>
+</blockquote>
+<p>I find the root cause:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">describe(&quot;[TS]Test&quot;, function () &#123;</span><br><span class="line">  expect(&quot;&quot;).toBe(&quot;&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>I forgot to add the ‘it’ statement around my expect.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">describe(&quot;[TS]Test&quot;, function () &#123;</span><br><span class="line">  it(&quot;test&quot;,() &#x3D;&gt; &#123;</span><br><span class="line">	expect(&quot;&quot;).toBe(&quot;&quot;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/03/01/2015/03/how-to-combine-typescript-files/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/03/01/2015/03/how-to-combine-typescript-files/" class="post-title-link" itemprop="url">How to compile many typescript files in VS.NET 2013?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-03-01T08:00:00+08:00">2015-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:32:32" itemprop="dateModified" datetime="2020-09-05T18:32:32+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>We can add following MSBuild script in your csproj file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;Import Project&#x3D;&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot;</span><br><span class="line">    Condition&#x3D;&quot;Exists(&#39;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\$(TypeScriptToolsVersion)\Microsoft.TypeScript.targets&#39;)&quot; &#x2F;&gt;</span><br><span class="line">&lt;Target Name&#x3D;&quot;CombineT1&quot; BeforeTargets&#x3D;&quot;PrepareForBuild&quot;&gt;</span><br><span class="line">  &lt;ItemGroup&gt;</span><br><span class="line">    &lt;T1TypeScriptFiles Include&#x3D;&quot;$(projectDir)Scripts\t1\*.ts;&quot; Exclude&#x3D;&quot;$(projectDir)\Scripts\**\*.d.ts;&quot; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;WriteLinesToFile File&#x3D;&quot;$(projectDir)Scripts\t1\typescriptcompiler.input&quot; Lines&#x3D;&quot;@(T1TypeScriptFiles)&quot; Overwrite&#x3D;&quot;true&quot; Encoding&#x3D;&quot;UTF-8&quot; &#x2F;&gt;</span><br><span class="line">  &lt;Exec Command&#x3D;&quot;&quot;$(MSBuildProgramFiles32)\Microsoft SDKs\TypeScript\$(TypeScriptToolsVersion)\tsc&quot; --out $(projectDir)Scripts\t1\t1.js --target ES5 @$(projectDir)Scripts\t1\typescriptcompiler.input&quot; CustomErrorRegularExpression&#x3D;&quot;\.ts\([0-9]+,[0-9]+\):(.*)&quot;&gt;</span><br><span class="line">  &lt;&#x2F;Exec&gt;</span><br><span class="line">&lt;&#x2F;Target&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/03/01/2015/03/found-conflicts-between-different-versions-of-the-same-dependent-assemblies/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/03/01/2015/03/found-conflicts-between-different-versions-of-the-same-dependent-assemblies/" class="post-title-link" itemprop="url">Found conflicts between different versions of the same dependent assemblies</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-03-01T08:00:00+08:00">2015-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:33:25" itemprop="dateModified" datetime="2020-09-05T18:33:25+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Found conflicts between different versions of the same dependent assembly. Please set the “AutoGenerateBindingRedirects” property to true in the project file. For more information, see <a target="_blank" rel="noopener" href="http://go.microsoft.com/fwlink/?LinkId=294190">http://go.microsoft.com/fwlink/?LinkId=294190</a>.</p>
+</blockquote>
+<p>Considering there are about 50 references across the projects I have in this solution, that isn’t particularly helpful.</p>
+<p>There is an easy way to get the compiler to spit out more information.</p>
+<ol>
+<li>In Visual Studio 2013 go to Tools &gt; Options.</li>
+<li>Select Project and Solutions &gt; Build and Run.</li>
+<li>Find the drop down MSBuild project build output verbosity. Here you can configure MSBuild to give you more information. By default it will be set to “Minimal”. Change this to “Detailed’.</li>
+<li>Rebuild and view the Output window. Copy everything into notepad and search for the <strong>warning</strong> which should tell you which assemblies you need to look at.</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/03/01/2015/03/psexec-gets-stuck-on-licence-prompt-when-running-noninteractively/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -607,78 +822,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/02/01/2015/02/vsnet-found-the-webapi-reference-error/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/02/01/2015/02/vsnet-found-the-webapi-reference-error/" class="post-title-link" itemprop="url">VS.NET found the WebAPI reference error</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-02-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-02-01T08:00:00+08:00">2015-02-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:34:46" itemprop="dateModified" datetime="2020-09-05T18:34:46+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>I’ve created a MVC 4 Web API Application inside my solution, but I changed nuget package default location. So I’m getting 2 errors right now.</p>
-<blockquote>
-<p>‘System.Web.Http.HttpConfiguration’ does not contain a definition for ‘MapHttpAttributeRoutes’ and no extension method ‘MapHttpAttributeRoutes’ accepting a first argument of type ‘System.Web.Http.HttpConfiguration’ could be found (are you missing a using directive or an assembly reference?)</p>
-</blockquote>
-<p>A forced reinstall of WebAPI could do the job:</p>
-<blockquote>
-<pre><code>update-package microsoft.aspnet.webapi -reinstall -project yourProject</code></pre>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/02/01/2015/02/why-cant-i-get-the-jenkins-powershell-plugin-to-work/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -753,153 +896,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/01/01/2015/01/how-to-catch-httprequestvalidationexception/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/01/01/2015/01/how-to-catch-httprequestvalidationexception/" class="post-title-link" itemprop="url">How To Catch HttpRequestValidationException</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-01-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-01-01T08:00:00+08:00">2015-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:36:22" itemprop="dateModified" datetime="2020-09-05T18:36:22+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>If you’ve worked with ASP.NET for any length of time, you have worried about how to handle the Yellow Screen of Death. You know, the one that says:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpRequestValidationException: A potentially dangerous Request.Form value was detected from the client...</span><br></pre></td></tr></table></figure>
-
-<p>or something similar.</p>
-<p>The common refrain is turn off request validation, but there are times when you want to use the built-in validation functions. You just want a friendlier error for your user.</p>
-<p>This code could be better thought out, but here it is anyway:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">void Application_Error(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; Code that runs when an unhandled error occurs</span><br><span class="line">  Exception ex &#x3D; Server.GetLastError();</span><br><span class="line">  if (ex is HttpRequestValidationException)</span><br><span class="line">  &#123;</span><br><span class="line">    HttpWebRequest req &#x3D; (HttpWebRequest)WebRequest.Create(</span><br><span class="line">      &quot;http:&#x2F;&#x2F;&quot; + Request.Url.Authority + Request.ApplicationPath + &quot;&#x2F;HttpRequestValidationException.aspx&quot;);</span><br><span class="line">    HttpWebResponse response &#x3D; (HttpWebResponse)req.GetResponse();</span><br><span class="line"></span><br><span class="line">    Response.Clear();</span><br><span class="line">    Response.ClearHeaders();</span><br><span class="line">    for (int i &#x3D; 0; i &lt; response.Headers.Count; i++)</span><br><span class="line">      Response.AddHeader(response.Headers.GetKey(i), response.Headers.Get(i));</span><br><span class="line">    Response.StatusCode &#x3D; (int)response.StatusCode;</span><br><span class="line"></span><br><span class="line">    System.IO.Stream src &#x3D; response.GetResponseStream();</span><br><span class="line">    while (true) &#123;</span><br><span class="line">      int b &#x3D; src.ReadByte();</span><br><span class="line">      if (b &#x3D;&#x3D; -1) break;</span><br><span class="line">      Response.OutputStream.WriteByte((byte)b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    response.Close();</span><br><span class="line">    Response.End();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/01/01/2015/01/autofac-global-interface-interceptor-with-autofacextrasdynamicproxy2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/01/01/2015/01/autofac-global-interface-interceptor-with-autofacextrasdynamicproxy2/" class="post-title-link" itemprop="url">Autofac global interface interceptor with Autofac.Extras.DynamicProxy2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-01-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-01-01T08:00:00+08:00">2015-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:36:46" itemprop="dateModified" datetime="2020-09-05T18:36:46+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>You can’t really do EnableInterfaceInterceptors <em>globally</em>.</p>
-<p>But you can add the interceptors dynamically and it requires a little work. The way to go is to create a custom Autofac.Module that attaches to all component registrations. I’ll show it to you in an example.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public class InterceptorModule : Autofac.Module</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; This is a private constant from the Autofac.Extras.DynamicProxy2 assembly</span><br><span class="line">  &#x2F;&#x2F; that is needed to &quot;poke&quot; interceptors into registrations.</span><br><span class="line">  const string InterceptorsPropertyName &#x3D; &quot;Autofac.Extras.DynamicProxy2.RegistrationExtensions.InterceptorsPropertyName&quot;;</span><br><span class="line"></span><br><span class="line">  protected override void Load(ContainerBuilder builder)</span><br><span class="line">  &#123;</span><br><span class="line">    &#x2F;&#x2F; Register global interceptors here.</span><br><span class="line">    builder.Register(c &#x3D;&gt; new CallLogger(Console.Out));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)</span><br><span class="line">  &#123;</span><br><span class="line">    &#x2F;&#x2F; Here is where you define your &quot;global interceptor list&quot;</span><br><span class="line">    var interceptorServices &#x3D; new Service[] &#123;</span><br><span class="line">		new TypedService(typeof(CallLogger))</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Append the global interceptors to any existing list, or create a new interceptor</span><br><span class="line">    &#x2F;&#x2F; list if none are specified. Note this info will only be used by registrations</span><br><span class="line">    &#x2F;&#x2F; that are set to have interceptors enabled. It&#39;ll be ignored by others.</span><br><span class="line">    object existing;</span><br><span class="line">    if (registration.Metadata.TryGetValue(InterceptorsPropertyName, out existing))</span><br><span class="line">    &#123;</span><br><span class="line">      registration.Metadata[InterceptorsPropertyName] &#x3D;</span><br><span class="line">        ((IEnumerable&lt;Service&gt;)existing).Concat(interceptorServices).Distinct();</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">      registration.Metadata.Add(InterceptorsPropertyName, interceptorServices);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>To make it work, you register the module along with the rest of your dependencies.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">builder.RegisterType&lt;YourType&gt;()</span><br><span class="line">      .As&lt;YourIInterface&gt;()</span><br><span class="line">      .EnableInterfaceInterceptors();</span><br><span class="line">&#x2F;&#x2F; Here&#39;s the magic module:</span><br><span class="line">builder.RegisterModule&lt;InterceptorModule&gt;();</span><br><span class="line">var container &#x3D; builder.Build();</span><br></pre></td></tr></table></figure>
-
-<p>If you run these registrations and resolve, You can see the interceptor works as you’ll see the CallLogger output.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -967,12 +967,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

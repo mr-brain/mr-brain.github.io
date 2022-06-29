@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/why-isnt-there-an-assembly-unload-method/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -169,7 +169,173 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/" class="post-title-link" itemprop="url">No exports were found that match the constraint contract name error</a>
+            <a href="/2014/05/01/2014/05/why-isnt-there-an-assembly-unload-method/" class="post-title-link" itemprop="url">Why isn't there an Assembly. Unload method?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:07:31" itemprop="dateModified" datetime="2020-09-05T18:07:31+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Please refer to this article (<a target="_blank" rel="noopener" href="http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx">http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx</a>).</p>
+<p>Memory consumption been eating more and more?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">do</span><br><span class="line">&#123;</span><br><span class="line">  Assembly.LoadFrom(&quot;Library1.dll&quot;);</span><br><span class="line">&#125;while( true );</span><br></pre></td></tr></table></figure>
+
+<p>The result is NO. It will only keep a copy of Library1 Assembly in Memory, And never been release.<br>But I need the plugin Mechanism for Load/Unload Assembly.</p>
+<p>How to load and unload Library1 Assembly?<br>Step1: Create the Library1 Project.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Serializable]</span><br><span class="line">public class MyClass1</span><br><span class="line">&#123;</span><br><span class="line">  public string Test()</span><br><span class="line">  &#123;</span><br><span class="line">    return &quot;abc&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Step 2: Create the Test Project.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AppDomainSetup ads &#x3D; new AppDomainSetup();</span><br><span class="line">ShadowCopyFiles &#x3D; &quot;true&quot;;</span><br><span class="line">var myAppDomain &#x3D; AppDomain.CreateDomain(&quot;MyAppDomainName&quot;, null, ads);</span><br></pre></td></tr></table></figure>
+
+<p>The follow code will load Library1.dll file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object proxy &#x3D; myAppDomain.CreateInstanceFromAndUnwrap(&quot;Library1.dll&quot;, &quot;Library1.MyClass1&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>Invoke the Test Method.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MethodInfo mi &#x3D; proxy.GetType().GetMethod(&quot;Test&quot;, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);</span><br><span class="line">string s &#x3D; (string)mi.Invoke(proxy, new object[]&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Unload the Library1.dll file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AppDomain.Unload(myAppDomain);</span><br></pre></td></tr></table></figure>
+
+<p>If you use T1 Common Library. You can write the following simple code.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UnloadAssembly asm &#x3D; UnloadAssembly.Load(&quot;Library1.dll&quot;);</span><br><span class="line">UnloadClass cls &#x3D; asm.GetUnloadClass(&quot;Library1.MyClass1&quot;);</span><br><span class="line">string s &#x3D; (string)cls.Invoke(&quot;Test&quot;);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/10/01/2013/10/render-dynamic-model-in-razor-view-engine-and-aspnet-mvc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/10/01/2013/10/render-dynamic-model-in-razor-view-engine-and-aspnet-mvc/" class="post-title-link" itemprop="url">Render dynamic model in Razor view engine and ASP.NET MVC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-10-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-10-01T08:00:00+08:00">2013-10-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 17:45:32" itemprop="dateModified" datetime="2020-09-05T17:45:32+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>When I try to render a view whose model type is specified as: @model dynamic</p>
+<p>by using the following code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@&#123; Html.RenderPartial(&quot;PartialView&quot;, Model.UserProfile); &#125;</span><br></pre></td></tr></table></figure>
+
+<p>I get the following exception:</p>
+<blockquote>
+<p>‘System.Web.Mvc.HtmlHelper<dynamic>‘ has no applicable method named ‘RenderPartial’<br>but appears to have an extension method by that name.<br>Extension methods cannot be dynamically dispatched.<br>Consider casting the dynamic arguments or calling the extension method without the extension method syntax.</p>
+</blockquote>
+<p>Answer: It appears that the view where I was placing the RenderPartial code had a dynamic model, and thus, MVC couldn’t choose the correct method to use. Casting the model in the RenderPartial call to the correct type fixed the issue.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Html.Partial(&quot;_PartialView&quot;, (ModelClass)View.UserProfile)</span><br><span class="line">@&#123; Html.RenderPartial(&quot;PartialView&quot;, (ModelClass)Model.UserProfile); &#125;</span><br></pre></td></tr></table></figure>
+
+<p>When you send the anonymous type model to the view:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return View(new &#123;x&#x3D;4, y&#x3D;6&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>It show that using anonymous types is not supported, however, there is a workaround, you can use an ExpandoObject, convert it to Expando</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">using T1.Web.Mvc4;</span><br><span class="line">return View(new &#123;x&#x3D;4, y&#x3D;6&#125;.ToExpando());</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/09/01/2013/09/adding-the-globalasaxcs-file-in-aspnet-website/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/09/01/2013/09/adding-the-globalasaxcs-file-in-aspnet-website/" class="post-title-link" itemprop="url">Adding the Global.asax.cs file in Asp.net WebSite</a>
         </h2>
 
         <div class="post-meta">
@@ -186,7 +352,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:01:47" itemprop="dateModified" datetime="2020-09-05T18:01:47+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:00:43" itemprop="dateModified" datetime="2020-09-05T18:00:43+08:00">2020-09-05</time>
               </span>
 
           
@@ -200,25 +366,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>This morning I faced a problem while creating my Visual Studio 2012 Library Project. It said “no exports were found that match the constraint contract name”</p>
-<p>I solved this problem by clearing Visual Studio Component Model Cache. Just delete or rename this folder:</p>
-<blockquote>
-<p>%AppData%..\Local\Microsoft\VisualStudio\11.0\ComponentModelCache</p>
-</blockquote>
-<p>Visual Studio Express 2012 has different paths. Visual Studio Express</p>
-<blockquote>
-<p>…\Users{user}\AppData\Local\Microsoft\WDExpress\11.0\ComponentModelCache</p>
-</blockquote>
-<p>With Visual Studio Express 2012 for Web</p>
-<blockquote>
-<p>…\Users{user}\AppData\Local\Microsoft\VWDExpress\11.0\ComponentModelCache</p>
-</blockquote>
-<p>When I running MyWebSite in .NET 4.0 and I can’t get it working.</p>
-<blockquote>
-<p>HTTP error 500.22-Internal Server Error<br>Detect ASP.NET setting does not apply to integrated Managed pipeline mode.</p>
-</blockquote>
-<p>If you still need to use the HTTP Module you need to configure it (.NET 4.0 framework) as follows:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;system.webServer&gt;</span><br><span class="line">  &lt;modules runAllManagedModulesForAllRequests&#x3D;&quot;true&quot;&gt;</span><br><span class="line">    &lt;add name&#x3D;&quot;MyModule&quot; type&#x3D;&quot;&lt;&lt;Namespace&gt;&gt;.&lt;&lt;Class&gt;&gt;, &lt;&lt;assembly&gt;&gt;&quot;&#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;modules&gt;</span><br><span class="line">  &lt;validation validateIntegratedModeConfiguration&#x3D;&quot;false&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;system.webServer&gt;</span><br></pre></td></tr></table></figure>
+          <p>If we use Asp.net Web Application (File -&gt; New-&gt; Project-&gt; Asp.net Web Application), we can add Global.asax as well as Global.asax.cs file.</p>
+<p>However, if we use Asp.net Web site (File-&gt;New-&gt;Website-&gt;Asp.net Website), it is not the case. By default we will have Global.asax file only and not the Global.asax.cs file.</p>
+<p>The structure of the Global.asax file is as under</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Application Language&#x3D;&quot;C#&quot; %&gt;</span><br><span class="line">&lt;script runat&#x3D;&quot;server&quot;&gt;</span><br><span class="line">void Application_Start(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; Code that runs on application startup</span><br><span class="line">&#125;</span><br><span class="line">void Application_End(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F;  Code that runs on application shutdown</span><br><span class="line">&#125;</span><br><span class="line">void Application_Error(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; Code that runs when an unhandled error occurs</span><br><span class="line">&#125;</span><br><span class="line">void Session_Start(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; Code that runs when a new session is started</span><br><span class="line">&#125;</span><br><span class="line">void Session_End(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>So how can we add a Global.asax.cs file for a Asp.net Web site project? Let us observer the same in the below steps</p>
+<p>Step 1: Right click App_Code -&gt; Add New Item -&gt; Class -&gt; Rename it as Global.cs . Then click on the Add button.</p>
+<p>Step 2: In the Global.cs file that got created, decorate it by inheriting the class from System.Web.HttpApplication</p>
+<p>So the Global.asax.cs file will now look like</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using System.Linq;</span><br><span class="line">using System.Web;</span><br><span class="line"></span><br><span class="line">public class Global : System.Web.HttpApplication</span><br><span class="line">&#123;</span><br><span class="line">  public Global()</span><br><span class="line">  &#123;</span><br><span class="line">    &#x2F;&#x2F; TODO: Add constructor logic here</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected void Application_Start(object sender, EventArgs e)</span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected void Session_Start(object sender, EventArgs e)</span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected void Session_End(object sender, EventArgs e)</span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected void Application_End(object sender, EventArgs e)</span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Step 3: Now, from the Global.asax file, remove the entire script code and change the</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Application Language&#x3D;&quot;C#&quot; %&gt;</span><br></pre></td></tr></table></figure>
+
+<p>to</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Application Language&#x3D;&quot;C#&quot; CodeBehind&#x3D;&quot;~&#x2F;App_Code&#x2F;Global.asax.cs&quot; Inherits&#x3D;&quot;Global&quot; %&gt;</span><br></pre></td></tr></table></figure>
+
+<p>That’s it. Now run the application and it will work<br>Hope this helps atleast for the newbies. Happy coding.</p>
 
       
     </div>
@@ -322,7 +487,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/08/c-50-callermembername/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -336,7 +501,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2013/08/01/2013/08/c-50-callermembername/" class="post-title-link" itemprop="url">C# 5.0 CallerMemberName</a>
+            <a href="/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/" class="post-title-link" itemprop="url">No exports were found that match the constraint contract name error</a>
         </h2>
 
         <div class="post-meta">
@@ -346,14 +511,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2013-08-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-08-01T08:00:00+08:00">2013-08-01</time>
+              <time title="Created: 2013-09-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-09-01T08:00:00+08:00">2013-09-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:58:29" itemprop="dateModified" datetime="2020-09-05T17:58:29+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:01:47" itemprop="dateModified" datetime="2020-09-05T18:01:47+08:00">2020-09-05</time>
               </span>
 
           
@@ -367,23 +532,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>My new favorite C# language feature: CallerMemberName</p>
-<p>This is how a property with INotifyPropertyChanged support looks like pre C# 4.5:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string OldStylePropertyChanged</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _oldStyle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _oldStyle)</span><br><span class="line">    &#123;</span><br><span class="line">      _oldStyle &#x3D; value;</span><br><span class="line">      OnPropertyChangedOldStyle(&quot;OldStylePropertyChanged&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChangedOldStyle(string propertyName)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>And this is how it will look like when we apply the use of CallerMemberName in our PropertyChanged method:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string DynamicTitle</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _dynamicTitle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _dynamicTitle)</span><br><span class="line">    &#123;</span><br><span class="line">      _dynamicTitle &#x3D; value;</span><br><span class="line">      OnPropertyChanged();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChanged([CallerMemberName] string propertyName &#x3D; null)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Some more really cool additions to CallerMemberName is the following Parameter attributes:</p>
-<ul>
-<li>[CallerMemberName]</li>
-<li>[CallerFilePath]</li>
-<li>[CallerLineNumber]</li>
-</ul>
-<p>The name of the attributes is straight forward and easy to understand, so I doubt that I would have to describe them in detail, instead, let’s look at an example straight from MSDN on how to use them.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public sealed class Logger</span><br><span class="line">&#123;</span><br><span class="line">  public void TraceMessage(string message,</span><br><span class="line">       [CallerMemberName] string memberName &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerFilePath] string sourceFilePath &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerLineNumber] int sourceLineNumber &#x3D; 0)</span><br><span class="line">  &#123;</span><br><span class="line">    Debug.WriteLine(&quot;message: &quot; + message);</span><br><span class="line">    Debug.WriteLine(&quot;member name: &quot; + memberName);</span><br><span class="line">    Debug.WriteLine(&quot;source file path: &quot; + sourceFilePath);</span><br><span class="line">    Debug.WriteLine(&quot;source line number: &quot; + sourceLineNumber);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Happy hacking!</p>
+          <p>This morning I faced a problem while creating my Visual Studio 2012 Library Project. It said “no exports were found that match the constraint contract name”</p>
+<p>I solved this problem by clearing Visual Studio Component Model Cache. Just delete or rename this folder:</p>
+<blockquote>
+<p>%AppData%..\Local\Microsoft\VisualStudio\11.0\ComponentModelCache</p>
+</blockquote>
+<p>Visual Studio Express 2012 has different paths. Visual Studio Express</p>
+<blockquote>
+<p>…\Users{user}\AppData\Local\Microsoft\WDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>With Visual Studio Express 2012 for Web</p>
+<blockquote>
+<p>…\Users{user}\AppData\Local\Microsoft\VWDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>When I running MyWebSite in .NET 4.0 and I can’t get it working.</p>
+<blockquote>
+<p>HTTP error 500.22-Internal Server Error<br>Detect ASP.NET setting does not apply to integrated Managed pipeline mode.</p>
+</blockquote>
+<p>If you still need to use the HTTP Module you need to configure it (.NET 4.0 framework) as follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;system.webServer&gt;</span><br><span class="line">  &lt;modules runAllManagedModulesForAllRequests&#x3D;&quot;true&quot;&gt;</span><br><span class="line">    &lt;add name&#x3D;&quot;MyModule&quot; type&#x3D;&quot;&lt;&lt;Namespace&gt;&gt;.&lt;&lt;Class&gt;&gt;, &lt;&lt;assembly&gt;&gt;&quot;&#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;modules&gt;</span><br><span class="line">  &lt;validation validateIntegratedModeConfiguration&#x3D;&quot;false&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;system.webServer&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -470,7 +637,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/08/microsoftvisualstudioshellinteropdll-error/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/08/c-50-callermembername/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -484,7 +651,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2013/08/01/2013/08/microsoftvisualstudioshellinteropdll-error/" class="post-title-link" itemprop="url">Microsoft.VisualStudio.Shell.Interop.dll ERROR</a>
+            <a href="/2013/08/01/2013/08/c-50-callermembername/" class="post-title-link" itemprop="url">C# 5.0 CallerMemberName</a>
         </h2>
 
         <div class="post-meta">
@@ -501,7 +668,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:59:22" itemprop="dateModified" datetime="2020-09-05T17:59:22+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 17:58:29" itemprop="dateModified" datetime="2020-09-05T17:58:29+08:00">2020-09-05</time>
               </span>
 
           
@@ -515,15 +682,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>VS 2008, COM interop, and Microsoft.VisualStudio.Shell.Interop.dll</p>
-<p>When I try to compile our VsPackages with VS 2008 the compilation fails. The compilation fails with the message:</p>
-<blockquote>
-<p>The assembly ‘Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a’<br>is not registered for COM Interop. Please register it with regasm.exe /tlb.</p>
-</blockquote>
-<p>This is a known bug that was discovered right as VS2008 was going out the door. Microsoft have a fix in place (to be delivered with VS 2008 SP1)</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://connect.microsoft.com/VisualStudio/Downloads/DownloadDetails.aspx?DownloadID=10671">https://connect.microsoft.com/VisualStudio/Downloads/DownloadDetails.aspx?DownloadID=10671</a></p>
-</blockquote>
+          <p>My new favorite C# language feature: CallerMemberName</p>
+<p>This is how a property with INotifyPropertyChanged support looks like pre C# 4.5:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string OldStylePropertyChanged</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _oldStyle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _oldStyle)</span><br><span class="line">    &#123;</span><br><span class="line">      _oldStyle &#x3D; value;</span><br><span class="line">      OnPropertyChangedOldStyle(&quot;OldStylePropertyChanged&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChangedOldStyle(string propertyName)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>And this is how it will look like when we apply the use of CallerMemberName in our PropertyChanged method:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string DynamicTitle</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _dynamicTitle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _dynamicTitle)</span><br><span class="line">    &#123;</span><br><span class="line">      _dynamicTitle &#x3D; value;</span><br><span class="line">      OnPropertyChanged();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChanged([CallerMemberName] string propertyName &#x3D; null)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Some more really cool additions to CallerMemberName is the following Parameter attributes:</p>
+<ul>
+<li>[CallerMemberName]</li>
+<li>[CallerFilePath]</li>
+<li>[CallerLineNumber]</li>
+</ul>
+<p>The name of the attributes is straight forward and easy to understand, so I doubt that I would have to describe them in detail, instead, let’s look at an example straight from MSDN on how to use them.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public sealed class Logger</span><br><span class="line">&#123;</span><br><span class="line">  public void TraceMessage(string message,</span><br><span class="line">       [CallerMemberName] string memberName &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerFilePath] string sourceFilePath &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerLineNumber] int sourceLineNumber &#x3D; 0)</span><br><span class="line">  &#123;</span><br><span class="line">    Debug.WriteLine(&quot;message: &quot; + message);</span><br><span class="line">    Debug.WriteLine(&quot;member name: &quot; + memberName);</span><br><span class="line">    Debug.WriteLine(&quot;source file path: &quot; + sourceFilePath);</span><br><span class="line">    Debug.WriteLine(&quot;source line number: &quot; + sourceLineNumber);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Happy hacking!</p>
 
       
     </div>
@@ -811,6 +986,79 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/08/microsoftvisualstudioshellinteropdll-error/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/08/01/2013/08/microsoftvisualstudioshellinteropdll-error/" class="post-title-link" itemprop="url">Microsoft.VisualStudio.Shell.Interop.dll ERROR</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-08-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-08-01T08:00:00+08:00">2013-08-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 17:59:22" itemprop="dateModified" datetime="2020-09-05T17:59:22+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>VS 2008, COM interop, and Microsoft.VisualStudio.Shell.Interop.dll</p>
+<p>When I try to compile our VsPackages with VS 2008 the compilation fails. The compilation fails with the message:</p>
+<blockquote>
+<p>The assembly ‘Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a’<br>is not registered for COM Interop. Please register it with regasm.exe /tlb.</p>
+</blockquote>
+<p>This is a known bug that was discovered right as VS2008 was going out the door. Microsoft have a fix in place (to be delivered with VS 2008 SP1)</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://connect.microsoft.com/VisualStudio/Downloads/DownloadDetails.aspx?DownloadID=10671">https://connect.microsoft.com/VisualStudio/Downloads/DownloadDetails.aspx?DownloadID=10671</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/09/install-typescript091/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -907,229 +1155,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/07/01/2013/07/resolving-dependent-net-assembly-version-conflicts/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/07/01/2013/07/resolving-dependent-net-assembly-version-conflicts/" class="post-title-link" itemprop="url">Resolving Dependent .NET Assembly Version Conflicts</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2013-07-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-07-01T08:00:00+08:00">2013-07-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:57:32" itemprop="dateModified" datetime="2020-09-05T17:57:32+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>I ran into an interesting error message this morning while run application.</p>
-<blockquote>
-<p>—— Build started: Project: UnitTests, Configuration: Debug Any CPU ——<br>Consider app.config remapping of assembly “yourAssembly, Culture=neutral, PublicKeyToken=xxx”<br>from Version “2.2.0.0” [] to Version “2.2.8.0”<br>[C:\Demo\yourAssembly.dll] to solve conflict and get rid of warning.<br>C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\Microsoft.Common.targets :<br>warning MSB3247: Found conflicts between different versions of the same dependent assembly.</p>
-</blockquote>
-<p>This occurs because YourApp depends on a different version of the your Assembly.</p>
-<p>Fortunately, the error message gives you all you need to know to fix the problem. I added an App.config file to the project with the following XML.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;runtime&gt;</span><br><span class="line">    &lt;assemblyBinding xmlns&#x3D;&quot;urn:schemas-microsoft-com:asm.v1&quot;&gt;</span><br><span class="line">      &lt;dependentAssembly&gt;</span><br><span class="line">        &lt;assemblyIdentity name&#x3D;&quot;myAssembly&quot; publicKeyToken&#x3D;&quot;96D09A1EB7F44A77&quot; culture&#x3D;&quot;neutral&quot;&#x2F;&gt;</span><br><span class="line">        &lt;bindingRedirect oldVersion&#x3D;&quot;0.0.0.0-2.2.8.0&quot; newVersion&#x3D;&quot;2.2.8.0&quot;&#x2F;&gt;</span><br><span class="line">      &lt;&#x2F;dependentAssembly&gt;</span><br><span class="line">    &lt;&#x2F;assemblyBinding&gt;</span><br><span class="line">  &lt;&#x2F;runtime&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
-
-<p>How to find public key token for a .NET DLL or assembly?</p>
-<p>Use the following command,</p>
-<blockquote>
-<p>sn -T myDLL.dll</p>
-</blockquote>
-<p>This will give you the public key token. Remember one thing this only works if the assembly has to be strongly signed.</p>
-<p>Example</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\WINNT\Microsoft.NET\Framework\v3.5&gt;sn -T myDll.dll</span><br><span class="line">Microsoft (R) .NET Framework Strong Name Utility  Version 3.5.21022.8</span><br><span class="line">Copyright (c) Microsoft Corporation.  All rights reserved.</span><br><span class="line"></span><br><span class="line">Public key token is x77x5x561934x089</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/06/01/2013/06/how-to-move-windows-that-open-up-offscreen/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/06/01/2013/06/how-to-move-windows-that-open-up-offscreen/" class="post-title-link" itemprop="url">How to move windows that open up offscreen?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2013-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-06-01T08:00:00+08:00">2013-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:56:05" itemprop="dateModified" datetime="2020-09-05T17:56:05+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>Press <em>ALT</em> + <em>SPACE</em> to bring up the system menu (you won’t see it because it is off screen)</li>
-<li>Press <em>M</em> to select the “Move” menu choice.</li>
-<li>Press one of the arrow keys to initiate the movement.</li>
-</ol>
-<p>Now just use the mouse to place the window where you want.</p>
-<p>In fact, as long as we remember a few shortcuts, you can easily solve this small problem:</p>
-<p>「Shift」＋「Win」＋ Left/Right Arrow: You can work around the screen to quickly switch windows.</p>
-<p>「Alt」＋ Space ＋「M」: Can move the cursor quickly “stick” to the currently displayed warning window, when you move the mouse, you can drag the window to the front of the visible screen.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/06/01/2013/06/how-to-redirect-to-a-specific-version-of-net-assembly-at-runtime/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/06/01/2013/06/how-to-redirect-to-a-specific-version-of-net-assembly-at-runtime/" class="post-title-link" itemprop="url">How to redirect to a specific version of .net assembly at runtime?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2013-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-06-01T08:00:00+08:00">2013-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:56:29" itemprop="dateModified" datetime="2020-09-05T17:56:29+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>We can redirect to a specific version of a .net assembly by using configuration file as below:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">runtime</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">assemblyBinding</span> <span class="attr">xmlns</span>=<span class="string">&quot;urn:schemas-microsoft-com:asm.v1&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependentAssembly</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">assemblyIdentity</span> <span class="attr">name</span>=<span class="string">&quot;myAssembly&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">publicKeyToken</span>=<span class="string">&quot;32ab4ba45e0a69a1&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">culture</span>=<span class="string">&quot;en-us&quot;</span> /&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- Assembly versions can be redirected in application,</span></span><br><span class="line"><span class="comment">          publisher policy, or machine configuration files. --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bindingRedirect</span> <span class="attr">oldVersion</span>=<span class="string">&quot;1.0.0.0&quot;</span> <span class="attr">newVersion</span>=<span class="string">&quot;2.0.0.0&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependentAssembly</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">assemblyBinding</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">runtime</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1197,12 +1226,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

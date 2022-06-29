@@ -155,6 +155,228 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/select-distinct-using-linq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/01/2014/06/select-distinct-using-linq/" class="post-title-link" itemprop="url">Select distinct using linq</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:40:53" itemprop="dateModified" datetime="2020-09-05T18:40:53+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Using <a target="_blank" rel="noopener" href="https://code.google.com/p/morelinq/">morelinq</a> you can use DistinctBy:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myList.DistinctBy(x &#x3D;&gt; x.id);</span><br></pre></td></tr></table></figure>
+
+<p>Otherwise, you can use a group:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myList.GroupBy(x &#x3D;&gt; x.id)</span><br><span class="line">	.Select(g &#x3D;&gt; g.First());</span><br></pre></td></tr></table></figure>
+
+<p>Or you can use linq syntax</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">distinctData &#x3D; from tb1 in myList</span><br><span class="line">	group tb1 by tb1.id into g</span><br><span class="line">	select g.First();</span><br></pre></td></tr></table></figure>
+
+<p>You can create custom extension method:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static class EnumerableExtender</span><br><span class="line">&#123;</span><br><span class="line">	public static IEnumerable&lt;TSource&gt; DistinctBy&lt;TSource, TKey&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector)</span><br><span class="line">	&#123;</span><br><span class="line">		HashSet&lt;TKey&gt; seenKeys &#x3D; new HashSet&lt;TKey&gt;();</span><br><span class="line">		foreach (TSource element in source)</span><br><span class="line">		&#123;</span><br><span class="line">			var elementValue &#x3D; keySelector(element);</span><br><span class="line">			if (seenKeys.Add(elementValue))</span><br><span class="line">			&#123;</span><br><span class="line">				yield return element;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Would be better to write a lot of use.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">distinctDatas &#x3D; myList.DistinctBy(person &#x3D;&gt; person.Name);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/" class="post-title-link" itemprop="url">Unit Testing ASP.NET Web Site Project code stored in APP_Code</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:40:42" itemprop="dateModified" datetime="2020-09-05T18:40:42+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Here’s a Website.targets file you can include in unit testing solution. It (re)compiles website only when App_Code changes. Just add something in <strong>Test Project</strong> like</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;PropertyGroup&gt;</span><br><span class="line">    &lt;WebsiteName&gt;*MyWebsite*&lt;&#x2F;WebsiteName&gt;</span><br><span class="line">    &lt;WebsitePath&gt;..&lt;&#x2F;WebsitePath&gt;</span><br><span class="line">  &lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">  &lt;Import Project&#x3D;&quot;$(ProjectDir)\Website.targets&quot; &gt;&lt;&#x2F;Import&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;BeforeBuild&quot; DependsOnTargets&#x3D;&quot;CompileWebsite&quot;&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
+
+<p>to your .csproj, customizing WebsiteName and WebsitePath and you should be ready to create <strong>Website.targets</strong> file in Test Project Folder:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">    Target that compiles Website&#39;s App_Code to be used for testing</span><br><span class="line">  --&gt;</span><br><span class="line">&lt;Project DefaultTargets&#x3D;&quot;CompileWebsite&quot; ToolsVersion&#x3D;&quot;4.0&quot; xmlns&#x3D;&quot;http:&#x2F;&#x2F;schemas.microsoft.com&#x2F;developer&#x2F;msbuild&#x2F;2003&quot;&gt;</span><br><span class="line">  &lt;ItemGroup&gt;</span><br><span class="line">    &lt;AppCodeFiles Include&#x3D;&quot;$(WebsitePath)\$(WebsiteName)\App_Code\**\*.*&quot; &gt;&lt;&#x2F;AppCodeFiles&gt;</span><br><span class="line">  &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CompileWebsite&quot; Inputs&#x3D;&quot;@(AppCodeFiles)&quot; Outputs&#x3D;&quot;$(ProjectDir)\PrecompiledWeb\bin\App_Code.dll&quot;&gt;</span><br><span class="line">    &lt;AspNetCompiler VirtualPath&#x3D;&quot;$(WebsiteName)&quot; PhysicalPath&#x3D;&quot;$(WebsitePath)\$(WebsiteName)&quot; TargetPath&#x3D;&quot;$(ProjectDir)\PrecompiledWeb&quot; Force&#x3D;&quot;true&quot; Debug&#x3D;&quot;true&quot; &gt;&lt;&#x2F;AspNetCompiler&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CleanWebsite&quot;&gt;</span><br><span class="line">    &lt;RemoveDir Directories&#x3D;&quot;$(WebsitePath)\$(WebsiteName)\PrecompiledWeb&quot; &gt;&lt;&#x2F;RemoveDir&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">&lt;&#x2F;Project&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/using-forms-authentication-in-aspnet-mvc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/01/2014/06/using-forms-authentication-in-aspnet-mvc/" class="post-title-link" itemprop="url">Using Forms Authentication in ASP.NET MVC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:40:31" itemprop="dateModified" datetime="2020-09-05T18:40:31+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>In Web.config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;system.web&gt;</span><br><span class="line">    &lt;authentication mode&#x3D;&quot;Forms&quot;&gt;</span><br><span class="line">      &lt;forms defaultUrl&#x3D;&quot;~&#x2F;Home&#x2F;Index&#x2F;&quot; loginUrl&#x3D;&quot;~&#x2F;Home&#x2F;Login&#x2F;&quot; timeout&#x3D;&quot;30&quot; &gt;&lt;&#x2F;forms&gt;</span><br><span class="line">    &lt;&#x2F;authentication&gt;</span><br><span class="line">    &lt;authorization&gt;</span><br><span class="line">      &lt;deny users&#x3D;&quot;?&quot;&gt;&lt;&#x2F;deny&gt;</span><br><span class="line">    &lt;&#x2F;authorization&gt;</span><br><span class="line">  &lt;&#x2F;system.web&gt;</span><br><span class="line">  &lt;location path&#x3D;&quot;Scripts&quot;&gt;</span><br><span class="line">    &lt;system.web&gt;</span><br><span class="line">	  &lt;authorization&gt;</span><br><span class="line">	    &lt;allow users&#x3D;&quot;*&quot;&gt;&lt;&#x2F;allow&gt;</span><br><span class="line">	  &lt;&#x2F;authorization&gt;</span><br><span class="line">	&lt;&#x2F;system.web&gt;</span><br><span class="line">  &lt;&#x2F;location&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Create LoginViewModel.cs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class LoginViewModel : IValidatableObject</span><br><span class="line">&#123;</span><br><span class="line">	[DisplayFormat(ConvertEmptyStringToNull &#x3D; false)]</span><br><span class="line">	public string ReturnUrl &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	[DisplayFormat(ConvertEmptyStringToNull &#x3D; false)]</span><br><span class="line">	[Required]</span><br><span class="line">	public string UserName &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	[DisplayFormat(ConvertEmptyStringToNull &#x3D; false)]</span><br><span class="line">	[Required]</span><br><span class="line">	[DataType(DataType.Password)]</span><br><span class="line">	[Display(Name &#x3D; &quot;Password&quot;)]</span><br><span class="line">	public string Password &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	[Display(Name &#x3D; &quot;Remember me?&quot;)]</span><br><span class="line">	public bool RememberMe &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)</span><br><span class="line">	&#123;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Create HomeController.cs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class HomeController : Controller</span><br><span class="line">&#123;</span><br><span class="line">	[AllowAnonymous]</span><br><span class="line">	public ActionResult Login(string ReturnUrl)</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;ReturnUrl: url that is before user login</span><br><span class="line">		var vm &#x3D; new LoginViewModel() &#123; ReturnUrl &#x3D; ReturnUrl &#125;;</span><br><span class="line">		return View(vm);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	[AllowAnonymous]</span><br><span class="line">	[HttpPost]</span><br><span class="line">	public ActionResult Login(LoginViewModel model)</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;</span><br><span class="line">		if( !ModelState.IsValid )</span><br><span class="line">		&#123;</span><br><span class="line">			return View(model);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		&#x2F;&#x2F;todo check login account and password</span><br><span class="line">		if (false)</span><br><span class="line">		&#123;</span><br><span class="line">             ...</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		FormsAuthentication.RedirectFromLoginPage(model.UserName, false);</span><br><span class="line">		return Redirect(FormsAuthentication.GetRedirectUrl(model.UserName, false));</span><br><span class="line">	&#125;</span><br><span class="line">	[AllowAnonymous]</span><br><span class="line">       public ActionResult Logout()</span><br><span class="line">       &#123;</span><br><span class="line">           Session.Abandon();</span><br><span class="line">           FormsAuthentication.SignOut();</span><br><span class="line">           return RedirectToAction(&quot;Login&quot;, &quot;Home&quot;);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<p>In Home/Login.cshtml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@using (Html.BeginForm(&quot;Login&quot;, &quot;Home&quot;, new &#123; ReturnUrl&#x3D;Model.ReturnUrl &#125;, FormMethod.Post, new &#123; autocomplete&#x3D;&quot;off&quot; &#125;))</span><br><span class="line">&#123;</span><br><span class="line">  @Html.TextBoxFor(m &#x3D;&gt; m.UserName)</span><br><span class="line">  @Html.ValidationMessageFor(m &#x3D;&gt; m.UserName)</span><br><span class="line">  &lt;br &#x2F;&gt;</span><br><span class="line">  @Html.PasswordFor(m &#x3D;&gt; m.Password)</span><br><span class="line">  @Html.ValidationMessageFor(m &#x3D;&gt; m.Password)</span><br><span class="line">  &lt;br &#x2F;&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;Login&quot; &#x2F;&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/a-mixedmode-assembly-exception-message-been-showed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -299,77 +521,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/" class="post-title-link" itemprop="url">Database diagram support objects cannot be installed</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:05:15" itemprop="dateModified" datetime="2020-09-05T18:05:15+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>If you ever get a message like this when trying to create a diagram in SQL 2005/2008 Express.</p>
-<blockquote>
-<p>Database diagram support objects cannot be installed because this database does not have a valid owner.</p>
-<p>To continue, first use the Files page of the Database Properties dialog box or the ALTER AUTHORIZATION statement to set the database owner to a valid login, then add the database diagram support objects.</p>
-</blockquote>
-<p>Here’s step by step what you have to do:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_dbcmptlevel &#39;yourDB&#39;, &#39;90&#39;;</span><br><span class="line">go</span><br><span class="line">ALTER AUTHORIZATION ON DATABASE::yourDB TO &quot;yourLogin&quot;</span><br><span class="line">go</span><br><span class="line">use [yourDB]</span><br><span class="line">go</span><br><span class="line">EXECUTE AS USER &#x3D; N&#39;dbo&#39; REVERT</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/cant-save-your-table-changes-in-sql2008-management-studio/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -438,7 +589,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/msbuild-get-output-message/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -452,7 +603,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/" class="post-title-link" itemprop="url">Microsoft FastCGI Error 0x80070585</a>
+            <a href="/2014/05/01/2014/05/msbuild-get-output-message/" class="post-title-link" itemprop="url">Title:How do I get the Message msbuild task that shows up in the Visual Studio .NET project output?</a>
         </h2>
 
         <div class="post-meta">
@@ -469,7 +620,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:05:42" itemprop="dateModified" datetime="2020-09-05T18:05:42+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:06:14" itemprop="dateModified" datetime="2020-09-05T18:06:14+08:00">2020-09-05</time>
               </span>
 
           
@@ -483,11 +634,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>If you run FastCGI and show following error:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FastCGI Error</span><br><span class="line">The FastCGI Handler was unable to process the request.</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Error Details:</span><br><span class="line">Could not find entry for &quot;php&quot; on site 2043809562 in [Types] section.</span><br><span class="line">Error Number: 1413 (0x80070585).</span><br><span class="line">HTTP Error 500 - Server Error.</span><br><span class="line">Internet Information Services (IIS)</span><br></pre></td></tr></table></figure>
+          <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Target</span> <span class="attr">Name</span>=<span class="string">&quot;BeforeBuild&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Message</span> <span class="attr">Text</span>=<span class="string">&quot;Justin Dearing Message&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Target</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>You can modify C:\WINDOWS\system32\inetsrv\fcgiext.ini file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Types]</span><br><span class="line">php&#x3D;PHP</span><br><span class="line"></span><br><span class="line">[PHP]</span><br><span class="line">ExePath&#x3D;C:\Devp\PHP\php-cgi.exe</span><br><span class="line">InstanceMaxRequests&#x3D;10000</span><br><span class="line">ActivityTimeout&#x3D;300</span><br><span class="line">RequestTimeout&#x3D;300</span><br><span class="line">EnvironmentVars&#x3D;PHP_FCGI_MAX_REQUESTS:10000,PHPRC:C:\Devp\PHP\</span><br></pre></td></tr></table></figure>
+<p>However, the messages don’t show up in the Visual Studio .NET build output.</p>
+<p>To change the build output verbosity shown in the VS.NET output window, open the Options dialog and select the Build and Run settings below the Projects and Solutions node.</p>
+<p><img src="msbuild-get-output-message/2014-05-28_134204.png" alt="options dialog"></p>
+<p>Unless you explicitly specify a low message importance, your messages should show up at <font color='blue'>Normal</font> verbosity or higher.</p>
 
       
     </div>
@@ -582,7 +734,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/msbuild-get-output-message/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -596,7 +748,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/05/01/2014/05/msbuild-get-output-message/" class="post-title-link" itemprop="url">Title:How do I get the Message msbuild task that shows up in the Visual Studio .NET project output?</a>
+            <a href="/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/" class="post-title-link" itemprop="url">Database diagram support objects cannot be installed</a>
         </h2>
 
         <div class="post-meta">
@@ -613,7 +765,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:06:14" itemprop="dateModified" datetime="2020-09-05T18:06:14+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:05:15" itemprop="dateModified" datetime="2020-09-05T18:05:15+08:00">2020-09-05</time>
               </span>
 
           
@@ -627,178 +779,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Target</span> <span class="attr">Name</span>=<span class="string">&quot;BeforeBuild&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Message</span> <span class="attr">Text</span>=<span class="string">&quot;Justin Dearing Message&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Target</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>However, the messages don’t show up in the Visual Studio .NET build output.</p>
-<p>To change the build output verbosity shown in the VS.NET output window, open the Options dialog and select the Build and Run settings below the Projects and Solutions node.</p>
-<p><img src="msbuild-get-output-message/2014-05-28_134204.png" alt="options dialog"></p>
-<p>Unless you explicitly specify a low message importance, your messages should show up at <font color='blue'>Normal</font> verbosity or higher.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/why-isnt-there-an-assembly-unload-method/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/05/01/2014/05/why-isnt-there-an-assembly-unload-method/" class="post-title-link" itemprop="url">Why isn't there an Assembly. Unload method?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:07:31" itemprop="dateModified" datetime="2020-09-05T18:07:31+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Please refer to this article (<a target="_blank" rel="noopener" href="http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx">http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx</a>).</p>
-<p>Memory consumption been eating more and more?</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">do</span><br><span class="line">&#123;</span><br><span class="line">  Assembly.LoadFrom(&quot;Library1.dll&quot;);</span><br><span class="line">&#125;while( true );</span><br></pre></td></tr></table></figure>
-
-<p>The result is NO. It will only keep a copy of Library1 Assembly in Memory, And never been release.<br>But I need the plugin Mechanism for Load/Unload Assembly.</p>
-<p>How to load and unload Library1 Assembly?<br>Step1: Create the Library1 Project.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Serializable]</span><br><span class="line">public class MyClass1</span><br><span class="line">&#123;</span><br><span class="line">  public string Test()</span><br><span class="line">  &#123;</span><br><span class="line">    return &quot;abc&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Step 2: Create the Test Project.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AppDomainSetup ads &#x3D; new AppDomainSetup();</span><br><span class="line">ShadowCopyFiles &#x3D; &quot;true&quot;;</span><br><span class="line">var myAppDomain &#x3D; AppDomain.CreateDomain(&quot;MyAppDomainName&quot;, null, ads);</span><br></pre></td></tr></table></figure>
-
-<p>The follow code will load Library1.dll file.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object proxy &#x3D; myAppDomain.CreateInstanceFromAndUnwrap(&quot;Library1.dll&quot;, &quot;Library1.MyClass1&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>Invoke the Test Method.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MethodInfo mi &#x3D; proxy.GetType().GetMethod(&quot;Test&quot;, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);</span><br><span class="line">string s &#x3D; (string)mi.Invoke(proxy, new object[]&#123;&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>Unload the Library1.dll file.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AppDomain.Unload(myAppDomain);</span><br></pre></td></tr></table></figure>
-
-<p>If you use T1 Common Library. You can write the following simple code.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UnloadAssembly asm &#x3D; UnloadAssembly.Load(&quot;Library1.dll&quot;);</span><br><span class="line">UnloadClass cls &#x3D; asm.GetUnloadClass(&quot;Library1.MyClass1&quot;);</span><br><span class="line">string s &#x3D; (string)cls.Invoke(&quot;Test&quot;);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/10/01/2013/10/render-dynamic-model-in-razor-view-engine-and-aspnet-mvc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/10/01/2013/10/render-dynamic-model-in-razor-view-engine-and-aspnet-mvc/" class="post-title-link" itemprop="url">Render dynamic model in Razor view engine and ASP.NET MVC</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2013-10-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-10-01T08:00:00+08:00">2013-10-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:45:32" itemprop="dateModified" datetime="2020-09-05T17:45:32+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>When I try to render a view whose model type is specified as: @model dynamic</p>
-<p>by using the following code:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@&#123; Html.RenderPartial(&quot;PartialView&quot;, Model.UserProfile); &#125;</span><br></pre></td></tr></table></figure>
-
-<p>I get the following exception:</p>
+          <p>If you ever get a message like this when trying to create a diagram in SQL 2005/2008 Express.</p>
 <blockquote>
-<p>‘System.Web.Mvc.HtmlHelper<dynamic>‘ has no applicable method named ‘RenderPartial’<br>but appears to have an extension method by that name.<br>Extension methods cannot be dynamically dispatched.<br>Consider casting the dynamic arguments or calling the extension method without the extension method syntax.</p>
+<p>Database diagram support objects cannot be installed because this database does not have a valid owner.</p>
+<p>To continue, first use the Files page of the Database Properties dialog box or the ALTER AUTHORIZATION statement to set the database owner to a valid login, then add the database diagram support objects.</p>
 </blockquote>
-<p>Answer: It appears that the view where I was placing the RenderPartial code had a dynamic model, and thus, MVC couldn’t choose the correct method to use. Casting the model in the RenderPartial call to the correct type fixed the issue.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Html.Partial(&quot;_PartialView&quot;, (ModelClass)View.UserProfile)</span><br><span class="line">@&#123; Html.RenderPartial(&quot;PartialView&quot;, (ModelClass)Model.UserProfile); &#125;</span><br></pre></td></tr></table></figure>
-
-<p>When you send the anonymous type model to the view:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return View(new &#123;x&#x3D;4, y&#x3D;6&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>It show that using anonymous types is not supported, however, there is a workaround, you can use an ExpandoObject, convert it to Expando</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">using T1.Web.Mvc4;</span><br><span class="line">return View(new &#123;x&#x3D;4, y&#x3D;6&#125;.ToExpando());</span><br></pre></td></tr></table></figure>
+<p>Here’s step by step what you have to do:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_dbcmptlevel &#39;yourDB&#39;, &#39;90&#39;;</span><br><span class="line">go</span><br><span class="line">ALTER AUTHORIZATION ON DATABASE::yourDB TO &quot;yourLogin&quot;</span><br><span class="line">go</span><br><span class="line">use [yourDB]</span><br><span class="line">go</span><br><span class="line">EXECUTE AS USER &#x3D; N&#39;dbo&#39; REVERT</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -818,7 +805,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/09/01/2013/09/adding-the-globalasaxcs-file-in-aspnet-website/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -832,7 +819,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2013/09/01/2013/09/adding-the-globalasaxcs-file-in-aspnet-website/" class="post-title-link" itemprop="url">Adding the Global.asax.cs file in Asp.net WebSite</a>
+            <a href="/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/" class="post-title-link" itemprop="url">Microsoft FastCGI Error 0x80070585</a>
         </h2>
 
         <div class="post-meta">
@@ -842,14 +829,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2013-09-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-09-01T08:00:00+08:00">2013-09-01</time>
+              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:00:43" itemprop="dateModified" datetime="2020-09-05T18:00:43+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:05:42" itemprop="dateModified" datetime="2020-09-05T18:05:42+08:00">2020-09-05</time>
               </span>
 
           
@@ -863,24 +850,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>If we use Asp.net Web Application (File -&gt; New-&gt; Project-&gt; Asp.net Web Application), we can add Global.asax as well as Global.asax.cs file.</p>
-<p>However, if we use Asp.net Web site (File-&gt;New-&gt;Website-&gt;Asp.net Website), it is not the case. By default we will have Global.asax file only and not the Global.asax.cs file.</p>
-<p>The structure of the Global.asax file is as under</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Application Language&#x3D;&quot;C#&quot; %&gt;</span><br><span class="line">&lt;script runat&#x3D;&quot;server&quot;&gt;</span><br><span class="line">void Application_Start(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; Code that runs on application startup</span><br><span class="line">&#125;</span><br><span class="line">void Application_End(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F;  Code that runs on application shutdown</span><br><span class="line">&#125;</span><br><span class="line">void Application_Error(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; Code that runs when an unhandled error occurs</span><br><span class="line">&#125;</span><br><span class="line">void Session_Start(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; Code that runs when a new session is started</span><br><span class="line">&#125;</span><br><span class="line">void Session_End(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+          <p>If you run FastCGI and show following error:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FastCGI Error</span><br><span class="line">The FastCGI Handler was unable to process the request.</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Error Details:</span><br><span class="line">Could not find entry for &quot;php&quot; on site 2043809562 in [Types] section.</span><br><span class="line">Error Number: 1413 (0x80070585).</span><br><span class="line">HTTP Error 500 - Server Error.</span><br><span class="line">Internet Information Services (IIS)</span><br></pre></td></tr></table></figure>
 
-<p>So how can we add a Global.asax.cs file for a Asp.net Web site project? Let us observer the same in the below steps</p>
-<p>Step 1: Right click App_Code -&gt; Add New Item -&gt; Class -&gt; Rename it as Global.cs . Then click on the Add button.</p>
-<p>Step 2: In the Global.cs file that got created, decorate it by inheriting the class from System.Web.HttpApplication</p>
-<p>So the Global.asax.cs file will now look like</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using System.Linq;</span><br><span class="line">using System.Web;</span><br><span class="line"></span><br><span class="line">public class Global : System.Web.HttpApplication</span><br><span class="line">&#123;</span><br><span class="line">  public Global()</span><br><span class="line">  &#123;</span><br><span class="line">    &#x2F;&#x2F; TODO: Add constructor logic here</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected void Application_Start(object sender, EventArgs e)</span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected void Session_Start(object sender, EventArgs e)</span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected void Session_End(object sender, EventArgs e)</span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected void Application_End(object sender, EventArgs e)</span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Step 3: Now, from the Global.asax file, remove the entire script code and change the</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Application Language&#x3D;&quot;C#&quot; %&gt;</span><br></pre></td></tr></table></figure>
-
-<p>to</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Application Language&#x3D;&quot;C#&quot; CodeBehind&#x3D;&quot;~&#x2F;App_Code&#x2F;Global.asax.cs&quot; Inherits&#x3D;&quot;Global&quot; %&gt;</span><br></pre></td></tr></table></figure>
-
-<p>That’s it. Now run the application and it will work<br>Hope this helps atleast for the newbies. Happy coding.</p>
+<p>You can modify C:\WINDOWS\system32\inetsrv\fcgiext.ini file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Types]</span><br><span class="line">php&#x3D;PHP</span><br><span class="line"></span><br><span class="line">[PHP]</span><br><span class="line">ExePath&#x3D;C:\Devp\PHP\php-cgi.exe</span><br><span class="line">InstanceMaxRequests&#x3D;10000</span><br><span class="line">ActivityTimeout&#x3D;300</span><br><span class="line">RequestTimeout&#x3D;300</span><br><span class="line">EnvironmentVars&#x3D;PHP_FCGI_MAX_REQUESTS:10000,PHPRC:C:\Devp\PHP\</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -899,7 +873,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -967,12 +941,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

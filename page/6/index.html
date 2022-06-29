@@ -155,6 +155,227 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/10/01/2014/10/how-to-compile-razor-views-at-compile-time/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/10/01/2014/10/how-to-compile-razor-views-at-compile-time/" class="post-title-link" itemprop="url">How to compile razor views at compile time ?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-10-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-10-01T08:00:00+08:00">2014-10-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:39:22" itemprop="dateModified" datetime="2020-09-05T18:39:22+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Razor views are dynamically compiled by the ASP.NET runtime. If you want your views to be built at compile-time you could add the following option to your .csproj file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;PropertyGroup Condition&#x3D;&quot; &#39;$(Configuration)|$(Platform)&#39; &#x3D;&#x3D; &#39;Debug|AnyCPU&#39; &quot;&gt;</span><br><span class="line">	...</span><br><span class="line">    &lt;MvcBuildViews&gt;true&lt;&#x2F;MvcBuildViews&gt;</span><br><span class="line">&lt;&#x2F;PropertyGroup&gt;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">&lt;Target Name&#x3D;&quot;MvcBuildViews&quot; AfterTargets&#x3D;&quot;AfterBuild&quot; Condition&#x3D;&quot;&#39;$(MvcBuildViews)&#39;&#x3D;&#x3D;&#39;true&#39;&quot;&gt;</span><br><span class="line">   	&lt;AspNetCompiler VirtualPath&#x3D;&quot;temp&quot; PhysicalPath&#x3D;&quot;$(WebProjectOutputDir)&quot; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/08/01/2014/08/how-to-get-vsnet-2013-offline-update-3-/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/08/01/2014/08/how-to-get-vsnet-2013-offline-update-3-/" class="post-title-link" itemprop="url">How to get VS.NET 2013 off-line Update 3 ?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-08-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-08-01T08:00:00+08:00">2014-08-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:39:43" itemprop="dateModified" datetime="2020-09-05T18:39:43+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Download VS.NET 2013 Update 3 online setup file from <a target="_blank" rel="noopener" href="http://www.microsoft.com/en-US/download/details.aspx?id=43721">http://www.microsoft.com/en-US/download/details.aspx?id=43721</a></p>
+<p>Input following command</p>
+<blockquote>
+<p>VS2013.3.exe /layout</p>
+</blockquote>
+<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/VS2013-Update3.PNG" alt="img"></p>
+<p>You will get the about 1.8G files in download folder.<br>Click VS2013.exe will install VS.NET 2013 Update 3.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/07/01/2014/07/c-convert-xml-string-to-object/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/07/01/2014/07/c-convert-xml-string-to-object/" class="post-title-link" itemprop="url">C# Convert XML String to Object</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-07-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-07-01T08:00:00+08:00">2014-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:40:15" itemprop="dateModified" datetime="2020-09-05T18:40:15+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>You need to use the xsd.exe tool which gets installed with the Windows SDK into a directory something similar to:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin</span><br></pre></td></tr></table></figure>
+
+<p>And on 64bit computers:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Microsoft SDKs\Windows\v6.0A\bin</span><br></pre></td></tr></table></figure>
+
+<p>On the first run, you use xsd.exe and you convert your sample XML into a XSD file (XML schema file):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xsd yourfile.xml</span><br></pre></td></tr></table></figure>
+
+<p>This gives you yourfile.xsd, which in a second step, you can convert again using xsd.exe into a C# class:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xsd yourfile.xsd &#x2F;c</span><br></pre></td></tr></table></figure>
+
+<p>You can deserialize xml string to C# object:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">StringReader sr &#x3D; new StringReader(xmlStr);</span><br><span class="line">XmlSerializer mySerializer &#x3D; new XmlSerializer(typeof(YourObject));</span><br><span class="line">YourObject obj &#x3D; (YourObject)mySerializer.Deserialize(sr);</span><br></pre></td></tr></table></figure>
+
+<p>You can serialize object to <strong>simple</strong> xml string.<br>First, you must declare namespace in YourObject:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class YourObject</span><br><span class="line">&#123;</span><br><span class="line">   public YourObject()</span><br><span class="line">   &#123;</span><br><span class="line">    this._namespaces &#x3D; new XmlSerializerNamespaces(new XmlQualifiedName[] &#123;</span><br><span class="line">      new XmlQualifiedName(string.Empty, &quot;urn:Abracadabra&quot;) &#x2F;&#x2F; Default Namespace</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  [XmlNamespaceDeclarations]</span><br><span class="line">  public XmlSerializerNamespaces Namespaces</span><br><span class="line">  &#123;</span><br><span class="line">    get &#123; return this._namespaces; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  private XmlSerializerNamespaces _namespaces;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Then you can start serialize obj to xml string:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MemoryStream ms &#x3D; new MemoryStream();</span><br><span class="line">XmlSerializer mySerializer &#x3D; new XmlSerializer(typeof(YourObject));</span><br><span class="line">mySerializer.Serialize(ms, obj, obj.Namespaces);</span><br><span class="line">ms.Position &#x3D; 0;</span><br><span class="line">StreamReader sr &#x3D; new StreamReader(ms);</span><br><span class="line">string strXml &#x3D; sr.ReadToEnd();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/07/01/2014/07/display-gmt-datetime-format-string/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -661,232 +882,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/select-distinct-using-linq/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/06/01/2014/06/select-distinct-using-linq/" class="post-title-link" itemprop="url">Select distinct using linq</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:40:53" itemprop="dateModified" datetime="2020-09-05T18:40:53+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Using <a target="_blank" rel="noopener" href="https://code.google.com/p/morelinq/">morelinq</a> you can use DistinctBy:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myList.DistinctBy(x &#x3D;&gt; x.id);</span><br></pre></td></tr></table></figure>
-
-<p>Otherwise, you can use a group:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myList.GroupBy(x &#x3D;&gt; x.id)</span><br><span class="line">	.Select(g &#x3D;&gt; g.First());</span><br></pre></td></tr></table></figure>
-
-<p>Or you can use linq syntax</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">distinctData &#x3D; from tb1 in myList</span><br><span class="line">	group tb1 by tb1.id into g</span><br><span class="line">	select g.First();</span><br></pre></td></tr></table></figure>
-
-<p>You can create custom extension method:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static class EnumerableExtender</span><br><span class="line">&#123;</span><br><span class="line">	public static IEnumerable&lt;TSource&gt; DistinctBy&lt;TSource, TKey&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector)</span><br><span class="line">	&#123;</span><br><span class="line">		HashSet&lt;TKey&gt; seenKeys &#x3D; new HashSet&lt;TKey&gt;();</span><br><span class="line">		foreach (TSource element in source)</span><br><span class="line">		&#123;</span><br><span class="line">			var elementValue &#x3D; keySelector(element);</span><br><span class="line">			if (seenKeys.Add(elementValue))</span><br><span class="line">			&#123;</span><br><span class="line">				yield return element;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Would be better to write a lot of use.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">distinctDatas &#x3D; myList.DistinctBy(person &#x3D;&gt; person.Name);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/" class="post-title-link" itemprop="url">Unit Testing ASP.NET Web Site Project code stored in APP_Code</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:40:42" itemprop="dateModified" datetime="2020-09-05T18:40:42+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Here’s a Website.targets file you can include in unit testing solution. It (re)compiles website only when App_Code changes. Just add something in <strong>Test Project</strong> like</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;PropertyGroup&gt;</span><br><span class="line">    &lt;WebsiteName&gt;*MyWebsite*&lt;&#x2F;WebsiteName&gt;</span><br><span class="line">    &lt;WebsitePath&gt;..&lt;&#x2F;WebsitePath&gt;</span><br><span class="line">  &lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">  &lt;Import Project&#x3D;&quot;$(ProjectDir)\Website.targets&quot; &gt;&lt;&#x2F;Import&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;BeforeBuild&quot; DependsOnTargets&#x3D;&quot;CompileWebsite&quot;&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
-
-<p>to your .csproj, customizing WebsiteName and WebsitePath and you should be ready to create <strong>Website.targets</strong> file in Test Project Folder:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">    Target that compiles Website&#39;s App_Code to be used for testing</span><br><span class="line">  --&gt;</span><br><span class="line">&lt;Project DefaultTargets&#x3D;&quot;CompileWebsite&quot; ToolsVersion&#x3D;&quot;4.0&quot; xmlns&#x3D;&quot;http:&#x2F;&#x2F;schemas.microsoft.com&#x2F;developer&#x2F;msbuild&#x2F;2003&quot;&gt;</span><br><span class="line">  &lt;ItemGroup&gt;</span><br><span class="line">    &lt;AppCodeFiles Include&#x3D;&quot;$(WebsitePath)\$(WebsiteName)\App_Code\**\*.*&quot; &gt;&lt;&#x2F;AppCodeFiles&gt;</span><br><span class="line">  &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CompileWebsite&quot; Inputs&#x3D;&quot;@(AppCodeFiles)&quot; Outputs&#x3D;&quot;$(ProjectDir)\PrecompiledWeb\bin\App_Code.dll&quot;&gt;</span><br><span class="line">    &lt;AspNetCompiler VirtualPath&#x3D;&quot;$(WebsiteName)&quot; PhysicalPath&#x3D;&quot;$(WebsitePath)\$(WebsiteName)&quot; TargetPath&#x3D;&quot;$(ProjectDir)\PrecompiledWeb&quot; Force&#x3D;&quot;true&quot; Debug&#x3D;&quot;true&quot; &gt;&lt;&#x2F;AspNetCompiler&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CleanWebsite&quot;&gt;</span><br><span class="line">    &lt;RemoveDir Directories&#x3D;&quot;$(WebsitePath)\$(WebsiteName)\PrecompiledWeb&quot; &gt;&lt;&#x2F;RemoveDir&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">&lt;&#x2F;Project&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/using-forms-authentication-in-aspnet-mvc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/06/01/2014/06/using-forms-authentication-in-aspnet-mvc/" class="post-title-link" itemprop="url">Using Forms Authentication in ASP.NET MVC</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:40:31" itemprop="dateModified" datetime="2020-09-05T18:40:31+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>In Web.config</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;system.web&gt;</span><br><span class="line">    &lt;authentication mode&#x3D;&quot;Forms&quot;&gt;</span><br><span class="line">      &lt;forms defaultUrl&#x3D;&quot;~&#x2F;Home&#x2F;Index&#x2F;&quot; loginUrl&#x3D;&quot;~&#x2F;Home&#x2F;Login&#x2F;&quot; timeout&#x3D;&quot;30&quot; &gt;&lt;&#x2F;forms&gt;</span><br><span class="line">    &lt;&#x2F;authentication&gt;</span><br><span class="line">    &lt;authorization&gt;</span><br><span class="line">      &lt;deny users&#x3D;&quot;?&quot;&gt;&lt;&#x2F;deny&gt;</span><br><span class="line">    &lt;&#x2F;authorization&gt;</span><br><span class="line">  &lt;&#x2F;system.web&gt;</span><br><span class="line">  &lt;location path&#x3D;&quot;Scripts&quot;&gt;</span><br><span class="line">    &lt;system.web&gt;</span><br><span class="line">	  &lt;authorization&gt;</span><br><span class="line">	    &lt;allow users&#x3D;&quot;*&quot;&gt;&lt;&#x2F;allow&gt;</span><br><span class="line">	  &lt;&#x2F;authorization&gt;</span><br><span class="line">	&lt;&#x2F;system.web&gt;</span><br><span class="line">  &lt;&#x2F;location&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
-
-<p>Create LoginViewModel.cs</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class LoginViewModel : IValidatableObject</span><br><span class="line">&#123;</span><br><span class="line">	[DisplayFormat(ConvertEmptyStringToNull &#x3D; false)]</span><br><span class="line">	public string ReturnUrl &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	[DisplayFormat(ConvertEmptyStringToNull &#x3D; false)]</span><br><span class="line">	[Required]</span><br><span class="line">	public string UserName &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	[DisplayFormat(ConvertEmptyStringToNull &#x3D; false)]</span><br><span class="line">	[Required]</span><br><span class="line">	[DataType(DataType.Password)]</span><br><span class="line">	[Display(Name &#x3D; &quot;Password&quot;)]</span><br><span class="line">	public string Password &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	[Display(Name &#x3D; &quot;Remember me?&quot;)]</span><br><span class="line">	public bool RememberMe &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)</span><br><span class="line">	&#123;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Create HomeController.cs</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class HomeController : Controller</span><br><span class="line">&#123;</span><br><span class="line">	[AllowAnonymous]</span><br><span class="line">	public ActionResult Login(string ReturnUrl)</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;ReturnUrl: url that is before user login</span><br><span class="line">		var vm &#x3D; new LoginViewModel() &#123; ReturnUrl &#x3D; ReturnUrl &#125;;</span><br><span class="line">		return View(vm);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	[AllowAnonymous]</span><br><span class="line">	[HttpPost]</span><br><span class="line">	public ActionResult Login(LoginViewModel model)</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;</span><br><span class="line">		if( !ModelState.IsValid )</span><br><span class="line">		&#123;</span><br><span class="line">			return View(model);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		&#x2F;&#x2F;todo check login account and password</span><br><span class="line">		if (false)</span><br><span class="line">		&#123;</span><br><span class="line">             ...</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		FormsAuthentication.RedirectFromLoginPage(model.UserName, false);</span><br><span class="line">		return Redirect(FormsAuthentication.GetRedirectUrl(model.UserName, false));</span><br><span class="line">	&#125;</span><br><span class="line">	[AllowAnonymous]</span><br><span class="line">       public ActionResult Logout()</span><br><span class="line">       &#123;</span><br><span class="line">           Session.Abandon();</span><br><span class="line">           FormsAuthentication.SignOut();</span><br><span class="line">           return RedirectToAction(&quot;Login&quot;, &quot;Home&quot;);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-
-<p>In Home/Login.cshtml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@using (Html.BeginForm(&quot;Login&quot;, &quot;Home&quot;, new &#123; ReturnUrl&#x3D;Model.ReturnUrl &#125;, FormMethod.Post, new &#123; autocomplete&#x3D;&quot;off&quot; &#125;))</span><br><span class="line">&#123;</span><br><span class="line">  @Html.TextBoxFor(m &#x3D;&gt; m.UserName)</span><br><span class="line">  @Html.ValidationMessageFor(m &#x3D;&gt; m.UserName)</span><br><span class="line">  &lt;br &#x2F;&gt;</span><br><span class="line">  @Html.PasswordFor(m &#x3D;&gt; m.Password)</span><br><span class="line">  @Html.ValidationMessageFor(m &#x3D;&gt; m.Password)</span><br><span class="line">  &lt;br &#x2F;&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;Login&quot; &#x2F;&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -954,12 +953,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

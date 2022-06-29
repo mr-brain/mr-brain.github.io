@@ -155,6 +155,154 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/08/01/2015/08/nuget-package-element-is-not-declared-warning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/08/01/2015/08/nuget-package-element-is-not-declared-warning/" class="post-title-link" itemprop="url">nuget 'packages' element is not declared warning</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-08-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-08-01T08:00:00+08:00">2015-08-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:28:55" itemprop="dateModified" datetime="2020-09-05T18:28:55+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>not a showstopper but when using nuget in a project, it creates a packages.config file with this shape</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;packages&gt;</span><br><span class="line">   ... your packages</span><br><span class="line">&lt;&#x2F;packages&gt;</span><br></pre></td></tr></table></figure>
+
+<p>this gives a warning in VS</p>
+<blockquote>
+<p>The ‘packages’ element is not declared.</p>
+</blockquote>
+<p>You can always make simple xsd schema for ‘packages.config’ to get rid of this warning. To do this, create file named “packages.xsd”:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot; ?&gt;</span><br><span class="line">&lt;xs:schema xmlns:xs&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema&quot; elementFormDefault&#x3D;&quot;qualified&quot;</span><br><span class="line">      targetNamespace&#x3D;&quot;urn:packages&quot; xmlns&#x3D;&quot;urn:packages&quot;&gt;</span><br><span class="line">  &lt;xs:element name&#x3D;&quot;packages&quot;&gt;</span><br><span class="line">    &lt;xs:complexType&gt;</span><br><span class="line">      &lt;xs:sequence&gt;</span><br><span class="line">        &lt;xs:element name&#x3D;&quot;package&quot; maxOccurs&#x3D;&quot;unbounded&quot;&gt;</span><br><span class="line">          &lt;xs:complexType&gt;</span><br><span class="line">            &lt;xs:attribute name&#x3D;&quot;id&quot; type&#x3D;&quot;xs:string&quot; use&#x3D;&quot;required&quot; &#x2F;&gt;</span><br><span class="line">            &lt;xs:attribute name&#x3D;&quot;version&quot; type&#x3D;&quot;xs:string&quot; use&#x3D;&quot;required&quot; &#x2F;&gt;</span><br><span class="line">            &lt;xs:attribute name&#x3D;&quot;targetFramework&quot; type&#x3D;&quot;xs:string&quot; use&#x3D;&quot;optional&quot; &#x2F;&gt;</span><br><span class="line">            &lt;xs:attribute name&#x3D;&quot;allowedVersions&quot; type&#x3D;&quot;xs:string&quot; use&#x3D;&quot;optional&quot; &#x2F;&gt;</span><br><span class="line">          &lt;&#x2F;xs:complexType&gt;</span><br><span class="line">        &lt;&#x2F;xs:element&gt;</span><br><span class="line">      &lt;&#x2F;xs:sequence&gt;</span><br><span class="line">    &lt;&#x2F;xs:complexType&gt;</span><br><span class="line">  &lt;&#x2F;xs:element&gt;</span><br><span class="line">&lt;&#x2F;xs:schema&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Location of this file (two options)</p>
+<p>In the same folder as ‘packages.config’ file,<br>If you want to share packages.xsd across multiple projects, move it to the Visual Studio Schemas folder (the path may slightly differ, it’s D:\Program Files (x86)\Microsoft Visual Studio 10.0\Xml\Schemas for me).<br>Then, edit <packages> tag in packages.config file (add xmlns attribute):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;packages xmlns&#x3D;&quot;urn:packages&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Now the warning should disappear (even if packages.config file is open in Visual Studio).</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/07/01/2015/07/asp-net-mvc-throw-exception/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/07/01/2015/07/asp-net-mvc-throw-exception/" class="post-title-link" itemprop="url">ASP.NET MVC throw Exception</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-07-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-07-01T08:00:00+08:00">2015-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:29:34" itemprop="dateModified" datetime="2020-09-05T18:29:34+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>My application was working fine and after I did some upgrades I am getting this error.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Attempt by &#39;System.Web.Mvc.PreApplicationStartCode.Start()&#39; to critical method &#39;System.Web.WebPages.Razor.PreApplicationStartCode.Start()&#39; failed</span><br></pre></td></tr></table></figure>
+
+<p>Please use this package from nuget</p>
+<p>Install-Package Microsoft.AspNet.Mvc -Version 5.2.2</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/05/01/2015/05/vsnet2013-error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -217,6 +365,78 @@
 <li>[x86] C:\Program Files\Microsoft Visual Studio 14.0\Common7\IDE</li>
 </ul>
 <p>and run devenv /resetuserdata.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/05/01/2015/05/NuGet-Manager-Console/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/05/01/2015/05/NuGet-Manager-Console/" class="post-title-link" itemprop="url">NuGet Manager Console</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-05-01T08:00:00+08:00">2015-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:30:16" itemprop="dateModified" datetime="2020-09-05T18:30:16+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>List all available versions of a specific package?</p>
+<blockquote>
+<p>get-package -ListAvailable -AllVersions -filter nunit -source <a target="_blank" rel="noopener" href="https://nuget.org/api/v2/">https://nuget.org/api/v2/</a></p>
+</blockquote>
+<p>How to install special version of package?</p>
+<blockquote>
+<p>install-package nunit -version x.xx</p>
+</blockquote>
 
       
     </div>
@@ -523,81 +743,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/03/01/2015/03/found-conflicts-between-different-versions-of-the-same-dependent-assemblies/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/03/01/2015/03/found-conflicts-between-different-versions-of-the-same-dependent-assemblies/" class="post-title-link" itemprop="url">Found conflicts between different versions of the same dependent assemblies</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-03-01T08:00:00+08:00">2015-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:33:25" itemprop="dateModified" datetime="2020-09-05T18:33:25+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>Found conflicts between different versions of the same dependent assembly. Please set the “AutoGenerateBindingRedirects” property to true in the project file. For more information, see <a target="_blank" rel="noopener" href="http://go.microsoft.com/fwlink/?LinkId=294190">http://go.microsoft.com/fwlink/?LinkId=294190</a>.</p>
-</blockquote>
-<p>Considering there are about 50 references across the projects I have in this solution, that isn’t particularly helpful.</p>
-<p>There is an easy way to get the compiler to spit out more information.</p>
-<ol>
-<li>In Visual Studio 2013 go to Tools &gt; Options.</li>
-<li>Select Project and Solutions &gt; Build and Run.</li>
-<li>Find the drop down MSBuild project build output verbosity. Here you can configure MSBuild to give you more information. By default it will be set to “Minimal”. Change this to “Detailed’.</li>
-<li>Rebuild and view the Output window. Copy everything into notepad and search for the <strong>warning</strong> which should tell you which assemblies you need to look at.</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/03/01/2015/03/google-input-chext-flag/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -744,150 +889,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/03/01/2015/03/jasmine-errors/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/03/01/2015/03/jasmine-errors/" class="post-title-link" itemprop="url">Jasmine Errors in VS.NET 2013</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-03-01T08:00:00+08:00">2015-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:32:18" itemprop="dateModified" datetime="2020-09-05T18:32:18+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>I get the following error:</p>
-<blockquote>
-<p>Script:<br>C:\Users\xxx\AppData\Local\Microsoft\VisualStudio\12.0\Extensions\2q5cdx5o.qzv\TestFiles\Jasmine\v2\jasmine.js</p>
-<p>Error: ‘null’ is not an object (evaluating ‘currentSpec.expect’) #665</p>
-</blockquote>
-<p>I find the root cause:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">describe(&quot;[TS]Test&quot;, function () &#123;</span><br><span class="line">  expect(&quot;&quot;).toBe(&quot;&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>I forgot to add the ‘it’ statement around my expect.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">describe(&quot;[TS]Test&quot;, function () &#123;</span><br><span class="line">  it(&quot;test&quot;,() &#x3D;&gt; &#123;</span><br><span class="line">	expect(&quot;&quot;).toBe(&quot;&quot;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/03/01/2015/03/how-to-combine-typescript-files/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/03/01/2015/03/how-to-combine-typescript-files/" class="post-title-link" itemprop="url">How to compile many typescript files in VS.NET 2013?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-03-01T08:00:00+08:00">2015-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:32:32" itemprop="dateModified" datetime="2020-09-05T18:32:32+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>We can add following MSBuild script in your csproj file.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;Import Project&#x3D;&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot;</span><br><span class="line">    Condition&#x3D;&quot;Exists(&#39;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\$(TypeScriptToolsVersion)\Microsoft.TypeScript.targets&#39;)&quot; &#x2F;&gt;</span><br><span class="line">&lt;Target Name&#x3D;&quot;CombineT1&quot; BeforeTargets&#x3D;&quot;PrepareForBuild&quot;&gt;</span><br><span class="line">  &lt;ItemGroup&gt;</span><br><span class="line">    &lt;T1TypeScriptFiles Include&#x3D;&quot;$(projectDir)Scripts\t1\*.ts;&quot; Exclude&#x3D;&quot;$(projectDir)\Scripts\**\*.d.ts;&quot; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;WriteLinesToFile File&#x3D;&quot;$(projectDir)Scripts\t1\typescriptcompiler.input&quot; Lines&#x3D;&quot;@(T1TypeScriptFiles)&quot; Overwrite&#x3D;&quot;true&quot; Encoding&#x3D;&quot;UTF-8&quot; &#x2F;&gt;</span><br><span class="line">  &lt;Exec Command&#x3D;&quot;&quot;$(MSBuildProgramFiles32)\Microsoft SDKs\TypeScript\$(TypeScriptToolsVersion)\tsc&quot; --out $(projectDir)Scripts\t1\t1.js --target ES5 @$(projectDir)Scripts\t1\typescriptcompiler.input&quot; CustomErrorRegularExpression&#x3D;&quot;\.ts\([0-9]+,[0-9]+\):(.*)&quot;&gt;</span><br><span class="line">  &lt;&#x2F;Exec&gt;</span><br><span class="line">&lt;&#x2F;Target&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -955,12 +960,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
