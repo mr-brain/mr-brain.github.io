@@ -299,74 +299,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/cant-save-your-table-changes-in-sql2008-management-studio/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/05/01/2014/05/cant-save-your-table-changes-in-sql2008-management-studio/" class="post-title-link" itemprop="url">Can’t save your table changes in SQL2008 Management Studio</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:04:43" itemprop="dateModified" datetime="2020-09-05T18:04:43+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Can’t save your table changes in SQL2008 Management Studio ?</p>
-<p>In SQL Server 2008, when you do some changes on a table and save it you’ll get a warning message like below</p>
-<pre><code>Saving changes is not permitted. The changes you have made require the following tables to be dropped and re-created. You have either made changes to a table that can’t be re-created or enabled the option Prevent saving changes that require the table to be re-created.</code></pre>
-<p>What the… that didn’t happen to me in SQL Server 2005 nor previous versions of SQL Server. So there is definitely a behaviour change in the new management studio. Luckily this behaviour can be disabled. You just need to go to Tools -&gt; Options then go to the Designer Page and uncheck “Prevent saving changes that require table re-creation”.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -419,6 +351,74 @@
 </blockquote>
 <p>Here’s step by step what you have to do:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_dbcmptlevel &#39;yourDB&#39;, &#39;90&#39;;</span><br><span class="line">go</span><br><span class="line">ALTER AUTHORIZATION ON DATABASE::yourDB TO &quot;yourLogin&quot;</span><br><span class="line">go</span><br><span class="line">use [yourDB]</span><br><span class="line">go</span><br><span class="line">EXECUTE AS USER &#x3D; N&#39;dbo&#39; REVERT</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/cant-save-your-table-changes-in-sql2008-management-studio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/05/01/2014/05/cant-save-your-table-changes-in-sql2008-management-studio/" class="post-title-link" itemprop="url">Can’t save your table changes in SQL2008 Management Studio</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:04:43" itemprop="dateModified" datetime="2020-09-05T18:04:43+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Can’t save your table changes in SQL2008 Management Studio ?</p>
+<p>In SQL Server 2008, when you do some changes on a table and save it you’ll get a warning message like below</p>
+<pre><code>Saving changes is not permitted. The changes you have made require the following tables to be dropped and re-created. You have either made changes to a table that can’t be re-created or enabled the option Prevent saving changes that require the table to be re-created.</code></pre>
+<p>What the… that didn’t happen to me in SQL Server 2005 nor previous versions of SQL Server. So there is definitely a behaviour change in the new management studio. Luckily this behaviour can be disabled. You just need to go to Tools -&gt; Options then go to the Designer Page and uncheck “Prevent saving changes that require table re-creation”.</p>
 
       
     </div>
@@ -507,76 +507,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/msbuild-get-output-message/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/05/01/2014/05/msbuild-get-output-message/" class="post-title-link" itemprop="url">Title:How do I get the Message msbuild task that shows up in the Visual Studio .NET project output?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:06:14" itemprop="dateModified" datetime="2020-09-05T18:06:14+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Target</span> <span class="attr">Name</span>=<span class="string">&quot;BeforeBuild&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Message</span> <span class="attr">Text</span>=<span class="string">&quot;Justin Dearing Message&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Target</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>However, the messages don’t show up in the Visual Studio .NET build output.</p>
-<p>To change the build output verbosity shown in the VS.NET output window, open the Options dialog and select the Build and Run settings below the Projects and Solutions node.</p>
-<p><img src="msbuild-get-output-message/2014-05-28_134204.png" alt="options dialog"></p>
-<p>Unless you explicitly specify a low message importance, your messages should show up at <font color='blue'>Normal</font> verbosity or higher.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/remove-the-last-character-in-a-string-in-tsql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -633,6 +563,76 @@
 </blockquote>
 <p>Sample code:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @String VARCHAR(100)</span><br><span class="line">SET @String &#x3D; &#39;TEST STRING&#39;</span><br><span class="line"></span><br><span class="line">-- Chop off the end character</span><br><span class="line">SET @String &#x3D; LEFT(@String, LEN(@String) - 1)</span><br><span class="line"></span><br><span class="line">SELECT @String</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/msbuild-get-output-message/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/05/01/2014/05/msbuild-get-output-message/" class="post-title-link" itemprop="url">Title:How do I get the Message msbuild task that shows up in the Visual Studio .NET project output?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:06:14" itemprop="dateModified" datetime="2020-09-05T18:06:14+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Target</span> <span class="attr">Name</span>=<span class="string">&quot;BeforeBuild&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Message</span> <span class="attr">Text</span>=<span class="string">&quot;Justin Dearing Message&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Target</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>However, the messages don’t show up in the Visual Studio .NET build output.</p>
+<p>To change the build output verbosity shown in the VS.NET output window, open the Options dialog and select the Build and Run settings below the Projects and Solutions node.</p>
+<p><img src="msbuild-get-output-message/2014-05-28_134204.png" alt="options dialog"></p>
+<p>Unless you explicitly specify a low message importance, your messages should show up at <font color='blue'>Normal</font> verbosity or higher.</p>
 
       
     </div>
@@ -1004,7 +1004,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
