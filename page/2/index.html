@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/install-aspnet5-dotnet-core1/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/install-net-core/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2016/04/01/2016/04/install-aspnet5-dotnet-core1/" class="post-title-link" itemprop="url">Install ASP.NET 5 (.NET Core 1)</a>
+            <a href="/2016/04/01/2016/04/install-net-core/" class="post-title-link" itemprop="url">Install .NET Core 1.0</a>
         </h2>
 
         <div class="post-meta">
@@ -186,7 +186,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:27:00" itemprop="dateModified" datetime="2020-09-05T18:27:00+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 17:41:02" itemprop="dateModified" datetime="2020-09-05T17:41:02+08:00">2020-09-05</time>
               </span>
 
           
@@ -200,35 +200,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Install <a target="_blank" rel="noopener" href="https://go.microsoft.com/fwlink/?LinkId=627627">ASP.NET 5</a></p>
-<p>Enable the ASP.NET 5 command-line tools. Open a command-prompt and run:</p>
-<blockquote>
-<p>dnvm upgrade</p>
-</blockquote>
-<p>This will make the default .NET Execution Environment (DNX) active on the path.</p>
-<p>On Windows 7 and Windows Server 2008 R2 you will also need to install the <a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual C++ Redistributable for Visual Studio 2012 Update 4.</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@powershell -NoProfile -ExecutionPolicy unrestricted -Command &quot;&amp;&#123;$Branch&#x3D;&#39;dev&#39;;iex ((new-object net.webclient).DownloadString(&#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;aspnet&#x2F;Home&#x2F;dev&#x2F;dnvminstall.ps1&#39;))&#125;&quot;</span><br></pre></td></tr></table></figure>
+          <p>The best way to install .NET Core on Windows is to download the <a target="_blank" rel="noopener" href="https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/1.0.0.001598/dotnet-win-x64.1.0.0.001598.exe">official MSI installer</a>. This installer will install the tools and put them on your PATH.</p>
+<p>If you are using Windows 7, Windows Server 2008 or Windows Server 2012 you will also need to install Visual C++ Redistributable for <a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual Studio 2012 Update 4</a> &amp; <a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/details.aspx?id=48145">Visual C++ Redistributable for Visual Studio 2015</a> .</p>
+<p>Initialize some code for console application</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt;mkdir hwapp</span><br><span class="line">C:\&gt;cd hwapp</span><br><span class="line">C:\&gt;dotnet new</span><br></pre></td></tr></table></figure>
 
-<p>Once this step is complete you should be able to run dnvm and see some help text.</p>
-<p>Use DNVM to install DNX for .NET Core:</p>
+<p>The first command will restore the packages specified in the project.json file, and the second command will run the actual sample:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt;dotnet restore</span><br><span class="line">C:\&gt;dotnet run</span><br></pre></td></tr></table></figure>
+
+<p>update npm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g npm</span><br></pre></td></tr></table></figure>
+
+<p>Initialize yo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g yo</span><br><span class="line">npm install -g generator-webapp</span><br><span class="line">npm install -g generator-aspnet</span><br></pre></td></tr></table></figure>
+
+<p>To scaffold a new aspnet project, run:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yo aspnet</span><br></pre></td></tr></table></figure>
+
+<p><img src="install-net-core%5Cyo-aspnet.png" alt="yo-aspnet"></p>
+<p>Now lets create using Visual Studio yo extension, <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=samverschueren.yo">install yo extension first</a>.</p>
+<p>Intellisense Key Bindings for Visual Studio Code</p>
+<p>|<br>|Key |Command |Command id<br>|Ctrl+Space |Trigger Suggest |editor.action.triggerSuggest</p>
+<p>Add Static Files packages and restore “project.json”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;dependencies&quot;: &#123;</span><br><span class="line">	...,</span><br><span class="line">	&quot;Microsoft.AspNet.StaticFiles&quot;: &quot;1.0.0-rc1-final&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>From the Command Palette in VS Code</p>
 <blockquote>
-<pre><code>dnvm upgrade -r coreclr</code></pre>
-</blockquote>
-<p>Use DNVM to install DNX for the full .NET Framework:</p>
-<blockquote>
-<pre><code>dnvm upgrade -r clr</code></pre>
-</blockquote>
-<p>Install the requested DNX version from the feed, create console application using .NET Core</p>
-<blockquote>
-<pre><code>dnvm install -a x64 -r coreclr 1.0.0-rc1-final</code></pre>
-</blockquote>
-<p>Install generator</p>
-<blockquote>
-<pre><code>npm install -g yo generator-aspnet</code></pre>
-</blockquote>
-<p>Create Develop folder and generate console project</p>
-<blockquote>
-<pre><code>yo aspnet</code></pre>
+<pre><code>dotnet restore</code></pre>
 </blockquote>
 
       
@@ -325,6 +323,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/install-git-server-on-windows/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/04/01/2016/04/install-git-server-on-windows/" class="post-title-link" itemprop="url">Install Git Server on Windows</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:27:21" itemprop="dateModified" datetime="2020-09-05T18:27:21+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Download “Git 2.8.0 for Windows” from <a target="_blank" rel="noopener" href="https://git-scm.com/">git-scm site</a><br>Download Bitvise SSH Server (WinSSHD) 6.45 from <a target="_blank" rel="noopener" href="https://www.bitvise.com/download-area">bitvise</a></p>
+<p>Install Git for windows and setup login account</p>
+<p><img src="install-git-server-on-windows/install-git.png" alt="install git"></p>
+<p>Create Git Repos Root Folder</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:&#x2F;Demo&#x2F;GitRepos</span><br></pre></td></tr></table></figure>
+
+<p>Create test folder and open bash command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:&#x2F;User&#x2F;vdevp&#x2F;GitRepos&gt;md test</span><br></pre></td></tr></table></figure>
+
+<p><img src="install-git-server-on-windows/git-bash-here.png" alt="git-bash-here"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vdevp@vdevp-PC MINGW64 &#x2F;c&#x2F;User&#x2F;vdevp&#x2F;GitRepos&#x2F;test</span><br><span class="line">$ git init --bare</span><br></pre></td></tr></table></figure>
+
+<p>Git will create many initialize files</p>
+<p><img src="install-git-server-on-windows/git-init.png" alt="git-init"></p>
+<p>Go to your client PC and create test folder</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:&#x2F;Demo&#x2F;test</span><br></pre></td></tr></table></figure>
+
+<p>open Git bash command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git clone ssh:&#x2F;&#x2F;vdevp@192.168.2.3&#x2F;~&#x2F;GitRepos&#x2F;test</span><br><span class="line">Cloning into &#39;test&#39;...</span><br><span class="line">vdevp@192.168.2.3&#39;s password:</span><br><span class="line">&#39;git-upload-pack&#39; is not recognized as an internal or external command, operable program or batch file.</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights and the repository exists.</span><br></pre></td></tr></table></figure>
+
+<p>If you see the error message, please go to Server add system PATH environment</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Git\bin;C:\Program Files\Git\mingw64\libexec\git-core</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/minify-javascript-in-vsnet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -379,165 +463,6 @@
 
 <p>Done.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;UsingTask TaskName&#x3D;&quot;AjaxMin&quot; AssemblyFile&#x3D;&quot;$(MSBuildProjectDirectory)\DLL\AjaxMinTask.dll&quot; &#x2F;&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;AfterBuild&quot; Condition&#x3D;&quot;&#39;$(ConfigurationName)&#39;&#x3D;&#x3D;&#39;Debug&#39;&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;JS Include&#x3D;&quot;app\**\*.js&quot; Exclude&#x3D;&quot;**\*.min.js;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">      &lt;CSS Include&#x3D;&quot;app\**\*.css&quot; Exclude&#x3D;&quot;**\*.min.css;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">    &lt;AjaxMin JsSourceFiles&#x3D;&quot;@(JS)&quot; JsSourceExtensionPattern&#x3D;&quot;\.js$&quot; JsTargetExtension&#x3D;&quot;-min.js&quot; CssSourceFiles&#x3D;&quot;@(CSS)&quot; CssSourceExtensionPattern&#x3D;&quot;\.css$&quot; CssTargetExtension&#x3D;&quot;-min.css&quot; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">  &lt;PropertyGroup&gt;</span><br><span class="line">    &lt;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">		CustomCollectFiles;</span><br><span class="line">		$(CopyAllFilesToSingleFolderForPackageDependsOn);</span><br><span class="line">	  &lt;&#x2F;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">  &lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CustomCollectFiles&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;MinJS Include&#x3D;&quot;**\*.jsMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinJS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).js&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">      &lt;MinCSS Include&#x3D;&quot;**\*.cssMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinCSS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).css&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/03/01/2016/03/install-hexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/03/01/2016/03/install-hexo/" class="post-title-link" itemprop="url">Install Hexo</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-03-01T08:00:00+08:00">2016-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:45:24" itemprop="dateModified" datetime="2020-09-05T18:45:24+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Create-a-GitHub-Account"><a href="#Create-a-GitHub-Account" class="headerlink" title="Create a GitHub Account"></a>Create a GitHub Account</h3><p>Create a new Repository name: “username.github.io”</p>
-<p>username must same as account name</p>
-<h3 id="Install-Node-js"><a href="#Install-Node-js" class="headerlink" title="Install Node.js"></a>Install Node.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo -g</span><br><span class="line">npm init Blog</span><br><span class="line">cd Blog</span><br></pre></td></tr></table></figure>
-
-<p>npm install</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-archive --save</span><br><span class="line">npm install hexo-generator-category --save</span><br><span class="line">npm install hexo-generator-tag --save</span><br><span class="line">npm install hexo-server --save</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-deployer-heroku --save</span><br><span class="line">npm install hexo-deployer-rsync --save</span><br><span class="line">npm install hexo-deployer-openshift --save</span><br><span class="line">npm install hexo-renderer-marked@0.2 --save</span><br><span class="line">npm install hexo-renderer-stylus@0.2 --save</span><br><span class="line">npm install hexo-generator-feed@1 --save</span><br><span class="line">npm install hexo-generator-sitemap@1 --save</span><br><span class="line">npm install hexo-tag-bootstrap --save</span><br><span class="line">npm install hexo-generator-search --save</span><br></pre></td></tr></table></figure>
-
-<p>Process the following command, and visit localhost:4000 to see the result</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-<p>The Following command that generate public folder, you can deploy it to your target site folder.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-
-<p>Modify _config.yml file in Blog Folder</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line"> 	  repo: https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;username.github.io.git</span><br><span class="line"> 	  branch: master</span><br></pre></td></tr></table></figure>
-
-<p>Deploy to GitHub command</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-
-<p>Other</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo n #Generate articles，or source\_posts manually edit&#x2F;create md file</span><br><span class="line">hexo s #deploy preview result</span><br></pre></td></tr></table></figure>
-
-<p>Update Hexo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update -g</span><br></pre></td></tr></table></figure>
-
-<p>Install Other Theme</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;MOxFIVE&#x2F;hexo-theme-yelee.git themes&#x2F;yelee</span><br></pre></td></tr></table></figure>
-
-<p>Modify themes/yelee/_config.yml</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/03/01/2016/03/odds-convert-table/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/03/01/2016/03/odds-convert-table/" class="post-title-link" itemprop="url">Odds convert table</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-03-01T08:00:00+08:00">2016-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:33:34" itemprop="dateModified" datetime="2020-09-05T17:33:34+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <iframe src="/Source/odds-convert-table.html" width=480 height=740 frameborder=0>
-</iframe>
 
       
     </div>
@@ -647,7 +572,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/03/01/2016/03/t1-tinyioc-example/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/03/01/2016/03/odds-convert-table/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -661,7 +586,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2016/03/01/2016/03/t1-tinyioc-example/" class="post-title-link" itemprop="url">T1.TinyIoc Example</a>
+            <a href="/2016/03/01/2016/03/odds-convert-table/" class="post-title-link" itemprop="url">Odds convert table</a>
         </h2>
 
         <div class="post-meta">
@@ -678,7 +603,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:45:57" itemprop="dateModified" datetime="2020-09-05T18:45:57+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 17:33:34" itemprop="dateModified" datetime="2020-09-05T17:33:34+08:00">2020-09-05</time>
               </span>
 
           
@@ -692,15 +617,101 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
-<p>The following code is using t1.TinyIoc example</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import t1 require(&quot;t1&quot;);</span><br><span class="line">class IMyKlass implements t1.IIocInterfaceChecker &#123;</span><br><span class="line">	className: string &#x3D; &quot;IMyKlass&quot;;</span><br><span class="line">	test(): number &#123;</span><br><span class="line">		throw new Error(&quot;Not implement&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyKlass extends IMyKlass &#123;</span><br><span class="line">	test(): number &#123;</span><br><span class="line">		return 123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">t1.TinyIoc.registerType(IMyKlass, MyKlass);</span><br><span class="line"></span><br><span class="line">var obj: IMyKlass &#x3D; Ioc.resolve(IMyKlass);</span><br><span class="line">var val &#x3D; obj.test();</span><br><span class="line">expect(val).toBe(123);</span><br></pre></td></tr></table></figure>
+          <iframe src="/Source/odds-convert-table.html" width=480 height=740 frameborder=0>
+</iframe>
 
-<p>If you need global instance</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<p>You can even</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t1.TinyIoc.registerLazy(IMyKlass, () &#x3D;&gt; new MyKlass());</span><br></pre></td></tr></table></figure>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/03/01/2016/03/install-hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/03/01/2016/03/install-hexo/" class="post-title-link" itemprop="url">Install Hexo</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-03-01T08:00:00+08:00">2016-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:45:24" itemprop="dateModified" datetime="2020-09-05T18:45:24+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Create-a-GitHub-Account"><a href="#Create-a-GitHub-Account" class="headerlink" title="Create a GitHub Account"></a>Create a GitHub Account</h3><p>Create a new Repository name: “username.github.io”</p>
+<p>username must same as account name</p>
+<h3 id="Install-Node-js"><a href="#Install-Node-js" class="headerlink" title="Install Node.js"></a>Install Node.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo -g</span><br><span class="line">npm init Blog</span><br><span class="line">cd Blog</span><br></pre></td></tr></table></figure>
+
+<p>npm install</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-archive --save</span><br><span class="line">npm install hexo-generator-category --save</span><br><span class="line">npm install hexo-generator-tag --save</span><br><span class="line">npm install hexo-server --save</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-deployer-heroku --save</span><br><span class="line">npm install hexo-deployer-rsync --save</span><br><span class="line">npm install hexo-deployer-openshift --save</span><br><span class="line">npm install hexo-renderer-marked@0.2 --save</span><br><span class="line">npm install hexo-renderer-stylus@0.2 --save</span><br><span class="line">npm install hexo-generator-feed@1 --save</span><br><span class="line">npm install hexo-generator-sitemap@1 --save</span><br><span class="line">npm install hexo-tag-bootstrap --save</span><br><span class="line">npm install hexo-generator-search --save</span><br></pre></td></tr></table></figure>
+
+<p>Process the following command, and visit localhost:4000 to see the result</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>The Following command that generate public folder, you can deploy it to your target site folder.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>Modify _config.yml file in Blog Folder</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line"> 	  repo: https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;username.github.io.git</span><br><span class="line"> 	  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>Deploy to GitHub command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+
+<p>Other</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo n #Generate articles，or source\_posts manually edit&#x2F;create md file</span><br><span class="line">hexo s #deploy preview result</span><br></pre></td></tr></table></figure>
+
+<p>Update Hexo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update -g</span><br></pre></td></tr></table></figure>
+
+<p>Install Other Theme</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;MOxFIVE&#x2F;hexo-theme-yelee.git themes&#x2F;yelee</span><br></pre></td></tr></table></figure>
+
+<p>Modify themes/yelee/_config.yml</p>
 
       
     </div>
@@ -887,7 +898,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2015/11/01/2015/11/when-debug-typescript-ts-files-in-chrome/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/03/01/2016/03/t1-tinyioc-example/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -901,7 +912,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/11/01/2015/11/when-debug-typescript-ts-files-in-chrome/" class="post-title-link" itemprop="url">When debug a Typescript application in Google Chrome, the *.ts files are appear totally empty ?</a>
+            <a href="/2016/03/01/2016/03/t1-tinyioc-example/" class="post-title-link" itemprop="url">T1.TinyIoc Example</a>
         </h2>
 
         <div class="post-meta">
@@ -911,14 +922,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2015-11-01 08:00:00" itemprop="dateCreated datePublished" datetime="2015-11-01T08:00:00+08:00">2015-11-01</time>
+              <time title="Created: 2016-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-03-01T08:00:00+08:00">2016-03-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:43:46" itemprop="dateModified" datetime="2020-09-05T17:43:46+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:45:57" itemprop="dateModified" datetime="2020-09-05T18:45:57+08:00">2020-09-05</time>
               </span>
 
           
@@ -932,8 +943,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>You try to add following to your web.config</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;system.webServer&gt;</span><br><span class="line">  ...</span><br><span class="line">  &lt;staticContent&gt;</span><br><span class="line">    &lt;remove fileExtension&#x3D;&quot;.tsx&quot; &#x2F;&gt;</span><br><span class="line">    &lt;mimeMap fileExtension&#x3D;&quot;.tsx&quot; mimeType&#x3D;&quot;application&#x2F;javascript&quot; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;staticContent&gt;</span><br><span class="line">&lt;&#x2F;system.webServer&gt;</span><br></pre></td></tr></table></figure>
+          <p><a target="_blank" rel="noopener" href="https://www.nuget.org/packages/T1.Scripts/">T1.Scripts Nuget page 0.1.0.11</a></p>
+<p>The following code is using t1.TinyIoc example</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import t1 require(&quot;t1&quot;);</span><br><span class="line">class IMyKlass implements t1.IIocInterfaceChecker &#123;</span><br><span class="line">	className: string &#x3D; &quot;IMyKlass&quot;;</span><br><span class="line">	test(): number &#123;</span><br><span class="line">		throw new Error(&quot;Not implement&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyKlass extends IMyKlass &#123;</span><br><span class="line">	test(): number &#123;</span><br><span class="line">		return 123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">t1.TinyIoc.registerType(IMyKlass, MyKlass);</span><br><span class="line"></span><br><span class="line">var obj: IMyKlass &#x3D; Ioc.resolve(IMyKlass);</span><br><span class="line">var val &#x3D; obj.test();</span><br><span class="line">expect(val).toBe(123);</span><br></pre></td></tr></table></figure>
+
+<p>If you need global instance</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t1.TinyIoc.registerInstance(IMyKlass, new MyKlass());</span><br></pre></td></tr></table></figure>
+
+<p>You can even</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t1.TinyIoc.registerLazy(IMyKlass, () &#x3D;&gt; new MyKlass());</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1020,7 +1038,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

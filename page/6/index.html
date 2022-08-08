@@ -155,6 +155,79 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/11/01/2014/11/overriding--operator-how-to-compare-to-null/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/11/01/2014/11/overriding--operator-how-to-compare-to-null/" class="post-title-link" itemprop="url">Overriding == operator. How to compare to null?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-11-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-11-01T08:00:00+08:00">2014-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:38:48" itemprop="dateModified" datetime="2020-09-05T18:38:48+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Here is a simplified example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static bool operator &#x3D;&#x3D;(ThreeDPoint a, ThreeDPoint b)</span><br><span class="line">&#123;</span><br><span class="line">    if (a &#x3D;&#x3D; null)</span><br><span class="line">    &#123;</span><br><span class="line">         &#x2F;&#x2F;any code here never gets executed!  We first die a slow painful death.</span><br><span class="line">    &#125;</span><br><span class="line">    return a.Equals(b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>However, what happens when a ThreeDPoint object is null?</p>
+<p>You can’t write:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ThreeDPoint  a;</span><br><span class="line">if (a &#x3D;&#x3D; null)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;fail!</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Use object.ReferenceEquals(person1, null) instead of the == operator:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public static bool operator &#x3D;&#x3D;(ThreeDPoint a, ThreeDPoint b)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F; If both are null, or both are same instance, return true.</span><br><span class="line">    if (System.Object.ReferenceEquals(a, b))</span><br><span class="line">    &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; If one is null, but not both, return false.</span><br><span class="line">    if (((object)a &#x3D;&#x3D; null) || ((object)b &#x3D;&#x3D; null))</span><br><span class="line">    &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Return true if the fields match:</span><br><span class="line">    return a.x &#x3D;&#x3D; b.x &amp;&amp; a.y &#x3D;&#x3D; b.y &amp;&amp; a.z &#x3D;&#x3D; b.z;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/10/01/2014/10/how-to-compile-razor-views-at-compile-time/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -814,74 +887,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/nullreferenceexception-unexplained-error-in-aspnet-mvc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/06/01/2014/06/nullreferenceexception-unexplained-error-in-aspnet-mvc/" class="post-title-link" itemprop="url">NullReferenceException unexplained error in ASP.NET MVC</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:41:07" itemprop="dateModified" datetime="2020-09-05T18:41:07+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[NullReferenceException: Object reference not set to an instance of an object.]</span><br><span class="line">   System.Web.Mvc.&lt;ConvertResults&gt;d__2.MoveNext() +105</span><br><span class="line">   System.Web.Mvc.&lt;Validate&gt;d__1.MoveNext() +1050  System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext) +404</span><br></pre></td></tr></table></figure>
-
-<p>Please check your <em>Validate</em> function code in <strong><em>xxx</em>Model</strong> (inherited <em>IValidatableObject</em>). <font color='red'>You should not return null value.</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)</span><br><span class="line">&#123;</span><br><span class="line">  return null;   &#x2F;&#x2F; this is error code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -953,7 +958,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

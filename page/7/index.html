@@ -233,6 +233,74 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/nullreferenceexception-unexplained-error-in-aspnet-mvc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/01/2014/06/nullreferenceexception-unexplained-error-in-aspnet-mvc/" class="post-title-link" itemprop="url">NullReferenceException unexplained error in ASP.NET MVC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:41:07" itemprop="dateModified" datetime="2020-09-05T18:41:07+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[NullReferenceException: Object reference not set to an instance of an object.]</span><br><span class="line">   System.Web.Mvc.&lt;ConvertResults&gt;d__2.MoveNext() +105</span><br><span class="line">   System.Web.Mvc.&lt;Validate&gt;d__1.MoveNext() +1050  System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext) +404</span><br></pre></td></tr></table></figure>
+
+<p>Please check your <em>Validate</em> function code in <strong><em>xxx</em>Model</strong> (inherited <em>IValidatableObject</em>). <font color='red'>You should not return null value.</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)</span><br><span class="line">&#123;</span><br><span class="line">  return null;   &#x2F;&#x2F; this is error code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -446,81 +514,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/cannot-see-cs-files-after-last-rename-vsnet-2013-projects/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/05/01/2014/05/cannot-see-cs-files-after-last-rename-vsnet-2013-projects/" class="post-title-link" itemprop="url">Cannot see cs files after last rename VS.NET 2013 Projects</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:04:09" itemprop="dateModified" datetime="2020-09-05T18:04:09+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>After I rename VS.NET 2013 Project Name, I had this <strong>“The ‘Microsoft.VisualStudio.Editor.Implementation.EditorPackage’ package did not load correctly.”</strong> error message when I started up Visual Studio 2013.</p>
-<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/VS2013-ActivityLog-xml-Exception.png" alt="img"></p>
-<p>This is telling me to open ActivityLog.xml, and hopefully an answer will be found. So I opened up that file and found some error entries:</p>
-<blockquote>
-<p>No EditorOptionDefinition export found for the given option name: Graphics/Simple/Enable<br>Parameter name: optionId</p>
-</blockquote>
-<p>For Visual Studio 2013, it’s located in the</p>
-<blockquote>
-<p>%LOCALAPPDATA%\Microsoft\VisualStudio\12.0 folder.<br>For Visual Studio 2012, it’s 11.0 folder.</p>
-</blockquote>
-<p>I renamed <strong>ComponentModelCache</strong> to <strong>ComponentModelCache.Borked</strong> and restarted Visual Studio. It started right up and without any errors.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/cant-save-your-table-changes-in-sql2008-management-studio/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -589,7 +582,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/msbuild-get-output-message/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/cannot-see-cs-files-after-last-rename-vsnet-2013-projects/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -603,7 +596,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/05/01/2014/05/msbuild-get-output-message/" class="post-title-link" itemprop="url">Title:How do I get the Message msbuild task that shows up in the Visual Studio .NET project output?</a>
+            <a href="/2014/05/01/2014/05/cannot-see-cs-files-after-last-rename-vsnet-2013-projects/" class="post-title-link" itemprop="url">Cannot see cs files after last rename VS.NET 2013 Projects</a>
         </h2>
 
         <div class="post-meta">
@@ -620,7 +613,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:06:14" itemprop="dateModified" datetime="2020-09-05T18:06:14+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:04:09" itemprop="dateModified" datetime="2020-09-05T18:04:09+08:00">2020-09-05</time>
               </span>
 
           
@@ -634,12 +627,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Target</span> <span class="attr">Name</span>=<span class="string">&quot;BeforeBuild&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Message</span> <span class="attr">Text</span>=<span class="string">&quot;Justin Dearing Message&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Target</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>However, the messages don’t show up in the Visual Studio .NET build output.</p>
-<p>To change the build output verbosity shown in the VS.NET output window, open the Options dialog and select the Build and Run settings below the Projects and Solutions node.</p>
-<p><img src="msbuild-get-output-message/2014-05-28_134204.png" alt="options dialog"></p>
-<p>Unless you explicitly specify a low message importance, your messages should show up at <font color='blue'>Normal</font> verbosity or higher.</p>
+          <p>After I rename VS.NET 2013 Project Name, I had this <strong>“The ‘Microsoft.VisualStudio.Editor.Implementation.EditorPackage’ package did not load correctly.”</strong> error message when I started up Visual Studio 2013.</p>
+<p><img src="https://dl.dropboxusercontent.com/u/13003046/images/VS2013-ActivityLog-xml-Exception.png" alt="img"></p>
+<p>This is telling me to open ActivityLog.xml, and hopefully an answer will be found. So I opened up that file and found some error entries:</p>
+<blockquote>
+<p>No EditorOptionDefinition export found for the given option name: Graphics/Simple/Enable<br>Parameter name: optionId</p>
+</blockquote>
+<p>For Visual Studio 2013, it’s located in the</p>
+<blockquote>
+<p>%LOCALAPPDATA%\Microsoft\VisualStudio\12.0 folder.<br>For Visual Studio 2012, it’s 11.0 folder.</p>
+</blockquote>
+<p>I renamed <strong>ComponentModelCache</strong> to <strong>ComponentModelCache.Borked</strong> and restarted Visual Studio. It started right up and without any errors.</p>
 
       
     </div>
@@ -805,7 +803,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/why-isnt-there-an-assembly-unload-method/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -819,7 +817,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/" class="post-title-link" itemprop="url">Microsoft FastCGI Error 0x80070585</a>
+            <a href="/2014/05/01/2014/05/why-isnt-there-an-assembly-unload-method/" class="post-title-link" itemprop="url">Why isn't there an Assembly. Unload method?</a>
         </h2>
 
         <div class="post-meta">
@@ -836,7 +834,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:05:42" itemprop="dateModified" datetime="2020-09-05T18:05:42+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:07:31" itemprop="dateModified" datetime="2020-09-05T18:07:31+08:00">2020-09-05</time>
               </span>
 
           
@@ -850,11 +848,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>If you run FastCGI and show following error:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FastCGI Error</span><br><span class="line">The FastCGI Handler was unable to process the request.</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Error Details:</span><br><span class="line">Could not find entry for &quot;php&quot; on site 2043809562 in [Types] section.</span><br><span class="line">Error Number: 1413 (0x80070585).</span><br><span class="line">HTTP Error 500 - Server Error.</span><br><span class="line">Internet Information Services (IIS)</span><br></pre></td></tr></table></figure>
+          <p>Please refer to this article (<a target="_blank" rel="noopener" href="http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx">http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx</a>).</p>
+<p>Memory consumption been eating more and more?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">do</span><br><span class="line">&#123;</span><br><span class="line">  Assembly.LoadFrom(&quot;Library1.dll&quot;);</span><br><span class="line">&#125;while( true );</span><br></pre></td></tr></table></figure>
 
-<p>You can modify C:\WINDOWS\system32\inetsrv\fcgiext.ini file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Types]</span><br><span class="line">php&#x3D;PHP</span><br><span class="line"></span><br><span class="line">[PHP]</span><br><span class="line">ExePath&#x3D;C:\Devp\PHP\php-cgi.exe</span><br><span class="line">InstanceMaxRequests&#x3D;10000</span><br><span class="line">ActivityTimeout&#x3D;300</span><br><span class="line">RequestTimeout&#x3D;300</span><br><span class="line">EnvironmentVars&#x3D;PHP_FCGI_MAX_REQUESTS:10000,PHPRC:C:\Devp\PHP\</span><br></pre></td></tr></table></figure>
+<p>The result is NO. It will only keep a copy of Library1 Assembly in Memory, And never been release.<br>But I need the plugin Mechanism for Load/Unload Assembly.</p>
+<p>How to load and unload Library1 Assembly?<br>Step1: Create the Library1 Project.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Serializable]</span><br><span class="line">public class MyClass1</span><br><span class="line">&#123;</span><br><span class="line">  public string Test()</span><br><span class="line">  &#123;</span><br><span class="line">    return &quot;abc&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Step 2: Create the Test Project.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AppDomainSetup ads &#x3D; new AppDomainSetup();</span><br><span class="line">ShadowCopyFiles &#x3D; &quot;true&quot;;</span><br><span class="line">var myAppDomain &#x3D; AppDomain.CreateDomain(&quot;MyAppDomainName&quot;, null, ads);</span><br></pre></td></tr></table></figure>
+
+<p>The follow code will load Library1.dll file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object proxy &#x3D; myAppDomain.CreateInstanceFromAndUnwrap(&quot;Library1.dll&quot;, &quot;Library1.MyClass1&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>Invoke the Test Method.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MethodInfo mi &#x3D; proxy.GetType().GetMethod(&quot;Test&quot;, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);</span><br><span class="line">string s &#x3D; (string)mi.Invoke(proxy, new object[]&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Unload the Library1.dll file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AppDomain.Unload(myAppDomain);</span><br></pre></td></tr></table></figure>
+
+<p>If you use T1 Common Library. You can write the following simple code.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UnloadAssembly asm &#x3D; UnloadAssembly.Load(&quot;Library1.dll&quot;);</span><br><span class="line">UnloadClass cls &#x3D; asm.GetUnloadClass(&quot;Library1.MyClass1&quot;);</span><br><span class="line">string s &#x3D; (string)cls.Invoke(&quot;Test&quot;);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -941,7 +956,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
