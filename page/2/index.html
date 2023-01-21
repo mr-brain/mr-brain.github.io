@@ -155,6 +155,259 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/install-aspnet5-dotnet-core1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/04/01/2016/04/install-aspnet5-dotnet-core1/" class="post-title-link" itemprop="url">Install ASP.NET 5 (.NET Core 1)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:27:00" itemprop="dateModified" datetime="2020-09-05T18:27:00+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Install <a target="_blank" rel="noopener" href="https://go.microsoft.com/fwlink/?LinkId=627627">ASP.NET 5</a></p>
+<p>Enable the ASP.NET 5 command-line tools. Open a command-prompt and run:</p>
+<blockquote>
+<p>dnvm upgrade</p>
+</blockquote>
+<p>This will make the default .NET Execution Environment (DNX) active on the path.</p>
+<p>On Windows 7 and Windows Server 2008 R2 you will also need to install the <a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=30679">Visual C++ Redistributable for Visual Studio 2012 Update 4.</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@powershell -NoProfile -ExecutionPolicy unrestricted -Command &quot;&amp;&#123;$Branch&#x3D;&#39;dev&#39;;iex ((new-object net.webclient).DownloadString(&#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;aspnet&#x2F;Home&#x2F;dev&#x2F;dnvminstall.ps1&#39;))&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Once this step is complete you should be able to run dnvm and see some help text.</p>
+<p>Use DNVM to install DNX for .NET Core:</p>
+<blockquote>
+<pre><code>dnvm upgrade -r coreclr</code></pre>
+</blockquote>
+<p>Use DNVM to install DNX for the full .NET Framework:</p>
+<blockquote>
+<pre><code>dnvm upgrade -r clr</code></pre>
+</blockquote>
+<p>Install the requested DNX version from the feed, create console application using .NET Core</p>
+<blockquote>
+<pre><code>dnvm install -a x64 -r coreclr 1.0.0-rc1-final</code></pre>
+</blockquote>
+<p>Install generator</p>
+<blockquote>
+<pre><code>npm install -g yo generator-aspnet</code></pre>
+</blockquote>
+<p>Create Develop folder and generate console project</p>
+<blockquote>
+<pre><code>yo aspnet</code></pre>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/minify-javascript-in-vsnet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/04/01/2016/04/minify-javascript-in-vsnet/" class="post-title-link" itemprop="url">how do I minify Javascript and CSS in the vs.net 2013 post-build step</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 17:38:55" itemprop="dateModified" datetime="2020-09-05T17:38:55+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Want Ajax Minifier to be packaged with your project? From the Ajax Minifier install folder, you can move AjaxMin.dll and AjaxMinTask.dll directly into your source directory. I put them in my App_Data folder. Once they’re somewhere in your source, in Visual Studio right-click them, select Include in Project, and also change their Build Action property to None.</p>
+<p>Then in the code I included above, change</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Import Project&#x3D;&quot;$(MSBuildExtensionsPath)\Microsoft\Microsoft Ajax Minifier\ajaxmin.tasks&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>to</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;UsingTask TaskName&#x3D;&quot;AjaxMin&quot; AssemblyFile&#x3D;&quot;$(MSBuildProjectDirectory)\App_Data\AjaxMinTask.dll&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Done.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;UsingTask TaskName&#x3D;&quot;AjaxMin&quot; AssemblyFile&#x3D;&quot;$(MSBuildProjectDirectory)\DLL\AjaxMinTask.dll&quot; &#x2F;&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;AfterBuild&quot; Condition&#x3D;&quot;&#39;$(ConfigurationName)&#39;&#x3D;&#x3D;&#39;Debug&#39;&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;JS Include&#x3D;&quot;app\**\*.js&quot; Exclude&#x3D;&quot;**\*.min.js;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">      &lt;CSS Include&#x3D;&quot;app\**\*.css&quot; Exclude&#x3D;&quot;**\*.min.css;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">    &lt;AjaxMin JsSourceFiles&#x3D;&quot;@(JS)&quot; JsSourceExtensionPattern&#x3D;&quot;\.js$&quot; JsTargetExtension&#x3D;&quot;-min.js&quot; CssSourceFiles&#x3D;&quot;@(CSS)&quot; CssSourceExtensionPattern&#x3D;&quot;\.css$&quot; CssTargetExtension&#x3D;&quot;-min.css&quot; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">  &lt;PropertyGroup&gt;</span><br><span class="line">    &lt;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">		CustomCollectFiles;</span><br><span class="line">		$(CopyAllFilesToSingleFolderForPackageDependsOn);</span><br><span class="line">	  &lt;&#x2F;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">  &lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CustomCollectFiles&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;MinJS Include&#x3D;&quot;**\*.jsMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinJS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).js&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">      &lt;MinCSS Include&#x3D;&quot;**\*.cssMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinCSS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).css&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/install-git-server-on-windows/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/04/01/2016/04/install-git-server-on-windows/" class="post-title-link" itemprop="url">Install Git Server on Windows</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:27:21" itemprop="dateModified" datetime="2020-09-05T18:27:21+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Download “Git 2.8.0 for Windows” from <a target="_blank" rel="noopener" href="https://git-scm.com/">git-scm site</a><br>Download Bitvise SSH Server (WinSSHD) 6.45 from <a target="_blank" rel="noopener" href="https://www.bitvise.com/download-area">bitvise</a></p>
+<p>Install Git for windows and setup login account</p>
+<p><img src="install-git-server-on-windows/install-git.png" alt="install git"></p>
+<p>Create Git Repos Root Folder</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:&#x2F;Demo&#x2F;GitRepos</span><br></pre></td></tr></table></figure>
+
+<p>Create test folder and open bash command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:&#x2F;User&#x2F;vdevp&#x2F;GitRepos&gt;md test</span><br></pre></td></tr></table></figure>
+
+<p><img src="install-git-server-on-windows/git-bash-here.png" alt="git-bash-here"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vdevp@vdevp-PC MINGW64 &#x2F;c&#x2F;User&#x2F;vdevp&#x2F;GitRepos&#x2F;test</span><br><span class="line">$ git init --bare</span><br></pre></td></tr></table></figure>
+
+<p>Git will create many initialize files</p>
+<p><img src="install-git-server-on-windows/git-init.png" alt="git-init"></p>
+<p>Go to your client PC and create test folder</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:&#x2F;Demo&#x2F;test</span><br></pre></td></tr></table></figure>
+
+<p>open Git bash command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git clone ssh:&#x2F;&#x2F;vdevp@192.168.2.3&#x2F;~&#x2F;GitRepos&#x2F;test</span><br><span class="line">Cloning into &#39;test&#39;...</span><br><span class="line">vdevp@192.168.2.3&#39;s password:</span><br><span class="line">&#39;git-upload-pack&#39; is not recognized as an internal or external command, operable program or batch file.</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights and the repository exists.</span><br></pre></td></tr></table></figure>
+
+<p>If you see the error message, please go to Server add system PATH environment</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Git\bin;C:\Program Files\Git\mingw64\libexec\git-core</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/install-net-core/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -323,165 +576,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/install-git-server-on-windows/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/04/01/2016/04/install-git-server-on-windows/" class="post-title-link" itemprop="url">Install Git Server on Windows</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:27:21" itemprop="dateModified" datetime="2020-09-05T18:27:21+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Download “Git 2.8.0 for Windows” from <a target="_blank" rel="noopener" href="https://git-scm.com/">git-scm site</a><br>Download Bitvise SSH Server (WinSSHD) 6.45 from <a target="_blank" rel="noopener" href="https://www.bitvise.com/download-area">bitvise</a></p>
-<p>Install Git for windows and setup login account</p>
-<p><img src="install-git-server-on-windows/install-git.png" alt="install git"></p>
-<p>Create Git Repos Root Folder</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:&#x2F;Demo&#x2F;GitRepos</span><br></pre></td></tr></table></figure>
-
-<p>Create test folder and open bash command</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:&#x2F;User&#x2F;vdevp&#x2F;GitRepos&gt;md test</span><br></pre></td></tr></table></figure>
-
-<p><img src="install-git-server-on-windows/git-bash-here.png" alt="git-bash-here"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vdevp@vdevp-PC MINGW64 &#x2F;c&#x2F;User&#x2F;vdevp&#x2F;GitRepos&#x2F;test</span><br><span class="line">$ git init --bare</span><br></pre></td></tr></table></figure>
-
-<p>Git will create many initialize files</p>
-<p><img src="install-git-server-on-windows/git-init.png" alt="git-init"></p>
-<p>Go to your client PC and create test folder</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:&#x2F;Demo&#x2F;test</span><br></pre></td></tr></table></figure>
-
-<p>open Git bash command</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git clone ssh:&#x2F;&#x2F;vdevp@192.168.2.3&#x2F;~&#x2F;GitRepos&#x2F;test</span><br><span class="line">Cloning into &#39;test&#39;...</span><br><span class="line">vdevp@192.168.2.3&#39;s password:</span><br><span class="line">&#39;git-upload-pack&#39; is not recognized as an internal or external command, operable program or batch file.</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights and the repository exists.</span><br></pre></td></tr></table></figure>
-
-<p>If you see the error message, please go to Server add system PATH environment</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Git\bin;C:\Program Files\Git\mingw64\libexec\git-core</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/minify-javascript-in-vsnet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/04/01/2016/04/minify-javascript-in-vsnet/" class="post-title-link" itemprop="url">how do I minify Javascript and CSS in the vs.net 2013 post-build step</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:38:55" itemprop="dateModified" datetime="2020-09-05T17:38:55+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Want Ajax Minifier to be packaged with your project? From the Ajax Minifier install folder, you can move AjaxMin.dll and AjaxMinTask.dll directly into your source directory. I put them in my App_Data folder. Once they’re somewhere in your source, in Visual Studio right-click them, select Include in Project, and also change their Build Action property to None.</p>
-<p>Then in the code I included above, change</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Import Project&#x3D;&quot;$(MSBuildExtensionsPath)\Microsoft\Microsoft Ajax Minifier\ajaxmin.tasks&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>to</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;UsingTask TaskName&#x3D;&quot;AjaxMin&quot; AssemblyFile&#x3D;&quot;$(MSBuildProjectDirectory)\App_Data\AjaxMinTask.dll&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>Done.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;UsingTask TaskName&#x3D;&quot;AjaxMin&quot; AssemblyFile&#x3D;&quot;$(MSBuildProjectDirectory)\DLL\AjaxMinTask.dll&quot; &#x2F;&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;AfterBuild&quot; Condition&#x3D;&quot;&#39;$(ConfigurationName)&#39;&#x3D;&#x3D;&#39;Debug&#39;&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;JS Include&#x3D;&quot;app\**\*.js&quot; Exclude&#x3D;&quot;**\*.min.js;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">      &lt;CSS Include&#x3D;&quot;app\**\*.css&quot; Exclude&#x3D;&quot;**\*.min.css;obj\**\*.*&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">    &lt;AjaxMin JsSourceFiles&#x3D;&quot;@(JS)&quot; JsSourceExtensionPattern&#x3D;&quot;\.js$&quot; JsTargetExtension&#x3D;&quot;-min.js&quot; CssSourceFiles&#x3D;&quot;@(CSS)&quot; CssSourceExtensionPattern&#x3D;&quot;\.css$&quot; CssTargetExtension&#x3D;&quot;-min.css&quot; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br><span class="line">  &lt;PropertyGroup&gt;</span><br><span class="line">    &lt;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">		CustomCollectFiles;</span><br><span class="line">		$(CopyAllFilesToSingleFolderForPackageDependsOn);</span><br><span class="line">	  &lt;&#x2F;CopyAllFilesToSingleFolderForPackageDependsOn&gt;</span><br><span class="line">  &lt;&#x2F;PropertyGroup&gt;</span><br><span class="line">  &lt;Target Name&#x3D;&quot;CustomCollectFiles&quot;&gt;</span><br><span class="line">    &lt;ItemGroup&gt;</span><br><span class="line">      &lt;MinJS Include&#x3D;&quot;**\*.jsMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinJS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).js&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">      &lt;MinCSS Include&#x3D;&quot;**\*.cssMIN&quot; &#x2F;&gt;</span><br><span class="line">      &lt;FilesForPackagingFromProject Include&#x3D;&quot;%(MinCSS.Identity)&quot;&gt;</span><br><span class="line">        &lt;DestinationRelativePath&gt;%(RecursiveDir)%(Filename).css&lt;&#x2F;DestinationRelativePath&gt;</span><br><span class="line">      &lt;&#x2F;FilesForPackagingFromProject&gt;</span><br><span class="line">    &lt;&#x2F;ItemGroup&gt;</span><br><span class="line">  &lt;&#x2F;Target&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/03/01/2016/03/create-custom-iis-url-rewrite-provider/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -553,72 +647,6 @@
 <p><img src="create-custom-iis-url-rewrite-provider/iis-url-rewrite-3.png" alt="Step3"></p>
 <p>This completes the registration and configuration of a rewrite provider. As a result the web.config file for the default web site will contain the following XML code inside of the <rewrite> section:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;system.webServer&gt;</span><br><span class="line">	&lt;rewrite&gt;</span><br><span class="line">		&lt;providers&gt;</span><br><span class="line">			&lt;provider name&#x3D;&quot;T1.IisUrlRewriteModule&quot; type&#x3D;&quot;T1.IisUrlRewriteModule.CdnRewriteProvider, T1.IisUrlRewriteModule, Version&#x3D;1.0.0.0, Culture&#x3D;neutral, PublicKeyToken&#x3D;cd92a3df2f0d20b9&quot;&gt;</span><br><span class="line">				&lt;settings&gt;</span><br><span class="line">					&lt;add key&#x3D;&quot;config&quot; value&#x3D;&quot;aaa&quot; &#x2F;&gt;</span><br><span class="line">				&lt;&#x2F;settings&gt;</span><br><span class="line">			&lt;&#x2F;provider&gt;</span><br><span class="line">		&lt;&#x2F;providers&gt;</span><br><span class="line">	&lt;&#x2F;rewrite&gt;</span><br><span class="line">&lt;&#x2F;system.webServer&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/03/01/2016/03/odds-convert-table/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/03/01/2016/03/odds-convert-table/" class="post-title-link" itemprop="url">Odds convert table</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-03-01T08:00:00+08:00">2016-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:33:34" itemprop="dateModified" datetime="2020-09-05T17:33:34+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <iframe src="/Source/odds-convert-table.html" width=480 height=740 frameborder=0>
-</iframe>
 
       
     </div>
@@ -731,6 +759,72 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/03/01/2016/03/odds-convert-table/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/03/01/2016/03/odds-convert-table/" class="post-title-link" itemprop="url">Odds convert table</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-03-01T08:00:00+08:00">2016-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 17:33:34" itemprop="dateModified" datetime="2020-09-05T17:33:34+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <iframe src="/Source/odds-convert-table.html" width=480 height=740 frameborder=0>
+</iframe>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/03/01/2016/03/reflux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -790,95 +884,6 @@
 <h3 id="Main-js"><a href="#Main-js" class="headerlink" title="Main.js"></a>Main.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line">	var baseUrl &#x3D; &quot;&#x2F;js&#x2F;Samples&#x2F;ReactRouterDemo1&#x2F;&quot;;</span><br><span class="line"></span><br><span class="line">	require.config(&#123;</span><br><span class="line">		paths: &#123;</span><br><span class="line">			&quot;App&quot;: baseUrl + &quot;App&quot;,</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">define([&quot;require&quot;, &quot;exports&quot;, &#39;App&#39;], function (require, exports, app) &#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width&quot; &#x2F;&gt;</span><br><span class="line">	&lt;title&gt;React Router Demo1&lt;&#x2F;title&gt;</span><br><span class="line">	&lt;script src&#x3D;&quot;~&#x2F;js&#x2F;requirejs-config.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">	&lt;script src&#x3D;&quot;~&#x2F;Scripts&#x2F;require.js&quot; data-main&#x3D;&quot;&#x2F;js&#x2F;Samples&#x2F;ReactRouterDemo1&#x2F;Main.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id&#x3D;&quot;app1&quot;&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/03/01/2016/03/visual-studio-code-setup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/03/01/2016/03/visual-studio-code-setup/" class="post-title-link" itemprop="url">Setting up TypeScript + Visual Studio Code development environment</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-03-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-03-01T08:00:00+08:00">2016-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:42:57" itemprop="dateModified" datetime="2020-09-05T17:42:57+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Let’s get started!</p>
-<ul>
-<li>Download and installing <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a></li>
-<li>Download and installing <a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">node.js 4.4.1</a></li>
-</ul>
-<p>Let’s now install some VS code extensions.<br>Open VS Code when you are ready and use Shift + Ctrl + p<br>to access command panel.</p>
-<p>type “install extensions”</p>
-<p><img src="visual-studio-code-setup/install-extensions.png" alt="install-extensions"></p>
-<blockquote>
-<p>ext install tslin</p>
-</blockquote>
-<p>Note The tslint extension requires a global installation of tslint:</p>
-<blockquote>
-<p>npm install -g tslint</p>
-</blockquote>
-<p>then restart VS Code</p>
-<blockquote>
-<p>ext install Wallaby.js</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;mkdir ts-vscode-boilerplate</span><br><span class="line">&gt;cd ts-vscode-boilerplate</span><br><span class="line">&gt;npm init</span><br></pre></td></tr></table></figure>
-
-<p>We are now ready to install the third party dependencies:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ npm install  --save-dev browser-sync</span><br><span class="line">$ npm install  --save-dev browserify</span><br><span class="line">$ npm install  --save-dev chai</span><br><span class="line">$ npm install  --save-dev gulp</span><br><span class="line">$ npm install  --save-dev gulp-istanbul</span><br><span class="line">$ npm install  --save-dev gulp-mocha</span><br><span class="line">$ npm install  --save-dev gulp-sourcemaps</span><br><span class="line">$ npm install  --save-dev gulp-tslint</span><br><span class="line">$ npm install  --save-dev gulp-typescript</span><br><span class="line">$ npm install  --save-dev gulp-uglify</span><br><span class="line">$ npm install  --save-dev run-sequence</span><br><span class="line">$ npm install  --save-dev tslint</span><br><span class="line">$ npm install  --save-dev typescript</span><br><span class="line">$ npm install  --save-dev vinyl-buffer</span><br><span class="line">$ npm install  --save-dev vinyl-source-stream</span><br></pre></td></tr></table></figure>
-
-<p>Open VS Code and Click preferences -&gt; “Workspace Settings”.</p>
 
       
     </div>
@@ -1038,12 +1043,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1079,7 +1084,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

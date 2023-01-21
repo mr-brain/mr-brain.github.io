@@ -155,6 +155,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2008/09/01/2008/09/valuehelper-class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2008/09/01/2008/09/valuehelper-class/" class="post-title-link" itemprop="url">ValueHelper Class</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2008-09-01 08:00:00" itemprop="dateCreated datePublished" datetime="2008-09-01T08:00:00+08:00">2008-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 17:52:08" itemprop="dateModified" datetime="2020-09-05T17:52:08+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>If you want to clone the same object of class, you must inherit “ICloneable” interface and implement Clone() method for clone function. Now only through ValueHelper Class can be simple to complete this goal.</p>
+<ul>
+<li>Assembly:T1.dll</li>
+<li>Namespace:T1.Common</li>
+</ul>
+<p>Using the code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MyClass a &#x3D; new MyClass();</span><br><span class="line">a.Id &#x3D; 123;</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">MyClass b &#x3D; new MyClass();</span><br><span class="line">b.Id &#x3D; a.Id;</span><br><span class="line">b.Name &#x3D; a.Name;</span><br><span class="line">Console.WriteLine(&quot;b Id&#x3D;&#123;0&#125; Name&#x3D;&#123;1&#125;&quot;, b.Id, b.Name);</span><br></pre></td></tr></table></figure>
+
+<p>And the following code in the same</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MyClass a &#x3D; new MyClass();</span><br><span class="line">a.Id &#x3D; 123;</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">MyClass b &#x3D; new MyClass();</span><br><span class="line">ValueHelper.CopyData(a, b);</span><br><span class="line">Console.WriteLine(&quot;b Id&#x3D;&#123;0&#125; Name&#x3D;&#123;1&#125;&quot;, b.Id, b.Name);</span><br></pre></td></tr></table></figure>
+
+<p>You can also use Property.GetValue/SetValue to achieve the same purpose, but ValueHelper.CopyData performance on faster than the Property.GetValue/SetValue.</p>
+<p>ValueHelper Class copy only int/float/string… basic types of variables, do not copy the object type variable.</p>
+<p>Therefore, the following code to try to copy the a.Item object will be skipped.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class MyClass1</span><br><span class="line">&#123;</span><br><span class="line">	public string ID&#123;get; set;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyClass2</span><br><span class="line">&#123;</span><br><span class="line">	public string Name&#123;get; set;&#125;</span><br><span class="line">	public MyClass1 Item&#123;get; set;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyClass2 a &#x3D; new MyClass2();</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">a.Item &#x3D; new MyClass1();</span><br><span class="line">a.ID &#x3D; &quot;123&quot;;</span><br><span class="line">MyClass2 b &#x3D; new MyClass2();</span><br><span class="line">ValueHelper.CopyData(a, b);</span><br><span class="line">&#x2F;&#x2F;b.Item will be null.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2008/09/01/2008/09/dynamicproperty-class/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -235,7 +314,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2008/09/01/2008/09/valuehelper-class/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2008/09/01/2008/09/dataconfig-class/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -249,7 +328,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2008/09/01/2008/09/valuehelper-class/" class="post-title-link" itemprop="url">ValueHelper Class</a>
+            <a href="/2008/09/01/2008/09/dataconfig-class/" class="post-title-link" itemprop="url">DataConfig Class</a>
         </h2>
 
         <div class="post-meta">
@@ -266,7 +345,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:52:08" itemprop="dateModified" datetime="2020-09-05T17:52:08+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 17:49:36" itemprop="dateModified" datetime="2020-09-05T17:49:36+08:00">2020-09-05</time>
               </span>
 
           
@@ -280,21 +359,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>If you want to clone the same object of class, you must inherit “ICloneable” interface and implement Clone() method for clone function. Now only through ValueHelper Class can be simple to complete this goal.</p>
+          <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>Each database connection parameters set different. DataConfig so you can easily set these parameters.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Assembly:T1.Data.dll</span><br><span class="line">Namespace:T1.Data</span><br></pre></td></tr></table></figure>
+
+<p>DataConfig Properties:</p>
 <ul>
-<li>Assembly:T1.dll</li>
-<li>Namespace:T1.Common</li>
+<li>ProviderType ProviderType</li>
+<li>string Server</li>
+<li>string Database</li>
+<li>string LoginId</li>
+<li>string Password</li>
 </ul>
-<p>Using the code:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MyClass a &#x3D; new MyClass();</span><br><span class="line">a.Id &#x3D; 123;</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">MyClass b &#x3D; new MyClass();</span><br><span class="line">b.Id &#x3D; a.Id;</span><br><span class="line">b.Name &#x3D; a.Name;</span><br><span class="line">Console.WriteLine(&quot;b Id&#x3D;&#123;0&#125; Name&#x3D;&#123;1&#125;&quot;, b.Id, b.Name);</span><br></pre></td></tr></table></figure>
+<p>Through the above property setting, you can easily export a variety of different database connection string.<br>Using the code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DataConfig cfg &#x3D; new DataConfig();</span><br><span class="line">cfg.ProviderType &#x3D; ProviderType.SqlServer;</span><br><span class="line">cfg.Server &#x3D; &quot;172.0.0.1&quot;;</span><br><span class="line">cfg.Database &#x3D; &quot;Northwind&quot;;</span><br><span class="line">cfg.LoginId &#x3D; &quot;sa&quot;;</span><br><span class="line">cfg.Password &#x3D; &quot;123&quot;;</span><br><span class="line">console.WriteLine(cfg.ConnectString);</span><br></pre></td></tr></table></figure>
 
-<p>And the following code in the same</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MyClass a &#x3D; new MyClass();</span><br><span class="line">a.Id &#x3D; 123;</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">MyClass b &#x3D; new MyClass();</span><br><span class="line">ValueHelper.CopyData(a, b);</span><br><span class="line">Console.WriteLine(&quot;b Id&#x3D;&#123;0&#125; Name&#x3D;&#123;1&#125;&quot;, b.Id, b.Name);</span><br></pre></td></tr></table></figure>
+<p>If you wish change to Oracle…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cfg.ProviderType &#x3D; ProviderType.Oracle;</span><br><span class="line">console.WriteLine(cfg.ConnectString);</span><br></pre></td></tr></table></figure>
 
-<p>You can also use Property.GetValue/SetValue to achieve the same purpose, but ValueHelper.CopyData performance on faster than the Property.GetValue/SetValue.</p>
-<p>ValueHelper Class copy only int/float/string… basic types of variables, do not copy the object type variable.</p>
-<p>Therefore, the following code to try to copy the a.Item object will be skipped.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class MyClass1</span><br><span class="line">&#123;</span><br><span class="line">	public string ID&#123;get; set;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyClass2</span><br><span class="line">&#123;</span><br><span class="line">	public string Name&#123;get; set;&#125;</span><br><span class="line">	public MyClass1 Item&#123;get; set;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyClass2 a &#x3D; new MyClass2();</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">a.Item &#x3D; new MyClass1();</span><br><span class="line">a.ID &#x3D; &quot;123&quot;;</span><br><span class="line">MyClass2 b &#x3D; new MyClass2();</span><br><span class="line">ValueHelper.CopyData(a, b);</span><br><span class="line">&#x2F;&#x2F;b.Item will be null.</span><br></pre></td></tr></table></figure>
+<p>Even if you wish change to SqlExpress…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cfg.ProviderType &#x3D; ProviderType.SqlExpress;</span><br><span class="line">console.WriteLine(cfg.ConnectString);</span><br></pre></td></tr></table></figure>
+
+<p>In addition you can also simplify the traditional connection string in app.Config file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;add name&#x3D;&quot;db1&quot; connectionString&#x3D;&quot;Data Source&#x3D;172.0.0.1;Network Library&#x3D;DBMSSOCN;Initial Catalog&#x3D;Northwind;User ID&#x3D;sa;Password&#x3D;123&quot;&gt;&lt;&#x2F;add&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Change to…</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">add</span> <span class="attr">name</span>=<span class="string">&quot;db1&quot;</span> <span class="attr">connectionString</span>=<span class="string">&quot;ProviderType=SqlServer;Server=172.0.0.1;Database=Northwind;User ID=sa;Password=123&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">add</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>If you wish change to Oracle connection string…</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">add</span> <span class="attr">name</span>=<span class="string">&quot;db1&quot;</span> <span class="attr">connectionString</span>=<span class="string">&quot;ProviderType=Oracle;Server=172.0.0.1;Database=Northwind;User ID=sa;Password=123&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">add</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>With DataConfig, you do not have to remember some special database connection parameters.</p>
 
       
     </div>
@@ -381,12 +475,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -422,7 +516,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

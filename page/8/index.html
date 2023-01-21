@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/" class="post-title-link" itemprop="url">Microsoft FastCGI Error 0x80070585</a>
+            <a href="/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/" class="post-title-link" itemprop="url">Database diagram support objects cannot be installed</a>
         </h2>
 
         <div class="post-meta">
@@ -186,7 +186,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:05:42" itemprop="dateModified" datetime="2020-09-05T18:05:42+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:05:15" itemprop="dateModified" datetime="2020-09-05T18:05:15+08:00">2020-09-05</time>
               </span>
 
           
@@ -200,11 +200,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>If you run FastCGI and show following error:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FastCGI Error</span><br><span class="line">The FastCGI Handler was unable to process the request.</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Error Details:</span><br><span class="line">Could not find entry for &quot;php&quot; on site 2043809562 in [Types] section.</span><br><span class="line">Error Number: 1413 (0x80070585).</span><br><span class="line">HTTP Error 500 - Server Error.</span><br><span class="line">Internet Information Services (IIS)</span><br></pre></td></tr></table></figure>
-
-<p>You can modify C:\WINDOWS\system32\inetsrv\fcgiext.ini file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Types]</span><br><span class="line">php&#x3D;PHP</span><br><span class="line"></span><br><span class="line">[PHP]</span><br><span class="line">ExePath&#x3D;C:\Devp\PHP\php-cgi.exe</span><br><span class="line">InstanceMaxRequests&#x3D;10000</span><br><span class="line">ActivityTimeout&#x3D;300</span><br><span class="line">RequestTimeout&#x3D;300</span><br><span class="line">EnvironmentVars&#x3D;PHP_FCGI_MAX_REQUESTS:10000,PHPRC:C:\Devp\PHP\</span><br></pre></td></tr></table></figure>
+          <p>If you ever get a message like this when trying to create a diagram in SQL 2005/2008 Express.</p>
+<blockquote>
+<p>Database diagram support objects cannot be installed because this database does not have a valid owner.</p>
+<p>To continue, first use the Files page of the Database Properties dialog box or the ALTER AUTHORIZATION statement to set the database owner to a valid login, then add the database diagram support objects.</p>
+</blockquote>
+<p>Here’s step by step what you have to do:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_dbcmptlevel &#39;yourDB&#39;, &#39;90&#39;;</span><br><span class="line">go</span><br><span class="line">ALTER AUTHORIZATION ON DATABASE::yourDB TO &quot;yourLogin&quot;</span><br><span class="line">go</span><br><span class="line">use [yourDB]</span><br><span class="line">go</span><br><span class="line">EXECUTE AS USER &#x3D; N&#39;dbo&#39; REVERT</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -275,6 +277,75 @@
 <p>To change the build output verbosity shown in the VS.NET output window, open the Options dialog and select the Build and Run settings below the Projects and Solutions node.</p>
 <p><img src="msbuild-get-output-message/2014-05-28_134204.png" alt="options dialog"></p>
 <p>Unless you explicitly specify a low message importance, your messages should show up at <font color='blue'>Normal</font> verbosity or higher.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/" class="post-title-link" itemprop="url">Microsoft FastCGI Error 0x80070585</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:05:42" itemprop="dateModified" datetime="2020-09-05T18:05:42+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>If you run FastCGI and show following error:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FastCGI Error</span><br><span class="line">The FastCGI Handler was unable to process the request.</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Error Details:</span><br><span class="line">Could not find entry for &quot;php&quot; on site 2043809562 in [Types] section.</span><br><span class="line">Error Number: 1413 (0x80070585).</span><br><span class="line">HTTP Error 500 - Server Error.</span><br><span class="line">Internet Information Services (IIS)</span><br></pre></td></tr></table></figure>
+
+<p>You can modify C:\WINDOWS\system32\inetsrv\fcgiext.ini file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Types]</span><br><span class="line">php&#x3D;PHP</span><br><span class="line"></span><br><span class="line">[PHP]</span><br><span class="line">ExePath&#x3D;C:\Devp\PHP\php-cgi.exe</span><br><span class="line">InstanceMaxRequests&#x3D;10000</span><br><span class="line">ActivityTimeout&#x3D;300</span><br><span class="line">RequestTimeout&#x3D;300</span><br><span class="line">EnvironmentVars&#x3D;PHP_FCGI_MAX_REQUESTS:10000,PHPRC:C:\Devp\PHP\</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -456,89 +527,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/" class="post-title-link" itemprop="url">No exports were found that match the constraint contract name error</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2013-09-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-09-01T08:00:00+08:00">2013-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:01:47" itemprop="dateModified" datetime="2020-09-05T18:01:47+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>This morning I faced a problem while creating my Visual Studio 2012 Library Project. It said “no exports were found that match the constraint contract name”</p>
-<p>I solved this problem by clearing Visual Studio Component Model Cache. Just delete or rename this folder:</p>
-<blockquote>
-<p>%AppData%..\Local\Microsoft\VisualStudio\11.0\ComponentModelCache</p>
-</blockquote>
-<p>Visual Studio Express 2012 has different paths. Visual Studio Express</p>
-<blockquote>
-<p>…\Users{user}\AppData\Local\Microsoft\WDExpress\11.0\ComponentModelCache</p>
-</blockquote>
-<p>With Visual Studio Express 2012 for Web</p>
-<blockquote>
-<p>…\Users{user}\AppData\Local\Microsoft\VWDExpress\11.0\ComponentModelCache</p>
-</blockquote>
-<p>When I running MyWebSite in .NET 4.0 and I can’t get it working.</p>
-<blockquote>
-<p>HTTP error 500.22-Internal Server Error<br>Detect ASP.NET setting does not apply to integrated Managed pipeline mode.</p>
-</blockquote>
-<p>If you still need to use the HTTP Module you need to configure it (.NET 4.0 framework) as follows:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;system.webServer&gt;</span><br><span class="line">  &lt;modules runAllManagedModulesForAllRequests&#x3D;&quot;true&quot;&gt;</span><br><span class="line">    &lt;add name&#x3D;&quot;MyModule&quot; type&#x3D;&quot;&lt;&lt;Namespace&gt;&gt;.&lt;&lt;Class&gt;&gt;, &lt;&lt;assembly&gt;&gt;&quot;&#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;modules&gt;</span><br><span class="line">  &lt;validation validateIntegratedModeConfiguration&#x3D;&quot;false&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;system.webServer&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/09/01/2013/09/typescript-syntax/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -604,6 +592,89 @@
 
 <p>use file1 file module in test.ts</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import f1 &#x3D; module(&#39;file1&#39;)</span><br><span class="line">var c:number &#x3D; f1.MathAdd(1, 2);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/" class="post-title-link" itemprop="url">No exports were found that match the constraint contract name error</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-09-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-09-01T08:00:00+08:00">2013-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:01:47" itemprop="dateModified" datetime="2020-09-05T18:01:47+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>This morning I faced a problem while creating my Visual Studio 2012 Library Project. It said “no exports were found that match the constraint contract name”</p>
+<p>I solved this problem by clearing Visual Studio Component Model Cache. Just delete or rename this folder:</p>
+<blockquote>
+<p>%AppData%..\Local\Microsoft\VisualStudio\11.0\ComponentModelCache</p>
+</blockquote>
+<p>Visual Studio Express 2012 has different paths. Visual Studio Express</p>
+<blockquote>
+<p>…\Users{user}\AppData\Local\Microsoft\WDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>With Visual Studio Express 2012 for Web</p>
+<blockquote>
+<p>…\Users{user}\AppData\Local\Microsoft\VWDExpress\11.0\ComponentModelCache</p>
+</blockquote>
+<p>When I running MyWebSite in .NET 4.0 and I can’t get it working.</p>
+<blockquote>
+<p>HTTP error 500.22-Internal Server Error<br>Detect ASP.NET setting does not apply to integrated Managed pipeline mode.</p>
+</blockquote>
+<p>If you still need to use the HTTP Module you need to configure it (.NET 4.0 framework) as follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;system.webServer&gt;</span><br><span class="line">  &lt;modules runAllManagedModulesForAllRequests&#x3D;&quot;true&quot;&gt;</span><br><span class="line">    &lt;add name&#x3D;&quot;MyModule&quot; type&#x3D;&quot;&lt;&lt;Namespace&gt;&gt;.&lt;&lt;Class&gt;&gt;, &lt;&lt;assembly&gt;&gt;&quot;&#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;modules&gt;</span><br><span class="line">  &lt;validation validateIntegratedModeConfiguration&#x3D;&quot;false&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;system.webServer&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -840,274 +911,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/08/whats-the-thing-in-net-version/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/08/01/2013/08/whats-the-thing-in-net-version/" class="post-title-link" itemprop="url">What's the thing in .net version?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2013-08-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-08-01T08:00:00+08:00">2013-08-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:59:43" itemprop="dateModified" datetime="2020-09-05T17:59:43+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <table>
-<thead>
-<tr>
-<th>Visual Studio</th>
-<th align="left">.NET</th>
-<th>MVC</th>
-<th>EF</th>
-<th>Released</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>VS2002</td>
-<td align="left">1.0</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>January 2002</td>
-</tr>
-<tr>
-<td>VS2003</td>
-<td align="left">1.1</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>April 2003</td>
-</tr>
-<tr>
-<td>VS2005</td>
-<td align="left">2.0</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>November 2005</td>
-</tr>
-<tr>
-<td>VS2008</td>
-<td align="left">2.0,3.0,3.5</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>November 2007</td>
-</tr>
-<tr>
-<td>VS2008SP1</td>
-<td align="left">2.0,3.0,3.5SP1</td>
-<td>Add-in 1.0</td>
-<td>Yes</td>
-<td>August 2008</td>
-</tr>
-<tr>
-<td>VS2010SP1</td>
-<td align="left">2.0,3.0,3.5,4.0</td>
-<td>2.0,3.0</td>
-<td>Yes</td>
-<td>April 2010</td>
-</tr>
-<tr>
-<td>VS2010SP1</td>
-<td align="left">2.0,3.0,3.5SP1,4.0</td>
-<td>2.0,3.0</td>
-<td>Yes</td>
-<td>March 2011</td>
-</tr>
-<tr>
-<td>VS2012</td>
-<td align="left">2.0,3.0,3.5,4.0,4.5</td>
-<td>3.0,4.0</td>
-<td>Yes</td>
-<td>August 2012</td>
-</tr>
-<tr>
-<td>VS2012SP2</td>
-<td align="left">2.0,3.0,3.5,4.0,4.5</td>
-<td>3.0,4.0</td>
-<td>Yes</td>
-<td>April 2013</td>
-</tr>
-<tr>
-<td>VS2012SP3</td>
-<td align="left">2.0,3.0,3.5,4.0,4.5</td>
-<td>3.0,4.0</td>
-<td>Yes</td>
-<td>June 2013</td>
-</tr>
-<tr>
-<td>VS2013</td>
-<td align="left">2.0,3.0,3.5,4.0,4.5.1</td>
-<td>4.0</td>
-<td>Yes</td>
-<td>October 2013</td>
-</tr>
-<tr>
-<td>VS2015</td>
-<td align="left">2.0,3.0,3.5,4.0,4.5.1,4.5.2,4.6</td>
-<td></td>
-<td>Yes</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>VS2010SP1: When you have SP1 installed you’ll see instead: Microsoft Visual Studio 2010 Version 10.0.40219.1 SP1Rel Microsoft .NET Framework Version 4.0.30319 SP1Rel</p>
-<p>VS2012SP2: Add Fakes Framework that is the next generation of Moles &amp; Stubs. (<a target="_blank" rel="noopener" href="http://research.microsoft.com/en-us/projects/moles/">http://research.microsoft.com/en-us/projects/moles/</a>) Fakes is different from Moles, however, so moving from Moles to Fakes will require some modifications to your code. The Moles framework will not be supported in Visual Studio 2012.</p>
-<table>
-<thead>
-<tr>
-<th>C#</th>
-<th>.NET</th>
-<th>CLR</th>
-<th>MVC</th>
-<th>Razor</th>
-<th>Not support OS</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>C# 1.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>N/A</td>
-<td>N/A</td>
-<td></td>
-</tr>
-<tr>
-<td>C# 1.2</td>
-<td>1.1</td>
-<td>1.1</td>
-<td>N/A</td>
-<td>N/A</td>
-<td></td>
-</tr>
-<tr>
-<td>C# 2.0</td>
-<td>2.0</td>
-<td>2.0</td>
-<td>MVC1</td>
-<td>N/A</td>
-<td></td>
-</tr>
-<tr>
-<td>C# 3.0</td>
-<td>3.5</td>
-<td>2.0</td>
-<td>MVC2</td>
-<td>N/A</td>
-<td></td>
-</tr>
-<tr>
-<td>C# 4.0</td>
-<td>4.0</td>
-<td>4.0</td>
-<td>MVC3,4</td>
-<td>Razor</td>
-<td></td>
-</tr>
-<tr>
-<td>C# 5.0</td>
-<td>4.5</td>
-<td>4.0</td>
-<td>MVC4</td>
-<td></td>
-<td>XP,2003</td>
-</tr>
-<tr>
-<td></td>
-<td>4.5.1</td>
-<td>4.0</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>4.5.2</td>
-<td>4.0</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>C# 1.2 Features: First version to call Dispose on IEnumerators which implemented IDisposable</p>
-<p>C# 2.0 Features: Generics, anonymous methods, nullable types</p>
-<p>C# 3.0 Features: Lambda expressions, extension methods, expression trees, implicit type(var), query expressions</p>
-<p>C# 4.0 Features: Late binding(dynamic), named arguments and optional</p>
-<p>C# 5.0 Features: Async programming, caller info attributes</p>
-<table>
-<thead>
-<tr>
-<th>VS.NET</th>
-<th>Path</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>VS2008</td>
-<td>“C:\Program Files\Microsoft Visual Studio 9.0”</td>
-</tr>
-<tr>
-<td>VS2010</td>
-<td>“C:\Program Files\Microsoft Visual Studio 10.0”</td>
-</tr>
-<tr>
-<td>VS2012</td>
-<td>“C:\Program Files\Microsoft Visual Studio 11.0”</td>
-</tr>
-<tr>
-<td>VS2013</td>
-<td>“C:\Program Files\Microsoft Visual Studio 12.0”</td>
-</tr>
-</tbody></table>
-<p>There are some known issues using EF 4.x in a .NET 4.5 project.<br>We recommend installing a pre-release version of EF 5, which is designed to work with .NET 4.5</p>
-<p>Update: 2015.03.15</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1179,12 +982,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1220,7 +1023,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
