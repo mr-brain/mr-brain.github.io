@@ -155,6 +155,307 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/log-all-methods-using-autofac-interceptor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/01/2014/06/log-all-methods-using-autofac-interceptor/" class="post-title-link" itemprop="url">log all methods using AutoFac interceptor</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:41:20" itemprop="dateModified" datetime="2020-09-05T18:41:20+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Add references to:</p>
+<ul>
+<li>Autofac.dll (v3.1.1)</li>
+<li>Autofac.Extras.DynamicProxy2.dll (v3.0.2)</li>
+<li>Castle.Core.dll (Castle.Core 3.2.0 for .NETFramework v4.0 Client Profile)</li>
+</ul>
+<p>#Create Interceptors#<br>Interceptors implement the Castle.DynamicProxy.IInterceptor interface. Here’s a simple interceptor example that logs method calls including inputs and outputs:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class LoggerClass : IInterceptor</span><br><span class="line">&#123;</span><br><span class="line">	public void Intercept(IInvocation invocation)</span><br><span class="line">	&#123;</span><br><span class="line">		Console.WriteLine(&quot;Calling method &#123;0&#125; with parameters &#123;1&#125;... &quot;,</span><br><span class="line">			invocation.Method.Name,</span><br><span class="line">			string.Join(&quot;, &quot;, invocation.Arguments.Select(a &#x3D;&gt; (a ?? &quot;&quot;).ToString()).ToArray()));</span><br><span class="line"></span><br><span class="line">		invocation.Proceed();</span><br><span class="line"></span><br><span class="line">		Console.WriteLine(&quot;Done: result was &#123;0&#125;.&quot;, invocation.ReturnValue);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>#Register Interceptors with Autofac#<br>Interceptors must be registered with the container. You can register them either as typed services or as named services. If you register them as named services, they must be named IInterceptor registrations.</p>
+<p>Which of these you choose depends on how you decide to associate interceptors with the types being intercepted.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Named registration</span><br><span class="line">builder.Register(c &#x3D;&gt; new LoggerClass())</span><br><span class="line">       .Named&lt;IInterceptor&gt;(&quot;log-calls&quot;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Typed registration</span><br><span class="line">builder.Register(c &#x3D;&gt; new LoggerClass());</span><br></pre></td></tr></table></figure>
+
+<p>#Enable Interception on Types#<br>When you register a type being intercepted, you have to mark the type at registration time so Autofac knows to wire up that interception. You do this using the EnableInterfaceInterceptors() and EnableClassInterceptors() registration extensions.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ContainerBuilder cb &#x3D; new ContainerBuilder();</span><br><span class="line">cb.RegisterType&lt;SomeType&gt;()</span><br><span class="line">	 .As&lt;ISomeInterface&gt;()</span><br><span class="line">	 .EnableInterfaceInterceptors()</span><br><span class="line">	 .InterceptedBy(typeof(LoggerClass));</span><br><span class="line">cb.Register(c &#x3D;&gt; new LoggerClass());</span><br></pre></td></tr></table></figure>
+
+<p>Under the covers, EnableInterfaceInterceptors() creates an interface proxy that performs the interception, while EnableClassInterceptors() dynamically subclasses the target component to perform interception of virtual methods.</p>
+<p>Both techniques can be used in conjunction with the assembly scanning support, so you can configure batches of components using the same methods.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/how-to-deploy-files-for-unit-test-project/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/01/2014/06/how-to-deploy-files-for-unit-test-project/" class="post-title-link" itemprop="url">How to deploy files for VS.NET Unit Test Project</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:42:03" itemprop="dateModified" datetime="2020-09-05T18:42:03+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Here’s the easiest way to accomplish deploying folders to the TestResults folder:</p>
+<ol>
+<li>Right click on the .testrunconfig file in your solution explorer. For me, its LocalTestRun.testrunconfig.</li>
+<li>Select Open With and select XML editor</li>
+<li>Add a deployment item, specifying the relative path as the file name and an outputdirectory value of the directory name. In my example, I want to deploy everything in the configuration directory to a folder called configuration in the testrun folder, so I’ve added the following entry:</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Deployment</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">DeploymentItem</span> <span class="attr">filename</span>=<span class="string">&quot;Services\Identity\Claim\ClaimService.Test\configuration\&quot;</span> <span class="attr">outputDirectory</span>=<span class="string">&quot;configuration\&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">DeploymentItem</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Deployment</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Now when my tests execution, Visual Studio copies over all my configuration file entries and is able to load the app.config file successfully.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/nullreferenceexception-unexplained-error-in-aspnet-mvc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/01/2014/06/nullreferenceexception-unexplained-error-in-aspnet-mvc/" class="post-title-link" itemprop="url">NullReferenceException unexplained error in ASP.NET MVC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:41:07" itemprop="dateModified" datetime="2020-09-05T18:41:07+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[NullReferenceException: Object reference not set to an instance of an object.]</span><br><span class="line">   System.Web.Mvc.&lt;ConvertResults&gt;d__2.MoveNext() +105</span><br><span class="line">   System.Web.Mvc.&lt;Validate&gt;d__1.MoveNext() +1050  System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext) +404</span><br></pre></td></tr></table></figure>
+
+<p>Please check your <em>Validate</em> function code in <strong><em>xxx</em>Model</strong> (inherited <em>IValidatableObject</em>). <font color='red'>You should not return null value.</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public IEnumerable&lt;ValidationResult&gt; Validate(ValidationContext validationContext)</span><br><span class="line">&#123;</span><br><span class="line">  return null;   &#x2F;&#x2F; this is error code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/select-distinct-using-linq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/01/2014/06/select-distinct-using-linq/" class="post-title-link" itemprop="url">Select distinct using linq</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:40:53" itemprop="dateModified" datetime="2020-09-05T18:40:53+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Using <a target="_blank" rel="noopener" href="https://code.google.com/p/morelinq/">morelinq</a> you can use DistinctBy:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myList.DistinctBy(x &#x3D;&gt; x.id);</span><br></pre></td></tr></table></figure>
+
+<p>Otherwise, you can use a group:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myList.GroupBy(x &#x3D;&gt; x.id)</span><br><span class="line">	.Select(g &#x3D;&gt; g.First());</span><br></pre></td></tr></table></figure>
+
+<p>Or you can use linq syntax</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">distinctData &#x3D; from tb1 in myList</span><br><span class="line">	group tb1 by tb1.id into g</span><br><span class="line">	select g.First();</span><br></pre></td></tr></table></figure>
+
+<p>You can create custom extension method:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static class EnumerableExtender</span><br><span class="line">&#123;</span><br><span class="line">	public static IEnumerable&lt;TSource&gt; DistinctBy&lt;TSource, TKey&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector)</span><br><span class="line">	&#123;</span><br><span class="line">		HashSet&lt;TKey&gt; seenKeys &#x3D; new HashSet&lt;TKey&gt;();</span><br><span class="line">		foreach (TSource element in source)</span><br><span class="line">		&#123;</span><br><span class="line">			var elementValue &#x3D; keySelector(element);</span><br><span class="line">			if (seenKeys.Add(elementValue))</span><br><span class="line">			&#123;</span><br><span class="line">				yield return element;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Would be better to write a lot of use.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">distinctDatas &#x3D; myList.DistinctBy(person &#x3D;&gt; person.Name);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/unit-testing-aspnet-web-site-project-code-stored-in-app_code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -299,7 +600,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/jquery-multiple-attribute-selector/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/a-mixedmode-assembly-exception-message-been-showed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -313,7 +614,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/06/01/2014/06/jquery-multiple-attribute-selector/" class="post-title-link" itemprop="url">jQuery Multiple Attribute Selector</a>
+            <a href="/2014/05/01/2014/05/a-mixedmode-assembly-exception-message-been-showed/" class="post-title-link" itemprop="url">A “mixed-mode assembly exception” Message been showed.</a>
         </h2>
 
         <div class="post-meta">
@@ -323,14 +624,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
+              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:41:34" itemprop="dateModified" datetime="2020-09-05T18:41:34+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:03:45" itemprop="dateModified" datetime="2020-09-05T18:03:45+08:00">2020-09-05</time>
               </span>
 
           
@@ -344,178 +645,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>jQuery Multiple Attribute Selector</p>
-<blockquote>
-<p>input name=value <em>AND</em> name2=value2</p>
-</blockquote>
-<p>is perform following:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$[&#39;input[name&#x3D;&quot;value&quot;][name2&#x3D;&quot;value2&quot;]&#39;)</span><br></pre></td></tr></table></figure>
+          <p>To run .NET 2.0 assembly in .NET 4.0 environment, a “mixed-mode assembly exception” Message been showed.</p>
+<p>Add a configuration in the app.config: startup</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;startup useLegacyV2RuntimeActivationPolicy&#x3D;”true”&gt;</span><br><span class="line">  &lt;supportedRuntime version&#x3D;”v4.0”&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;startup&gt;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>input name=value <em>OR</em> name2=value2</p>
-</blockquote>
-<p>is perform following:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$[&#39;input[name&#x3D;&quot;value&quot;] , [name2&#x3D;&quot;value2&quot;]&#39;)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/log-all-methods-using-autofac-interceptor/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/06/01/2014/06/log-all-methods-using-autofac-interceptor/" class="post-title-link" itemprop="url">log all methods using AutoFac interceptor</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:41:20" itemprop="dateModified" datetime="2020-09-05T18:41:20+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Add references to:</p>
-<ul>
-<li>Autofac.dll (v3.1.1)</li>
-<li>Autofac.Extras.DynamicProxy2.dll (v3.0.2)</li>
-<li>Castle.Core.dll (Castle.Core 3.2.0 for .NETFramework v4.0 Client Profile)</li>
-</ul>
-<p>#Create Interceptors#<br>Interceptors implement the Castle.DynamicProxy.IInterceptor interface. Here’s a simple interceptor example that logs method calls including inputs and outputs:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class LoggerClass : IInterceptor</span><br><span class="line">&#123;</span><br><span class="line">	public void Intercept(IInvocation invocation)</span><br><span class="line">	&#123;</span><br><span class="line">		Console.WriteLine(&quot;Calling method &#123;0&#125; with parameters &#123;1&#125;... &quot;,</span><br><span class="line">			invocation.Method.Name,</span><br><span class="line">			string.Join(&quot;, &quot;, invocation.Arguments.Select(a &#x3D;&gt; (a ?? &quot;&quot;).ToString()).ToArray()));</span><br><span class="line"></span><br><span class="line">		invocation.Proceed();</span><br><span class="line"></span><br><span class="line">		Console.WriteLine(&quot;Done: result was &#123;0&#125;.&quot;, invocation.ReturnValue);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>#Register Interceptors with Autofac#<br>Interceptors must be registered with the container. You can register them either as typed services or as named services. If you register them as named services, they must be named IInterceptor registrations.</p>
-<p>Which of these you choose depends on how you decide to associate interceptors with the types being intercepted.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Named registration</span><br><span class="line">builder.Register(c &#x3D;&gt; new LoggerClass())</span><br><span class="line">       .Named&lt;IInterceptor&gt;(&quot;log-calls&quot;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Typed registration</span><br><span class="line">builder.Register(c &#x3D;&gt; new LoggerClass());</span><br></pre></td></tr></table></figure>
-
-<p>#Enable Interception on Types#<br>When you register a type being intercepted, you have to mark the type at registration time so Autofac knows to wire up that interception. You do this using the EnableInterfaceInterceptors() and EnableClassInterceptors() registration extensions.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ContainerBuilder cb &#x3D; new ContainerBuilder();</span><br><span class="line">cb.RegisterType&lt;SomeType&gt;()</span><br><span class="line">	 .As&lt;ISomeInterface&gt;()</span><br><span class="line">	 .EnableInterfaceInterceptors()</span><br><span class="line">	 .InterceptedBy(typeof(LoggerClass));</span><br><span class="line">cb.Register(c &#x3D;&gt; new LoggerClass());</span><br></pre></td></tr></table></figure>
-
-<p>Under the covers, EnableInterfaceInterceptors() creates an interface proxy that performs the interception, while EnableClassInterceptors() dynamically subclasses the target component to perform interception of virtual methods.</p>
-<p>Both techniques can be used in conjunction with the assembly scanning support, so you can configure batches of components using the same methods.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/06/01/2014/06/select-distinct-using-linq/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/06/01/2014/06/select-distinct-using-linq/" class="post-title-link" itemprop="url">Select distinct using linq</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-06-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-06-01T08:00:00+08:00">2014-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:40:53" itemprop="dateModified" datetime="2020-09-05T18:40:53+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Using <a target="_blank" rel="noopener" href="https://code.google.com/p/morelinq/">morelinq</a> you can use DistinctBy:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myList.DistinctBy(x &#x3D;&gt; x.id);</span><br></pre></td></tr></table></figure>
-
-<p>Otherwise, you can use a group:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myList.GroupBy(x &#x3D;&gt; x.id)</span><br><span class="line">	.Select(g &#x3D;&gt; g.First());</span><br></pre></td></tr></table></figure>
-
-<p>Or you can use linq syntax</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">distinctData &#x3D; from tb1 in myList</span><br><span class="line">	group tb1 by tb1.id into g</span><br><span class="line">	select g.First();</span><br></pre></td></tr></table></figure>
-
-<p>You can create custom extension method:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static class EnumerableExtender</span><br><span class="line">&#123;</span><br><span class="line">	public static IEnumerable&lt;TSource&gt; DistinctBy&lt;TSource, TKey&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector)</span><br><span class="line">	&#123;</span><br><span class="line">		HashSet&lt;TKey&gt; seenKeys &#x3D; new HashSet&lt;TKey&gt;();</span><br><span class="line">		foreach (TSource element in source)</span><br><span class="line">		&#123;</span><br><span class="line">			var elementValue &#x3D; keySelector(element);</span><br><span class="line">			if (seenKeys.Add(elementValue))</span><br><span class="line">			&#123;</span><br><span class="line">				yield return element;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Would be better to write a lot of use.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">distinctDatas &#x3D; myList.DistinctBy(person &#x3D;&gt; person.Name);</span><br></pre></td></tr></table></figure>
+<p>reference from MSDN, specifically address: <a target="_blank" rel="noopener" href="http://msdn.microsoft.com/zh-cn/library/bbx34a2h.aspx">http://msdn.microsoft.com/zh-cn/library/bbx34a2h.aspx</a></p>
 
       
     </div>
@@ -678,75 +812,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/a-mixedmode-assembly-exception-message-been-showed/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/05/01/2014/05/a-mixedmode-assembly-exception-message-been-showed/" class="post-title-link" itemprop="url">A “mixed-mode assembly exception” Message been showed.</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:03:45" itemprop="dateModified" datetime="2020-09-05T18:03:45+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>To run .NET 2.0 assembly in .NET 4.0 environment, a “mixed-mode assembly exception” Message been showed.</p>
-<p>Add a configuration in the app.config: startup</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;startup useLegacyV2RuntimeActivationPolicy&#x3D;”true”&gt;</span><br><span class="line">  &lt;supportedRuntime version&#x3D;”v4.0”&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;startup&gt;</span><br></pre></td></tr></table></figure>
-
-<p>reference from MSDN, specifically address: <a target="_blank" rel="noopener" href="http://msdn.microsoft.com/zh-cn/library/bbx34a2h.aspx">http://msdn.microsoft.com/zh-cn/library/bbx34a2h.aspx</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/remove-the-last-character-in-a-string-in-tsql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -803,92 +868,6 @@
 </blockquote>
 <p>Sample code:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @String VARCHAR(100)</span><br><span class="line">SET @String &#x3D; &#39;TEST STRING&#39;</span><br><span class="line"></span><br><span class="line">-- Chop off the end character</span><br><span class="line">SET @String &#x3D; LEFT(@String, LEN(@String) - 1)</span><br><span class="line"></span><br><span class="line">SELECT @String</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/why-isnt-there-an-assembly-unload-method/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/05/01/2014/05/why-isnt-there-an-assembly-unload-method/" class="post-title-link" itemprop="url">Why isn't there an Assembly. Unload method?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:07:31" itemprop="dateModified" datetime="2020-09-05T18:07:31+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Please refer to this article (<a target="_blank" rel="noopener" href="http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx">http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx</a>).</p>
-<p>Memory consumption been eating more and more?</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">do</span><br><span class="line">&#123;</span><br><span class="line">  Assembly.LoadFrom(&quot;Library1.dll&quot;);</span><br><span class="line">&#125;while( true );</span><br></pre></td></tr></table></figure>
-
-<p>The result is NO. It will only keep a copy of Library1 Assembly in Memory, And never been release.<br>But I need the plugin Mechanism for Load/Unload Assembly.</p>
-<p>How to load and unload Library1 Assembly?<br>Step1: Create the Library1 Project.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Serializable]</span><br><span class="line">public class MyClass1</span><br><span class="line">&#123;</span><br><span class="line">  public string Test()</span><br><span class="line">  &#123;</span><br><span class="line">    return &quot;abc&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Step 2: Create the Test Project.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AppDomainSetup ads &#x3D; new AppDomainSetup();</span><br><span class="line">ShadowCopyFiles &#x3D; &quot;true&quot;;</span><br><span class="line">var myAppDomain &#x3D; AppDomain.CreateDomain(&quot;MyAppDomainName&quot;, null, ads);</span><br></pre></td></tr></table></figure>
-
-<p>The follow code will load Library1.dll file.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object proxy &#x3D; myAppDomain.CreateInstanceFromAndUnwrap(&quot;Library1.dll&quot;, &quot;Library1.MyClass1&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>Invoke the Test Method.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MethodInfo mi &#x3D; proxy.GetType().GetMethod(&quot;Test&quot;, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);</span><br><span class="line">string s &#x3D; (string)mi.Invoke(proxy, new object[]&#123;&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>Unload the Library1.dll file.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AppDomain.Unload(myAppDomain);</span><br></pre></td></tr></table></figure>
-
-<p>If you use T1 Common Library. You can write the following simple code.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UnloadAssembly asm &#x3D; UnloadAssembly.Load(&quot;Library1.dll&quot;);</span><br><span class="line">UnloadClass cls &#x3D; asm.GetUnloadClass(&quot;Library1.MyClass1&quot;);</span><br><span class="line">string s &#x3D; (string)cls.Invoke(&quot;Test&quot;);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -975,12 +954,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">

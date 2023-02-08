@@ -155,6 +155,160 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/08/c-50-callermembername/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/08/01/2013/08/c-50-callermembername/" class="post-title-link" itemprop="url">C# 5.0 CallerMemberName</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-08-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-08-01T08:00:00+08:00">2013-08-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 17:58:29" itemprop="dateModified" datetime="2020-09-05T17:58:29+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>My new favorite C# language feature: CallerMemberName</p>
+<p>This is how a property with INotifyPropertyChanged support looks like pre C# 4.5:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string OldStylePropertyChanged</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _oldStyle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _oldStyle)</span><br><span class="line">    &#123;</span><br><span class="line">      _oldStyle &#x3D; value;</span><br><span class="line">      OnPropertyChangedOldStyle(&quot;OldStylePropertyChanged&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChangedOldStyle(string propertyName)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>And this is how it will look like when we apply the use of CallerMemberName in our PropertyChanged method:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string DynamicTitle</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _dynamicTitle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _dynamicTitle)</span><br><span class="line">    &#123;</span><br><span class="line">      _dynamicTitle &#x3D; value;</span><br><span class="line">      OnPropertyChanged();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChanged([CallerMemberName] string propertyName &#x3D; null)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Some more really cool additions to CallerMemberName is the following Parameter attributes:</p>
+<ul>
+<li>[CallerMemberName]</li>
+<li>[CallerFilePath]</li>
+<li>[CallerLineNumber]</li>
+</ul>
+<p>The name of the attributes is straight forward and easy to understand, so I doubt that I would have to describe them in detail, instead, let’s look at an example straight from MSDN on how to use them.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public sealed class Logger</span><br><span class="line">&#123;</span><br><span class="line">  public void TraceMessage(string message,</span><br><span class="line">       [CallerMemberName] string memberName &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerFilePath] string sourceFilePath &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerLineNumber] int sourceLineNumber &#x3D; 0)</span><br><span class="line">  &#123;</span><br><span class="line">    Debug.WriteLine(&quot;message: &quot; + message);</span><br><span class="line">    Debug.WriteLine(&quot;member name: &quot; + memberName);</span><br><span class="line">    Debug.WriteLine(&quot;source file path: &quot; + sourceFilePath);</span><br><span class="line">    Debug.WriteLine(&quot;source line number: &quot; + sourceLineNumber);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Happy hacking!</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/08/microsoftvisualstudioshellinteropdll-error/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/08/01/2013/08/microsoftvisualstudioshellinteropdll-error/" class="post-title-link" itemprop="url">Microsoft.VisualStudio.Shell.Interop.dll ERROR</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-08-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-08-01T08:00:00+08:00">2013-08-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 17:59:22" itemprop="dateModified" datetime="2020-09-05T17:59:22+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>VS 2008, COM interop, and Microsoft.VisualStudio.Shell.Interop.dll</p>
+<p>When I try to compile our VsPackages with VS 2008 the compilation fails. The compilation fails with the message:</p>
+<blockquote>
+<p>The assembly ‘Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a’<br>is not registered for COM Interop. Please register it with regasm.exe /tlb.</p>
+</blockquote>
+<p>This is a known bug that was discovered right as VS2008 was going out the door. Microsoft have a fix in place (to be delivered with VS 2008 SP1)</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://connect.microsoft.com/VisualStudio/Downloads/DownloadDetails.aspx?DownloadID=10671">https://connect.microsoft.com/VisualStudio/Downloads/DownloadDetails.aspx?DownloadID=10671</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/08/whats-the-thing-in-net-version/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -404,106 +558,6 @@
 </tbody></table>
 <p>There are some known issues using EF 4.x in a .NET 4.5 project.<br>We recommend installing a pre-release version of EF 5, which is designed to work with .NET 4.5</p>
 <p>Update: 2015.03.15</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/09/install-typescript091/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/08/01/2013/09/install-typescript091/" class="post-title-link" itemprop="url">Install TypeScript-0.9.1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2013-08-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-08-01T08:00:00+08:00">2013-08-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:01:08" itemprop="dateModified" datetime="2020-09-05T18:01:08+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Compile-on-Save With TypeScript 0.8.2, we’ve enabled the ability to compile a project when source files in the project are saved, circumventing the usual manual compile step.</p>
-<p>Download TypeScript for Visual Studio 2012 and 2013 <a target="_blank" rel="noopener" href="http://www.microsoft.com/en-us/download/details.aspx?id=34790">http://www.microsoft.com/en-us/download/details.aspx?id=34790</a></p>
-<p>For this to work, you need to enable the global setting in Tools-&gt;Options-&gt;Text Editor-&gt;TypeScript-&gt;Project. Specifically, enable “Automatically compile TypeScript files which are part of a project”.</p>
-<p>Next, you need to make sure your Visual Studio project uses the new TypeScript targets file. You can do this in one of two ways. New projects created with the TypeScript 0.8.2 release will automatically include a link to this targets file (as will the new version of the Windows 8 sample in the samples directory). For projects made with previous versions, you will need to edit the project file by right-clicking the project, selecting “Unload Project”, right-clicking the project, selecting “Edit”, and updating the project XML with the following:</p>
-<p>For each TypeScript file in your project, change the build action to ‘TypeScriptCompile’:</p>
-<pre><code>&lt;TypeScriptCompile Include=&quot;app.ts&quot; /&gt;</code></pre>
-<p>Then additionally add (or replace if you had an older PreBuild action for TypeScript) the following at the end of your project file to include TypeScript compilation in your project.</p>
-<p>For JavaScript projects (.jsproj):</p>
-<pre><code>&lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.VisualStudio.$(WMSJSProject).targets&quot; /&gt;
-  &lt;PropertyGroup Condition=&quot;&#39;$(Configuration)&#39; == &#39;Debug&#39;&quot;&gt;
-    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
-    &lt;TypeScriptIncludeComments&gt;true&lt;/TypeScriptIncludeComments&gt;
-    &lt;TypeScriptSourceMap&gt;true&lt;/TypeScriptSourceMap&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;PropertyGroup Condition=&quot;&#39;$(Configuration)&#39; == &#39;Release&#39;&quot;&gt;
-    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
-    &lt;TypeScriptIncludeComments&gt;false&lt;/TypeScriptIncludeComments&gt;
-    &lt;TypeScriptSourceMap&gt;false&lt;/TypeScriptSourceMap&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot; /&gt;</code></pre>
-<p>For C#-style projects (.csproj):</p>
-<pre><code> &lt;PropertyGroup Condition=&quot;&#39;$(Configuration)&#39; == &#39;Debug&#39;&quot;&gt;
-    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
-    &lt;TypeScriptIncludeComments&gt;true&lt;/TypeScriptIncludeComments&gt;
-    &lt;TypeScriptSourceMap&gt;true&lt;/TypeScriptSourceMap&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;PropertyGroup Condition=&quot;&#39;$(Configuration)&#39; == &#39;Release&#39;&quot;&gt;
-    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
-    &lt;TypeScriptIncludeComments&gt;false&lt;/TypeScriptIncludeComments&gt;
-    &lt;TypeScriptSourceMap&gt;false&lt;/TypeScriptSourceMap&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot; /&gt;</code></pre>
-<p>PS:Web Essentials 2012 is a feature of Visual Studio 2012 expansion plug For v3.0: Remove all support for the TypeScript (<a target="_blank" rel="noopener" href="http://madskristensen.net/post/Web-Essentials-2013-Where-is-the-TypeScript-support.aspx">http://madskristensen.net/post/Web-Essentials-2013-Where-is-the-TypeScript-support.aspx</a>) This was because many of those features were built directly in to Visual Studio 2013 and therefore no longer needed support by Web Essentials.</p>
-<p>The repository for high quality TypeScript type definitions. <a target="_blank" rel="noopener" href="https://github.com/borisyankov/DefinitelyTyped#readme">https://github.com/borisyankov/DefinitelyTyped#readme</a></p>
-<p>Usage: Include a line like this:</p>
-<pre><code>/// &lt;reference path=&quot;jquery.d.ts&quot; /&gt;</code></pre>
 
       
     </div>
@@ -1018,77 +1072,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2008/12/01/2008/12/dynamic-linq-to-object/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2008/12/01/2008/12/dynamic-linq-to-object/" class="post-title-link" itemprop="url">Dynamic Linq To Object</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2008-12-01 08:00:00" itemprop="dateCreated datePublished" datetime="2008-12-01T08:00:00+08:00">2008-12-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:52:51" itemprop="dateModified" datetime="2020-09-05T17:52:51+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Q-I-need-to-filter-a-generic-list-with-a-dynamic-query"><a href="#Q-I-need-to-filter-a-generic-list-with-a-dynamic-query" class="headerlink" title="Q: I need to filter a generic list with a dynamic query:"></a>Q: I need to filter a generic list with a dynamic query:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;string&gt; l;</span><br><span class="line">var x &#x3D; l.Where(*dynamic query*)</span><br></pre></td></tr></table></figure>
-
-<p>How would i do this using LINQ?<br>but it appears to not work with objects that use IEnumerable(generic lists included).<br>Can anyone offer any ideas?</p>
-<h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers"></a>Answers</h3><blockquote>
-<p>Assuming you mean a string-based query: the dynamic LINQ library will work fine; just call .AsQueryable() first:</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s &#x3D; *dynamic query*</span><br><span class="line">var qry &#x3D; l.AsQueryable().</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1160,12 +1143,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">

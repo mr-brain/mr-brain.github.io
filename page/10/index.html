@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2008/09/01/2008/09/valuehelper-class/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2008/12/01/2008/12/dynamic-linq-to-object/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2008/09/01/2008/09/valuehelper-class/" class="post-title-link" itemprop="url">ValueHelper Class</a>
+            <a href="/2008/12/01/2008/12/dynamic-linq-to-object/" class="post-title-link" itemprop="url">Dynamic Linq To Object</a>
         </h2>
 
         <div class="post-meta">
@@ -179,14 +179,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2008-09-01 08:00:00" itemprop="dateCreated datePublished" datetime="2008-09-01T08:00:00+08:00">2008-09-01</time>
+              <time title="Created: 2008-12-01 08:00:00" itemprop="dateCreated datePublished" datetime="2008-12-01T08:00:00+08:00">2008-12-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:52:08" itemprop="dateModified" datetime="2020-09-05T17:52:08+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 17:52:51" itemprop="dateModified" datetime="2020-09-05T17:52:51+08:00">2020-09-05</time>
               </span>
 
           
@@ -200,21 +200,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>If you want to clone the same object of class, you must inherit “ICloneable” interface and implement Clone() method for clone function. Now only through ValueHelper Class can be simple to complete this goal.</p>
-<ul>
-<li>Assembly:T1.dll</li>
-<li>Namespace:T1.Common</li>
-</ul>
-<p>Using the code:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MyClass a &#x3D; new MyClass();</span><br><span class="line">a.Id &#x3D; 123;</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">MyClass b &#x3D; new MyClass();</span><br><span class="line">b.Id &#x3D; a.Id;</span><br><span class="line">b.Name &#x3D; a.Name;</span><br><span class="line">Console.WriteLine(&quot;b Id&#x3D;&#123;0&#125; Name&#x3D;&#123;1&#125;&quot;, b.Id, b.Name);</span><br></pre></td></tr></table></figure>
+          <h3 id="Q-I-need-to-filter-a-generic-list-with-a-dynamic-query"><a href="#Q-I-need-to-filter-a-generic-list-with-a-dynamic-query" class="headerlink" title="Q: I need to filter a generic list with a dynamic query:"></a>Q: I need to filter a generic list with a dynamic query:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;string&gt; l;</span><br><span class="line">var x &#x3D; l.Where(*dynamic query*)</span><br></pre></td></tr></table></figure>
 
-<p>And the following code in the same</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MyClass a &#x3D; new MyClass();</span><br><span class="line">a.Id &#x3D; 123;</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">MyClass b &#x3D; new MyClass();</span><br><span class="line">ValueHelper.CopyData(a, b);</span><br><span class="line">Console.WriteLine(&quot;b Id&#x3D;&#123;0&#125; Name&#x3D;&#123;1&#125;&quot;, b.Id, b.Name);</span><br></pre></td></tr></table></figure>
-
-<p>You can also use Property.GetValue/SetValue to achieve the same purpose, but ValueHelper.CopyData performance on faster than the Property.GetValue/SetValue.</p>
-<p>ValueHelper Class copy only int/float/string… basic types of variables, do not copy the object type variable.</p>
-<p>Therefore, the following code to try to copy the a.Item object will be skipped.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class MyClass1</span><br><span class="line">&#123;</span><br><span class="line">	public string ID&#123;get; set;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyClass2</span><br><span class="line">&#123;</span><br><span class="line">	public string Name&#123;get; set;&#125;</span><br><span class="line">	public MyClass1 Item&#123;get; set;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyClass2 a &#x3D; new MyClass2();</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">a.Item &#x3D; new MyClass1();</span><br><span class="line">a.ID &#x3D; &quot;123&quot;;</span><br><span class="line">MyClass2 b &#x3D; new MyClass2();</span><br><span class="line">ValueHelper.CopyData(a, b);</span><br><span class="line">&#x2F;&#x2F;b.Item will be null.</span><br></pre></td></tr></table></figure>
+<p>How would i do this using LINQ?<br>but it appears to not work with objects that use IEnumerable(generic lists included).<br>Can anyone offer any ideas?</p>
+<h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers"></a>Answers</h3><blockquote>
+<p>Assuming you mean a string-based query: the dynamic LINQ library will work fine; just call .AsQueryable() first:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s &#x3D; *dynamic query*</span><br><span class="line">var qry &#x3D; l.AsQueryable().</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -295,6 +287,85 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MyClass c1 &#x3D; new MyClass();</span><br><span class="line">var setName &#x3D; DynamicProperty.SetProperty(&quot;Name&quot;);</span><br><span class="line">setName(c1, &quot;123&quot;);</span><br><span class="line">var getID &#x3D; DynamicProperty.GetProperty(&quot;ID&quot;);</span><br><span class="line">int i &#x3D; getID(c1);</span><br></pre></td></tr></table></figure>
 
 <p>DynamicProperty Method is fast than Invoke Method.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2008/09/01/2008/09/valuehelper-class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2008/09/01/2008/09/valuehelper-class/" class="post-title-link" itemprop="url">ValueHelper Class</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2008-09-01 08:00:00" itemprop="dateCreated datePublished" datetime="2008-09-01T08:00:00+08:00">2008-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 17:52:08" itemprop="dateModified" datetime="2020-09-05T17:52:08+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>If you want to clone the same object of class, you must inherit “ICloneable” interface and implement Clone() method for clone function. Now only through ValueHelper Class can be simple to complete this goal.</p>
+<ul>
+<li>Assembly:T1.dll</li>
+<li>Namespace:T1.Common</li>
+</ul>
+<p>Using the code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MyClass a &#x3D; new MyClass();</span><br><span class="line">a.Id &#x3D; 123;</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">MyClass b &#x3D; new MyClass();</span><br><span class="line">b.Id &#x3D; a.Id;</span><br><span class="line">b.Name &#x3D; a.Name;</span><br><span class="line">Console.WriteLine(&quot;b Id&#x3D;&#123;0&#125; Name&#x3D;&#123;1&#125;&quot;, b.Id, b.Name);</span><br></pre></td></tr></table></figure>
+
+<p>And the following code in the same</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MyClass a &#x3D; new MyClass();</span><br><span class="line">a.Id &#x3D; 123;</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">MyClass b &#x3D; new MyClass();</span><br><span class="line">ValueHelper.CopyData(a, b);</span><br><span class="line">Console.WriteLine(&quot;b Id&#x3D;&#123;0&#125; Name&#x3D;&#123;1&#125;&quot;, b.Id, b.Name);</span><br></pre></td></tr></table></figure>
+
+<p>You can also use Property.GetValue/SetValue to achieve the same purpose, but ValueHelper.CopyData performance on faster than the Property.GetValue/SetValue.</p>
+<p>ValueHelper Class copy only int/float/string… basic types of variables, do not copy the object type variable.</p>
+<p>Therefore, the following code to try to copy the a.Item object will be skipped.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class MyClass1</span><br><span class="line">&#123;</span><br><span class="line">	public string ID&#123;get; set;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyClass2</span><br><span class="line">&#123;</span><br><span class="line">	public string Name&#123;get; set;&#125;</span><br><span class="line">	public MyClass1 Item&#123;get; set;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyClass2 a &#x3D; new MyClass2();</span><br><span class="line">a.Name &#x3D; &quot;abc&quot;;</span><br><span class="line">a.Item &#x3D; new MyClass1();</span><br><span class="line">a.ID &#x3D; &quot;123&quot;;</span><br><span class="line">MyClass2 b &#x3D; new MyClass2();</span><br><span class="line">ValueHelper.CopyData(a, b);</span><br><span class="line">&#x2F;&#x2F;b.Item will be null.</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -475,12 +546,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">

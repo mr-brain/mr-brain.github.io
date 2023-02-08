@@ -155,6 +155,161 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/why-isnt-there-an-assembly-unload-method/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/05/01/2014/05/why-isnt-there-an-assembly-unload-method/" class="post-title-link" itemprop="url">Why isn't there an Assembly. Unload method?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:07:31" itemprop="dateModified" datetime="2020-09-05T18:07:31+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Please refer to this article (<a target="_blank" rel="noopener" href="http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx">http://blogs.msdn.com/jasonz/archive/2004/05/31/145105.aspx</a>).</p>
+<p>Memory consumption been eating more and more?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">do</span><br><span class="line">&#123;</span><br><span class="line">  Assembly.LoadFrom(&quot;Library1.dll&quot;);</span><br><span class="line">&#125;while( true );</span><br></pre></td></tr></table></figure>
+
+<p>The result is NO. It will only keep a copy of Library1 Assembly in Memory, And never been release.<br>But I need the plugin Mechanism for Load/Unload Assembly.</p>
+<p>How to load and unload Library1 Assembly?<br>Step1: Create the Library1 Project.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Serializable]</span><br><span class="line">public class MyClass1</span><br><span class="line">&#123;</span><br><span class="line">  public string Test()</span><br><span class="line">  &#123;</span><br><span class="line">    return &quot;abc&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Step 2: Create the Test Project.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AppDomainSetup ads &#x3D; new AppDomainSetup();</span><br><span class="line">ShadowCopyFiles &#x3D; &quot;true&quot;;</span><br><span class="line">var myAppDomain &#x3D; AppDomain.CreateDomain(&quot;MyAppDomainName&quot;, null, ads);</span><br></pre></td></tr></table></figure>
+
+<p>The follow code will load Library1.dll file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object proxy &#x3D; myAppDomain.CreateInstanceFromAndUnwrap(&quot;Library1.dll&quot;, &quot;Library1.MyClass1&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>Invoke the Test Method.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MethodInfo mi &#x3D; proxy.GetType().GetMethod(&quot;Test&quot;, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);</span><br><span class="line">string s &#x3D; (string)mi.Invoke(proxy, new object[]&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Unload the Library1.dll file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AppDomain.Unload(myAppDomain);</span><br></pre></td></tr></table></figure>
+
+<p>If you use T1 Common Library. You can write the following simple code.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UnloadAssembly asm &#x3D; UnloadAssembly.Load(&quot;Library1.dll&quot;);</span><br><span class="line">UnloadClass cls &#x3D; asm.GetUnloadClass(&quot;Library1.MyClass1&quot;);</span><br><span class="line">string s &#x3D; (string)cls.Invoke(&quot;Test&quot;);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/" class="post-title-link" itemprop="url">Microsoft FastCGI Error 0x80070585</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 18:05:42" itemprop="dateModified" datetime="2020-09-05T18:05:42+08:00">2020-09-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>If you run FastCGI and show following error:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FastCGI Error</span><br><span class="line">The FastCGI Handler was unable to process the request.</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Error Details:</span><br><span class="line">Could not find entry for &quot;php&quot; on site 2043809562 in [Types] section.</span><br><span class="line">Error Number: 1413 (0x80070585).</span><br><span class="line">HTTP Error 500 - Server Error.</span><br><span class="line">Internet Information Services (IIS)</span><br></pre></td></tr></table></figure>
+
+<p>You can modify C:\WINDOWS\system32\inetsrv\fcgiext.ini file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Types]</span><br><span class="line">php&#x3D;PHP</span><br><span class="line"></span><br><span class="line">[PHP]</span><br><span class="line">ExePath&#x3D;C:\Devp\PHP\php-cgi.exe</span><br><span class="line">InstanceMaxRequests&#x3D;10000</span><br><span class="line">ActivityTimeout&#x3D;300</span><br><span class="line">RequestTimeout&#x3D;300</span><br><span class="line">EnvironmentVars&#x3D;PHP_FCGI_MAX_REQUESTS:10000,PHPRC:C:\Devp\PHP\</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/database-diagram-support-objects-cannot-be-installed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -277,75 +432,6 @@
 <p>To change the build output verbosity shown in the VS.NET output window, open the Options dialog and select the Build and Run settings below the Projects and Solutions node.</p>
 <p><img src="msbuild-get-output-message/2014-05-28_134204.png" alt="options dialog"></p>
 <p>Unless you explicitly specify a low message importance, your messages should show up at <font color='blue'>Normal</font> verbosity or higher.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/05/01/2014/05/microsoft-fastcgi-error-0x80070585/" class="post-title-link" itemprop="url">Microsoft FastCGI Error 0x80070585</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-05-01 08:00:00" itemprop="dateCreated datePublished" datetime="2014-05-01T08:00:00+08:00">2014-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:05:42" itemprop="dateModified" datetime="2020-09-05T18:05:42+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>If you run FastCGI and show following error:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FastCGI Error</span><br><span class="line">The FastCGI Handler was unable to process the request.</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Error Details:</span><br><span class="line">Could not find entry for &quot;php&quot; on site 2043809562 in [Types] section.</span><br><span class="line">Error Number: 1413 (0x80070585).</span><br><span class="line">HTTP Error 500 - Server Error.</span><br><span class="line">Internet Information Services (IIS)</span><br></pre></td></tr></table></figure>
-
-<p>You can modify C:\WINDOWS\system32\inetsrv\fcgiext.ini file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Types]</span><br><span class="line">php&#x3D;PHP</span><br><span class="line"></span><br><span class="line">[PHP]</span><br><span class="line">ExePath&#x3D;C:\Devp\PHP\php-cgi.exe</span><br><span class="line">InstanceMaxRequests&#x3D;10000</span><br><span class="line">ActivityTimeout&#x3D;300</span><br><span class="line">RequestTimeout&#x3D;300</span><br><span class="line">EnvironmentVars&#x3D;PHP_FCGI_MAX_REQUESTS:10000,PHPRC:C:\Devp\PHP\</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -527,90 +613,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/09/01/2013/09/typescript-syntax/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/09/01/2013/09/typescript-syntax/" class="post-title-link" itemprop="url">TypeScript Syntax</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2013-09-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-09-01T08:00:00+08:00">2013-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:02:44" itemprop="dateModified" datetime="2020-09-05T18:02:44+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Declare variables</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var i:number &#x3D; 1;</span><br><span class="line">var s:string &#x3D; &quot;text&quot;;</span><br></pre></td></tr></table></figure>
-
-<p>interface and class</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">interface IPersion&#123;</span><br><span class="line">  firtname: string;</span><br><span class="line">  lastname: string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Student implements IPersion&#123;</span><br><span class="line">  firtname: string;</span><br><span class="line">  lastname: string;</span><br><span class="line"></span><br><span class="line">  constructor(public name: string)&#123;</span><br><span class="line">    this.firstname &#x3D; name;</span><br><span class="line">    this.lastname &#x3D; &quot;Student&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">  sayName()</span><br><span class="line">  &#123;</span><br><span class="line">    return &quot;Student&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Teacher extends Student&#123;</span><br><span class="line">  constructor()</span><br><span class="line">  &#123;</span><br><span class="line">    super(&quot;Flash&quot;);</span><br><span class="line">    this.lastname &#x3D; &quot;Teacher&quot;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sayName()</span><br><span class="line">  &#123;</span><br><span class="line">    return &quot;Teacher&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>static method</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class utils&#123;</span><br><span class="line">  public static CopyProperties(source: any, target: any): void &#123;</span><br><span class="line">    for (var prop in source) &#123;</span><br><span class="line">      if (target[prop] !&#x3D;&#x3D; undefined) &#123;</span><br><span class="line">        target[prop] &#x3D; source[prop];</span><br><span class="line">      &#125;</span><br><span class="line">      else &#123;</span><br><span class="line">        console.error(&quot;Cannot set undefined property: &quot; + prop);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">utils.CopyProperties(source, dest);</span><br></pre></td></tr></table></figure>
-
-<p>create module in math.ts</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module math&#123;</span><br><span class="line">        export function MathAdd(a:number, b:number)</span><br><span class="line">        &#123;</span><br><span class="line">                return a+b;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>use math module in test.ts</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;&#x2F; &lt;reference path&#x3D;&quot;math.ts&quot; &#x2F;&gt;</span><br><span class="line">var c:number &#x3D; math.MathAdd(1, 2);</span><br></pre></td></tr></table></figure>
-
-<p>create module in file1.ts</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export function MathAdd(a:number, b:number)</span><br><span class="line">&#123;</span><br><span class="line">  return a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>use file1 file module in test.ts</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import f1 &#x3D; module(&#39;file1&#39;)</span><br><span class="line">var c:number &#x3D; f1.MathAdd(1, 2);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/09/01/2013/09/no-exports-were-found-that-match-the-constraint-contract-name-error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -694,7 +696,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/08/c-50-callermembername/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/09/01/2013/09/typescript-syntax/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -708,7 +710,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2013/08/01/2013/08/c-50-callermembername/" class="post-title-link" itemprop="url">C# 5.0 CallerMemberName</a>
+            <a href="/2013/09/01/2013/09/typescript-syntax/" class="post-title-link" itemprop="url">TypeScript Syntax</a>
         </h2>
 
         <div class="post-meta">
@@ -718,14 +720,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2013-08-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-08-01T08:00:00+08:00">2013-08-01</time>
+              <time title="Created: 2013-09-01 08:00:00" itemprop="dateCreated datePublished" datetime="2013-09-01T08:00:00+08:00">2013-09-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:58:29" itemprop="dateModified" datetime="2020-09-05T17:58:29+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:02:44" itemprop="dateModified" datetime="2020-09-05T18:02:44+08:00">2020-09-05</time>
               </span>
 
           
@@ -739,23 +741,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>My new favorite C# language feature: CallerMemberName</p>
-<p>This is how a property with INotifyPropertyChanged support looks like pre C# 4.5:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string OldStylePropertyChanged</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _oldStyle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _oldStyle)</span><br><span class="line">    &#123;</span><br><span class="line">      _oldStyle &#x3D; value;</span><br><span class="line">      OnPropertyChangedOldStyle(&quot;OldStylePropertyChanged&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChangedOldStyle(string propertyName)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <p>Declare variables</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var i:number &#x3D; 1;</span><br><span class="line">var s:string &#x3D; &quot;text&quot;;</span><br></pre></td></tr></table></figure>
 
-<p>And this is how it will look like when we apply the use of CallerMemberName in our PropertyChanged method:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public string DynamicTitle</span><br><span class="line">&#123;</span><br><span class="line">  get &#123; return _dynamicTitle; &#125;</span><br><span class="line">  set</span><br><span class="line">  &#123;</span><br><span class="line">    if (value !&#x3D; _dynamicTitle)</span><br><span class="line">    &#123;</span><br><span class="line">      _dynamicTitle &#x3D; value;</span><br><span class="line">      OnPropertyChanged();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void OnPropertyChanged([CallerMemberName] string propertyName &#x3D; null)</span><br><span class="line">&#123;</span><br><span class="line">  var handler &#x3D; PropertyChanged;</span><br><span class="line">  if (handler !&#x3D; null)</span><br><span class="line">  &#123;</span><br><span class="line">    handler(this, new PropertyChangedEventArgs(propertyName));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>interface and class</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">interface IPersion&#123;</span><br><span class="line">  firtname: string;</span><br><span class="line">  lastname: string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Student implements IPersion&#123;</span><br><span class="line">  firtname: string;</span><br><span class="line">  lastname: string;</span><br><span class="line"></span><br><span class="line">  constructor(public name: string)&#123;</span><br><span class="line">    this.firstname &#x3D; name;</span><br><span class="line">    this.lastname &#x3D; &quot;Student&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">  sayName()</span><br><span class="line">  &#123;</span><br><span class="line">    return &quot;Student&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Teacher extends Student&#123;</span><br><span class="line">  constructor()</span><br><span class="line">  &#123;</span><br><span class="line">    super(&quot;Flash&quot;);</span><br><span class="line">    this.lastname &#x3D; &quot;Teacher&quot;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sayName()</span><br><span class="line">  &#123;</span><br><span class="line">    return &quot;Teacher&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>Some more really cool additions to CallerMemberName is the following Parameter attributes:</p>
-<ul>
-<li>[CallerMemberName]</li>
-<li>[CallerFilePath]</li>
-<li>[CallerLineNumber]</li>
-</ul>
-<p>The name of the attributes is straight forward and easy to understand, so I doubt that I would have to describe them in detail, instead, let’s look at an example straight from MSDN on how to use them.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public sealed class Logger</span><br><span class="line">&#123;</span><br><span class="line">  public void TraceMessage(string message,</span><br><span class="line">       [CallerMemberName] string memberName &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerFilePath] string sourceFilePath &#x3D; &quot;&quot;,</span><br><span class="line">       [CallerLineNumber] int sourceLineNumber &#x3D; 0)</span><br><span class="line">  &#123;</span><br><span class="line">    Debug.WriteLine(&quot;message: &quot; + message);</span><br><span class="line">    Debug.WriteLine(&quot;member name: &quot; + memberName);</span><br><span class="line">    Debug.WriteLine(&quot;source file path: &quot; + sourceFilePath);</span><br><span class="line">    Debug.WriteLine(&quot;source line number: &quot; + sourceLineNumber);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>static method</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class utils&#123;</span><br><span class="line">  public static CopyProperties(source: any, target: any): void &#123;</span><br><span class="line">    for (var prop in source) &#123;</span><br><span class="line">      if (target[prop] !&#x3D;&#x3D; undefined) &#123;</span><br><span class="line">        target[prop] &#x3D; source[prop];</span><br><span class="line">      &#125;</span><br><span class="line">      else &#123;</span><br><span class="line">        console.error(&quot;Cannot set undefined property: &quot; + prop);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">utils.CopyProperties(source, dest);</span><br></pre></td></tr></table></figure>
 
-<p>Happy hacking!</p>
+<p>create module in math.ts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module math&#123;</span><br><span class="line">        export function MathAdd(a:number, b:number)</span><br><span class="line">        &#123;</span><br><span class="line">                return a+b;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>use math module in test.ts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;&#x2F; &lt;reference path&#x3D;&quot;math.ts&quot; &#x2F;&gt;</span><br><span class="line">var c:number &#x3D; math.MathAdd(1, 2);</span><br></pre></td></tr></table></figure>
+
+<p>create module in file1.ts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export function MathAdd(a:number, b:number)</span><br><span class="line">&#123;</span><br><span class="line">  return a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>use file1 file module in test.ts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import f1 &#x3D; module(&#39;file1&#39;)</span><br><span class="line">var c:number &#x3D; f1.MathAdd(1, 2);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -842,7 +847,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/08/microsoftvisualstudioshellinteropdll-error/">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2013/08/01/2013/09/install-typescript091/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mr-brain.png">
@@ -856,7 +861,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2013/08/01/2013/08/microsoftvisualstudioshellinteropdll-error/" class="post-title-link" itemprop="url">Microsoft.VisualStudio.Shell.Interop.dll ERROR</a>
+            <a href="/2013/08/01/2013/09/install-typescript091/" class="post-title-link" itemprop="url">Install TypeScript-0.9.1</a>
         </h2>
 
         <div class="post-meta">
@@ -873,7 +878,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 17:59:22" itemprop="dateModified" datetime="2020-09-05T17:59:22+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-05 18:01:08" itemprop="dateModified" datetime="2020-09-05T18:01:08+08:00">2020-09-05</time>
               </span>
 
           
@@ -887,15 +892,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>VS 2008, COM interop, and Microsoft.VisualStudio.Shell.Interop.dll</p>
-<p>When I try to compile our VsPackages with VS 2008 the compilation fails. The compilation fails with the message:</p>
-<blockquote>
-<p>The assembly ‘Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a’<br>is not registered for COM Interop. Please register it with regasm.exe /tlb.</p>
-</blockquote>
-<p>This is a known bug that was discovered right as VS2008 was going out the door. Microsoft have a fix in place (to be delivered with VS 2008 SP1)</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://connect.microsoft.com/VisualStudio/Downloads/DownloadDetails.aspx?DownloadID=10671">https://connect.microsoft.com/VisualStudio/Downloads/DownloadDetails.aspx?DownloadID=10671</a></p>
-</blockquote>
+          <p>Compile-on-Save With TypeScript 0.8.2, we’ve enabled the ability to compile a project when source files in the project are saved, circumventing the usual manual compile step.</p>
+<p>Download TypeScript for Visual Studio 2012 and 2013 <a target="_blank" rel="noopener" href="http://www.microsoft.com/en-us/download/details.aspx?id=34790">http://www.microsoft.com/en-us/download/details.aspx?id=34790</a></p>
+<p>For this to work, you need to enable the global setting in Tools-&gt;Options-&gt;Text Editor-&gt;TypeScript-&gt;Project. Specifically, enable “Automatically compile TypeScript files which are part of a project”.</p>
+<p>Next, you need to make sure your Visual Studio project uses the new TypeScript targets file. You can do this in one of two ways. New projects created with the TypeScript 0.8.2 release will automatically include a link to this targets file (as will the new version of the Windows 8 sample in the samples directory). For projects made with previous versions, you will need to edit the project file by right-clicking the project, selecting “Unload Project”, right-clicking the project, selecting “Edit”, and updating the project XML with the following:</p>
+<p>For each TypeScript file in your project, change the build action to ‘TypeScriptCompile’:</p>
+<pre><code>&lt;TypeScriptCompile Include=&quot;app.ts&quot; /&gt;</code></pre>
+<p>Then additionally add (or replace if you had an older PreBuild action for TypeScript) the following at the end of your project file to include TypeScript compilation in your project.</p>
+<p>For JavaScript projects (.jsproj):</p>
+<pre><code>&lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.VisualStudio.$(WMSJSProject).targets&quot; /&gt;
+  &lt;PropertyGroup Condition=&quot;&#39;$(Configuration)&#39; == &#39;Debug&#39;&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;true&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;true&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;PropertyGroup Condition=&quot;&#39;$(Configuration)&#39; == &#39;Release&#39;&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;false&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;false&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot; /&gt;</code></pre>
+<p>For C#-style projects (.csproj):</p>
+<pre><code> &lt;PropertyGroup Condition=&quot;&#39;$(Configuration)&#39; == &#39;Debug&#39;&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;true&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;true&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;PropertyGroup Condition=&quot;&#39;$(Configuration)&#39; == &#39;Release&#39;&quot;&gt;
+    &lt;TypeScriptTarget&gt;ES5&lt;/TypeScriptTarget&gt;
+    &lt;TypeScriptIncludeComments&gt;false&lt;/TypeScriptIncludeComments&gt;
+    &lt;TypeScriptSourceMap&gt;false&lt;/TypeScriptSourceMap&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;Import Project=&quot;$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets&quot; /&gt;</code></pre>
+<p>PS:Web Essentials 2012 is a feature of Visual Studio 2012 expansion plug For v3.0: Remove all support for the TypeScript (<a target="_blank" rel="noopener" href="http://madskristensen.net/post/Web-Essentials-2013-Where-is-the-TypeScript-support.aspx">http://madskristensen.net/post/Web-Essentials-2013-Where-is-the-TypeScript-support.aspx</a>) This was because many of those features were built directly in to Visual Studio 2013 and therefore no longer needed support by Web Essentials.</p>
+<p>The repository for high quality TypeScript type definitions. <a target="_blank" rel="noopener" href="https://github.com/borisyankov/DefinitelyTyped#readme">https://github.com/borisyankov/DefinitelyTyped#readme</a></p>
+<p>Usage: Include a line like this:</p>
+<pre><code>/// &lt;reference path=&quot;jquery.d.ts&quot; /&gt;</code></pre>
 
       
     </div>
@@ -982,12 +1014,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">

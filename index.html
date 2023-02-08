@@ -155,6 +155,77 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2023/02/08/2023/02/Either/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/08/2023/02/Either/" class="post-title-link" itemprop="url">Either</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-02-08 23:00:00 / Modified: 23:42:25" itemprop="dateCreated datePublished" datetime="2023-02-08T23:00:00+08:00">2023-02-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/T1-Standard/" itemprop="url" rel="index"><span itemprop="name">T1.Standard</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="install-package-T1-Standard"><a href="#install-package-T1-Standard" class="headerlink" title="install-package T1.Standard"></a>install-package T1.Standard</h2><p>Instead of using exceptions extensively, we should use Either as a replacement.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public Result SayHello(string name)</span><br><span class="line">&#123;</span><br><span class="line">    if( name &#x3D;&#x3D; &quot;hack&quot; ) &#123;</span><br><span class="line">        throw new Exception(&quot;Bad Request&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return new Result</span><br><span class="line">    &#123;</span><br><span class="line">        ErrorMessage &#x3D; string.Empty</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">try &#123;</span><br><span class="line">    return SayHello(&quot;xxxx&quot;);</span><br><span class="line">&#125; catch (Exception e1) &#123;</span><br><span class="line">    return new Result &#123;</span><br><span class="line">        ErrorMessage &#x3D; e1.Message</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This is a C# implementation of the “Either” type. The Either type is a functional programming concept that allows you to represent values that can be one of two types, “left” or “right”. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public Either&lt;Result, Exception&gt; SayHello(string name)</span><br><span class="line">&#123;</span><br><span class="line">    if( name &#x3D;&#x3D; &quot;hack&quot; ) &#123;</span><br><span class="line">        return new Either&lt;Result, Exception&gt;(new Exception(&quot;Bad Request&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">    return new Either&lt;Result, Exception&gt;(new Result</span><br><span class="line">    &#123;</span><br><span class="line">        ErrorMessage &#x3D; $&quot;Hi &#123;name&#125;&quot;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return SayHello(&quot;xxx&quot;).Match(</span><br><span class="line">    result &#x3D;&gt; result,</span><br><span class="line">    ex &#x3D;&gt; new Result &#123;</span><br><span class="line">        ErrorMessage &#x3D; string.Empty,</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2023/01/20/2023/01/T1SourceGenerator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -409,6 +480,82 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2022/06/05/2022/06/LinqToDataTableExtension/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mr-brain.png">
+      <meta itemprop="name" content="Mr-Brain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elegance C#">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/05/2022/06/LinqToDataTableExtension/" class="post-title-link" itemprop="url">Linq To DataTable</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-05 14:00:00" itemprop="dateCreated datePublished" datetime="2022-06-05T14:00:00+08:00">2022-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-29 08:55:11" itemprop="dateModified" datetime="2022-06-29T08:55:11+08:00">2022-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/t1-standard/" itemprop="url" rel="index"><span itemprop="name">t1.standard</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="T1-Standard-Linq-LinqToDataTableExtension"><a href="#T1-Standard-Linq-LinqToDataTableExtension" class="headerlink" title="T1.Standard.Linq.LinqToDataTableExtension"></a>T1.Standard.Linq.LinqToDataTableExtension</h2><h3 id="string-object-Dictionary-List-to-DataTable-Sample"><a href="#string-object-Dictionary-List-to-DataTable-Sample" class="headerlink" title="string/object Dictionary List to DataTable Sample"></a>string/object Dictionary List to DataTable Sample</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var dictList &#x3D; new List&lt;Dictionary&lt;string, object&gt;&gt; &#123;</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 1&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Jack&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 2&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Flash&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var datatable &#x3D; dictList.ToDataTable();</span><br></pre></td></tr></table></figure>
+
+<h3 id="string-object-Dictionary-List-Deep-to-DataTable-Sample"><a href="#string-object-Dictionary-List-Deep-to-DataTable-Sample" class="headerlink" title="string/object Dictionary List Deep to DataTable Sample"></a>string/object Dictionary List Deep to DataTable Sample</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var dictList &#x3D; new List&lt;Dictionary&lt;string, object&gt;&gt; &#123;</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 1&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Jack&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;,</span><br><span class="line">		&#123;&quot;Price&quot;, null&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 2&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Flash&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;,</span><br><span class="line">		&#123;&quot;Price&quot;, 123m&#125;,</span><br><span class="line">		&#123;&quot;Home&quot;, null&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var datatable &#x3D; dictList.DeepToDataTable();</span><br><span class="line"></span><br><span class="line">Assert.Equal(typeof(decimal), dt.Columns[&quot;Price&quot;]!.DataType);</span><br><span class="line">Assert.Equal(typeof(string), dt.Columns[&quot;Home&quot;]!.DataType);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2022/06/05/2022/06/TreeBuilder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -469,82 +616,6 @@
 <h3 id="GenerateTree"><a href="#GenerateTree" class="headerlink" title="GenerateTree"></a>GenerateTree</h3><p>This will only create a fully structured tree</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var userList &#x3D; new[]</span><br><span class="line">&#123;</span><br><span class="line">	 new MyUser &#123;Path &#x3D; &quot;&quot;, Name &#x3D; &quot;A1&quot;&#125;,</span><br><span class="line">	 new MyUser &#123;Path &#x3D; &quot;demo&#x2F;name&quot;, Name &#x3D; &quot;C1&quot;&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var actual &#x3D; _treeBuilder.GenerateTree(userList,</span><br><span class="line">	 x &#x3D;&gt; x.Path,</span><br><span class="line">	 x &#x3D;&gt; _treeBuilder.GetParentPath(x.Path)</span><br><span class="line">).ToList();</span><br><span class="line"></span><br><span class="line">var expected &#x3D; new List&lt;TreeBuilder.TreeItem&lt;MyUser, string&gt;&gt;</span><br><span class="line">&#123;</span><br><span class="line">	 new TreeBuilder.TreeItem&lt;MyUser, string&gt;()</span><br><span class="line">	 &#123;</span><br><span class="line">		  Id &#x3D; &quot;&quot;,</span><br><span class="line">		  ParentId &#x3D; null,</span><br><span class="line">		  Item &#x3D; new MyUser &#123;Path &#x3D; &quot;&quot;, Name &#x3D; &quot;A1&quot;&#125;,</span><br><span class="line">		  Children &#x3D; new List&lt;TreeBuilder.TreeItem&lt;MyUser, string&gt;&gt;()</span><br><span class="line">	 &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">expected.ToExpectedObject().ShouldEqual(actual);</span><br></pre></td></tr></table></figure>
 
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2022/06/05/2022/06/LinqToDataTableExtension/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/06/05/2022/06/LinqToDataTableExtension/" class="post-title-link" itemprop="url">Linq To DataTable</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-06-05 14:00:00" itemprop="dateCreated datePublished" datetime="2022-06-05T14:00:00+08:00">2022-06-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-06-29 08:55:11" itemprop="dateModified" datetime="2022-06-29T08:55:11+08:00">2022-06-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/t1-standard/" itemprop="url" rel="index"><span itemprop="name">t1.standard</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="T1-Standard-Linq-LinqToDataTableExtension"><a href="#T1-Standard-Linq-LinqToDataTableExtension" class="headerlink" title="T1.Standard.Linq.LinqToDataTableExtension"></a>T1.Standard.Linq.LinqToDataTableExtension</h2><h3 id="string-object-Dictionary-List-to-DataTable-Sample"><a href="#string-object-Dictionary-List-to-DataTable-Sample" class="headerlink" title="string/object Dictionary List to DataTable Sample"></a>string/object Dictionary List to DataTable Sample</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var dictList &#x3D; new List&lt;Dictionary&lt;string, object&gt;&gt; &#123;</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 1&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Jack&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 2&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Flash&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var datatable &#x3D; dictList.ToDataTable();</span><br></pre></td></tr></table></figure>
-
-<h3 id="string-object-Dictionary-List-Deep-to-DataTable-Sample"><a href="#string-object-Dictionary-List-Deep-to-DataTable-Sample" class="headerlink" title="string/object Dictionary List Deep to DataTable Sample"></a>string/object Dictionary List Deep to DataTable Sample</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var dictList &#x3D; new List&lt;Dictionary&lt;string, object&gt;&gt; &#123;</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 1&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Jack&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;,</span><br><span class="line">		&#123;&quot;Price&quot;, null&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	new Dictionary&lt;string, object&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;&quot;Id&quot;, 2&#125;,</span><br><span class="line">		&#123;&quot;Name&quot;, &quot;Flash&quot;&#125;,</span><br><span class="line">		&#123;&quot;Birth&quot;, DateTime.Parse(&quot;2022-05-01&quot;)&#125;,</span><br><span class="line">		&#123;&quot;Price&quot;, 123m&#125;,</span><br><span class="line">		&#123;&quot;Home&quot;, null&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var datatable &#x3D; dictList.DeepToDataTable();</span><br><span class="line"></span><br><span class="line">Assert.Equal(typeof(decimal), dt.Columns[&quot;Price&quot;]!.DataType);</span><br><span class="line">Assert.Equal(typeof(string), dt.Columns[&quot;Home&quot;]!.DataType);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -933,79 +1004,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://mr-brain.github.io/2016/04/01/2016/04/how-to-encode-space-path-in-msbuild/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/mr-brain.png">
-      <meta itemprop="name" content="Mr-Brain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elegance C#">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/04/01/2016/04/how-to-encode-space-path-in-msbuild/" class="post-title-link" itemprop="url">How to encode space path in MSBuild?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-04-01 08:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T08:00:00+08:00">2016-04-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 18:26:45" itemprop="dateModified" datetime="2020-09-05T18:26:45+08:00">2020-09-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>I’m using the property MSBuildProjectDirectory with MSBuild.<br>The project is located in:</p>
-<blockquote>
-<pre><code>C:\Program Files (x86)\Jenkins\workspace\MyProject</code></pre>
-</blockquote>
-<p>and MSBuild will get a “The system cannot find the file specified” error.</p>
-<p>please instead of</p>
-<blockquote>
-<pre><code>$([MSBuild]::Unescape(&#39;$(MSBuildProjectDirectory)&#39;))</code></pre>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1077,12 +1075,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
